@@ -1,0 +1,14 @@
+/* Extra fonts (all SIL Open Font License; see fonts/README.txt). Each loads only when chosen. */
+@font-face { font-family: "Sahel"; src: url("../fonts/Sahel.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Sahel"; src: url("../fonts/Sahel-Bold.woff2") format("woff2"); font-weight: 600 900; font-display: swap; }
+@font-face { font-family: "Shabnam"; src: url("../fonts/Shabnam.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Shabnam"; src: url("../fonts/Shabnam-Bold.woff2") format("woff2"); font-weight: 600 900; font-display: swap; }
+@font-face { font-family: "Samim"; src: url("../fonts/Samim.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Samim"; src: url("../fonts/Samim-Bold.woff2") format("woff2"); font-weight: 600 900; font-display: swap; }
+@font-face { font-family: "Tanha"; src: url("../fonts/Tanha.woff2") format("woff2"); font-weight: 100 900; font-display: swap; }
+@font-face { font-family: "Parastoo"; src: url("../fonts/Parastoo.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Parastoo"; src: url("../fonts/Parastoo-Bold.woff2") format("woff2"); font-weight: 600 900; font-display: swap; }
+@font-face { font-family: "Inter"; src: url("../fonts/InterVariable.woff2") format("woff2"); font-weight: 100 900; font-display: swap; }
+@font-face { font-family: "Lora"; src: url("../fonts/Lora.ttf") format("truetype"); font-weight: 400 700; font-display: swap; }
+@font-face { font-family: "JetBrains Mono"; src: url("../fonts/JetBrainsMono-Regular.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "JetBrains Mono"; src: url("../fonts/JetBrainsMono-Bold.woff2") format("woff2"); font-weight: 600 900; font-display: swap; }

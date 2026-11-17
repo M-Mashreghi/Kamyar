@@ -1,0 +1,629 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>New tab</title>
+	<link rel="stylesheet" href="css/fonts.css" />
+	<link rel="stylesheet" href="css/style.css" />
+	<script src="js/themes.js"></script>
+	<script src="js/theme-preload.js"></script>
+</head>
+<body>
+	<video id="bgVideo" class="bg-video" muted loop autoplay playsinline hidden></video>
+	<nav class="rail" aria-label="Kamyar">
+		<div class="rail-logo"><img src="icons/icon-48.png" alt="Kamyar" width="34" height="34" /></div>
+		<button class="rail-btn" data-go="home" type="button" data-tip="home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></button>
+		<button class="rail-btn" data-go="apps" type="button" data-tip="services"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="2"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="2"/></svg></button>
+		<button class="rail-btn" data-go="tools" type="button" data-tip="wTools"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.1L3.6 17.1a1.5 1.5 0 0 0 2.1 2.1l5.7-5.7a4 4 0 0 0 5.1-5.4l-2.5 2.5-2-.5-.5-2z"/></svg></button>
+		<button class="rail-btn" data-go="plan" type="button" data-tip="tasksAndNotes"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="4"/><path d="m8 12 3 3 5-6"/></svg></button>
+		<button class="rail-btn" data-go="cal" type="button" data-tip="addEventTip"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4M12 13v5M9.5 15.5h5"/></svg></button>
+		<hr class="rail-sep" />
+		<div id="railAi" class="rail-ai"></div>
+		<span class="grow"></span>
+		<button id="syncChip" class="rail-btn sync" type="button" aria-live="polite"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 18h10a4 4 0 0 0 .5-7.97A6 6 0 0 0 6 9.5 4.25 4.25 0 0 0 7 18Z"/></svg><span class="dot"></span><span id="syncText" class="rail-tip"></span></button>
+		<button id="settingsBtn" class="rail-btn avatar" type="button" data-tip="settings"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1Z"/></svg></button>
+	</nav>
+
+	<main id="viewHome" class="view home">
+		<div class="col col-a">
+			<section class="card clock-card">
+				<div class="clock-top">
+					<div class="clock-box">
+						<div id="time" class="time">--:--</div>
+						<div id="dateShort" class="date-short"></div>
+						<div id="dateYear" class="date-year"></div>
+						<button id="clockMenuBtn" class="pill" type="button" aria-haspopup="menu"><span data-i18n="tTimer"></span> ▾</button>
+					</div>
+					<button id="wxMini" class="wx-mini" type="button" data-tip="wWeather"></button>
+				</div>
+				<div class="ticker">
+					<div id="date" class="date-full"></div>
+					<ul id="tickerList" class="ticker-list"></ul>
+				</div>
+			</section>
+			<section class="card widget w-calendar" data-widget="calendar">
+				<div class="panel-head">
+					<button id="calPrev" class="icon-btn small cal-nav" type="button" data-i18n-title="prevMonth"><span class="arrow-prev"></span></button>
+					<h2 id="calTitle" class="cal-title" data-i18n-title="backToday"></h2>
+					<button id="calNext" class="icon-btn small cal-nav" type="button" data-i18n-title="nextMonth"><span class="arrow-next"></span></button>
+				</div>
+				<div id="calGrid" class="cal-grid" role="grid"></div>
+				<p id="calInfo" class="cal-info muted"></p>
+				<div id="calEvents" class="cal-events"></div>
+				<div id="calFoot" class="cal-foot"></div>
+			</section>
+		</div>
+
+		<div class="col col-b">
+			<section class="card search-card">
+				<h1 id="greeting" class="greeting"></h1>
+				<div class="search-wrap">
+			<form id="searchForm" class="search" role="search">
+				<button id="engineBtn" class="engine-btn" type="button" aria-haspopup="menu" data-i18n-title="searchEngine"><img id="engineIcon" alt="" width="22" height="22" /><span class="updown">⌃<br />⌄</span></button>
+				<input id="searchInput" dir="auto" type="search" autocomplete="off" data-i18n-title="search" aria-autocomplete="list" aria-controls="searchHist" />
+				<button id="voiceBtn" class="search-btn" type="button" data-i18n-title="voiceSearch"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button>
+				<button id="imageBtn" class="search-btn" type="button" data-i18n-title="imageSearch"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8V6a2 2 0 0 1 2-2h2M16 4h2a2 2 0 0 1 2 2v2M20 16v2a2 2 0 0 1-2 2h-2M8 20H6a2 2 0 0 1-2-2v-2"/><circle cx="12" cy="12" r="3"/></svg></button>
+				<button class="search-go" type="submit" data-i18n-title="search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+			</form>
+			<ul id="searchHist" class="search-hist" role="listbox" hidden></ul>
+			<p id="voiceStatus" class="voice-status" hidden></p>
+		</div>
+			</section>
+			<section class="shortcuts" data-i18n-title="shortcuts">
+				<ul id="bookmarkList" class="tiles"></ul>
+			</section>
+		</div>
+
+		<div class="col col-c">
+			<section class="card side-panel">
+				<div class="side-switch" role="tablist">
+					<button class="side-tab" data-side="note" type="button" role="tab"><span data-i18n="notes"></span> 🗒</button>
+					<button class="side-tab" data-side="todo" type="button" role="tab"><span data-i18n="todos"></span> ☑</button>
+				</div>
+				<div class="side-todo">
+					<div class="todo-toolbar side-tools" data-scope="home"></div>
+					<span id="todoCount" class="muted small" hidden></span>
+					<div id="todoList" class="todo-groups side-list"></div>
+					<form id="todoForm" class="side-add">
+						<input id="todoInput" dir="auto" maxlength="300" data-i18n-ph="addNewTask" />
+						<button id="todoMore" class="icon-btn small" type="button" data-i18n-title="moreOptions">⋯</button>
+						<button class="sr-only" type="submit" data-i18n="add"></button>
+					</form>
+				</div>
+				<div class="side-note" hidden>
+					<input id="noteSearch" class="note-search" type="search" data-i18n-ph="searchNotes" />
+					<ul id="noteList" class="note-list side-list"></ul>
+					<form id="noteForm" class="side-add">
+						<input id="noteQuick" dir="auto" maxlength="200" data-i18n-ph="addNewNote" />
+						<button id="newNote" class="icon-btn small" type="button" data-i18n-title="newNote">＋</button>
+					</form>
+				</div>
+			</section>
+		</div>
+	</main>
+
+	<main id="viewApps" class="view apps-view" hidden></main>
+
+	<main id="viewPlan" class="view plan-view" hidden>
+		<div class="plan-top">
+			<button id="planNew" class="plan-chip" type="button"><span>＋</span> <span data-i18n="newEvent"></span></button>
+			<span class="grow"></span>
+			<button id="planToday" class="plan-chip" type="button"><span>☀️</span> <span data-i18n="today"></span></button>
+			<button id="openTasksPage" class="plan-chip" type="button"><span>☑️</span> <span data-i18n="todos"></span></button>
+			<button id="planNotes" class="plan-chip" type="button"><span>🗒️</span> <span data-i18n="notes"></span></button>
+			<span class="grow"></span>
+			<span class="plan-spacer"></span>
+		</div>
+		<div class="plan-body">
+			<div id="planSide" class="plan-side"></div>
+			<section class="card week">
+				<div class="week-nav">
+					<button id="weekPrev" class="icon-btn small cal-nav" type="button" data-i18n-title="prevWeek"><span class="arrow-prev"></span></button>
+					<strong id="weekTitle"></strong>
+					<button id="weekNext" class="icon-btn small cal-nav" type="button" data-i18n-title="nextWeek"><span class="arrow-next"></span></button>
+				</div>
+				<div id="weekHead" class="week-head"></div>
+				<div id="weekAll" class="week-all"></div>
+				<div id="weekScroll" class="week-scroll"><div id="weekGrid" class="week-grid"></div></div>
+			</section>
+		</div>
+	</main>
+
+	<main id="viewTools" class="view tools-view" hidden>
+		<div class="widgets">
+			<section class="panel widget" data-widget="weather">
+				<div class="panel-head">
+					<h2 data-i18n="wWeather"></h2>
+					<button id="wxEdit" class="link-btn" type="button" data-i18n="changeCity"></button>
+				</div>
+				<form id="wxForm" class="add-row" hidden>
+					<input id="wxCity" maxlength="60" data-i18n-ph="cityPh" />
+					<button class="btn" type="submit" data-i18n="set"></button>
+				</form>
+				<ul id="wxResults" class="wx-results" hidden></ul>
+				<div id="wxBody" class="wx-body"></div>
+			</section>
+			<section class="panel widget" data-widget="rates">
+				<div class="panel-head">
+					<h2 data-i18n="wRates"></h2>
+					<span id="ratesUpdated" class="muted small"></span>
+				</div>
+				<div id="ratesBody"></div>
+			</section>
+			<section class="panel widget" data-widget="prayer">
+				<div class="panel-head">
+					<h2 data-i18n="wPrayer"></h2>
+					<span id="prayerCity" class="muted small"></span>
+				</div>
+				<div id="prayerBody"></div>
+			</section>
+			<section class="panel widget" data-widget="tools">
+				<div class="panel-head"><h2 data-i18n="wTools"></h2></div>
+				<div class="seg tools-tabs" role="tablist">
+					<button class="seg-btn" data-tool="convert" type="button" data-i18n="tConvert"></button>
+					<button class="seg-btn" data-tool="age" type="button" data-i18n="tAge"></button>
+					<button class="seg-btn" data-tool="timer" type="button" data-i18n="tTimer"></button>
+					<button class="seg-btn" data-tool="watch" type="button" data-i18n="tWatch"></button>
+					<button class="seg-btn" data-tool="count" type="button" data-i18n="tCountdown"></button>
+				</div>
+				<div id="toolBody" class="tool-body"></div>
+			</section>
+			<section class="panel widget" data-widget="pomodoro">
+				<div class="panel-head">
+					<h2 data-i18n="wPomodoro"></h2>
+					<span id="pomoCount" class="muted small"></span>
+				</div>
+				<div class="pomo-modes" role="tablist">
+					<button class="pomo-mode" data-mode="focus" role="tab" type="button" data-i18n="focus25"></button>
+					<button class="pomo-mode" data-mode="short" role="tab" type="button" data-i18n="short5"></button>
+					<button class="pomo-mode" data-mode="long" role="tab" type="button" data-i18n="long15"></button>
+				</div>
+				<div id="pomoTime" class="pomo-time">25:00</div>
+				<div class="pomo-actions">
+					<button id="pomoStart" class="btn" type="button"></button>
+					<button id="pomoReset" class="btn btn-ghost" type="button" data-i18n="reset"></button>
+				</div>
+			</section>
+		</div>
+	</main>
+
+	<dialog id="noteDialog" class="dialog">
+		<form method="dialog" class="dialog-body">
+			<input id="noteTitleInput" dir="auto" class="note-title-input" maxlength="200" data-i18n-ph="noteTitle" />
+			<textarea id="noteBodyInput" dir="auto" rows="12" data-i18n-ph="noteBody"></textarea>
+			<div class="dialog-actions">
+				<button id="deleteNote" class="btn btn-danger" type="button" data-i18n="delete"></button>
+				<span id="noteSaved" class="muted"></span>
+				<button class="btn" value="close" data-i18n="close"></button>
+			</div>
+		</form>
+	</dialog>
+
+	<dialog id="bmDialog" class="dialog small">
+		<form id="bmForm" method="dialog" class="dialog-body">
+			<div class="page-head">
+				<h3 id="bmDialogTitle"></h3>
+				<span class="grow"></span>
+				<div id="bmKind" class="seg" role="tablist">
+					<button class="seg-btn" data-kind="bookmark" type="button" data-i18n="kShortcut"></button>
+					<button class="seg-btn" data-kind="folder" type="button" data-i18n="kFolder"></button>
+				</div>
+			</div>
+			<label><span data-i18n="name"></span><input id="bmName" maxlength="60" /></label>
+			<label class="bm-only"><span data-i18n="address"></span><input id="bmUrl" dir="ltr" placeholder="https://" /></label>
+			<div class="grid2">
+				<label><span data-i18n="emojiOpt"></span><input id="bmEmoji" maxlength="8" class="emoji-in" placeholder="🙂" /></label>
+				<label class="bm-only"><span data-i18n="kFolder"></span><select id="bmFolder"></select></label>
+			</div>
+			<p id="bmError" class="error" hidden></p>
+			<div class="dialog-actions">
+				<button id="bmDelete" class="btn btn-danger" type="button" hidden data-i18n="delete"></button>
+				<button id="bmImport" class="btn btn-ghost" type="button" data-i18n="importBrowser"></button>
+				<span></span>
+				<button class="btn btn-ghost" value="cancel" formnovalidate data-i18n="cancel"></button>
+				<button id="bmSave" class="btn" value="save" data-i18n="save"></button>
+			</div>
+		</form>
+	</dialog>
+
+	<dialog id="folderDialog" class="dialog">
+		<div class="dialog-body">
+			<div class="page-head">
+				<h3 id="folderTitle"></h3>
+				<span class="grow"></span>
+				<button id="folderEdit" class="btn btn-ghost small" type="button" data-i18n="edit"></button>
+				<button id="folderClose" class="icon-btn small" type="button" data-i18n-title="close">✕</button>
+			</div>
+			<ul id="folderList" class="bm-grid in-folder"></ul>
+		</div>
+	</dialog>
+
+	<dialog id="keysDialog" class="dialog small">
+		<form method="dialog" class="dialog-body">
+			<h3 data-i18n="keyboardShortcuts"></h3>
+			<dl id="keysList" class="keys-list"></dl>
+			<div class="dialog-actions"><span></span><button class="btn" value="close" data-i18n="close"></button></div>
+		</form>
+	</dialog>
+
+	<dialog id="imageDialog" class="dialog small">
+		<div class="dialog-body">
+			<div class="page-head"><h3 data-i18n="imageSearch"></h3><span class="grow"></span><button id="imageClose" class="icon-btn small" type="button" data-i18n-title="close">✕</button></div>
+			<form id="lensUpload" class="drop-zone" action="https://lens.google.com/v3/upload" method="POST" enctype="multipart/form-data" target="_blank">
+				<p data-i18n="dropImage"></p>
+				<label class="btn btn-ghost file-btn"><span data-i18n="chooseImage"></span><input id="lensFile" name="encoded_image" type="file" accept="image/*" hidden /></label>
+			</form>
+			<form id="imageUrlForm" class="row">
+				<input id="imageUrl" dir="auto" data-i18n-ph="imageUrlPh" required />
+				<button class="btn" data-i18n="search"></button>
+			</form>
+		</div>
+	</dialog>
+
+	<dialog id="importBmDialog" class="dialog">
+		<form method="dialog" class="dialog-body">
+			<h3 data-i18n="importBrowser"></h3>
+			<p class="muted small" data-i18n="importBrowserHint"></p>
+			<input id="ibFilter" type="search" data-i18n-ph="filterPh" />
+			<div id="ibList" class="ib-list"></div>
+			<div class="dialog-actions">
+				<span id="ibCount" class="muted small"></span>
+				<span></span>
+				<button class="btn btn-ghost" value="cancel" data-i18n="cancel"></button>
+				<button id="ibAdd" class="btn" value="add" data-i18n="addSelected"></button>
+			</div>
+		</form>
+	</dialog>
+
+	<dialog id="settingsDialog" class="dialog settings-dlg">
+		<form method="dialog" class="settings-wrap">
+			<header class="set-head">
+				<span data-i18n="settings"></span><span class="set-sep">‹</span><strong id="setSecTitle"></strong>
+				<span class="grow"></span>
+				<button class="icon-btn small set-close" value="close" data-i18n-title="close" aria-label="close">✕</button>
+			</header>
+			<nav id="setNav" class="set-nav">
+				<button type="button" class="set-tab" data-sec="profile"><span class="set-ic">👤</span><span data-i18n="sec_profile"></span></button>
+				<hr />
+				<button type="button" class="set-tab" data-sec="background"><span class="set-ic">🖼️</span><span data-i18n="sec_background"></span></button>
+				<button type="button" class="set-tab" data-sec="theme"><span class="set-ic">🎨</span><span data-i18n="sec_theme"></span></button>
+				<hr />
+				<button type="button" class="set-tab" data-sec="general"><span class="set-ic">⚙️</span><span data-i18n="sec_general"></span></button>
+				<button type="button" class="set-tab" data-sec="calendar"><span class="set-ic">📅</span><span data-i18n="sec_calendar"></span></button>
+				<button type="button" class="set-tab" data-sec="privacy"><span class="set-ic">🔒</span><span data-i18n="sec_privacy"></span></button>
+				<button type="button" class="set-tab" data-sec="data"><span class="set-ic">💾</span><span data-i18n="sec_data"></span></button>
+				<hr />
+				<button type="button" class="set-tab" data-sec="about"><span class="set-ic">✋</span><span data-i18n="sec_about"></span></button>
+			</nav>
+			<div class="set-body">
+				<section class="set-sec" data-sec="profile">
+					<div class="prof-card">
+						<button id="avatarBtn" class="prof-avatar" type="button" data-i18n-title="changeAvatar"><span id="profAvatar"></span><span class="prof-cam">📷</span></button>
+						<input id="avatarInput" type="file" accept="image/*" hidden />
+						<strong id="profName" class="prof-name"></strong>
+						<span id="profEmail" class="muted small" dir="ltr"></span>
+						<button id="avatarRemove" class="link-btn" type="button" data-i18n="removeAvatar"></button>
+					</div>
+					<div class="set-card acct">
+						<div class="acct-row">
+							<span class="acct-g">G</span>
+							<div class="grow"><strong data-i18n="googleAccount"></strong><p id="acctStatus" class="muted small"></p></div>
+							<button id="acctBtn" class="btn" type="button"></button>
+						</div>
+						<p id="chromeSyncInfo" class="muted small"></p>
+						<p id="chromeSyncUsage" class="muted small"></p>
+					</div>
+					<div class="set-fields">
+						<label class="fld"><span data-i18n="yourName"></span><input id="nameInput" maxlength="40" data-i18n-ph="namePh" /></label>
+						<label class="fld"><span data-i18n="username"></span><input id="usernameInput" maxlength="30" dir="ltr" /></label>
+						<label class="fld"><span data-i18n="birthDate"></span><input id="bdayInput" type="date" /></label>
+					</div>
+					<div class="set-card setting-row" data-needs-oauth>
+						<div><strong data-i18n="drive"></strong><p id="driveInfo" class="muted small"></p></div>
+						<button id="driveBtn" class="btn" type="button"></button>
+					</div>
+				</section>
+
+				<section class="set-sec" data-sec="background" hidden>
+					<h4 data-i18n="wallpaper"></h4>
+					<p class="muted small" data-i18n="wallpaperHint"></p>
+					<div id="wallGrid" class="wall-grid"></div>
+					<input id="wallInput" type="file" accept="image/*" multiple hidden />
+					<div class="row wrap">
+						<button id="wallRemove" class="btn btn-ghost small" type="button" data-i18n="noWallpaper"></button>
+						<label class="rot-row"><span data-i18n="wallRotate"></span>
+							<select id="wallRotate">
+								<option value="off" data-i18n="rotOff"></option>
+								<option value="tab" data-i18n="rotTab"></option>
+								<option value="h1" data-i18n="rotH1"></option>
+								<option value="h4" data-i18n="rotH4"></option>
+								<option value="h12" data-i18n="rotH12"></option>
+								<option value="d1" data-i18n="rotD1"></option>
+							</select>
+						</label>
+					</div>
+					<h4 data-i18n="videoBg"></h4>
+					<label class="drop-box"><input id="videoInput" type="file" accept="video/mp4,video/webm,video/*" hidden /><span class="drop-ic">⬆️</span><strong data-i18n="uploadVideo"></strong><small class="muted" data-i18n="videoHint"></small></label>
+					<div class="row wrap"><span id="videoInfo" class="muted small"></span><span class="grow"></span><button id="videoRemove" class="btn btn-ghost small" type="button" data-i18n="removeVideo"></button></div>
+					<label id="wallDimRow" class="range-row"><span data-i18n="wallDim"></span><input id="wallDim" type="range" min="0" max="80" step="5" /></label>
+				</section>
+
+				<section class="set-sec" data-sec="theme" hidden>
+					<h4 data-i18n="colorTheme"></h4>
+					<div id="modeRow" class="circle-row"></div>
+					<details class="more-themes"><summary data-i18n="moreThemes"></summary><div id="themeGrid" class="theme-grid" role="radiogroup"></div></details>
+					<h4 data-i18n="primaryColor"></h4>
+					<div id="accentRow" class="circle-row"></div>
+					<div class="row wrap theme-extra">
+						<label class="color-pick"><span data-i18n="customAccent"></span><input id="accentInput" type="color" /></label>
+						<button id="accentReset" class="btn btn-ghost small" type="button" data-i18n="resetColor"></button>
+					</div>
+					<h4 data-i18n="font"></h4>
+					<div id="fontGrid" class="font-grid"></div>
+				</section>
+
+				<section class="set-sec" data-sec="general" hidden>
+					<div class="set-fields grid2">
+						<label class="fld"><span data-i18n="language"></span><select id="langSelect"></select></label>
+						<label class="fld"><span data-i18n="searchEngine"></span>
+							<select id="engineSelect">
+								<option value="google">Google</option>
+								<option value="bing">Bing</option>
+								<option value="duckduckgo">DuckDuckGo</option>
+								<option value="brave">Brave Search</option>
+								<option value="yandex">Yandex</option>
+							</select>
+						</label>
+						<label class="fld"><span data-i18n="baseCurrency"></span>
+							<select id="baseSelect"><option>USD</option><option>EUR</option><option>CHF</option><option>GBP</option><option>CAD</option><option>TRY</option></select>
+						</label>
+					</div>
+					<h4 data-i18n="widgets"></h4>
+					<div id="widgetToggles" class="toggles"></div>
+					<label class="fld"><span data-i18n="navasanKey"></span><input id="navasanInput" dir="ltr" autocomplete="off" spellcheck="false" /></label>
+					<p class="muted small" data-i18n="navasanHint"></p>
+					<button id="showKeys" class="btn btn-ghost" type="button" data-i18n="keyboardShortcuts"></button>
+				</section>
+
+				<section class="set-sec" data-sec="calendar" hidden>
+					<div class="set-fields grid2">
+						<label class="fld"><span data-i18n="mainCalendar"></span>
+							<select id="calSelect">
+								<option value="persian" data-i18n="calPersian"></option>
+								<option value="gregory" data-i18n="calGregory"></option>
+								<option value="islamic-umalqura" data-i18n="calIslamic"></option>
+							</select>
+						</label>
+						<label class="fld"><span data-i18n="weekStart"></span>
+							<select id="weekStartSelect">
+								<option value="" data-i18n="wsAuto"></option>
+								<option value="6" data-i18n="wsSat"></option>
+								<option value="0" data-i18n="wsSun"></option>
+								<option value="1" data-i18n="wsMon"></option>
+							</select>
+						</label>
+					</div>
+					<h4 data-i18n="calEvents"></h4>
+					<p class="muted small" data-i18n="calEventsHint"></p>
+					<label class="tog-card"><span class="tc-ic">🇮🇷</span><span class="grow"><strong data-i18n="iranHolidays"></strong></span><input id="iranHol" class="switch" type="checkbox" /></label>
+					<label class="tog-card"><span class="tc-ic">🌍</span><span class="grow"><strong data-i18n="worldDaysLabel"></strong></span><input id="worldDays" class="switch" type="checkbox" /></label>
+					<div id="occCats"></div>
+				</section>
+
+				<section class="set-sec" data-sec="privacy" hidden>
+					<label class="tog-card"><span class="tc-ic">🕘</span><span class="grow"><strong data-i18n="searchHistTitle"></strong><small class="muted" data-i18n="searchHistory"></small></span><input id="searchHistChk" class="switch" type="checkbox" /></label>
+					<button id="clearHist" class="link-btn" type="button" data-i18n="clearHistory"></button>
+					<div class="set-card setting-row" data-needs-oauth>
+						<div><strong data-i18n="gcal"></strong><p id="gcalInfo" class="muted small"></p></div>
+						<button id="gcalBtn" class="btn btn-ghost" type="button"></button>
+					</div>
+					<p class="muted small" data-i18n="privacyNote"></p>
+				</section>
+
+				<section class="set-sec" data-sec="data" hidden>
+					<div class="set-card">
+						<strong data-i18n="backup"></strong>
+						<div class="row">
+							<button id="exportBtn" class="btn btn-ghost" type="button" data-i18n="exportJson"></button>
+							<label class="btn btn-ghost file-btn"><span data-i18n="importFile"></span><input id="importInput" type="file" accept="application/json,.json" hidden /></label>
+						</div>
+					</div>
+					<div class="set-card setting-row">
+						<div><strong data-i18n="fromDastyar"></strong><p class="muted small" data-i18n="fromDastyarHint"></p></div>
+						<button id="dastyarBtn" class="btn btn-ghost" type="button" data-i18n="fromDastyarBtn"></button>
+					</div>
+				</section>
+
+				<section class="set-sec" data-sec="about" hidden>
+					<div class="about">
+						<img src="icons/icon-128.png" alt="" width="72" height="72" />
+						<strong>Kamyar <span id="aboutVer" dir="ltr"></span></strong>
+						<p class="muted" data-i18n="aboutText"></p>
+					</div>
+				</section>
+				<p id="settingsMsg" class="muted"></p>
+			</div>
+			<select id="fontSelect" hidden></select>
+		</form>
+	</dialog>
+
+	<dialog id="eventDialog" class="dialog small">
+		<form id="eventForm" method="dialog" class="dialog-body">
+			<div class="page-head">
+				<h3 id="eventDialogTitle"></h3>
+				<span class="grow"></span>
+				<div class="seg" role="tablist">
+					<button class="seg-btn" data-kind="event" type="button" data-i18n="kindEvent"></button>
+					<button class="seg-btn" data-kind="birthday" type="button" data-i18n="kindBirthday"></button>
+				</div>
+			</div>
+			<input id="evTitle" dir="auto" maxlength="200" required class="note-title-input" />
+			<div class="grid2">
+				<label><span id="evDateLabel" data-i18n="date"></span><input id="evDate" type="date" required /></label>
+				<label class="check ev-noyear"><input id="evNoYear" type="checkbox" /> <span data-i18n="noYear"></span></label>
+				<label class="check ev-allday"><input id="evAllDay" type="checkbox" /> <span data-i18n="allDay"></span></label>
+				<span class="ev-allday"></span>
+				<label class="ev-time"><span data-i18n="startTime"></span><input id="evStart" type="time" /></label>
+				<label class="ev-time"><span data-i18n="endTime"></span><input id="evEnd" type="time" /></label>
+				<label class="ev-repeat"><span data-i18n="repeat"></span>
+					<select id="evRepeat">
+						<option value="" data-i18n="rpNone"></option>
+						<option value="daily" data-i18n="rpDaily"></option>
+						<option value="weekdays" data-i18n="rpWeekdays"></option>
+						<option value="weekly" data-i18n="rpWeekly"></option>
+						<option value="monthly" data-i18n="rpMonthly"></option>
+						<option value="yearly" data-i18n="rpYearly"></option>
+					</select>
+				</label>
+				<label class="ev-cal"><span data-i18n="repeatCal"></span>
+					<select id="evCal">
+						<option value="persian" data-i18n="calPersian"></option>
+						<option value="gregory" data-i18n="calGregory"></option>
+						<option value="islamic-umalqura" data-i18n="calIslamic"></option>
+					</select>
+				</label>
+				<label><span data-i18n="reminder"></span><select id="evRemind"></select></label>
+			</div>
+			<p id="evDateHint" class="muted small"></p>
+			<textarea id="evDesc" dir="auto" rows="2" data-i18n-ph="description"></textarea>
+			<div id="evColors" class="swatches"></div>
+			<div class="dialog-actions">
+				<button id="evDelete" class="btn btn-danger" type="button" data-i18n="delete"></button>
+				<span></span>
+				<button class="btn btn-ghost" value="cancel" formnovalidate data-i18n="cancel"></button>
+				<button class="btn" value="save" data-i18n="save"></button>
+			</div>
+		</form>
+	</dialog>
+
+	<dialog id="dastyarDialog" class="dialog small">
+		<form method="dialog" class="dialog-body">
+			<h3 data-i18n="dastyarTitle"></h3>
+			<ol class="steps">
+				<li data-i18n="dastyarStep1"></li>
+				<li data-i18n="dastyarStep2"></li>
+				<li><span data-i18n="dastyarStep3"></span>
+					<textarea id="dastyarCode" class="code" dir="ltr" readonly spellcheck="false" rows="6"></textarea>
+					<button id="dastyarCopy" class="btn btn-ghost small" type="button" data-i18n="copyCode"></button>
+				</li>
+				<li><span data-i18n="dastyarStep4"></span>
+					<div class="row"><label class="btn file-btn"><span data-i18n="chooseExport"></span><input id="dastyarFile" type="file" accept="application/json,.json" hidden /></label></div>
+				</li>
+			</ol>
+			<p class="muted small" data-i18n="dastyarSafe"></p>
+			<p id="dastyarMsg" class="dastyar-msg" role="status"></p>
+			<div class="dialog-actions">
+				<span></span>
+				<button class="btn btn-ghost" value="close" data-i18n="close"></button>
+			</div>
+		</form>
+	</dialog>
+
+	<dialog id="tasksPage" class="dialog page">
+		<div class="page-head">
+			<h3 data-i18n="todos"></h3>
+			<div class="seg" role="tablist">
+				<button class="seg-btn" data-view="list" type="button" data-i18n="viewList"></button>
+				<button class="seg-btn" data-view="boards" type="button" data-i18n="viewBoards"></button>
+			</div>
+			<span class="grow"></span>
+			<button id="addBoardBtn" class="btn btn-ghost" type="button" data-i18n="addBoard"></button>
+			<button id="newTaskBtn" class="btn" type="button" data-i18n="newTask"></button>
+			<button id="closeTasksPage" class="icon-btn small" type="button" data-i18n-title="close">✕</button>
+		</div>
+		<div class="todo-toolbar" data-scope="page"></div>
+		<div id="tasksPageBody" class="page-body"></div>
+	</dialog>
+
+	<dialog id="taskDialog" class="dialog small">
+		<form id="taskForm" method="dialog" class="dialog-body">
+			<h3 id="taskDialogTitle"></h3>
+			<input id="taskTitle" dir="auto" maxlength="300" required data-i18n-ph="taskTitle" class="note-title-input" />
+			<textarea id="taskDesc" dir="auto" rows="3" data-i18n-ph="description"></textarea>
+			<div class="grid2">
+				<label><span data-i18n="board"></span><select id="taskBoard"></select></label>
+				<label><span data-i18n="priority"></span>
+					<select id="taskPriority">
+						<option value="0" data-i18n="prNone"></option>
+						<option value="1" data-i18n="prLow"></option>
+						<option value="2" data-i18n="prMedium"></option>
+						<option value="3" data-i18n="prHigh"></option>
+					</select>
+				</label>
+				<label><span data-i18n="date"></span><input id="taskDate" type="date" /></label>
+				<label><span data-i18n="time"></span><input id="taskTime" type="time" /></label>
+				<label><span data-i18n="repeat"></span>
+					<select id="taskRepeat">
+						<option value="" data-i18n="rpNone"></option>
+						<option value="daily" data-i18n="rpDaily"></option>
+						<option value="weekdays" data-i18n="rpWeekdays"></option>
+						<option value="weekly" data-i18n="rpWeekly"></option>
+						<option value="monthly" data-i18n="rpMonthly"></option>
+						<option value="yearly" data-i18n="rpYearly"></option>
+					</select>
+				</label>
+				<label class="check reminder-check"><input id="taskRemind" type="checkbox" /> <span data-i18n="remindMe"></span></label>
+			</div>
+			<div>
+				<span class="small muted" data-i18n="labels"></span>
+				<div id="taskLabels" class="label-picker"></div>
+			</div>
+			<p id="taskError" class="error" hidden></p>
+			<div class="dialog-actions">
+				<button id="taskDelete" class="btn btn-danger" type="button" data-i18n="delete"></button>
+				<span></span>
+				<button class="btn btn-ghost" value="cancel" formnovalidate data-i18n="cancel"></button>
+				<button class="btn" value="save" data-i18n="save"></button>
+			</div>
+		</form>
+	</dialog>
+
+	<dialog id="boardDialog" class="dialog small">
+		<form id="boardForm" method="dialog" class="dialog-body">
+			<h3 id="boardDialogTitle"></h3>
+			<label><span data-i18n="boardName"></span><input id="boardName" dir="auto" maxlength="60" required data-i18n-ph="boardNamePh" /></label>
+			<div><span class="small muted" data-i18n="color"></span><div id="boardColors" class="swatches"></div></div>
+			<div id="boardBulk" class="board-bulk">
+				<span class="small muted" data-i18n="boardTasks"></span>
+				<div class="row wrap">
+					<select id="boardMoveTo"></select>
+					<button id="boardMove" class="btn btn-ghost small" type="button" data-i18n="moveAll"></button>
+					<button id="boardClear" class="btn btn-ghost small danger-text" type="button" data-i18n="deleteAllTasks"></button>
+				</div>
+			</div>
+			<div class="dialog-actions">
+				<button id="boardDelete" class="btn btn-danger" type="button" data-i18n="deleteBoard"></button>
+				<span></span>
+				<button class="btn btn-ghost" value="cancel" formnovalidate data-i18n="cancel"></button>
+				<button class="btn" value="save" data-i18n="save"></button>
+			</div>
+		</form>
+	</dialog>
+
+	<div id="toast" class="toast" role="status" hidden></div>
+
+	<script src="js/i18n.js"></script>
+	<script src="js/store.js"></script>
+	<script src="js/drive.js"></script>
+	<script src="js/chromesync.js"></script>
+	<script src="js/brands.js"></script>
+	<script src="js/app.js"></script>
+	<script src="js/todos.js"></script>
+	<script src="js/dastyar-import.js"></script>
+	<script src="js/events-core.js"></script>
+	<script src="js/events.js"></script>
+	<script src="js/occasions.js"></script>
+	<script src="js/calendar.js"></script>
+	<script src="js/gcal.js"></script>
+	<script src="js/weather.js"></script>
+	<script src="js/prayer.js"></script>
+	<script src="js/rates.js"></script>
+	<script src="js/pomodoro.js"></script>
+	<script src="js/tools.js"></script>
+	<script src="js/services.js"></script>
+	<script src="js/plan.js"></script>
+	<script src="js/layout.js"></script>
+	<script src="js/settings.js"></script>
+</body>
+</html>
