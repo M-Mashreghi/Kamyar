@@ -74,7 +74,7 @@
 	new MutationObserver(() => ($("syncChip").dataset.label = $("syncText").textContent)).observe($("syncText"), { childList: true, characterData: true, subtree: true });
 
 	/* ---------- notes / tasks switch ---------- */
-	let side = ls.get("hamyar_side", "todo") === "note" ? "note" : "todo";
+	let side = ["note", "later"].includes(ls.get("hamyar_side", "todo")) ? ls.get("hamyar_side", "todo") : "todo";
 	function showSide(v) {
 		side = v;
 		ls.set("hamyar_side", v);
@@ -84,10 +84,11 @@
 		});
 		document.querySelector(".side-todo").hidden = v !== "todo";
 		document.querySelector(".side-note").hidden = v !== "note";
+		document.querySelector(".side-later").hidden = v !== "later";
 	}
 	document.querySelectorAll(".side-tab").forEach((b) => b.addEventListener("click", () => {
 		showSide(b.dataset.side);
-		$(side === "todo" ? "todoInput" : "noteQuick").focus();
+		$(side === "todo" ? "todoInput" : side === "later" ? "laterInput" : "noteQuick").focus();
 	}));
 	$("noteForm").addEventListener("submit", (e) => {
 		e.preventDefault();

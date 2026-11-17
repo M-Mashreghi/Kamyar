@@ -107,10 +107,11 @@
 		$("ratesBody").replaceChildren(el("ul", { class: "rate-list" }, ...rows), ...extra);
 		// Short list for the home ticker: Iranian rates first when available, then gold, crypto and currencies.
 		const tick = [];
-		if (d.iran) for (const r of d.iran) tick.push({ label: t(r.label), value: `${num(r.value)}`, unit: t("toman"), change: r.change ? (r.change >= 0 ? 1 : -1) : 0 });
-		if (d.coins) for (const [id, label] of COINS) { const c = d.coins[id]; if (c && c.price != null) tick.push({ label: t(label), value: money(c.price, d.base), change: c.change || 0, pct: c.change }); }
-		if (d.fiat) for (const cur of FIAT) if (cur !== d.base && d.fiat[cur]) tick.push({ label: `${t(FIAT_KEY[cur])}`, code: cur, value: money(1 / d.fiat[cur], d.base), change: 0 });
-		H.ticker = tick;
+		if (d.iran) for (const r of d.iran) tick.push({ key: "ir:" + r.label, label: t(r.label), value: `${num(r.value)}`, unit: t("toman"), change: r.change ? (r.change >= 0 ? 1 : -1) : 0 });
+		if (d.coins) for (const [id, label] of COINS) { const c = d.coins[id]; if (c && c.price != null) tick.push({ key: "c:" + id, label: t(label), value: money(c.price, d.base), change: c.change || 0, pct: c.change }); }
+		if (d.fiat) for (const cur of FIAT) if (cur !== d.base && d.fiat[cur]) tick.push({ key: "f:" + cur, label: `${t(FIAT_KEY[cur])}`, code: cur, value: money(1 / d.fiat[cur], d.base), change: 0 });
+		const off = setting("tickerOff", {}) || {};
+		H.ticker = tick.filter((x) => !off[x.key]);
 		window.dispatchEvent(new Event("hamyar-rates"));
 		$("ratesUpdated").textContent = t("updatedAt", { time: new Intl.DateTimeFormat(I18n.locale, { hour: "2-digit", minute: "2-digit" }).format(new Date(d.at)) });
 	}
@@ -131,12 +132,14 @@
 
 	let sig = "";
 	H.onRefresh(() => {
-		const s = JSON.stringify([I18n.lang, setting("base", "USD"), setting("navasanKey", ""), H.widgetOn("rates")]);
+		const s = JSON.stringify([I18n.lang, setting("base", "USD"), setting("navasanKey", ""), H.widgetOn("rates"), setting("tickerOff", {})]);
 		if (s === sig) return;
 		const dataChanged = sig && JSON.parse(sig).slice(1, 3).join() !== JSON.parse(s).slice(1, 3).join();
 		sig = s;
 		render(!!dataChanged);
 	});
 	$("ratesUpdated").addEventListener("click", () => render(true));
+	// Every rate the home ticker can show, for the settings checklist: [key, label key, needs a Navasan key].
+	window.Rates = { TICKER: [...NAVASAN.map(([, l]) => ["ir:" + l, l, true]), ...COINS.map(([id, l]) => ["c:" + id, l, false]), ...FIAT.map((c) => ["f:" + c, FIAT_KEY[c], false])] };
 	setInterval(() => document.visibilityState === "visible" && render(true), TTL);
 })();

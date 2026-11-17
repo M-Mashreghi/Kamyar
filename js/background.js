@@ -71,3 +71,22 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
 chrome.notifications.onClicked.addListener((nid) => {
 	if (nid.startsWith("hamyar-")) chrome.tabs.create({});
 });
+
+// Right-click menu: "Save to Read later". The link waits in local storage until a Kamyar tab picks it up.
+const LATER_TITLE = { fa: "ذخیره در «بعداً بخوانم» کامیار", en: "Save to Kamyar Read later", fr: "Enregistrer dans Kamyar · À lire plus tard", de: "In Kamyar · Später lesen speichern" };
+async function setupMenu() {
+	const { hamyar_lang: lang } = await chrome.storage.local.get("hamyar_lang");
+	chrome.contextMenus.removeAll(() => chrome.contextMenus.create({ id: "kamyar-later", title: LATER_TITLE[lang] || LATER_TITLE.fa, contexts: ["page", "link"] }));
+}
+chrome.runtime.onInstalled.addListener(setupMenu);
+chrome.runtime.onStartup.addListener(setupMenu);
+chrome.storage.onChanged.addListener((c, area) => area === "local" && c.hamyar_lang && setupMenu());
+chrome.contextMenus.onClicked.addListener(async (info, tab) => {
+	if (info.menuItemId !== "kamyar-later") return;
+	const url = info.linkUrl || info.pageUrl;
+	if (!/^https?:/i.test(url || "")) return;
+	const title = info.linkUrl ? info.selectionText || "" : (tab && tab.title) || "";
+	const { kamyar_inbox: box = [] } = await chrome.storage.local.get("kamyar_inbox");
+	box.push({ url, title: String(title).slice(0, 200) });
+	await chrome.storage.local.set({ kamyar_inbox: box.slice(-200) });
+});

@@ -65,6 +65,7 @@
 				<input id="searchInput" dir="auto" type="search" autocomplete="off" data-i18n-title="search" aria-autocomplete="list" aria-controls="searchHist" />
 				<button id="voiceBtn" class="search-btn" type="button" data-i18n-title="voiceSearch"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button>
 				<button id="imageBtn" class="search-btn" type="button" data-i18n-title="imageSearch"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8V6a2 2 0 0 1 2-2h2M16 4h2a2 2 0 0 1 2 2v2M20 16v2a2 2 0 0 1-2 2h-2M8 20H6a2 2 0 0 1-2-2v-2"/><circle cx="12" cy="12" r="3"/></svg></button>
+				<button id="aiBtn" class="search-btn ai-btn" type="button" data-i18n-title="askAi" aria-haspopup="menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c.4 3.9 2.4 5.9 6.3 6.3-3.9.4-5.9 2.4-6.3 6.3-.4-3.9-2.4-5.9-6.3-6.3C9.6 8.9 11.6 6.9 12 3z"/><path d="M18.5 15.5c.2 1.6 1 2.4 2.5 2.5-1.6.2-2.4 1-2.5 2.5-.2-1.6-1-2.4-2.5-2.5 1.6-.1 2.4-.9 2.5-2.5z"/></svg></button>
 				<button class="search-go" type="submit" data-i18n-title="search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
 			</form>
 			<ul id="searchHist" class="search-hist" role="listbox" hidden></ul>
@@ -74,13 +75,24 @@
 			<section class="shortcuts" data-i18n-title="shortcuts">
 				<ul id="bookmarkList" class="tiles"></ul>
 			</section>
+			<section class="card daily-card" data-widget="daily">
+				<div class="daily-tabs" role="tablist">
+					<button class="daily-tab" data-daily="quote" type="button" role="tab"><span>💡</span> <span data-i18n="dailyQuote"></span></button>
+					<button class="daily-tab" data-daily="poem" type="button" role="tab"><span>📜</span> <span data-i18n="dailyPoem"></span></button>
+					<button class="daily-tab" data-daily="fal" type="button" role="tab"><span>🔮</span> <span data-i18n="hafezFal"></span></button>
+					<span class="grow"></span>
+					<button id="dailyNext" class="icon-btn small" type="button" data-i18n-title="another">↻</button>
+				</div>
+				<div id="dailyBody" class="daily-body"></div>
+			</section>
 		</div>
 
 		<div class="col col-c">
 			<section class="card side-panel">
 				<div class="side-switch" role="tablist">
-					<button class="side-tab" data-side="note" type="button" role="tab"><span data-i18n="notes"></span> 🗒</button>
-					<button class="side-tab" data-side="todo" type="button" role="tab"><span data-i18n="todos"></span> ☑</button>
+					<button class="side-tab" data-side="note" type="button" role="tab"><span data-i18n="notes"></span></button>
+					<button class="side-tab" data-side="todo" type="button" role="tab"><span data-i18n="todos"></span></button>
+					<button class="side-tab" data-side="later" type="button" role="tab"><span data-i18n="readLater"></span></button>
 				</div>
 				<div class="side-todo">
 					<div class="todo-toolbar side-tools" data-scope="home"></div>
@@ -98,6 +110,13 @@
 					<form id="noteForm" class="side-add">
 						<input id="noteQuick" dir="auto" maxlength="200" data-i18n-ph="addNewNote" />
 						<button id="newNote" class="icon-btn small" type="button" data-i18n-title="newNote">＋</button>
+					</form>
+				</div>
+				<div class="side-later" hidden>
+					<ul id="laterList" class="later-list side-list"></ul>
+					<form id="laterForm" class="side-add">
+						<input id="laterInput" dir="ltr" maxlength="2000" data-i18n-ph="laterPh" />
+						<button class="icon-btn small" type="submit" data-i18n-title="add">＋</button>
 					</form>
 				</div>
 			</section>
@@ -169,6 +188,21 @@
 					<button class="seg-btn" data-tool="count" type="button" data-i18n="tCountdown"></button>
 				</div>
 				<div id="toolBody" class="tool-body"></div>
+			</section>
+			<section class="panel widget habits" data-widget="habits">
+				<div class="panel-head">
+					<h2 data-i18n="wHabits"></h2>
+					<span id="habitSummary" class="muted small"></span>
+				</div>
+				<div id="habitList" class="habit-list"></div>
+				<form id="habitForm" class="habit-form">
+					<input id="habitEmoji" class="habit-emoji-in" maxlength="4" value="✅" aria-label="emoji" />
+					<input id="habitName" dir="auto" maxlength="40" data-i18n-ph="habitPh" />
+					<input id="habitTarget" type="number" min="1" max="20" value="1" data-i18n-title="habitTarget" />
+					<button class="btn" type="submit" data-i18n="add"></button>
+				</form>
+				<div id="habitSugg" class="habit-sugg"></div>
+				<p class="muted small" data-i18n="habitHint"></p>
 			</section>
 			<section class="panel widget" data-widget="pomodoro">
 				<div class="panel-head">
@@ -277,6 +311,13 @@
 		</form>
 	</dialog>
 
+	<dialog id="falDialog" class="dialog fal-dlg">
+		<form method="dialog" class="dialog-body">
+			<div class="fal-head"><h3>🔮 <span data-i18n="hafezFal"></span></h3><span class="grow"></span><button class="icon-btn small" value="close" aria-label="close">✕</button></div>
+			<div id="falBody" class="fal-body"></div>
+			<div class="dialog-actions"><span></span><button id="falAgain" class="btn" type="button" data-i18n="falAgain"></button></div>
+		</form>
+	</dialog>
 	<dialog id="settingsDialog" class="dialog settings-dlg">
 		<form method="dialog" class="settings-wrap">
 			<header class="set-head">
@@ -384,6 +425,9 @@
 					</div>
 					<h4 data-i18n="widgets"></h4>
 					<div id="widgetToggles" class="toggles"></div>
+					<h4 data-i18n="tickerRates"></h4>
+					<p class="muted small" data-i18n="tickerRatesHint"></p>
+					<div id="tickerToggles" class="toggles"></div>
 					<label class="fld"><span data-i18n="navasanKey"></span><input id="navasanInput" dir="ltr" autocomplete="off" spellcheck="false" /></label>
 					<p class="muted small" data-i18n="navasanHint"></p>
 					<button id="showKeys" class="btn btn-ghost" type="button" data-i18n="keyboardShortcuts"></button>
@@ -629,5 +673,7 @@
 	<script src="js/plan.js"></script>
 	<script src="js/layout.js"></script>
 	<script src="js/settings.js"></script>
+	<script src="js/quotes.js"></script>
+	<script src="js/extras.js"></script>
 </body>
 </html>
