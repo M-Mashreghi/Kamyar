@@ -877,3 +877,4 @@ html.has-video body { background: transparent !important; }
 .brand-line { display: inline-flex; align-items: center; gap: 8px; margin: 0; font-weight: 700; font-size: 15px; }
 .sparkle { color: var(--accent); flex: none; }
 .about-name { font-size: 20px; }
+.about-logo { border-radius: 28px; box-shadow: 0 10px 40px rgb(80 30 200 / .35); }

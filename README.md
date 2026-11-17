@@ -1,3 +1,5 @@
+<p align="center"><img src="icons/logo.png" alt="Kamyar" width="260" /></p>
+
 # Kamyar · کامیار
 
 **کامیار | یار هوشمند شما** · *Kamyar | Your smart companion*
