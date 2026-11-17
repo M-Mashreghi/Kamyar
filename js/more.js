@@ -184,19 +184,25 @@
 				? curs.map((c) => el("div", { class: "exp-total" }, el("small", { class: "muted" }, t("expTotal")), el("strong", {}, money(byCur[c], c))))
 				: [el("p", { class: "muted small" }, t("expEmpty"))])
 		);
-		// Category bars for the main currency of the month.
-		const main = curs[0];
+		// Category bars. With a budget, each capped category shows spent / cap in the budget's currency.
+		const budget = setting("budget", null);
+		const caps = budget && budget.caps ? Object.fromEntries(Object.entries(budget.caps).filter(([, v]) => Number(v) > 0)) : {};
+		const bCur = budget && budget.cur;
+		const useBudget = bCur && Object.keys(caps).length;
+		const main = useBudget ? bCur : curs[0];
 		const byCat = {};
 		if (main) for (const x of items) if (x.cur === main) byCat[x.cat] = (byCat[x.cat] || 0) + Number(x.amount || 0);
-		const cats = Object.entries(byCat).sort((a, b) => b[1] - a[1]);
+		const catIds = [...new Set([...(useBudget ? Object.keys(caps) : []), ...Object.keys(byCat)])].sort((a, b) => (byCat[b] || 0) / (caps[b] || byCur[main] || 1) - (byCat[a] || 0) / (caps[a] || byCur[main] || 1));
 		$("expCats").replaceChildren(
-			...cats.map(([c, v]) => {
+			...catIds.map((c) => {
 				const [id, emoji] = catOf(c);
-				const pct = Math.round((v / byCur[main]) * 100);
-				return el("div", { class: "exp-cat" },
+				const v = byCat[c] || 0, cap = useBudget ? Number(caps[c] || 0) : 0;
+				const pct = cap ? Math.round((v / cap) * 100) : Math.round((v / (byCur[main] || 1)) * 100);
+				const lvl = cap ? (pct >= 100 ? " over" : pct >= 80 ? " warn" : "") : "";
+				return el("div", { class: "exp-cat" + lvl, title: cap ? t("budgetOf", { spent: money(v, main), cap: money(cap, main) }) : null },
 					el("span", { class: "exp-cat-name" }, emoji + " " + t("ex_" + id)),
-					el("span", { class: "exp-bar" }, el("i", { style: `width:${Math.max(2, pct)}%` })),
-					el("span", { class: "exp-cat-val" }, num(pct) + (I18n.lang === "fa" ? "٪" : "%")));
+					el("span", { class: "exp-bar" }, el("i", { style: `width:${Math.min(100, Math.max(2, pct))}%` })),
+					el("span", { class: "exp-cat-val" }, cap ? num(pct) + (I18n.lang === "fa" ? "٪" : "%") + " / " + money(cap, main).replace(/\s*(تومان|toman)$/i, "") : num(pct) + (I18n.lang === "fa" ? "٪" : "%")));
 			})
 		);
 		const df = new Intl.DateTimeFormat(`${I18n.locale}-u-ca-${cal}`, { day: "numeric", month: "short" });
@@ -224,11 +230,60 @@
 		if (!(amount > 0)) return toast(t("expBad"));
 		const cur = $("expCur").value;
 		Store.add("expense", { amount, cur, cat: $("expCat").value, note: $("expNote").value.trim().slice(0, 60), date: $("expDate").value || dstr(new Date()) });
+		budgetCheck($("expCat").value, cur, amount);
 		if (setting("expCur") !== cur) Store.setSetting("expCur", cur);
 		$("expAmount").value = "";
 		$("expNote").value = "";
 		$("expAmount").focus();
 	});
+	// Budget editor: one cap per category, in one currency.
+	function drawBudget() {
+		const b = setting("budget", null) || {};
+		const cur = b.cur || setting("expCur", I18n.lang === "fa" ? "IRT" : "USD");
+		const caps = b.caps || {};
+		$("expBudget").replaceChildren(
+			el("div", { class: "exp-budget-head" }, el("strong", {}, "🎯 " + t("budget")),
+				el("select", { id: "budgetCur", "aria-label": "currency" }, ...CURS.map((c) => el("option", { value: c, selected: c === cur }, c === "IRT" ? t("toman") : c)))),
+			el("p", { class: "muted small" }, t("budgetHint")),
+			el("div", { class: "exp-budget-grid" },
+				...CATS.map(([id, emoji]) => el("label", { class: "exp-budget-row" }, el("span", {}, emoji + " " + t("ex_" + id)),
+					el("input", { dir: "ltr", inputmode: "decimal", "data-cat": id, value: caps[id] ? String(caps[id]) : "", placeholder: "—" })))),
+			el("div", { class: "snip-actions" },
+				el("button", { type: "button", class: "btn btn-ghost", onclick: () => { Store.setSetting("budget", null); $("expBudget").hidden = true; } }, t("budgetClear")),
+				el("button", { type: "button", class: "btn", onclick: saveBudget }, t("save")))
+		);
+	}
+	function saveBudget() {
+		const caps = {};
+		$("expBudget").querySelectorAll("input[data-cat]").forEach((i) => {
+			const v = Number(toLatin(i.value));
+			if (v > 0) caps[i.dataset.cat] = v;
+		});
+		Store.setSetting("budget", Object.keys(caps).length ? { cur: $("budgetCur").value, caps } : null);
+		$("expBudget").hidden = true;
+		toast(t("saved"));
+	}
+	$("expBudgetBtn").addEventListener("click", () => {
+		$("expBudget").hidden = !$("expBudget").hidden;
+		if (!$("expBudget").hidden) drawBudget();
+	});
+	// After adding an expense: warn at 80% and 100% of that category's cap for the current month.
+	function budgetCheck(cat, cur, added) {
+		const b = setting("budget", null);
+		const cap = b && b.cur === cur && b.caps && Number(b.caps[cat]);
+		if (!cap) return;
+		const calId = H.calOrder()[0];
+		const p = EvCore.parts(calId, noon());
+		const spent = Store.list("expense").filter((x) => x.cur === cur && x.cat === cat && x.date && (() => { const q = EvCore.parts(calId, new Date(x.date + "T12:00")); return q.year === p.year && q.month === p.month; })()).reduce((a, x) => a + Number(x.amount || 0), 0);
+		const before = spent - added;
+		const name = t("ex_" + catOf(cat)[0]);
+		let msg = "";
+		if (spent >= cap && before < cap) msg = t("budgetOver", { cat: name, cap: money(cap, cur) });
+		else if (spent >= cap * 0.8 && before < cap * 0.8) msg = t("budgetNear", { cat: name, pct: num(Math.round((spent / cap) * 100)), cap: money(cap, cur) });
+		if (!msg) return;
+		toast(msg);
+		if (globalThis.chrome?.notifications) chrome.notifications.create("kamyar-budget-" + Date.now(), { type: "basic", iconUrl: "icons/icon-128.png", title: "🎯 " + t("budget"), message: msg, priority: 1 });
+	}
 	$("expPrev").addEventListener("click", () => { monthShift--; drawExpenses(); });
 	$("expNext").addEventListener("click", () => { monthShift++; drawExpenses(); });
 	$("expMonth").addEventListener("click", () => { monthShift = 0; drawExpenses(); });

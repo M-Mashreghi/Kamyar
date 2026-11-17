@@ -19,7 +19,7 @@
 		const v = Store.get().settings[k];
 		return v === undefined ? def : v;
 	};
-	const WIDGETS = ["calendar", "weather", "rates", "prayer", "daily", "tools", "habits", "expenses", "sounds", "alerts", "snippets", "pomodoro"];
+	const WIDGETS = ["calendar", "weather", "rates", "prayer", "daily", "tools", "habits", "expenses", "sounds", "alerts", "snippets", "pomodoro", "focusStats"];
 	const widgetOn = (w) => (setting("widgets", {}) || {})[w] !== false;
 
 	/* ---------- shared helpers for the widget scripts ---------- */
@@ -630,7 +630,7 @@
 	$("clearHist").addEventListener("click", () => { saveHist([]); toast(t("historyCleared")); });
 	$("wallDim").addEventListener("input", (e) => Themes.setDim(Number(e.target.value)));
 	$("langSelect").replaceChildren(...I18n.langs.map((l) => el("option", { value: l }, I18n.names[l])));
-	const widgetLabel = { calendar: "wCalendar", weather: "wWeather", rates: "wRates", prayer: "wPrayer", pomodoro: "wPomodoro", tools: "wTools", daily: "wDaily", habits: "wHabits", expenses: "wExpenses", sounds: "wSounds", alerts: "wAlerts", snippets: "wSnippets" };
+	const widgetLabel = { calendar: "wCalendar", weather: "wWeather", rates: "wRates", prayer: "wPrayer", pomodoro: "wPomodoro", tools: "wTools", daily: "wDaily", habits: "wHabits", expenses: "wExpenses", sounds: "wSounds", alerts: "wAlerts", snippets: "wSnippets", focusStats: "wFocusStats" };
 	function renderWidgetToggles() {
 		$("widgetToggles").replaceChildren(
 			...WIDGETS.map((w) =>

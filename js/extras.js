@@ -68,7 +68,7 @@
 				const b = (dayNo() + shift) % Math.max(1, pairs);
 				body.replaceChildren(
 					el("div", { class: "beyt", dir: "rtl", lang: "fa" }, el("span", {}, lines[b * 2]), el("span", {}, lines[b * 2 + 1] || "")),
-					el("p", { class: "daily-by", dir: "rtl", lang: "fa" }, "— حافظ، غزل " + num(n + 1))
+					el("p", { class: "daily-by", dir: "rtl", lang: "fa" }, "— " + t("hafezGhazal", { n: num(n + 1) }))
 				);
 			} catch {
 				body.replaceChildren(el("p", { class: "error small" }, t("loadFail")));
@@ -88,9 +88,9 @@
 		const beyts = [];
 		for (let i = 0; i < lines.length; i += 2) beyts.push(el("div", { class: "beyt" }, el("span", {}, lines[i]), el("span", {}, lines[i + 1] || "")));
 		$("falBody").replaceChildren(
-			el("p", { class: "muted small", dir: "rtl" }, "غزل شماره‌ی " + num(n + 1)),
+			el("p", { class: "muted small", dir: "auto" }, t("hafezGhazal", { n: num(n + 1) })),
 			el("div", { class: "fal-poem", dir: "rtl", lang: "fa" }, ...beyts),
-			meaning ? el("div", { class: "fal-meaning", dir: "rtl", lang: "fa" }, el("strong", {}, "تعبیر فال: "), meaning) : ""
+			meaning ? el("div", { class: "fal-meaning", dir: "rtl", lang: "fa" }, el("strong", {}, t("falMeaning") + " "), meaning) : ""
 		);
 		if (!$("falDialog").open) $("falDialog").showModal();
 		$("falBody").scrollTop = 0;

@@ -20,6 +20,15 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
 		next = count % 4 === 0 ? "long" : "short";
 	} else next = "focus";
 	await chrome.storage.local.set({ [POMO]: { ...s, running: false, mode: next, remaining: DUR[next], count, countDate: today } });
+	if (s.mode === "focus") {
+		// Daily log of finished focus sessions, for the report on the tools page (kept for a year).
+		const d = new Date(), key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+		const log = (await chrome.storage.local.get("kamyar_pomo_log")).kamyar_pomo_log || {};
+		log[key] = (log[key] || 0) + 1;
+		const keys = Object.keys(log).sort();
+		while (keys.length > 366) delete log[keys.shift()];
+		await chrome.storage.local.set({ kamyar_pomo_log: log });
+	}
 	const t = await bgT();
 	const title = s.mode === "focus" ? t("notifFocusDone") : t("notifBreakDone");
 	const message = s.mode === "focus" ? t("notifBreakNext", { m: next === "long" ? 15 : 5 }) : t("notifFocusNext");

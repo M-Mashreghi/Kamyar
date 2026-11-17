@@ -14,6 +14,11 @@ The first public release of Kamyar, a personal new-tab page for Chrome with no a
 راهنمای کامل و انتقال از دستیار در [README](https://github.com/M-Mashreghi/Kamyar#نصب) است. Full guide and Dastyar import: [README](https://github.com/M-Mashreghi/Kamyar#install).
 
 ### تازه‌های این نسخه · New in this version
+- 📊 گزارش روزانه‌ی تمرکز (پومودورو) · Daily focus report
+- 🗓 خلاصه‌ی هفتگی · Weekly summary
+- 🎯 بودجه‌ی ماهانه با هشدار · Monthly budget with warnings
+- 🧮 ماشین‌حساب و مبدل ارز و واحد در جستجو · Calculator and currency/unit converter in search
+- نوار کناری دو تکه شد · The side rail is split in two
 - 🎧 صداهای تمرکز: ۱۴ صدا و ۸ ترکیب آماده، پخش در پس‌زمینه · Focus sounds: 14 synthesized sounds and 8 presets
 - 🔔 هشدار قیمت برای رمزارز، سهام و دلار · Price alerts for crypto, stocks and rates
 - 📋 قطعه‌متن‌ها با کپی یک‌کلیکی و راست‌کلیک · Text snippets, one-click copy and right-click insert

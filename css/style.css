@@ -1112,3 +1112,52 @@ html.has-video body { background: transparent !important; }
 	.pr-ev { font-size: 7.5pt; color: #0d47a1; line-height: 1.35; }
 	.pr-notes { margin-top: 6px; color: #777; font-size: 9pt; border-bottom: 1px dotted #aaa; padding-bottom: 14px; }
 }
+
+/* Second, shorter rail on the other side: daily tools and AI shortcuts. */
+.rail.rail-2 { inset-inline-start: auto; inset-inline-end: 14px; }
+.rail-2 .rail-btn::after { inset-inline-start: auto; inset-inline-end: calc(100% + 14px); }
+.rail-2 .rail-sep { display: block; }
+.view { inset-inline-end: var(--rail); }
+@media (max-width: 900px) { main.view { margin-inline-end: var(--rail); } }
+
+/* ---------- v2.10: focus report, budget, calculator ---------- */
+.focus-stats .panel-head .chip { box-shadow: none; padding: 4px 10px; font-size: 12.5px; }
+.fs-today { display: flex; gap: 14px; align-items: center; margin: 6px 0 12px; }
+.fs-ring { --p: 0; flex: none; width: 84px; height: 84px; border-radius: 50%; display: grid; place-items: center; background: conic-gradient(#f97316 calc(var(--p) * 1%), var(--surface-2) 0); }
+.fs-ring > div { width: 66px; height: 66px; border-radius: 50%; background: var(--surface); display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1.1; }
+.fs-ring strong { font-size: 24px; }
+.fs-ring small { color: var(--muted); font-size: 11px; }
+.fs-today-text { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.fs-today-text > strong { font-size: 15px; }
+.fs-goal input { width: 48px; border: 1px solid var(--border); background: var(--surface-2); color: inherit; border-radius: 8px; padding: 2px 6px; font: inherit; }
+.fs-chart { position: relative; display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; height: 130px; align-items: end; padding: 0 2px; }
+.fs-col { display: flex; flex-direction: column; align-items: center; gap: 3px; height: 100%; justify-content: flex-end; }
+.fs-n { font-size: 11px; color: var(--muted); min-height: 14px; }
+.fs-bar { width: 100%; max-width: 30px; height: 80%; display: flex; align-items: flex-end; background: var(--surface-2); border-radius: 8px; overflow: hidden; }
+.fs-bar i { display: block; width: 100%; background: color-mix(in srgb, #f97316 70%, transparent); border-radius: 8px; min-height: 0; }
+.fs-col.hit .fs-bar i { background: #f97316; }
+.fs-col.today small { color: var(--accent); font-weight: 700; }
+.fs-col small { font-size: 11px; color: var(--muted); }
+.fs-goal-line { position: absolute; inset-inline: 0; border-top: 1.5px dashed color-mix(in srgb, #f97316 60%, transparent); pointer-events: none; }
+.fs-facts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 12px; }
+.fs-facts > div { background: var(--surface-2); border-radius: 12px; padding: 8px; display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.fs-facts strong { font-size: 17px; }
+.fs-facts small { font-size: 11px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.fs-facts .up { color: var(--ok, #22c55e); } .fs-facts .down { color: var(--danger); }
+
+.exp-cat.warn .exp-bar i { background: #f59e0b; }
+.exp-cat.over .exp-bar i { background: var(--danger); }
+.exp-cat.over .exp-cat-val { color: var(--danger); font-weight: 600; }
+.exp-cat { grid-template-columns: 110px 1fr auto; }
+.exp-budget { background: var(--surface-2); border-radius: 12px; padding: 10px; margin-bottom: 10px; display: flex; flex-direction: column; gap: 8px; }
+.exp-budget-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.exp-budget select, .exp-budget input { border: 1px solid var(--border); background: var(--surface); color: inherit; border-radius: 8px; padding: 5px 8px; font: inherit; font-size: 12.5px; min-width: 0; }
+.exp-budget-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 10px; }
+.exp-budget-row { display: grid; grid-template-columns: 1fr 96px; align-items: center; gap: 6px; font-size: 12.5px; }
+.exp-budget p { margin: 0; }
+
+.calc-answer { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; width: 100%; margin-top: 8px; padding: 10px 16px; border: 1px solid var(--border); border-radius: 14px; background: var(--surface); color: inherit; font: inherit; text-align: start; cursor: copy; box-shadow: var(--shadow); }
+.calc-answer strong { font-size: 20px; }
+.calc-answer .calc-copy { margin-inline-start: auto; }
+.calc-answer:hover { border-color: var(--accent); }
+.search-wrap { position: relative; }

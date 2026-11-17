@@ -6,7 +6,7 @@
 
 <p align="center">
   <img alt="Chrome MV3" src="https://img.shields.io/badge/Chrome-Manifest%20V3-4285F4?logo=googlechrome&logoColor=white" />
-  <img alt="Version" src="https://img.shields.io/badge/version-2.9.0-6c4ff0" />
+  <img alt="Version" src="https://img.shields.io/badge/version-2.10.0-6c4ff0" />
   <img alt="Languages" src="https://img.shields.io/badge/languages-FA%20%7C%20EN%20%7C%20FR%20%7C%20DE-14b8a6" />
   <img alt="No ads" src="https://img.shields.io/badge/ads-none-3db985" />
   <img alt="No tracking" src="https://img.shields.io/badge/tracking-none-3db985" />
@@ -55,6 +55,11 @@
 - **📋 قطعه‌متن‌ها:** آدرس، جواب‌های آماده و متن‌های پرتکرار با یک کلیک کپی می‌شوند. در هر سایتی هم با راست‌کلیک در جعبه‌ی متن، همان‌جا نوشته می‌شوند.
 - **🖨 تقویم برای چاپ:** ماه شمسی با مناسبت‌ها، رویدادها و کارهای خودتان. چاپ کنید یا PDF بگیرید.
 - **🎵 این آهنگ چیه؟:** چند ثانیه گوش می‌دهد و اسم آهنگ و خواننده را با لینک اسپاتیفای، یوتیوب و اپل موزیک نشان می‌دهد. برای این کار کلید رایگان [AudD](https://dashboard.audd.io/) لازم است.
+- **📊 گزارش تمرکز:** هر روز چند جلسه‌ی پومودوروی ۲۵ دقیقه‌ای داشته‌اید، چقدر تا هدف روزانه مانده، نمودار ۷ روز اخیر، روزهای پشت‌سرهم و بهترین روز.
+- **🗓 خلاصه‌ی هفتگی:** آخر هفته (جمعه شب) یک کارت باز می‌شود با کارهای انجام‌شده، جلسه‌های تمرکز، عادت‌ها و خرج هفته.
+- **🎯 بودجه‌ی ماهانه:** برای هر دسته‌ی هزینه سقف بگذارید. در ۸۰٪ و ۱۰۰٪ سقف هشدار می‌گیرید.
+- **🧮 ماشین‌حساب و مبدل در جستجو:** مثلاً «۱۲۰ دلار به تومان»، «۵ فوت به سانتی‌متر»، «۳۰ c to f» یا «۱۲×(۳+۴)». جواب همان زیر جعبه‌ی جستجو می‌آید و با یک کلیک کپی می‌شود.
+- **دو نوار کناری:** ابزارهای اصلی سمت راست، و صداها، تمرکز، مرور روز و هوش مصنوعی‌ها سمت چپ.
 
 <p align="center"><img src="docs/screenshots/home-daily-fa.png" alt="شعر روز و بعداً بخوانم" width="900" /></p>
 <p align="center"><img src="docs/screenshots/hafez-fal-fa.png" alt="فال حافظ" width="900" /></p>
@@ -66,6 +71,11 @@
 <p align="center"><img src="docs/screenshots/alerts-snippets-fa.png" alt="هشدار قیمت و قطعه‌متن‌ها" width="900" /></p>
 <p align="center"><img src="docs/screenshots/print-month-fa.png" alt="تقویم برای چاپ" width="900" /></p>
 <p align="center"><img src="docs/screenshots/song-fa.png" alt="این آهنگ چیه؟" width="900" /></p>
+<p align="center"><img src="docs/screenshots/home-two-rails-fa.png" alt="دو نوار کناری" width="900" /></p>
+<p align="center"><img src="docs/screenshots/focus-report-fa.png" alt="گزارش تمرکز" width="900" /></p>
+<p align="center"><img src="docs/screenshots/week-summary-fa.png" alt="خلاصه‌ی هفتگی" width="900" /></p>
+<p align="center"><img src="docs/screenshots/budget-fa.png" alt="بودجه‌ی ماهانه" width="900" /></p>
+<p align="center"><img src="docs/screenshots/calc-fa.png" alt="ماشین‌حساب در جستجو" width="900" /></p>
 
 ### تقویم و مناسبت‌ها
 
@@ -203,6 +213,11 @@ Kamyar is a **personal new-tab page for Google Chrome**. Every new tab shows you
 - **Snippets:** addresses, canned replies and other text you type often, copied in one click. You can also insert them into any text box from the right-click menu.
 - **Printable calendar:** the month with occasions, your events and tasks, ready to print or save as PDF.
 - **What's this song?:** listens for a few seconds and shows the title and artist with Spotify, YouTube and Apple Music links. Needs a free [AudD](https://dashboard.audd.io/) key.
+- **Focus report:** how many 25-minute Pomodoro sessions you finished each day, your daily goal, a 7-day chart, streak and best day.
+- **Weekly summary:** at the end of the week, a card with tasks done, focus sessions, habits and the week's spending.
+- **Monthly budget:** a cap per expense category, with warnings at 80% and 100%.
+- **Calculator and converter in search:** "120 dollars to toman", "5 ft to cm", "30 c to f" or "12*(3+4)". The answer shows under the search box and copies in one click.
+- **Two side rails:** navigation on one side; sounds, focus, the daily brief and AI shortcuts on the other.
 - **Calendar:** Persian (Solar Hijri), Gregorian and Islamic calendars side by side, with Iranian and international occasions, each with its own emoji. Twelve occasion categories that you can turn on or off one by one. Events, birthdays and reminders, with repeats. Optional Google Calendar events.
 - **Weekly planner:** an hour-by-hour week view of events, timed tasks and birthdays. Click an empty slot to add an event at that time.
 - **Tasks and notes:** due dates, times, priorities, labels, reminders, repeats, boards, filters and sorting, plus quick notes with search.
@@ -223,6 +238,11 @@ Kamyar is a **personal new-tab page for Google Chrome**. Every new tab shows you
 <p align="center"><img src="docs/screenshots/alerts-snippets-fa.png" alt="Price alerts and snippets" width="900" /></p>
 <p align="center"><img src="docs/screenshots/print-month-fa.png" alt="Printable calendar" width="900" /></p>
 <p align="center"><img src="docs/screenshots/song-fa.png" alt="What's this song?" width="900" /></p>
+<p align="center"><img src="docs/screenshots/home-two-rails-fa.png" alt="Two side rails" width="900" /></p>
+<p align="center"><img src="docs/screenshots/focus-report-fa.png" alt="Focus report" width="900" /></p>
+<p align="center"><img src="docs/screenshots/week-summary-fa.png" alt="Weekly summary" width="900" /></p>
+<p align="center"><img src="docs/screenshots/budget-fa.png" alt="Monthly budget" width="900" /></p>
+<p align="center"><img src="docs/screenshots/calc-fa.png" alt="Calculator in search" width="900" /></p>
 <p align="center"><img src="docs/screenshots/planner-light-en.png" alt="Weekly planner" width="900" /></p>
 
 ### Where your data lives
