@@ -56,6 +56,22 @@
 			["Google News", "https://news.google.com"], ["BBC فارسی|BBC Persian", "https://www.bbc.com/persian"], ["ایسنا|ISNA", "https://www.isna.ir"], ["ایرنا|IRNA", "https://www.irna.ir"], ["خبرآنلاین|Khabaronline", "https://www.khabaronline.ir"],
 			["ورزش سه|Varzesh3", "https://www.varzesh3.com"], ["زومیت|Zoomit", "https://www.zoomit.ir"], ["BBC News", "https://www.bbc.com/news"], ["Reuters", "https://www.reuters.com"], ["Euronews", "https://www.euronews.com"]
 		]],
+		["usnews", "🇺🇸", "خبرگزاری‌های آمریکا|US news|Presse américaine|US-Nachrichten", [
+			["Reuters", "https://www.reuters.com"], ["AP News", "https://apnews.com"], ["CNN", "https://www.cnn.com"], ["The New York Times", "https://www.nytimes.com"], ["The Washington Post", "https://www.washingtonpost.com"],
+			["The Wall Street Journal", "https://www.wsj.com"], ["Bloomberg", "https://www.bloomberg.com"], ["NPR", "https://www.npr.org"], ["NBC News", "https://www.nbcnews.com"], ["ABC News", "https://abcnews.go.com"],
+			["CBS News", "https://www.cbsnews.com"], ["Fox News", "https://www.foxnews.com"], ["CNBC", "https://www.cnbc.com"], ["USA Today", "https://www.usatoday.com"], ["Politico", "https://www.politico.com"], ["Axios", "https://www.axios.com"]
+		]],
+		["gaming", "🎮", "گیمینگ|Gaming|Jeux vidéo|Gaming", [
+			["Steam", "https://store.steampowered.com"], ["Epic Games", "https://store.epicgames.com"], ["PlayStation", "https://www.playstation.com"], ["Xbox", "https://www.xbox.com"], ["Nintendo", "https://www.nintendo.com"],
+			["GOG", "https://www.gog.com"], ["itch.io", "https://itch.io"], ["Battle.net", "https://battle.net"], ["EA", "https://www.ea.com"], ["Ubisoft", "https://www.ubisoft.com"], ["Rockstar Games", "https://www.rockstargames.com"],
+			["Twitch", "https://www.twitch.tv"], ["IGN", "https://www.ign.com"], ["GameSpot", "https://www.gamespot.com"], ["Metacritic", "https://www.metacritic.com/game/"], ["PC Gamer", "https://www.pcgamer.com"],
+			["Kotaku", "https://kotaku.com"], ["HowLongToBeat", "https://howlongtobeat.com"], ["زومجی|Zoomg", "https://www.zoomg.ir"], ["گیمفا|Gamefa", "https://gamefa.com"]
+		]],
+		["wallpapers", "🖼️", "والپیپر|Wallpapers|Fonds d'écran|Hintergrundbilder", [
+			["Wallhaven", "https://wallhaven.cc"], ["Wallpaper Abyss", "https://wall.alphacoders.com"], ["Wallpaper Cave", "https://wallpapercave.com"], ["WallpapersCraft", "https://wallpaperscraft.com"],
+			["HDQwalls", "https://hdqwalls.com"], ["GameWallpapers", "https://www.gamewallpapers.com"], ["DeviantArt", "https://www.deviantart.com/topic/wallpaper"], ["Unsplash", "https://unsplash.com/wallpapers"],
+			["Pexels", "https://www.pexels.com"], ["WallpaperAccess", "https://wallpaperaccess.com"], ["Wallpaper Flare", "https://www.wallpaperflare.com"]
+		]],
 		["tools", "🧰", "ابزارهای آنلاین|Online tools|Outils en ligne|Online-Werkzeuge", [
 			["Google Translate", "https://translate.google.com"], ["ویکی‌پدیا|Wikipedia", "https://www.wikipedia.org"], ["Speedtest", "https://www.speedtest.net"], ["Fast.com", "https://fast.com"], ["iLovePDF", "https://www.ilovepdf.com"],
 			["remove.bg", "https://www.remove.bg"], ["Canva", "https://www.canva.com"], ["TinyPNG", "https://tinypng.com"], ["Convertio", "https://convertio.co"], ["VirusTotal", "https://www.virustotal.com"]

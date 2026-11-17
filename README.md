@@ -6,7 +6,7 @@
 
 <p align="center">
   <img alt="Chrome MV3" src="https://img.shields.io/badge/Chrome-Manifest%20V3-4285F4?logo=googlechrome&logoColor=white" />
-  <img alt="Version" src="https://img.shields.io/badge/version-2.6.3-6c4ff0" />
+  <img alt="Version" src="https://img.shields.io/badge/version-2.6.4-6c4ff0" />
   <img alt="Languages" src="https://img.shields.io/badge/languages-FA%20%7C%20EN%20%7C%20FR%20%7C%20DE-14b8a6" />
   <img alt="No ads" src="https://img.shields.io/badge/ads-none-3db985" />
   <img alt="No tracking" src="https://img.shields.io/badge/tracking-none-3db985" />
@@ -60,7 +60,7 @@
 ### میان‌برها و سرویس‌ها
 
 - میان‌برها با **لوگوی واقعی هر سایت**، پوشه، کشیدن و جابه‌جا کردن، و منوی راست‌کلیک.
-- صفحه‌ی سرویس‌ها با دسته‌بندی: **هوش مصنوعی** (Claude، ChatGPT، Gemini، DeepSeek، Qwen، NotebookLM و …)، **همه‌ی سرویس‌های گوگل**، سایت‌های ایرانی، خرید، سفر، فیلم، موسیقی، شبکه‌های اجتماعی، خبر و ابزار.
+- صفحه‌ی سرویس‌ها با دسته‌بندی: **هوش مصنوعی** (Claude، ChatGPT، Gemini، DeepSeek، Qwen، NotebookLM و …)، **همه‌ی سرویس‌های گوگل**، سایت‌های ایرانی، خرید، سفر، فیلم، موسیقی، شبکه‌های اجتماعی، خبر، **خبرگزاری‌های آمریکا** (رویترز، AP، CNN، نیویورک تایمز و …)، **گیمینگ** (Steam، Epic، PlayStation، IGN و …)، **والپیپر** (Wallhaven، Wallpaper Abyss، Wallpaper Cave و …) و ابزار.
 - دسترسی سریع به Claude، ChatGPT، Gemini، Qwen، DeepSeek و NotebookLM از نوار کناری.
 
 <p align="center"><img src="docs/screenshots/services-fa.png" alt="صفحه‌ی سرویس‌ها" width="900" /></p>
@@ -161,7 +161,7 @@ Kamyar is a **personal new-tab page for Google Chrome**. Every new tab shows you
 - **Calendar:** Persian (Solar Hijri), Gregorian and Islamic calendars side by side, with Iranian and international occasions, each with its own emoji. Twelve occasion categories that you can turn on or off one by one. Events, birthdays and reminders, with repeats. Optional Google Calendar events.
 - **Weekly planner:** an hour-by-hour week view of events, timed tasks and birthdays. Click an empty slot to add an event at that time.
 - **Tasks and notes:** due dates, times, priorities, labels, reminders, repeats, boards, filters and sorting, plus quick notes with search.
-- **Shortcuts and services:** shortcuts with real site logos, folders, drag and drop, and a right-click menu. A services page with AI tools (Claude, ChatGPT, Gemini, DeepSeek, Qwen, NotebookLM…), every Google service, and popular Iranian and international sites.
+- **Shortcuts and services:** shortcuts with real site logos, folders, drag and drop, and a right-click menu. A services page with AI tools (Claude, ChatGPT, Gemini, DeepSeek, Qwen, NotebookLM…), every Google service, US news (Reuters, AP, CNN, NYT…), gaming (Steam, Epic, PlayStation, IGN…), wallpaper sites (Wallhaven, Wallpaper Abyss, Wallpaper Cave…), and popular Iranian and international sites.
 - **Tools:** weather, prayer times, currency and gold rates, Pomodoro, timer, stopwatch, countdowns, date converter and age calculator. Voice and image search.
 - **Look and feel:** light, dark, auto and day/night modes, 26 more themes, 7 accent colors or your own, **13 bundled fonts**, and image or **video** backgrounds.
 - **Profile:** picture, name, username and birthday, saved to your Google account through Chrome Sync.
