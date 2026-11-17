@@ -1,0 +1,31 @@
+name: Release
+
+# Run this from the Actions tab ("Run workflow") to publish a release.
+# It reads the version from manifest.json, builds Kamyar-v<version>.zip and creates the v<version> tag and release.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Read version
+        id: v
+        run: echo "version=$(jq -r .version manifest.json)" >> "$GITHUB_OUTPUT"
+
+      - name: Build zip
+        run: |
+          git archive --prefix=Kamyar/ -o "Kamyar-v${{ steps.v.outputs.version }}.zip" HEAD -- . ':!docs' ':!.github'
+          sed "s/{VERSION}/${{ steps.v.outputs.version }}/g" .github/release-notes.md > notes.md
+
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "v${{ steps.v.outputs.version }}" "Kamyar-v${{ steps.v.outputs.version }}.zip" \
+            --title "Kamyar v${{ steps.v.outputs.version }}" --notes-file notes.md --target "$GITHUB_SHA"
