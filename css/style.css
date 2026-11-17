@@ -874,3 +874,6 @@ html.has-video body { background: transparent !important; }
 .dialog .range-row input { flex: 1; padding: 0; border: 0; background: transparent; accent-color: var(--accent); }
 .dialog label.rot-row { flex-direction: row; align-items: center; gap: 8px; }
 .dialog .rot-row select { width: auto; }
+.brand-line { display: inline-flex; align-items: center; gap: 8px; margin: 0; font-weight: 700; font-size: 15px; }
+.sparkle { color: var(--accent); flex: none; }
+.about-name { font-size: 20px; }

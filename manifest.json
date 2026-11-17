@@ -1,9 +1,9 @@
 {
   "manifest_version": 3,
-  "name": "Kamyar – personal new tab",
+  "name": "کامیار | یار هوشمند شما",
   "short_name": "Kamyar",
-  "version": "2.6.0",
-  "description": "Tasks, notes and shortcuts in your new tab. Your data is saved in your own Google Drive. No ads, no tracking.",
+  "version": "2.6.1",
+  "description": "Kamyar, your smart companion: calendar, tasks, notes and shortcuts in your new tab, saved in your own Google account. No ads, no tracking.",
   "icons": {
     "16": "icons/icon-16.png",
     "32": "icons/icon-32.png",

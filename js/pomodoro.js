@@ -24,7 +24,7 @@
 		});
 		const c = state.countDate === today() ? state.count : 0;
 		$("pomoCount").textContent = c ? t("todaySessions", { n: new Intl.NumberFormat(I18n.locale).format(c) }) : "";
-		document.title = state.running ? `${text} · ${t(state.mode === "focus" ? "pFocus" : "pBreak")}` : t("newTab");
+		document.title = state.running ? `${text} · ${t(state.mode === "focus" ? "pFocus" : "pBreak")}` : t("brandFull");
 	}
 
 	async function update(next) {

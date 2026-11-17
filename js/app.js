@@ -893,7 +893,7 @@
 		const lang = setting("lang", null);
 		if (lang && lang !== I18n.lang) I18n.set(lang); // triggers renderAll again via onChange
 		applyTheme();
-		document.title = t("newTab");
+		document.title = t("brandFull");
 		$("searchInput").placeholder = t("searchPh", { engine: engine()[0] });
 		document.querySelectorAll("[data-widget]").forEach((w) => (w.hidden = !widgetOn(w.dataset.widget)));
 		tick();

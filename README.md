@@ -1,5 +1,7 @@
 # Kamyar · کامیار
 
+**کامیار | یار هوشمند شما** · *Kamyar | Your smart companion*
+
 یک تب جدید شخصی برای Google Chrome، بدون تبلیغ و بدون ردیابی.
 
 A personal new-tab page for Google Chrome. No ads, no tracking.
