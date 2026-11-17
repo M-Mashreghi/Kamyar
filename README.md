@@ -6,7 +6,7 @@
 
 <p align="center">
   <img alt="Chrome MV3" src="https://img.shields.io/badge/Chrome-Manifest%20V3-4285F4?logo=googlechrome&logoColor=white" />
-  <img alt="Version" src="https://img.shields.io/badge/version-2.8.0-6c4ff0" />
+  <img alt="Version" src="https://img.shields.io/badge/version-2.9.0-6c4ff0" />
   <img alt="Languages" src="https://img.shields.io/badge/languages-FA%20%7C%20EN%20%7C%20FR%20%7C%20DE-14b8a6" />
   <img alt="No ads" src="https://img.shields.io/badge/ads-none-3db985" />
   <img alt="No tracking" src="https://img.shields.io/badge/tracking-none-3db985" />
@@ -50,6 +50,11 @@
 - **🎯 حالت تمرکز:** با یک دکمه فقط ساعت، جستجو و پومودورو می‌ماند و سایت‌های حواس‌پرت‌کن (اینستاگرام، یوتیوب، X و …) تا وقتی تمرکز روشن است بسته می‌شوند. فهرست سایت‌ها دست خودتان است.
 - **📈 سهام و شاخص‌ها:** قیمت انویدیا، اپل، S&P 500، نزدک و هر نماد دلخواه بورس آمریکا کنار نرخ ارز (فقط برای نمایش).
 - **💸 ردیاب هزینه:** خرج‌ها به تومان، دلار، یورو و … با دسته‌بندی، جمع ماهانه (بر اساس تقویم اصلی شما) و نمودار سهم هر دسته.
+- **🎧 صداهای تمرکز:** ۱۴ صدای آرامش‌بخش (باران، رعدوبرق، باد، موج دریا، رودخانه، آتش هیزم، کافه، شب تابستان، پرندگان، قطار، نویز سفید، صورتی و قهوه‌ای، و بیت آلفا) که می‌شود ترکیبشان کرد. ۸ ترکیب آماده مثل «کافه‌ی بارانی» و «شب بارانی کنار آتش» هم دارد، با تایمر خاموشی. صداها در پس‌زمینه پخش می‌شوند و با رفتن به سایت‌های دیگر قطع نمی‌شوند. همه‌ی صداها همان لحظه در خود مرورگر ساخته می‌شوند، پس فایل صوتی دانلود نمی‌شود و اینترنت هم لازم نیست.
+- **🔔 هشدار قیمت:** مثلاً «بیت‌کوین زیر ۹۰٬۰۰۰ دلار» یا «انویدیا بالای ۲۰۰ دلار». کروم اعلان می‌دهد، حتی اگر صفحه‌ی کامیار باز نباشد.
+- **📋 قطعه‌متن‌ها:** آدرس، جواب‌های آماده و متن‌های پرتکرار با یک کلیک کپی می‌شوند. در هر سایتی هم با راست‌کلیک در جعبه‌ی متن، همان‌جا نوشته می‌شوند.
+- **🖨 تقویم برای چاپ:** ماه شمسی با مناسبت‌ها، رویدادها و کارهای خودتان. چاپ کنید یا PDF بگیرید.
+- **🎵 این آهنگ چیه؟:** چند ثانیه گوش می‌دهد و اسم آهنگ و خواننده را با لینک اسپاتیفای، یوتیوب و اپل موزیک نشان می‌دهد. برای این کار کلید رایگان [AudD](https://dashboard.audd.io/) لازم است.
 
 <p align="center"><img src="docs/screenshots/home-daily-fa.png" alt="شعر روز و بعداً بخوانم" width="900" /></p>
 <p align="center"><img src="docs/screenshots/hafez-fal-fa.png" alt="فال حافظ" width="900" /></p>
@@ -57,6 +62,10 @@
 <p align="center"><img src="docs/screenshots/morning-brief-fa.png" alt="مرور صبحگاهی" width="900" /></p>
 <p align="center"><img src="docs/screenshots/focus-mode-fa.png" alt="حالت تمرکز" width="900" /></p>
 <p align="center"><img src="docs/screenshots/expenses-fa.png" alt="ردیاب هزینه و سهام" width="900" /></p>
+<p align="center"><img src="docs/screenshots/focus-sounds-fa.png" alt="صداهای تمرکز" width="900" /></p>
+<p align="center"><img src="docs/screenshots/alerts-snippets-fa.png" alt="هشدار قیمت و قطعه‌متن‌ها" width="900" /></p>
+<p align="center"><img src="docs/screenshots/print-month-fa.png" alt="تقویم برای چاپ" width="900" /></p>
+<p align="center"><img src="docs/screenshots/song-fa.png" alt="این آهنگ چیه؟" width="900" /></p>
 
 ### تقویم و مناسبت‌ها
 
@@ -189,6 +198,11 @@ Kamyar is a **personal new-tab page for Google Chrome**. Every new tab shows you
 - **Focus mode:** one click leaves only the clock, search and Pomodoro, and blocks distracting sites (Instagram, YouTube, X…) while focus is on. You choose the list.
 - **Stocks and indexes:** NVIDIA, Apple, S&P 500, Nasdaq or any US symbol next to the currency rates (display only).
 - **Expense tracker:** log spending in toman, dollars, euros and more, with categories, monthly totals (in your main calendar) and a breakdown per category.
+- **Focus sounds:** 14 sounds you can mix (rain, thunderstorm, wind, waves, stream, fireplace, café, summer night, birds, train, white, pink and brown noise, alpha beats), 8 presets and a sleep timer. They keep playing in the background while you browse. Every sound is synthesized live in the browser, so nothing is downloaded and no internet is needed.
+- **Price alerts:** for example "Bitcoin below $90,000" or "NVIDIA above $200". Chrome notifies you, even with no Kamyar tab open.
+- **Snippets:** addresses, canned replies and other text you type often, copied in one click. You can also insert them into any text box from the right-click menu.
+- **Printable calendar:** the month with occasions, your events and tasks, ready to print or save as PDF.
+- **What's this song?:** listens for a few seconds and shows the title and artist with Spotify, YouTube and Apple Music links. Needs a free [AudD](https://dashboard.audd.io/) key.
 - **Calendar:** Persian (Solar Hijri), Gregorian and Islamic calendars side by side, with Iranian and international occasions, each with its own emoji. Twelve occasion categories that you can turn on or off one by one. Events, birthdays and reminders, with repeats. Optional Google Calendar events.
 - **Weekly planner:** an hour-by-hour week view of events, timed tasks and birthdays. Click an empty slot to add an event at that time.
 - **Tasks and notes:** due dates, times, priorities, labels, reminders, repeats, boards, filters and sorting, plus quick notes with search.
@@ -205,6 +219,10 @@ Kamyar is a **personal new-tab page for Google Chrome**. Every new tab shows you
 <p align="center"><img src="docs/screenshots/morning-brief-fa.png" alt="Morning brief" width="900" /></p>
 <p align="center"><img src="docs/screenshots/focus-mode-fa.png" alt="Focus mode" width="900" /></p>
 <p align="center"><img src="docs/screenshots/expenses-fa.png" alt="Expenses and stocks" width="900" /></p>
+<p align="center"><img src="docs/screenshots/focus-sounds-fa.png" alt="Focus sounds" width="900" /></p>
+<p align="center"><img src="docs/screenshots/alerts-snippets-fa.png" alt="Price alerts and snippets" width="900" /></p>
+<p align="center"><img src="docs/screenshots/print-month-fa.png" alt="Printable calendar" width="900" /></p>
+<p align="center"><img src="docs/screenshots/song-fa.png" alt="What's this song?" width="900" /></p>
 <p align="center"><img src="docs/screenshots/planner-light-en.png" alt="Weekly planner" width="900" /></p>
 
 ### Where your data lives
@@ -253,6 +271,7 @@ manifest.json      Chrome MV3 manifest
 newtab.html        The new-tab page
 css/               Styles and bundled @font-face rules
 js/                One file per feature (calendar, occasions, todos, planner, services, settings, …)
+offscreen.html     Plays the focus sounds in the background
 fonts/             Bundled fonts (SIL Open Font License)
 icons/             App icons, logo and brand logos for shortcuts
 wallpapers/        Ready-made wallpapers (1920×1080) and their thumbnails

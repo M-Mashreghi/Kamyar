@@ -165,5 +165,5 @@
 		sig = s;
 		render();
 	});
-	window.Cal = { render, occasions, parts };
+	window.Cal = { render, occasions, parts, shown: () => shown, weekStart, weekendDays };
 })();
