@@ -188,6 +188,9 @@ Kamyar is a **personal new-tab page for Google Chrome**. Every new tab shows you
 - **Four languages:** Persian, English, French and German.
 - Backup and restore, and import from the Dastyar extension.
 
+<p align="center"><img src="docs/screenshots/home-daily-fa.png" alt="Poem of the day and Read later" width="900" /></p>
+<p align="center"><img src="docs/screenshots/hafez-fal-fa.png" alt="Hafez fal" width="900" /></p>
+<p align="center"><img src="docs/screenshots/habits-fa.png" alt="Habit tracker" width="900" /></p>
 <p align="center"><img src="docs/screenshots/planner-light-en.png" alt="Weekly planner" width="900" /></p>
 
 ### Where your data lives
