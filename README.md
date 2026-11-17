@@ -6,7 +6,7 @@
 
 <p align="center">
   <img alt="Chrome MV3" src="https://img.shields.io/badge/Chrome-Manifest%20V3-4285F4?logo=googlechrome&logoColor=white" />
-  <img alt="Version" src="https://img.shields.io/badge/version-2.7.0-6c4ff0" />
+  <img alt="Version" src="https://img.shields.io/badge/version-2.8.0-6c4ff0" />
   <img alt="Languages" src="https://img.shields.io/badge/languages-FA%20%7C%20EN%20%7C%20FR%20%7C%20DE-14b8a6" />
   <img alt="No ads" src="https://img.shields.io/badge/ads-none-3db985" />
   <img alt="No tracking" src="https://img.shields.io/badge/tracking-none-3db985" />
@@ -46,10 +46,17 @@
 - **بعداً بخوانم:** لینک‌ها را از پنل کناری یا با **راست‌کلیک روی هر صفحه** ذخیره کنید.
 - **ردیاب عادت‌ها:** آب خوردن، ورزش، مطالعه و هر عادت دیگر، با هدف روزانه، نمای ۷ روزه و شمارش روزهای پشت‌سرهم 🔥.
 - **انتخاب نرخ‌ها:** در تنظیمات انتخاب کنید کدام ارز، طلا یا رمزارز در نوار نرخ‌ها دیده شود.
+- **☀️ مرور صبحگاهی:** هر روز صبح یک کارت که کارهای امروز و عقب‌افتاده، رویدادها و تولدها، آب‌وهوا، مناسبت روز، عادت‌ها و جمله‌ی روز را یک‌جا نشان می‌دهد.
+- **🎯 حالت تمرکز:** با یک دکمه فقط ساعت، جستجو و پومودورو می‌ماند و سایت‌های حواس‌پرت‌کن (اینستاگرام، یوتیوب، X و …) تا وقتی تمرکز روشن است بسته می‌شوند. فهرست سایت‌ها دست خودتان است.
+- **📈 سهام و شاخص‌ها:** قیمت انویدیا، اپل، S&P 500، نزدک و هر نماد دلخواه بورس آمریکا کنار نرخ ارز (فقط برای نمایش).
+- **💸 ردیاب هزینه:** خرج‌ها به تومان، دلار، یورو و … با دسته‌بندی، جمع ماهانه (بر اساس تقویم اصلی شما) و نمودار سهم هر دسته.
 
 <p align="center"><img src="docs/screenshots/home-daily-fa.png" alt="شعر روز و بعداً بخوانم" width="900" /></p>
 <p align="center"><img src="docs/screenshots/hafez-fal-fa.png" alt="فال حافظ" width="900" /></p>
 <p align="center"><img src="docs/screenshots/habits-fa.png" alt="ردیاب عادت‌ها" width="900" /></p>
+<p align="center"><img src="docs/screenshots/morning-brief-fa.png" alt="مرور صبحگاهی" width="900" /></p>
+<p align="center"><img src="docs/screenshots/focus-mode-fa.png" alt="حالت تمرکز" width="900" /></p>
+<p align="center"><img src="docs/screenshots/expenses-fa.png" alt="ردیاب هزینه و سهام" width="900" /></p>
 
 ### تقویم و مناسبت‌ها
 
@@ -178,6 +185,10 @@ Kamyar is a **personal new-tab page for Google Chrome**. Every new tab shows you
 - **Read later:** save links from the side panel or by **right-clicking any page**.
 - **Habit tracker:** water, exercise, reading or anything else, with a daily target, a 7-day view and a 🔥 streak.
 - **Pick your rates:** choose which currencies, gold and crypto show on the rates bar.
+- **Morning brief:** each morning, one card with today's and overdue tasks, events and birthdays, weather, today's occasion, habits and the daily quote.
+- **Focus mode:** one click leaves only the clock, search and Pomodoro, and blocks distracting sites (Instagram, YouTube, X…) while focus is on. You choose the list.
+- **Stocks and indexes:** NVIDIA, Apple, S&P 500, Nasdaq or any US symbol next to the currency rates (display only).
+- **Expense tracker:** log spending in toman, dollars, euros and more, with categories, monthly totals (in your main calendar) and a breakdown per category.
 - **Calendar:** Persian (Solar Hijri), Gregorian and Islamic calendars side by side, with Iranian and international occasions, each with its own emoji. Twelve occasion categories that you can turn on or off one by one. Events, birthdays and reminders, with repeats. Optional Google Calendar events.
 - **Weekly planner:** an hour-by-hour week view of events, timed tasks and birthdays. Click an empty slot to add an event at that time.
 - **Tasks and notes:** due dates, times, priorities, labels, reminders, repeats, boards, filters and sorting, plus quick notes with search.
@@ -191,6 +202,9 @@ Kamyar is a **personal new-tab page for Google Chrome**. Every new tab shows you
 <p align="center"><img src="docs/screenshots/home-daily-fa.png" alt="Poem of the day and Read later" width="900" /></p>
 <p align="center"><img src="docs/screenshots/hafez-fal-fa.png" alt="Hafez fal" width="900" /></p>
 <p align="center"><img src="docs/screenshots/habits-fa.png" alt="Habit tracker" width="900" /></p>
+<p align="center"><img src="docs/screenshots/morning-brief-fa.png" alt="Morning brief" width="900" /></p>
+<p align="center"><img src="docs/screenshots/focus-mode-fa.png" alt="Focus mode" width="900" /></p>
+<p align="center"><img src="docs/screenshots/expenses-fa.png" alt="Expenses and stocks" width="900" /></p>
 <p align="center"><img src="docs/screenshots/planner-light-en.png" alt="Weekly planner" width="900" /></p>
 
 ### Where your data lives

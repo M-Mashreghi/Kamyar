@@ -19,7 +19,7 @@
 		const v = Store.get().settings[k];
 		return v === undefined ? def : v;
 	};
-	const WIDGETS = ["calendar", "weather", "rates", "prayer", "daily", "tools", "habits", "pomodoro"];
+	const WIDGETS = ["calendar", "weather", "rates", "prayer", "daily", "tools", "habits", "expenses", "pomodoro"];
 	const widgetOn = (w) => (setting("widgets", {}) || {})[w] !== false;
 
 	/* ---------- shared helpers for the widget scripts ---------- */
@@ -630,7 +630,7 @@
 	$("clearHist").addEventListener("click", () => { saveHist([]); toast(t("historyCleared")); });
 	$("wallDim").addEventListener("input", (e) => Themes.setDim(Number(e.target.value)));
 	$("langSelect").replaceChildren(...I18n.langs.map((l) => el("option", { value: l }, I18n.names[l])));
-	const widgetLabel = { calendar: "wCalendar", weather: "wWeather", rates: "wRates", prayer: "wPrayer", pomodoro: "wPomodoro", tools: "wTools", daily: "wDaily", habits: "wHabits" };
+	const widgetLabel = { calendar: "wCalendar", weather: "wWeather", rates: "wRates", prayer: "wPrayer", pomodoro: "wPomodoro", tools: "wTools", daily: "wDaily", habits: "wHabits", expenses: "wExpenses" };
 	function renderWidgetToggles() {
 		$("widgetToggles").replaceChildren(
 			...WIDGETS.map((w) =>
@@ -651,6 +651,7 @@
 		$("iranHol").checked = setting("iranHolidays", true);
 		$("worldDays").checked = setting("worldDays", true);
 		$("navasanInput").value = setting("navasanKey", "");
+		$("stocksInput").value = setting("stocks", Rates.DEF_STOCKS) ?? Rates.DEF_STOCKS;
 		$("settingsMsg").textContent = "";
 		renderWidgetToggles();
 		renderChromeSyncInfo();
@@ -666,6 +667,7 @@
 	$("iranHol").addEventListener("change", (e) => Store.setSetting("iranHolidays", e.target.checked));
 	$("worldDays").addEventListener("change", (e) => Store.setSetting("worldDays", e.target.checked));
 	$("navasanInput").addEventListener("change", (e) => Store.setSetting("navasanKey", e.target.value.trim()));
+	$("stocksInput").addEventListener("change", (e) => Store.setSetting("stocks", e.target.value.trim()));
 	$("exportBtn").addEventListener("click", () => {
 		const blob = new Blob([JSON.stringify(Store.get(), null, 2)], { type: "application/json" });
 		const a = el("a", { href: URL.createObjectURL(blob), download: `kamyar-backup-${new Date().toISOString().slice(0, 10)}.json` });

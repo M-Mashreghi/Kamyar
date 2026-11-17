@@ -90,3 +90,16 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
 	box.push({ url, title: String(title).slice(0, 200) });
 	await chrome.storage.local.set({ kamyar_inbox: box.slice(-200) });
 });
+
+// Focus mode: while it is on, the sites the person listed are blocked with declarativeNetRequest.
+async function applyFocus() {
+	const { kamyar_focus: f } = await chrome.storage.local.get("kamyar_focus");
+	const old = await chrome.declarativeNetRequest.getDynamicRules();
+	const removeRuleIds = old.filter((r) => r.id >= 9000 && r.id < 9100).map((r) => r.id);
+	const sites = f && f.on ? (f.sites || []).map((s) => String(s).toLowerCase().replace(/^https?:\/\//, "").replace(/^www\./, "").split("/")[0]).filter((s) => /^[a-z0-9.-]+\.[a-z]{2,}$/.test(s)).slice(0, 60) : [];
+	const addRules = sites.map((s, i) => ({ id: 9000 + i, priority: 1, action: { type: "block" }, condition: { urlFilter: "||" + s, resourceTypes: ["main_frame"] } }));
+	await chrome.declarativeNetRequest.updateDynamicRules({ removeRuleIds, addRules });
+}
+chrome.storage.onChanged.addListener((c, area) => area === "local" && c.kamyar_focus && applyFocus());
+chrome.runtime.onStartup.addListener(applyFocus);
+chrome.runtime.onInstalled.addListener(applyFocus);

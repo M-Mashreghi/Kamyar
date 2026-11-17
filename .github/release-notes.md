@@ -14,6 +14,10 @@ The first public release of Kamyar, a personal new-tab page for Chrome with no a
 راهنمای کامل و انتقال از دستیار در [README](https://github.com/M-Mashreghi/Kamyar#نصب) است. Full guide and Dastyar import: [README](https://github.com/M-Mashreghi/Kamyar#install).
 
 ### تازه‌های این نسخه · New in this version
+- ☀️ مرور صبحگاهی: کارها، رویدادها، تولدها، آب‌وهوا و جمله‌ی روز در یک کارت · Morning brief
+- 🎯 حالت تمرکز با بستن سایت‌های حواس‌پرت‌کن · Focus mode that blocks distracting sites
+- 📈 سهام و شاخص‌های آمریکا (انویدیا، اپل، S&P 500، نزدک) · US stocks and indexes
+- 💸 ردیاب هزینه با دسته‌بندی و جمع ماهانه · Expense tracker with categories and monthly totals
 - ✨ پرسیدن مستقیم از Claude، ChatGPT، Gemini، Perplexity و DeepSeek از نوار جستجو (Shift+Enter) · Ask an AI straight from the search bar
 - 💡 جمله‌ی امیدبخش روز، 📜 شعر روز و 🔮 فال حافظ با تعبیر · Daily hopeful quote, poem of the day and Hafez fal
 - 🔖 «بعداً بخوانم» با راست‌کلیک روی هر صفحه · Read later, also from the right-click menu

@@ -13,6 +13,31 @@
 	// Navasan field → label. Fields missing from the answer are skipped.
 	const NAVASAN = [["usd_sell", "rUsd"], ["eur", "rEur"], ["gbp", "rGbp"], ["aed", "rAed"], ["try", "rTry"], ["18ayar", "rGold18"], ["sekkeh", "rSekke"], ["bahar", "rBahar"], ["nim", "rNim"], ["rob", "rRob"], ["usdt", "rUsdt"]];
 
+	// US stocks and indexes (display only), from Yahoo Finance's public chart endpoint.
+	const DEF_STOCKS = "NVDA, AAPL, ^GSPC, ^IXIC";
+	const STOCK_NAMES = { NVDA: ["انویدیا", "NVIDIA"], AAPL: ["اپل", "Apple"], MSFT: ["مایکروسافت", "Microsoft"], GOOGL: ["گوگل", "Alphabet"], GOOG: ["گوگل", "Alphabet"], AMZN: ["آمازون", "Amazon"], META: ["متا", "Meta"], TSLA: ["تسلا", "Tesla"], AMD: ["ای‌ام‌دی", "AMD"], INTC: ["اینتل", "Intel"], TSM: ["TSMC", "TSMC"], NFLX: ["نتفلیکس", "Netflix"], "^GSPC": ["شاخص S&P 500", "S&P 500"], "^IXIC": ["شاخص نزدک", "Nasdaq"], "^DJI": ["شاخص داوجونز", "Dow Jones"], "^NDX": ["نزدک ۱۰۰", "Nasdaq 100"], "^RUT": ["راسل ۲۰۰۰", "Russell 2000"], "^VIX": ["شاخص ترس VIX", "VIX"] };
+	const stockList = () => String(setting("stocks", DEF_STOCKS) ?? DEF_STOCKS).toUpperCase().split(/[\s,،]+/).filter((x) => /^[\^A-Z0-9.\-=]{1,12}$/.test(x)).slice(0, 12);
+	const stockName = (sym, meta) => (STOCK_NAMES[sym] ? STOCK_NAMES[sym][I18n.lang === "fa" ? 0 : 1] : (meta && meta.shortName) || sym);
+	async function stocks(list) {
+		const one = async (sym) => {
+			const path = `/v8/finance/chart/${encodeURIComponent(sym)}?range=1d&interval=1d`;
+			let d;
+			try {
+				d = await getJson("https://query1.finance.yahoo.com" + path);
+			} catch {
+				d = await getJson("https://query2.finance.yahoo.com" + path);
+			}
+			const m = d && d.chart && d.chart.result && d.chart.result[0] && d.chart.result[0].meta;
+			if (!m || m.regularMarketPrice == null) return null;
+			const prev = m.chartPreviousClose ?? m.previousClose;
+			return { sym, short: m.shortName || "", price: m.regularMarketPrice, cur: m.currency || "USD", index: sym.startsWith("^"), change: prev ? ((m.regularMarketPrice - prev) / prev) * 100 : null };
+		};
+		const r = await Promise.allSettled(list.map(one));
+		const out = r.map((x) => (x.status === "fulfilled" ? x.value : null)).filter(Boolean);
+		if (list.length && !out.length) throw new Error("stocks");
+		return out;
+	}
+
 	async function getJson(url) {
 		const r = await fetch(url);
 		if (!r.ok) throw new Error("HTTP " + r.status);
@@ -46,11 +71,12 @@
 
 	async function load(force) {
 		const base = setting("base", "USD"), key = setting("navasanKey", "");
-		const sig = base + "|" + (key ? "k" : "");
+		const syms = stockList();
+		const sig = base + "|" + (key ? "k" : "") + "|" + syms.join(",");
 		const cached = (await chrome.storage.local.get(CACHE))[CACHE];
 		if (!force && cached && cached.sig === sig && Date.now() - cached.at < TTL) return cached;
-		const [f, c, n] = await Promise.allSettled([fiat(base), coins(base), key ? navasan(key) : Promise.resolve(null)]);
-		if (f.status === "rejected" && c.status === "rejected" && (!key || n.status === "rejected")) {
+		const [f, c, n, st] = await Promise.allSettled([fiat(base), coins(base), key ? navasan(key) : Promise.resolve(null), syms.length ? stocks(syms) : Promise.resolve([])]);
+		if (f.status === "rejected" && c.status === "rejected" && (!key || n.status === "rejected") && (st.status === "rejected" || !st.value.length)) {
 			if (cached && cached.sig === sig) return { ...cached, stale: true };
 			throw new Error("rates");
 		}
@@ -62,7 +88,8 @@
 			fiat: f.status === "fulfilled" ? f.value : prev.fiat || null,
 			coins: c.status === "fulfilled" ? c.value : prev.coins || null,
 			iran: key ? (n.status === "fulfilled" ? n.value : prev.iran || null) : null,
-			iranFailed: !!key && n.status === "rejected"
+			iranFailed: !!key && n.status === "rejected",
+			stocks: st.status === "fulfilled" ? st.value : prev.stocks || null
 		};
 		await chrome.storage.local.set({ [CACHE]: out });
 		return out;
@@ -90,7 +117,7 @@
 			rows.push(el("li", { class: "rate-head" }, t("ratesIran")));
 			for (const r of d.iran) rows.push(el("li", {}, el("span", {}, t(r.label)), el("strong", {}, `${num(r.value)} ${t("toman")}`), r.change ? el("span", { class: "chg " + (r.change >= 0 ? "up" : "down") }, (r.change >= 0 ? "▲ " : "▼ ") + num(Math.abs(r.change))) : el("span")));
 		}
-		rows.push(el("li", { class: "rate-head" }, t("ratesIntl")));
+		if (d.coins || d.fiat) rows.push(el("li", { class: "rate-head" }, t("ratesIntl")));
 		if (d.coins)
 			for (const [id, label] of COINS) {
 				const c = d.coins[id];
@@ -101,6 +128,10 @@
 				if (cur === d.base || !d.fiat[cur]) continue;
 				rows.push(el("li", {}, el("span", {}, `${t(FIAT_KEY[cur])} (${cur})`), el("strong", {}, money(1 / d.fiat[cur], d.base)), el("span")));
 			}
+		if (d.stocks && d.stocks.length) {
+			rows.push(el("li", { class: "rate-head" }, t("ratesStocks")));
+			for (const x of d.stocks) rows.push(el("li", {}, el("span", { dir: "auto" }, stockName(x.sym, { shortName: x.short }) + (x.index ? "" : ` (${x.sym})`)), el("strong", {}, x.index ? num(x.price, { maximumFractionDigits: 0 }) : money(x.price, x.cur)), changeEl(x.change)));
+		}
 		const extra = [];
 		if (d.iranFailed) extra.push(el("p", { class: "error small" }, t("ratesFail") + " (Navasan)"));
 		if (d.stale) extra.push(el("p", { class: "muted small" }, t("offlineCached")));
@@ -110,6 +141,7 @@
 		if (d.iran) for (const r of d.iran) tick.push({ key: "ir:" + r.label, label: t(r.label), value: `${num(r.value)}`, unit: t("toman"), change: r.change ? (r.change >= 0 ? 1 : -1) : 0 });
 		if (d.coins) for (const [id, label] of COINS) { const c = d.coins[id]; if (c && c.price != null) tick.push({ key: "c:" + id, label: t(label), value: money(c.price, d.base), change: c.change || 0, pct: c.change }); }
 		if (d.fiat) for (const cur of FIAT) if (cur !== d.base && d.fiat[cur]) tick.push({ key: "f:" + cur, label: `${t(FIAT_KEY[cur])}`, code: cur, value: money(1 / d.fiat[cur], d.base), change: 0 });
+		if (d.stocks) for (const x of d.stocks) tick.push({ key: "s:" + x.sym, label: stockName(x.sym, { shortName: x.short }), value: x.index ? num(x.price, { maximumFractionDigits: 0 }) : money(x.price, x.cur), change: x.change == null ? 0 : x.change >= 0 ? 1 : -1, pct: x.change });
 		const off = setting("tickerOff", {}) || {};
 		H.ticker = tick.filter((x) => !off[x.key]);
 		window.dispatchEvent(new Event("hamyar-rates"));
@@ -132,14 +164,15 @@
 
 	let sig = "";
 	H.onRefresh(() => {
-		const s = JSON.stringify([I18n.lang, setting("base", "USD"), setting("navasanKey", ""), H.widgetOn("rates"), setting("tickerOff", {})]);
+		const s = JSON.stringify([I18n.lang, setting("base", "USD"), setting("navasanKey", ""), H.widgetOn("rates"), setting("tickerOff", {}), setting("stocks", DEF_STOCKS)]);
 		if (s === sig) return;
-		const dataChanged = sig && JSON.parse(sig).slice(1, 3).join() !== JSON.parse(s).slice(1, 3).join();
+		const a = JSON.parse(s), b = sig && JSON.parse(sig);
+		const dataChanged = b && (a[1] !== b[1] || a[2] !== b[2] || a[6] !== b[6]);
 		sig = s;
 		render(!!dataChanged);
 	});
 	$("ratesUpdated").addEventListener("click", () => render(true));
 	// Every rate the home ticker can show, for the settings checklist: [key, label key, needs a Navasan key].
-	window.Rates = { TICKER: [...NAVASAN.map(([, l]) => ["ir:" + l, l, true]), ...COINS.map(([id, l]) => ["c:" + id, l, false]), ...FIAT.map((c) => ["f:" + c, FIAT_KEY[c], false])] };
+	window.Rates = { DEF_STOCKS, TICKER: [...NAVASAN.map(([, l]) => ["ir:" + l, l, true]), ...COINS.map(([id, l]) => ["c:" + id, l, false]), ...FIAT.map((c) => ["f:" + c, FIAT_KEY[c], false])] };
 	setInterval(() => document.visibilityState === "visible" && render(true), TTL);
 })();

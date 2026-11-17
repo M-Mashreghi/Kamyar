@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "کامیار | یار هوشمند شما",
   "short_name": "Kamyar",
-  "version": "2.7.0",
+  "version": "2.8.0",
   "description": "Kamyar, your smart companion: calendar, tasks, notes and shortcuts in your new tab, saved in your own Google account. No ads, no tracking.",
   "icons": {
     "16": "icons/icon-16.png",
@@ -26,11 +26,15 @@
     "identity.email",
     "favicon",
     "alarms",
-    "notifications", "contextMenus"
+    "notifications",
+    "contextMenus",
+    "declarativeNetRequest"
   ],
   "optional_permissions": ["bookmarks", "topSites"],
   "host_permissions": [
-    "https://www.googleapis.com/*"
+    "https://www.googleapis.com/*",
+    "https://query1.finance.yahoo.com/*",
+    "https://query2.finance.yahoo.com/*"
   ],
   "oauth2": {
     "client_id": "PASTE_YOUR_CLIENT_ID.apps.googleusercontent.com",
@@ -40,6 +44,6 @@
   },
   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAm1GpXwqGDp3xSBS1vgN/IM7tOY7Wjo0jnEtDyK2BdPAX6oybonk/BBn8HfTrjyBsf+ZR3O3xal8/lPkdkMnWf69mw9IxJVd7aI+pm3LpWX22N+BuyIGKBIda0/pPH9aF+aQScs9Z9mHA9L3AxoZ55jDuiRhHu0LNDAPPFLNXVFKnahUd0XW+p7ABVdkFBbFa9Yso+SQdEAVettvTr7xae98InK5ZHSsXwaQ4DBBhKQeODSCf4RvQGCgxIdzImCwsoLUtc44G9W6GIafNwCGmMbHNQ537k+Iwd2Q+O709ZykC4DRcVavs2P7+/uQ4Ts2bH8OdME62YFflKH842BBeVQIDAQAB",
   "content_security_policy": {
-    "extension_pages": "script-src 'self'; object-src 'self'; connect-src 'self' https://www.googleapis.com https://oauth2.googleapis.com https://api.open-meteo.com https://geocoding-api.open-meteo.com https://api.frankfurter.app https://open.er-api.com https://api.coingecko.com https://api.navasan.tech"
+    "extension_pages": "script-src 'self'; object-src 'self'; connect-src 'self' https://www.googleapis.com https://oauth2.googleapis.com https://api.open-meteo.com https://geocoding-api.open-meteo.com https://api.frankfurter.app https://open.er-api.com https://api.coingecko.com https://api.navasan.tech https://query1.finance.yahoo.com https://query2.finance.yahoo.com"
   }
 }

@@ -948,3 +948,61 @@ html.has-video body { background: transparent !important; }
 .side-tab { font-size: 12.5px; padding: 5px 2px; }
 .fal-head { display: flex; align-items: center; gap: 8px; }
 .fal-head h3 { margin: 0; }
+
+/* ---------- v2.8: morning brief, focus mode, expenses ---------- */
+.brief-dlg { width: min(620px, calc(100vw - 32px)); }
+.brief-body { display: flex; flex-direction: column; gap: 14px; max-height: 68vh; overflow: auto; padding: 4px 2px 8px; }
+.brief-head { display: flex; flex-direction: column; gap: 2px; }
+.brief-greet { font-size: 20px; }
+.brief-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.brief-chip { background: var(--surface-2); border-radius: 999px; padding: 5px 12px; font-size: 13px; }
+.brief-chip.off { color: var(--danger); }
+.brief-sec h4 { margin: 0 0 6px; font-size: 14px; }
+.brief-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+.brief-list li { display: flex; gap: 10px; align-items: baseline; background: var(--surface-2); border-radius: 10px; padding: 7px 10px; font-size: 13.5px; }
+.brief-time { flex: none; min-width: 52px; color: var(--muted); font-size: 12px; }
+.brief-list li.overdue .brief-time { color: var(--danger); font-weight: 600; }
+.brief-quote { margin: 0; padding: 10px 14px; border-inline-start: 3px solid var(--accent); background: color-mix(in srgb, var(--accent) 8%, transparent); border-radius: 10px; line-height: 1.9; }
+.dialog-actions .check { display: flex; align-items: center; gap: 6px; }
+
+.rail-btn#focusBtn.active { background: #f97316; color: #fff; }
+.focus-layer { position: fixed; inset: 0; z-index: 60; display: grid; place-items: center; overflow: auto; padding: 24px 16px; background: color-mix(in srgb, var(--bg) 82%, transparent); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); }
+.focus-inner { width: min(640px, 100%); display: flex; flex-direction: column; align-items: center; gap: 16px; }
+.focus-time { font-size: clamp(64px, 12vw, 120px); font-weight: 700; line-height: 1; letter-spacing: 1px; }
+.focus-date { color: var(--muted); font-size: 15px; margin-top: -6px; }
+.focus-search { width: 100%; }
+.focus-search .search-wrap { width: 100%; }
+.focus-pomo { width: min(380px, 100%); }
+.focus-pomo .panel, .focus-pomo .panel[hidden] { display: block !important; break-inside: auto; margin: 0; }
+.focus-block { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.focus-sites { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; }
+.focus-site { display: inline-flex; align-items: center; gap: 6px; background: var(--surface); border: 1px solid var(--border); border-radius: 999px; padding: 2px 4px 2px 10px; font-size: 12.5px; }
+.focus-site .icon-btn { width: 22px; height: 22px; }
+.focus-site-form { display: flex; gap: 4px; align-items: center; border: 1px solid var(--border); border-radius: 999px; padding: 2px 4px 2px 12px; background: var(--surface); }
+.focus-site-form input { border: 0; background: transparent; outline: 0; font-size: 13px; width: 200px; color: inherit; }
+.focus-exit { margin-top: 4px; }
+
+.expenses .panel-head { gap: 4px; }
+.exp-month { font-size: 13px; font-weight: 600; cursor: pointer; min-width: 96px; text-align: center; }
+.exp-totals { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0 8px; }
+.exp-total { flex: 1; min-width: 120px; background: var(--surface-2); border-radius: 12px; padding: 8px 12px; display: flex; flex-direction: column; }
+.exp-total strong { font-size: 18px; }
+.exp-cats { display: flex; flex-direction: column; gap: 5px; margin-bottom: 10px; }
+.exp-cat { display: grid; grid-template-columns: 110px 1fr 40px; align-items: center; gap: 8px; font-size: 12.5px; }
+.exp-bar { height: 8px; background: var(--surface-2); border-radius: 99px; overflow: hidden; }
+.exp-bar i { display: block; height: 100%; background: var(--accent); border-radius: 99px; }
+.exp-cat-val { color: var(--muted); text-align: end; }
+.exp-form { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
+.exp-form input, .exp-form select { border: 1px solid var(--border); background: var(--surface-2); border-radius: 10px; padding: 7px 9px; outline: 0; min-width: 0; color: inherit; font: inherit; font-size: 13px; }
+.exp-form input:focus, .exp-form select:focus { border-color: var(--accent); }
+#expNote { grid-column: span 2; }
+.exp-list { list-style: none; margin: 10px 0 0; padding: 0; display: flex; flex-direction: column; gap: 2px; max-height: 260px; overflow: auto; }
+.exp-item { display: flex; align-items: center; gap: 8px; padding: 5px 6px; border-radius: 10px; }
+.exp-item:hover { background: var(--surface-2); }
+.exp-emoji { font-size: 17px; }
+.exp-text { flex: 1; min-width: 0; display: flex; flex-direction: column; font-size: 13.5px; }
+.exp-text span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.exp-text small { font-size: 11px; }
+.exp-amt { font-size: 13.5px; white-space: nowrap; }
+.exp-x { opacity: 0; }
+.exp-item:hover .exp-x { opacity: 1; }

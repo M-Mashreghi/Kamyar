@@ -273,4 +273,8 @@
 		drainInbox();
 	});
 	H.addLater = addLater;
+	H.quoteToday = () => {
+		const list = quoteList();
+		return list[dayNo() % list.length];
+	};
 })();
