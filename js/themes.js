@@ -214,8 +214,11 @@
 		return id;
 	}
 	const removeWall = (id) => tx("readwrite", (st) => st.delete(id));
+	/* Ready-made wallpapers that ship with the extension. */
+	const BUILTIN = ["spirit-deer", "winter-deer", "snow-cabin", "dragon", "sakura", "bubble-cat", "forest-girl", "raccoon", "new-york", "keyboard", "low-poly", "bugatti", "bmw"]
+		.map((n) => ({ id: "b-" + n, data: "/wallpapers/" + n + ".jpg", thumb: "/wallpapers/thumbs/" + n + ".jpg", builtin: true }));
 	async function useWall(id) {
-		const w = (await walls()).find((x) => x.id === id);
+		const w = BUILTIN.find((x) => x.id === id) || (await walls()).find((x) => x.id === id);
 		if (!w) return false;
 		ls("hamyar_wall_id", id);
 		ls("hamyar_wall_at", String(Date.now()));
@@ -228,7 +231,10 @@
 		if (!every || !ls("hamyar_wall")) return;
 		const last = Number(ls("hamyar_wall_at") || 0);
 		if (every > 1 && Date.now() - last < every) return;
-		const list = await walls();
+		// Own pictures rotate among themselves; otherwise the ready-made ones join in.
+		const own = await walls();
+		const cur = ls("hamyar_wall_id") || "";
+		const list = own.length >= 2 && !cur.startsWith("b-") ? own : [...BUILTIN, ...own];
 		if (list.length < 2) return;
 		// The next picture is prepared for the next tab, so this one doesn't flash from one wallpaper to another.
 		const i = list.findIndex((w) => w.id === ls("hamyar_wall_id"));
@@ -241,6 +247,6 @@
 	}
 
 	window.Themes = { list, byId, apply, applyWallpaper, readWallpaper, setWallpaper, setDim, hasWall: () => !!ls("hamyar_wall"), hasVideo: () => ls("hamyar_video") === "1", setVideo, getVideo, dim: () => Number(ls("hamyar_wall_dim") || 35),
-		applyFont, FONTS, FONT_LIST, isDay, walls, addWall, removeWall, useWall, rotate, ROTATE,
+		applyFont, FONTS, FONT_LIST, isDay, walls, addWall, removeWall, useWall, BUILTIN, rotate, ROTATE,
 		rotation: (v) => (v === undefined ? ls("hamyar_wall_rotate") || "off" : ls("hamyar_wall_rotate", v)), activeWall: () => ls("hamyar_wall_id") };
 })();
