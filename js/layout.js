@@ -59,7 +59,7 @@
 	H.showView = showView;
 
 	/* ---------- AI sites in the rail ---------- */
-	const AI = [["Claude", "https://claude.ai"], ["ChatGPT", "https://chatgpt.com"], ["Qwen", "https://chat.qwen.ai"], ["DeepSeek", "https://chat.deepseek.com"], ["NotebookLM", "https://notebooklm.google.com"]];
+	const AI = [["Claude", "https://claude.ai"], ["ChatGPT", "https://chatgpt.com"], ["Gemini", "https://gemini.google.com"], ["Qwen", "https://chat.qwen.ai"], ["DeepSeek", "https://chat.deepseek.com"], ["NotebookLM", "https://notebooklm.google.com"]];
 	$("railAi").replaceChildren(...AI.map(([name, url]) => el("a", { class: "rail-btn rail-site", href: url, "data-label": name, "aria-label": name }, H.siteImg(url, name, 22))));
 
 	/* ---------- rail labels (tooltips) ---------- */
