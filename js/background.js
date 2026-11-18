@@ -377,3 +377,65 @@ chrome.runtime.onInstalled.addListener((d) => {
 	if (d.reason === "update") chrome.storage.local.set({ kamyar_whatsnew: chrome.runtime.getManifest().version, kamyar_update: null });
 });
 chrome.runtime.onStartup.addListener(ensureKamyarAlarms);
+
+/* ---------- Web focus: the floating timer on every site (js/web-timer.js) ----------
+ * kamyar_webtimer.on shows it; it follows the Pomodoro state. The page asks for the optional
+ * "<all_urls>" permission first; without it the timer only shows inside Kamyar. */
+const WEBT = "kamyar_webtimer", WEBT_ID = "kamyar-webtimer";
+async function applyWebTimer() {
+	const w = (await chrome.storage.local.get(WEBT))[WEBT];
+	const on = !!(w && w.on);
+	const can = await chrome.permissions.contains({ origins: ["<all_urls>"] }).catch(() => false);
+	const reg = await chrome.scripting.getRegisteredContentScripts({ ids: [WEBT_ID] }).catch(() => []);
+	if (on && can && !reg.length) {
+		await chrome.scripting.registerContentScripts([{ id: WEBT_ID, js: ["js/web-timer.js"], matches: ["http://*/*", "https://*/*"], runAt: "document_idle" }]).catch(() => {});
+		// Tabs that are already open get it too.
+		for (const tab of await chrome.tabs.query({})) {
+			if (/^https?:/.test(tab.url || "")) chrome.scripting.executeScript({ target: { tabId: tab.id }, files: ["js/web-timer.js"] }).catch(() => {});
+		}
+	}
+	if ((!on || !can) && reg.length) await chrome.scripting.unregisterContentScripts({ ids: [WEBT_ID] }).catch(() => {});
+}
+chrome.storage.onChanged.addListener((c, area) => area === "local" && c[WEBT] && applyWebTimer());
+chrome.permissions.onAdded?.addListener(applyWebTimer);
+chrome.permissions.onRemoved?.addListener(applyWebTimer);
+chrome.runtime.onStartup.addListener(applyWebTimer);
+chrome.runtime.onInstalled.addListener(applyWebTimer);
+
+// When a web focus session ends (the Pomodoro alarm above finished it), close the session and open blocked sites again.
+chrome.storage.onChanged.addListener(async (c, area) => {
+	if (area !== "local" || !c[POMO]) return;
+	const was = c[POMO].oldValue, now = c[POMO].newValue;
+	if (!was || !now || !was.running || now.running || was.mode !== "focus" || now.mode === "focus") return;
+	const w = (await chrome.storage.local.get(WEBT))[WEBT];
+	if (!w || !w.on) return;
+	await endWebFocus(true);
+});
+async function endWebFocus(finished) {
+	const w = (await chrome.storage.local.get(WEBT))[WEBT] || {};
+	await chrome.storage.local.set({ [WEBT]: { ...w, on: false, finished: !!finished, at: Date.now() } });
+	if (w.blocked) {
+		const f = (await chrome.storage.local.get("kamyar_focus")).kamyar_focus;
+		if (f && f.on) await chrome.storage.local.set({ kamyar_focus: { ...f, on: false } });
+	}
+}
+// Buttons on the floating timer.
+chrome.runtime.onMessage.addListener((m, _s, reply) => {
+	if (!m || m.kamyar !== "pomo") return;
+	(async () => {
+		const s = (await chrome.storage.local.get(POMO))[POMO];
+		if (!s) return;
+		if (m.op === "toggle") {
+			const next = s.running ? { ...s, running: false, remaining: Math.max(0, s.endAt - Date.now()) } : { ...s, running: true, endAt: Date.now() + (s.remaining || DUR[s.mode]) };
+			await chrome.storage.local.set({ [POMO]: next });
+			if (next.running) chrome.alarms.create("hamyar-pomo", { when: next.endAt });
+			else chrome.alarms.clear("hamyar-pomo");
+		} else if (m.op === "stop") {
+			await chrome.storage.local.set({ [POMO]: { ...s, running: false, mode: "focus", remaining: DUR.focus } });
+			chrome.alarms.clear("hamyar-pomo");
+			await endWebFocus(false);
+		}
+		reply({ ok: true });
+	})();
+	return true;
+});

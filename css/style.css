@@ -1493,4 +1493,10 @@ html.tour-boxes [data-widget="daily"] > .box-x { animation: boxPulse 1.2s ease-i
 html.has-wall .cal-foot-btn { background: color-mix(in srgb, var(--surface-2) calc(var(--box-a, 60%) * 0.9), transparent); transition: background-color .2s; }
 html.has-wall .card:hover .cal-foot-btn, html.has-wall .panel:hover .cal-foot-btn { background: color-mix(in srgb, var(--surface-2) var(--box-ah, 85%), transparent); }
 html.has-wall .cal-foot-btn:hover { background: color-mix(in srgb, var(--accent) 22%, transparent); }
-.setup-walls:not(.colors) { max-height: 270px; overflow-y: auto; padding-inline-end: 4px; }
+.setup-walls { flex-shrink: 0; }
+.setup-walls:not(.colors) { grid-auto-rows: 72px; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); }
+.setup-walls:not(.colors) .setup-wall { aspect-ratio: auto; height: 72px; }
+/* v2.17: web focus */
+.webfocus { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; }
+.webfocus-btn { width: 100%; max-width: 280px; }
+.webfocus p { margin: 0; }

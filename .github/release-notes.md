@@ -14,6 +14,8 @@ The first public release of Kamyar, a personal new-tab page for Chrome with no a
 راهنمای کامل و انتقال از دستیار در [README](https://github.com/M-Mashreghi/Kamyar#نصب) است. Full guide and Dastyar import: [README](https://github.com/M-Mashreghi/Kamyar#install).
 
 ### تازه‌های این نسخه · New in this version
+- 🌐 فوکوس وب‌گردی: یک جلسه‌ی ۲۵ دقیقه‌ای برای کار در اینترنت، با تایمر کوچکی روی همه‌ی سایت‌ها که می‌شود آن را کشید و هر جا گذاشت؛ سایت‌های حواس‌پرت‌کن تا پایان جلسه بسته می‌شوند · Web focus: a 25-minute session with a small draggable timer on every site; distracting sites stay blocked until it ends
+- 🖼️ همه‌ی تصویرهای آماده در راه‌اندازی اول دیده می‌شوند · All ready-made wallpapers show in the first-run setup
 - 🖼️ تصویرهای زمینه‌ی تازه (روی هم ۳۱ تصویر آماده، از جمله ۶ عکس از Pexels)؛ تصویرهای دارای نشان تجاری یا شخصیت‌های محفوظ برداشته شدند · New ready-made wallpapers (31 in all, 6 from Pexels); images with brands or protected characters were removed
 - 🔧 نوار پایین تقویم هم حالا از شفافیت باکس‌ها پیروی می‌کند · The calendar footer now follows the box opacity too
 - 🏷️ نام افزونه در کروم انگلیسی شد و شعار تازه: «کامیار، دستیار هوشمند همه‌جانبه‌ی شما» · The extension name in Chrome is now English, with the new tagline "Your all-in-one smart assistant"
