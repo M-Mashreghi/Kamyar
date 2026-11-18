@@ -232,8 +232,35 @@
 	/* Ready-made wallpapers that ship with the extension. */
 	const BUILTIN = ["spirit-deer", "winter-deer", "snow-cabin", "dragon", "sakura", "bubble-cat", "forest-girl", "raccoon", "new-york", "keyboard", "low-poly", "bugatti", "bmw"]
 		.map((n) => ({ id: "b-" + n, data: "/wallpapers/" + n + ".jpg", thumb: "/wallpapers/thumbs/" + n + ".jpg", builtin: true }));
+	/* Plain colours and soft gradients, drawn as a tiny picture so they work like any wallpaper
+	 * (dimming, box opacity, hover). */
+	const COLOR_LIST = [
+		["navy", "#0b1f3a"], ["midnight", "#0d0d14"], ["charcoal", "#26282c"], ["slate", "#3b4655"], ["forest", "#163a2b"], ["teal", "#0f4c55"],
+		["plum", "#3b1d4a"], ["wine", "#4a1424"], ["sand", "#d9c9a8"], ["cream", "#f3ede2"], ["sky", "#bcd8f0"], ["blush", "#f2d1d6"],
+		["dusk", "#1e3c72", "#6a3093"], ["ocean", "#0f2027", "#2c5364"], ["sunset", "#ee9ca7", "#ffdde1"], ["aurora", "#134e5e", "#71b280"], ["peach", "#f6d365", "#fda085"], ["mint", "#d4fc79", "#96e6a1"]
+	];
+	let COLORS = null;
+	function colors() {
+		if (COLORS) return COLORS;
+		COLORS = COLOR_LIST.map(([name, a, b]) => {
+			const c = document.createElement("canvas");
+			c.width = 64;
+			c.height = 36;
+			const g = c.getContext("2d");
+			if (b) {
+				const gr = g.createLinearGradient(0, 0, 64, 36);
+				gr.addColorStop(0, a);
+				gr.addColorStop(1, b);
+				g.fillStyle = gr;
+			} else g.fillStyle = a;
+			g.fillRect(0, 0, 64, 36);
+			const data = c.toDataURL("image/png");
+			return { id: "c-" + name, data, thumb: data, color: true };
+		});
+		return COLORS;
+	}
 	async function useWall(id) {
-		const w = BUILTIN.find((x) => x.id === id) || (await walls()).find((x) => x.id === id);
+		const w = BUILTIN.find((x) => x.id === id) || (id.startsWith("c-") && colors().find((x) => x.id === id)) || (await walls()).find((x) => x.id === id);
 		if (!w) return false;
 		ls("hamyar_wall_id", id);
 		ls("hamyar_wall_at", String(Date.now()));
@@ -249,6 +276,7 @@
 		// Own pictures rotate among themselves; otherwise the ready-made ones join in.
 		const own = await walls();
 		const cur = ls("hamyar_wall_id") || "";
+		if (cur.startsWith("c-")) return;
 		const list = own.length >= 2 && !cur.startsWith("b-") ? own : [...BUILTIN, ...own];
 		if (list.length < 2) return;
 		// The next picture is prepared for the next tab, so this one doesn't flash from one wallpaper to another.
@@ -262,6 +290,6 @@
 	}
 
 	window.Themes = { list, byId, apply, applyWallpaper, readWallpaper, setWallpaper, setDim, boxAlpha, setBoxAlpha, hasWall: () => !!ls("hamyar_wall"), hasVideo: () => ls("hamyar_video") === "1", setVideo, getVideo, dim: () => Number(ls("hamyar_wall_dim") || 35),
-		applyFont, FONTS, FONT_LIST, isDay, walls, addWall, removeWall, useWall, BUILTIN, rotate, ROTATE,
+		applyFont, FONTS, FONT_LIST, isDay, walls, addWall, removeWall, useWall, BUILTIN, colors, rotate, ROTATE,
 		rotation: (v) => (v === undefined ? ls("hamyar_wall_rotate") || "off" : ls("hamyar_wall_rotate", v)), activeWall: () => ls("hamyar_wall_id") };
 })();

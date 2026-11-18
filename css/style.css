@@ -1451,3 +1451,15 @@ html.tour-boxes [data-widget="daily"] > .box-x { animation: boxPulse 1.2s ease-i
 .setup .manage-item input.switch::after { content: ""; position: absolute; top: 3px; inset-inline-start: 3px; width: 18px; height: 18px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgb(0 0 0 / .3); transition: inset-inline-start .2s; }
 .setup .manage-item input.switch:checked { background: var(--accent); }
 .setup .manage-item input.switch:checked::after { inset-inline-start: 21px; }
+.wall-grid.colors, .setup-walls.colors { grid-template-columns: repeat(auto-fill, minmax(56px, 1fr)); }
+.wall-th.color, .setup-walls.colors .setup-wall { aspect-ratio: 1; border-radius: 50%; }
+.wall-th.color img { border-radius: 50%; }
+.setup-range { display: grid; grid-template-columns: 170px 1fr 44px; align-items: center; gap: 10px; font-size: 14px; }
+.bday { display: flex; flex-direction: column; gap: 8px; align-items: flex-start; }
+.bday-cal { display: inline-flex; gap: 4px; padding: 3px; border-radius: 999px; background: var(--surface-2); }
+.bday-chip { border: 0; background: none; color: var(--text); border-radius: 999px; padding: 5px 14px; font: inherit; font-size: 13px; cursor: pointer; }
+.bday-chip.on { background: var(--accent); color: var(--accent-ink); }
+.bday-row { display: flex; gap: 8px; width: 100%; }
+.bday-row select, .bday-row input { height: 40px; border-radius: 10px; border: 1px solid var(--border); background: var(--surface-2); color: var(--text); padding: 0 10px; font: inherit; }
+.bday-row select { flex: 1; }
+.bday-row input { width: 110px; }

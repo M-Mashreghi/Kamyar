@@ -53,7 +53,6 @@
 		$("acctBtn").className = email ? "btn btn-ghost" : "btn";
 		$("usernameInput").value = setting("username", "");
 		const bd = setting("birthday", "");
-		$("bdayInput").value = bd && bd.date ? bd.date : "";
 	}
 	// Chrome's own page for signing in, switching or signing out of the Google account.
 	$("acctBtn").addEventListener("click", () => chrome.tabs.create({ url: "chrome://settings/people" }));
@@ -70,10 +69,51 @@
 	});
 	$("avatarRemove").addEventListener("click", () => Store.setSetting("avatar", ""));
 	$("usernameInput").addEventListener("change", (e) => Store.setSetting("username", e.target.value.trim().replace(/^@/, "")));
-	$("bdayInput").addEventListener("change", (e) => {
-		const v = e.target.value;
-		const old = setting("birthday", "");
-		Store.setSetting("birthday", v ? { date: v, cal: (old && old.cal) || (I18n.lang === "fa" ? "persian" : "gregory") } : "");
+	/* Birthday picker: Persian (Solar Hijri) or Gregorian, whichever is easier; saved as a Gregorian date
+	 * plus the calendar it was entered in ({ date: "yyyy-mm-dd", cal }). Used in Settings and in the first-run setup. */
+	const PMONTHS = ["فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور", "مهر", "آبان", "آذر", "دی", "بهمن", "اسفند"];
+	const PMONTHS_LATIN = ["Farvardin", "Ordibehesht", "Khordad", "Tir", "Mordad", "Shahrivar", "Mehr", "Aban", "Azar", "Dey", "Bahman", "Esfand"];
+	function partsOf(iso, cal) {
+		if (!iso) return null;
+		const d = new Date(iso + "T12:00:00");
+		if (cal !== "persian") return { y: d.getFullYear(), m: d.getMonth() + 1, d: d.getDate() };
+		const p = {};
+		for (const x of new Intl.DateTimeFormat("en-u-ca-persian-nu-latn", { year: "numeric", month: "numeric", day: "numeric" }).formatToParts(d)) p[x.type] = parseInt(x.value, 10);
+		return { y: p.year, m: p.month, d: p.day };
+	}
+	H.bdayPicker = function () {
+		const saved = setting("birthday", "") || {};
+		let cal = saved.cal || (I18n.lang === "fa" ? "persian" : "gregory");
+		const box = el("div", { class: "bday" });
+		function draw() {
+			const cur = setting("birthday", "") || {};
+			const p = partsOf(cur.date, cal) || {};
+			const months = cal === "persian" ? (I18n.lang === "fa" ? PMONTHS : PMONTHS_LATIN) : Array.from({ length: 12 }, (_, i) => new Intl.DateTimeFormat(I18n.locale, { month: "long" }).format(new Date(2001, i, 1)));
+			const day = el("select", { "aria-label": t("bdayDay") }, el("option", { value: "" }, t("bdayDay")), ...Array.from({ length: 31 }, (_, i) => el("option", { value: i + 1, selected: p.d === i + 1 }, H.num(i + 1))));
+			const month = el("select", { "aria-label": t("bdayMonth") }, el("option", { value: "" }, t("bdayMonth")), ...months.map((n, i) => el("option", { value: i + 1, selected: p.m === i + 1 }, n)));
+			const year = el("input", { type: "number", inputmode: "numeric", placeholder: cal === "persian" ? "۱۳۷۰" : "1990", min: cal === "persian" ? 1280 : 1900, max: cal === "persian" ? 1420 : 2040, value: p.y || "", "aria-label": t("bdayYear") });
+			const save = () => {
+				const y = Number(year.value), m = Number(month.value), d = Number(day.value);
+				if (!y || !m || !d) return;
+				const iso = cal === "persian" ? DastyarImport.j2g(y, m, d) : `${y}-${String(m).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
+				Store.setSetting("birthday", { date: iso, cal });
+			};
+			[day, month, year].forEach((x) => x.addEventListener("change", save));
+			box.replaceChildren(...[
+				el("div", { class: "bday-cal" }, ...[["persian", "bdayPersian"], ["gregory", "bdayGregorian"]].map(([c, label]) =>
+					el("button", { type: "button", class: "bday-chip" + (c === cal ? " on" : ""), onclick: () => { cal = c; draw(); } }, t(label)))),
+				el("div", { class: "bday-row" }, day, month, year),
+				cur.date ? el("button", { type: "button", class: "link-btn small", onclick: () => { Store.setSetting("birthday", ""); draw(); } }, t("bdayClear")) : null].filter(Boolean));
+		}
+		draw();
+		return box;
+	};
+	const bdayBox = H.bdayPicker();
+	$("bdayInput").replaceWith(bdayBox);
+	bdayBox.id = "bdayInput";
+	H.onRefresh(() => {
+		const cur = $("bdayInput");
+		if (cur && !cur.contains(document.activeElement)) cur.replaceWith(Object.assign(H.bdayPicker(), { id: "bdayInput" }));
 	});
 	// Small square JPEG so the avatar fits in Chrome Sync next to everything else.
 	function squareImage(file, size) {

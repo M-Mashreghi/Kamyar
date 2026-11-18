@@ -641,7 +641,7 @@
 	async function renderWalls() {
 		let list = await Themes.walls().catch(() => []);
 		// A wallpaper chosen before collections existed joins the collection.
-		if (!list.length && Themes.hasWall() && !String(Themes.activeWall() || "").startsWith("b-")) {
+		if (!list.length && Themes.hasWall() && !/^[bc]-/.test(String(Themes.activeWall() || ""))) {
 			try {
 				const id = await Themes.addWall(localStorage.getItem("hamyar_wall"));
 				localStorage.setItem("hamyar_wall_id", id);
@@ -649,6 +649,8 @@
 			} catch {}
 		}
 		const active = Themes.hasWall() ? Themes.activeWall() : null;
+		$("colorWalls").replaceChildren(...Themes.colors().map((w) => el("div", { class: "wall-th color" + (w.id === active ? " on" : "") },
+			el("button", { type: "button", class: "wall-pick", "aria-pressed": String(w.id === active), title: t("useWallpaper"), onclick: async () => { await Themes.useWall(w.id); Store.setSetting("wallBuiltin", w.id); renderThemeGrid(); } }, el("img", { src: w.thumb, alt: "" })))));
 		$("builtinWalls").replaceChildren(...Themes.BUILTIN.map((w) => el("div", { class: "wall-th" + (w.id === active ? " on" : "") },
 			el("button", { type: "button", class: "wall-pick", "aria-pressed": String(w.id === active), title: t("useWallpaper"), onclick: async () => { await Themes.useWall(w.id); Store.setSetting("wallBuiltin", w.id); renderThemeGrid(); } }, el("img", { src: w.thumb, alt: "", loading: "lazy" })))));
 		$("wallGrid").replaceChildren(

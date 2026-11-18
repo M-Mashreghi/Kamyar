@@ -53,11 +53,10 @@
 			return out;
 		},
 		you() {
-			const bd = setting("birthday", "");
 			return [
 				...head("setupYouT", "setupYouText"),
 				el("label", { class: "fld" }, el("span", {}, t("setupName")), el("input", { type: "text", maxlength: 40, value: setting("name", ""), placeholder: t("setupNamePh"), oninput: (e) => Store.setSetting("name", e.target.value.trim()) })),
-				el("label", { class: "fld" }, el("span", {}, t("setupBirthday")), el("input", { type: "date", value: bd && bd.date ? bd.date : "", onchange: (e) => Store.setSetting("birthday", e.target.value ? { date: e.target.value, cal: I18n.lang === "fa" ? "persian" : "gregory" } : "") })),
+				el("div", { class: "fld" }, el("span", {}, t("setupBirthday")), H.bdayPicker()),
 				el("p", { class: "muted small" }, t("setupYouNote"))
 			];
 		},
@@ -105,6 +104,19 @@
 				el("div", { class: "setup-walls" },
 					el("button", { type: "button", class: "setup-wall none" + (!active ? " on" : ""), onclick: () => pick(null) }, t("setupNoWall")),
 					...Themes.BUILTIN.map((w) => el("button", { type: "button", class: "setup-wall" + (w.id === active ? " on" : ""), onclick: () => pick(w.id) }, el("img", { src: w.thumb, alt: "", loading: "lazy" })))),
+				el("h4", {}, t("colorWalls")),
+				el("div", { class: "setup-walls colors" }, ...Themes.colors().map((w) => el("button", { type: "button", class: "setup-wall" + (w.id === active ? " on" : ""), title: w.id.slice(2), onclick: () => pick(w.id) }, el("img", { src: w.thumb, alt: "" })))),
+				el("h4", {}, t("boxAlphaTitle")),
+				el("p", { class: "muted small" }, t(Themes.hasWall() || Themes.hasVideo() ? "boxAlphaHint" : "boxAlphaNoWall")),
+				...[["boxAlphaIdle", 0], ["boxAlphaHover", 1]].map(([label, k]) => {
+					const outEl = el("output", { class: "small muted" }, H.num(Themes.boxAlpha()[k]) + (I18n.lang === "fa" ? "٪" : "%"));
+					const r = el("input", { type: "range", min: 0, max: 100, step: 5, value: Themes.boxAlpha()[k], oninput: (e) => {
+						const v = Number(e.target.value);
+						Themes.setBoxAlpha(k ? null : v, k ? v : null);
+						outEl.textContent = H.num(v) + (I18n.lang === "fa" ? "٪" : "%");
+					}, onchange: () => Store.setSetting("boxAlpha", Themes.boxAlpha()) });
+					return el("label", { class: "range-row setup-range" }, el("span", {}, t(label)), r, outEl);
+				}),
 				el("p", { class: "muted small" }, t("setupLookNote"))
 			];
 		},

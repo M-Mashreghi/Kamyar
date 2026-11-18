@@ -14,6 +14,8 @@ The first public release of Kamyar, a personal new-tab page for Chrome with no a
 راهنمای کامل و انتقال از دستیار در [README](https://github.com/M-Mashreghi/Kamyar#نصب) است. Full guide and Dastyar import: [README](https://github.com/M-Mashreghi/Kamyar#install).
 
 ### تازه‌های این نسخه · New in this version
+- 🎨 ۱۸ رنگ ساده و ملایم برای پس‌زمینه، و تنظیم شفافیت در همان راه‌اندازی اول · 18 plain colours and soft gradients as backgrounds; box opacity in the first-run setup
+- 🎂 تاریخ تولد به شمسی یا میلادی · Birthday in the Persian or Gregorian calendar
 - 👋 راه‌اندازی اول کار با چند سؤال کوتاه (زبان، اطلاعات قبلی، نام، شهر، ظاهر، باکس‌ها) · First-run setup with a few short questions
 - 🔄 همگام‌سازی درست‌تر: تنظیمات کامپیوترهای مختلف دیگر روی هم پاک نمی‌شوند و میان‌برهای پیش‌فرض دوتا نمی‌شوند؛ شفافیت و تصویر زمینه‌ی آماده هم همگام می‌شوند · Safer sync: settings from different computers no longer overwrite each other, no doubled starter shortcuts; box opacity and the ready-made wallpaper sync too
 - 🇮🇷 نزدیک ۲۷۰ سایت ایرانی در ۲۴ دسته در صفحه‌ی سرویس‌ها · About 270 Iranian sites in 24 Services categories
