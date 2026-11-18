@@ -94,6 +94,10 @@ async function setupMenu(force) {
 	menuSig = sig;
 	chrome.contextMenus.removeAll(() => {
 		chrome.contextMenus.create({ id: "kamyar-later", title: LATER_TITLE[lang] || LATER_TITLE.fa, contexts: ["page", "link"] });
+		// Screenshots: one parent item with the ways to capture.
+		const st = SHOT_TITLES[lang] || SHOT_TITLES.fa;
+		chrome.contextMenus.create({ id: "kamyar-shot", title: st.parent, contexts: ["page", "link", "image", "selection", "video"] });
+		for (const k of ["visible", "full", "area", "delay"]) chrome.contextMenus.create({ id: "shot:" + k, parentId: "kamyar-shot", title: st[k], contexts: ["page", "link", "image", "selection", "video"] });
 		if (!snips.length) return;
 		chrome.contextMenus.create({ id: "kamyar-snip", title: SNIP_TITLE[lang] || SNIP_TITLE.fa, contexts: ["editable"] });
 		for (const x of snips) chrome.contextMenus.create({ id: "snip:" + x.id, parentId: "kamyar-snip", title: String(x.title || x.text || "").slice(0, 60).replace(/&/g, "&&"), contexts: ["editable"] });
@@ -125,6 +129,7 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
 		} catch {}
 		return;
 	}
+	if (String(info.menuItemId).startsWith("shot:")) return tab && takeShot(String(info.menuItemId).slice(5), tab);
 	if (info.menuItemId !== "kamyar-later") return;
 	const url = info.linkUrl || info.pageUrl;
 	if (!/^https?:/i.test(url || "")) return;
@@ -438,4 +443,133 @@ chrome.runtime.onMessage.addListener((m, _s, reply) => {
 		reply({ ok: true });
 	})();
 	return true;
+});
+
+/* ---------- Screenshots (right-click › Kamyar screenshot, or the keyboard shortcuts) ----------
+ * The capture is kept in memory here and handed to capture.html, which stitches, previews and saves it. */
+const SHOT_TITLES = {
+	fa: { parent: "📸 عکس از صفحه (کامیار)", visible: "بخش دیده‌شده‌ی صفحه", full: "کل صفحه (تا پایین)", area: "انتخاب یک ناحیه…", delay: "بخش دیده‌شده، بعد از ۳ ثانیه" },
+	en: { parent: "📸 Kamyar screenshot", visible: "Visible part", full: "Entire page", area: "Select an area…", delay: "Visible part in 3 seconds" },
+	fr: { parent: "📸 Capture Kamyar", visible: "Partie visible", full: "Page entière", area: "Choisir une zone…", delay: "Partie visible dans 3 s" },
+	de: { parent: "📸 Kamyar-Screenshot", visible: "Sichtbarer Bereich", full: "Ganze Seite", area: "Bereich auswählen…", delay: "Sichtbarer Bereich in 3 s" }
+};
+const shots = new Map(); // id -> capture, until the capture page takes it
+const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+let lastGrab = 0;
+// Chrome allows about two captures a second.
+async function grab(windowId) {
+	const gap = Date.now() - lastGrab;
+	if (gap < 550) await wait(550 - gap);
+	lastGrab = Date.now();
+	return chrome.tabs.captureVisibleTab(windowId, { format: "png" });
+}
+async function inTab(tabId, func, args = []) {
+	const [r] = await chrome.scripting.executeScript({ target: { tabId }, func, args });
+	return r && r.result;
+}
+function pageInfo() {
+	const d = document.documentElement, b = document.body || d;
+	return { w: innerWidth, h: innerHeight, total: Math.max(d.scrollHeight, b.scrollHeight), x: scrollX, y: scrollY, dpr: devicePixelRatio, title: document.title, url: location.href };
+}
+// While the page is stitched, things fixed to the screen (headers, chat buttons) would repeat in every strip.
+function hideFixed(hide) {
+	if (hide) {
+		if (window.__kamyarFixed) return;
+		const list = [];
+		for (const el of document.querySelectorAll("body *")) {
+			const p = getComputedStyle(el).position;
+			if (p === "fixed" || p === "sticky") { list.push([el, el.style.visibility]); el.style.visibility = "hidden"; }
+		}
+		window.__kamyarFixed = list;
+		document.documentElement.style.scrollBehavior = "auto";
+	} else {
+		for (const [el, v] of window.__kamyarFixed || []) el.style.visibility = v;
+		window.__kamyarFixed = null;
+	}
+}
+// Lets the person drag a rectangle; resolves with it (in CSS pixels of the viewport) or null on Escape.
+function pickArea(labels) {
+	return new Promise((done) => {
+		const o = document.createElement("div");
+		o.style.cssText = "position:fixed;inset:0;z-index:2147483647;cursor:crosshair;background:rgba(0,0,0,.25)";
+		const box = document.createElement("div");
+		box.style.cssText = "position:fixed;border:2px solid #4f8cff;background:rgba(79,140,255,.12);box-shadow:0 0 0 9999px rgba(0,0,0,.35);display:none;pointer-events:none";
+		const tip = document.createElement("div");
+		tip.textContent = labels.tip;
+		tip.style.cssText = "position:fixed;top:14px;left:50%;transform:translateX(-50%);background:#111a;color:#fff;font:600 13px system-ui,Tahoma,sans-serif;padding:8px 14px;border-radius:999px;pointer-events:none";
+		o.append(box, tip);
+		document.documentElement.append(o);
+		let s = null;
+		const end = (r) => { o.remove(); removeEventListener("keydown", key, true); setTimeout(() => done(r), 120); };
+		const key = (e) => { if (e.key === "Escape") { e.preventDefault(); end(null); } };
+		addEventListener("keydown", key, true);
+		o.addEventListener("pointerdown", (e) => { s = { x: e.clientX, y: e.clientY }; o.setPointerCapture(e.pointerId); tip.remove(); });
+		o.addEventListener("pointermove", (e) => {
+			if (!s) return;
+			const x = Math.min(s.x, e.clientX), y = Math.min(s.y, e.clientY), w = Math.abs(e.clientX - s.x), h = Math.abs(e.clientY - s.y);
+			Object.assign(box.style, { display: "block", left: x + "px", top: y + "px", width: w + "px", height: h + "px" });
+			o.style.background = "transparent";
+		});
+		o.addEventListener("pointerup", (e) => {
+			if (!s) return;
+			const r = { x: Math.min(s.x, e.clientX), y: Math.min(s.y, e.clientY), w: Math.abs(e.clientX - s.x), h: Math.abs(e.clientY - s.y) };
+			end(r.w > 4 && r.h > 4 ? r : null);
+		});
+	});
+}
+async function takeShot(kind, tab) {
+	const t = await bgT();
+	try {
+		const info = await inTab(tab.id, pageInfo);
+		let shot = { kind, title: info.title || tab.title || "", url: info.url || tab.url || "", dpr: info.dpr, w: info.w, at: Date.now(), parts: [] };
+		if (kind === "visible" || kind === "delay") {
+			if (kind === "delay") await wait(3000);
+			shot.parts.push({ y: 0, data: await grab(tab.windowId) });
+			shot.h = info.h;
+		} else if (kind === "area") {
+			const { hamyar_lang: lang } = await chrome.storage.local.get("hamyar_lang");
+			const tips = { fa: "یک ناحیه را با موس بکشید (Esc برای لغو)", en: "Drag to select an area (Esc to cancel)", fr: "Glissez pour choisir une zone (Échap pour annuler)", de: "Bereich mit der Maus ziehen (Esc bricht ab)" };
+			const r = await inTab(tab.id, pickArea, [{ tip: tips[lang] || tips.en }]);
+			if (!r) return;
+			shot.parts.push({ y: 0, data: await grab(tab.windowId) });
+			shot.h = info.h;
+			shot.crop = r;
+		} else {
+			// Entire page: scroll down a screen at a time and capture each strip (up to 40 screens).
+			const total = Math.min(info.total, info.h * 40);
+			await inTab(tab.id, hideFixed, [false]);
+			for (let y = 0; y < total; y += info.h) {
+				const at = await inTab(tab.id, (yy) => { scrollTo(0, yy); return new Promise((r) => requestAnimationFrame(() => setTimeout(() => r(scrollY), 160))); }, [y]);
+				if (y > 0) await inTab(tab.id, hideFixed, [true]);
+				shot.parts.push({ y: at, data: await grab(tab.windowId) });
+				if (at + info.h >= total) break;
+			}
+			await inTab(tab.id, hideFixed, [false]);
+			await inTab(tab.id, (x, y) => scrollTo(x, y), [info.x, info.y]);
+			shot.h = total;
+		}
+		const id = "s" + Date.now().toString(36);
+		shots.set(id, shot);
+		// Also kept in session storage in case this worker is restarted before the page asks (small captures only).
+		try { await chrome.storage.session.set({ ["kamyar_shot_" + id]: shot }); } catch {}
+		chrome.tabs.create({ url: chrome.runtime.getURL("capture.html#" + id), index: tab.index + 1, openerTabId: tab.id });
+	} catch (e) {
+		chrome.notifications.create("hamyar-shot-" + Date.now(), { type: "basic", iconUrl: "icons/icon-128.png", title: t("shotFail"), message: String((e && e.message) || e).slice(0, 180), priority: 1 });
+	}
+}
+chrome.runtime.onMessage.addListener((m, _s, reply) => {
+	if (!m || m.kamyar !== "shot") return;
+	(async () => {
+		let s = shots.get(m.id);
+		if (!s) s = (await chrome.storage.session.get("kamyar_shot_" + m.id).catch(() => ({})))["kamyar_shot_" + m.id];
+		shots.delete(m.id);
+		chrome.storage.session.remove("kamyar_shot_" + m.id).catch(() => {});
+		reply(s || null);
+	})();
+	return true;
+});
+chrome.commands?.onCommand.addListener(async (cmd, tab) => {
+	if (!cmd.startsWith("shot-")) return;
+	tab = tab || (await chrome.tabs.query({ active: true, currentWindow: true }))[0];
+	if (tab) takeShot(cmd.slice(5), tab);
 });

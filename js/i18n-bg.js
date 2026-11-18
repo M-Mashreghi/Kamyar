@@ -1,6 +1,7 @@
 /* Notification strings for the background service worker (generated from i18n.js). */
 const BG_STRINGS = {
  "fa": {
+  "shotFail": "گرفتن عکس از این صفحه ممکن نشد",
   "notifFocusDone": "جلسه‌ی تمرکز تمام شد 🎉",
   "notifBreakNext": "وقت استراحت ({m} دقیقه)",
   "notifBreakDone": "استراحت تمام شد",
@@ -16,6 +17,7 @@ const BG_STRINGS = {
   "whenInDays": "{n} روز دیگر"
  },
  "en": {
+  "shotFail": "Couldn't capture this page",
   "notifFocusDone": "Focus session done 🎉",
   "notifBreakNext": "Time for a {m}-minute break",
   "notifBreakDone": "Break is over",
@@ -31,6 +33,7 @@ const BG_STRINGS = {
   "whenInDays": "In {n} days"
  },
  "fr": {
+  "shotFail": "Impossible de capturer cette page",
   "notifFocusDone": "Session de concentration terminée 🎉",
   "notifBreakNext": "Place à une pause de {m} minutes",
   "notifBreakDone": "La pause est terminée",
@@ -46,6 +49,7 @@ const BG_STRINGS = {
   "whenInDays": "Dans {n} jours"
  },
  "de": {
+  "shotFail": "Diese Seite konnte nicht aufgenommen werden",
   "notifFocusDone": "Fokuseinheit beendet 🎉",
   "notifBreakNext": "Zeit für {m} Minuten Pause",
   "notifBreakDone": "Pause vorbei",

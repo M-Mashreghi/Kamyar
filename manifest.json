@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Kamyar | Your All-in-One Smart Assistant",
   "short_name": "Kamyar",
-  "version": "2.17.0",
+  "version": "2.18.0",
   "description": "Kamyar, your all-in-one smart assistant: calendar, tasks, notes and shortcuts in your new tab, saved in your own Google account. No ads, no tracking.",
   "icons": {
     "16": "icons/icon-16.png",
@@ -31,10 +31,16 @@
     "declarativeNetRequest",
     "offscreen",
     "scripting",
-    "activeTab", "idle"
+    "activeTab",
+    "idle"
   ],
-  "optional_permissions": ["bookmarks", "topSites"],
-  "optional_host_permissions": ["<all_urls>"],
+  "optional_permissions": [
+    "bookmarks",
+    "topSites"
+  ],
+  "optional_host_permissions": [
+    "<all_urls>"
+  ],
   "host_permissions": [
     "https://www.googleapis.com/*",
     "https://query1.finance.yahoo.com/*",
@@ -52,5 +58,25 @@
   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAm1GpXwqGDp3xSBS1vgN/IM7tOY7Wjo0jnEtDyK2BdPAX6oybonk/BBn8HfTrjyBsf+ZR3O3xal8/lPkdkMnWf69mw9IxJVd7aI+pm3LpWX22N+BuyIGKBIda0/pPH9aF+aQScs9Z9mHA9L3AxoZ55jDuiRhHu0LNDAPPFLNXVFKnahUd0XW+p7ABVdkFBbFa9Yso+SQdEAVettvTr7xae98InK5ZHSsXwaQ4DBBhKQeODSCf4RvQGCgxIdzImCwsoLUtc44G9W6GIafNwCGmMbHNQ537k+Iwd2Q+O709ZykC4DRcVavs2P7+/uQ4Ts2bH8OdME62YFflKH842BBeVQIDAQAB",
   "content_security_policy": {
     "extension_pages": "script-src 'self'; object-src 'self'; connect-src 'self' https://www.googleapis.com https://oauth2.googleapis.com https://api.open-meteo.com https://geocoding-api.open-meteo.com https://api.frankfurter.app https://open.er-api.com https://api.coingecko.com https://api.navasan.tech https://query1.finance.yahoo.com https://query2.finance.yahoo.com https://api.audd.io https://api.github.com https://air-quality-api.open-meteo.com https://www.thesportsdb.com https://translate.googleapis.com"
+  },
+  "commands": {
+    "shot-visible": {
+      "suggested_key": {
+        "default": "Alt+Shift+3"
+      },
+      "description": "Screenshot: visible part"
+    },
+    "shot-full": {
+      "suggested_key": {
+        "default": "Alt+Shift+1"
+      },
+      "description": "Screenshot: entire page"
+    },
+    "shot-area": {
+      "suggested_key": {
+        "default": "Alt+Shift+4"
+      },
+      "description": "Screenshot: select an area"
+    }
   }
 }

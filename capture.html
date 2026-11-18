@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Kamyar · Screenshot</title>
+	<link rel="icon" href="icons/icon-32.png" />
+	<link rel="stylesheet" href="css/capture.css" />
+</head>
+<body>
+	<header class="top">
+		<img src="icons/icon-48.png" alt="" width="34" height="34" />
+		<div class="ttl"><h1 id="hTitle"></h1><a id="hUrl" class="url" target="_blank" rel="noopener" dir="ltr"></a></div>
+	</header>
+	<main class="wrap">
+		<section class="preview" id="preview"><p id="loading" class="muted"></p></section>
+		<aside class="panel">
+			<h2 id="aTitle"></h2>
+			<label class="fld"><span id="lName"></span><input id="fname" dir="auto" /></label>
+			<div class="fld"><span id="lFormat"></span>
+				<div class="seg" id="fmt"><button type="button" data-f="png">PNG</button><button type="button" data-f="jpg">JPG</button><button type="button" data-f="pdf">PDF</button></div>
+			</div>
+			<label class="fld" id="qRow"><span id="lQuality"></span><input id="quality" type="range" min="50" max="100" step="5" value="90" /><output id="qOut"></output></label>
+			<button id="save" class="btn primary" type="button"></button>
+			<label class="chk"><input id="autoSave" type="checkbox" /> <span id="lAuto"></span></label>
+			<hr />
+			<button id="copy" class="btn" type="button"></button>
+			<button id="print" class="btn" type="button"></button>
+			<p id="size" class="muted small"></p>
+			<p id="msg" class="msg" role="status"></p>
+		</aside>
+	</main>
+	<script src="js/capture.js"></script>
+</body>
+</html>
