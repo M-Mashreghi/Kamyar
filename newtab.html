@@ -536,16 +536,17 @@
 		</form>
 	</dialog>
 
-	<dialog id="folderDialog" class="dialog">
+	<dialog id="folderDialog" class="dialog folder-dlg">
 		<div class="dialog-body">
-			<div class="page-head">
+			<div class="page-head folder-head">
 				<button id="folderBack" class="icon-btn small" type="button" data-i18n-title="back" hidden>‹</button>
-				<h3 id="folderTitle" class="folder-crumbs"></h3>
+				<span id="folderFace" class="folder-face" aria-hidden="true"></span>
+				<div class="folder-ttl"><h3 id="folderTitle" class="folder-crumbs"></h3><span id="folderCount" class="folder-count"></span></div>
 				<span class="grow"></span>
 				<button id="folderEdit" class="btn btn-ghost small" type="button" data-i18n="edit"></button>
 				<button id="folderClose" class="icon-btn small" type="button" data-i18n-title="close">✕</button>
 			</div>
-			<ul id="folderList" class="bm-grid in-folder"></ul>
+			<ul id="folderList" class="tiles in-folder"></ul>
 		</div>
 	</dialog>
 

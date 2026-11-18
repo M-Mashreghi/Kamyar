@@ -347,13 +347,23 @@
 		}
 	});
 
+	// A folder's face: a tidy 2×2 grid of what is inside (always four cells, so it looks balanced),
+	// with "+N" in the last cell when there is more. An empty folder shows its own emoji.
+	function folderPreview(item, inside, cls = "") {
+		if (!inside.length) return el("span", { class: "bm-icon folder-icon empty " + cls }, el("span", { class: "fold-emoji" }, item.emoji || "📁"));
+		const more = inside.length > 4 ? inside.length - 3 : 0;
+		const cells = inside.slice(0, more ? 3 : 4).map((b) => el("span", { class: "fcell" }, b.type === "folder" || b.emoji ? el("span", { class: "mini-emoji" }, b.emoji || "📁") : Brands.img(b.url, b.title, 16)));
+		if (more) cells.push(el("span", { class: "fcell more" }, "+" + more));
+		while (cells.length < 4) cells.push(el("span", { class: "fcell blank" }));
+		return el("span", { class: "bm-icon folder-icon " + cls }, ...cells);
+	}
 	// Main grid holds shortcuts outside folders plus the folders; both share one order.
 	let dragId = null;
 	function tile(item, siblings) {
 		const isFolder = item.type === "folder";
 		const inside = isFolder ? childrenOf(item.id) : [];
 		const icon = isFolder
-			? el("span", { class: "bm-icon folder-icon" + (inside.length ? "" : " empty") }, ...(inside.length ? inside.slice(0, 6).map((b) => b.type === "folder" ? el("span", { class: "mini-emoji" }, b.emoji || "📁") : b.emoji ? el("span", { class: "mini-emoji" }, b.emoji) : Brands.img(b.url, b.title, 16)) : [item.emoji || "📁"]))
+			? folderPreview(item, inside)
 			: el("span", { class: "bm-icon" }, item.emoji ? el("span", { class: "bm-emoji" }, item.emoji) : Brands.img(item.url, item.title, 28));
 		const main = isFolder
 			? el("button", { type: "button", class: "bm-open", onclick: () => openFolder(item.id) }, icon, el("span", { class: "bm-name", dir: "auto" }, item.title))
@@ -362,6 +372,7 @@
 			"li",
 			{
 				class: "bm",
+				"data-id": item.id,
 				draggable: "true",
 				ondragstart: () => (dragId = item.id),
 				oncontextmenu: (e) => { e.preventDefault(); tileMenu(e.currentTarget.querySelector(".bm-edit"), item); },
@@ -441,7 +452,16 @@
 	function openFolder(id) {
 		openFolderId = id;
 		renderFolder();
-		if (!$("folderDialog").open) $("folderDialog").showModal();
+		const dlg = $("folderDialog");
+		if (dlg.open) return;
+		// The folder grows out of its own tile, so it is clear which folder opened.
+		const tileEl = document.querySelector(`[data-id="${CSS.escape(id)}"]`);
+		dlg.showModal();
+		if (tileEl && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+			const a = tileEl.getBoundingClientRect(), b = dlg.getBoundingClientRect();
+			const dx = a.left + a.width / 2 - (b.left + b.width / 2), dy = a.top + a.height / 2 - (b.top + b.height / 2);
+			dlg.animate([{ transform: `translate(${dx}px, ${dy}px) scale(.15)`, opacity: 0 }, { transform: "none", opacity: 1 }], { duration: 260, easing: "cubic-bezier(.2,.8,.2,1)" });
+		}
 	}
 	function renderFolder() {
 		const f = Store.get().items[openFolderId];
@@ -451,11 +471,14 @@
 		for (let x = f, n = 0; x && n < 12; n++, x = alive(x.folder) ? Store.get().items[x.folder] : null) trail.unshift(x);
 		$("folderTitle").replaceChildren(...trail.flatMap((x, i) => [
 			i ? el("span", { class: "crumb-sep" }, " / ") : "",
-			i < trail.length - 1 ? el("button", { type: "button", class: "crumb", onclick: () => openFolder(x.id) }, (x.emoji ? x.emoji + " " : "") + x.title) : el("span", {}, (x.emoji ? x.emoji + " " : "") + x.title)
+			i < trail.length - 1 ? el("button", { type: "button", class: "crumb", onclick: () => openFolder(x.id) }, (x.emoji ? x.emoji + " " : "") + x.title) : el("span", {}, x.title)
 		]));
 		$("folderBack").hidden = !parentOf(f);
 		const id = openFolderId;
 		const inside = () => childrenOf(id);
+		$("folderFace").replaceChildren(folderPreview(f, inside(), "big"));
+		const nIn = inside().length;
+		$("folderCount").textContent = nIn ? t("folderCount", { n: H.num ? H.num(nIn) : nIn }) : t("folderEmpty");
 		const items = inside().map((x) => tile(x, inside));
 		items.push(el("li", { class: "bm" }, el("button", { class: "bm-add", type: "button", onclick: () => openBmDialog(null, id) }, el("span", { class: "bm-icon" }, "+"), el("span", { class: "bm-name" }, t("add")))));
 		$("folderList").replaceChildren(...items);

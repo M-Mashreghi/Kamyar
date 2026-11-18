@@ -4,6 +4,7 @@
 	"use strict";
 	const D = {};
 	D.fa = {
+		folderCount: "{n} مورد", folderEmpty: "خالی است؛ با + یا کشیدن میان‌بر رویش چیزی اضافه کنید",
 		webFocusStart: "فوکوس وب‌گردی (۲۵ دقیقه)", webFocusStop: "پایان فوکوس وب‌گردی", webFocusBlock: "سایت‌های حواس‌پرت‌کن بسته شوند", webFocusNote: "تایمر کوچکی روی همه‌ی سایت‌ها نشان داده می‌شود؛ می‌توانید آن را بکشید و هر جا بگذارید.", webFocusOn: "فوکوس شروع شد؛ تایمر روی همه‌ی سایت‌ها هست.", webFocusNoPerm: "فوکوس شروع شد. برای دیدن تایمر روی سایت‌ها، اجازه‌ی دسترسی را بدهید.", webFocusDone: "جلسه‌ی تمرکز تمام شد 🎉 کمی استراحت کنید.",
 		boxMove: "بکش و جابه‌جا کن (یا با کلیدهای جهت)", boxWide: "پهن کردن باکس", boxNarrow: "باریک کردن باکس", layoutCols: "ستون‌ها", layoutReset0: "چیدمان پیش‌فرض", layoutReset: "چیدمان به حالت اول برگشت", layoutHint: "باکس‌ها را با ⠿ بکشید و جابه‌جا کنید؛ ⤢ پهنشان می‌کند.",
 		colorWalls: "رنگ‌های ساده", bdayPersian: "شمسی", bdayGregorian: "میلادی", bdayDay: "روز", bdayMonth: "ماه", bdayYear: "سال", bdayClear: "پاک کردن تاریخ تولد",
@@ -56,6 +57,7 @@
 		h_newyear: "سال نو میلادی", h_christmas: "کریسمس"
 	};
 	D.en = {
+		folderCount: "{n} items", folderEmpty: "Empty. Add with +, or drag a shortcut onto the folder",
 		webFocusStart: "Web focus (25 min)", webFocusStop: "End web focus", webFocusBlock: "Block distracting sites", webFocusNote: "A small timer shows on every site; drag it anywhere.", webFocusOn: "Focus started; the timer is on every site.", webFocusNoPerm: "Focus started. Allow access to see the timer on sites.", webFocusDone: "Focus session done 🎉 Take a short break.",
 		boxMove: "Drag to move (or use the arrow keys)", boxWide: "Make box wide", boxNarrow: "Make box narrow", layoutCols: "Columns", layoutReset0: "Default layout", layoutReset: "Layout reset", layoutHint: "Drag boxes by ⠿ to move them; ⤢ makes one wide.",
 		colorWalls: "Plain colours", bdayPersian: "Persian (Solar Hijri)", bdayGregorian: "Gregorian", bdayDay: "Day", bdayMonth: "Month", bdayYear: "Year", bdayClear: "Clear birthday",
@@ -108,6 +110,7 @@
 		h_newyear: "New Year's Day", h_christmas: "Christmas"
 	};
 	D.fr = {
+		folderCount: "{n} éléments", folderEmpty: "Vide. Ajoutez avec +, ou glissez un raccourci sur le dossier",
 		webFocusStart: "Concentration web (25 min)", webFocusStop: "Terminer la concentration", webFocusBlock: "Bloquer les sites distrayants", webFocusNote: "Un petit minuteur s'affiche sur chaque site ; déplacez-le où vous voulez.", webFocusOn: "C'est parti ; le minuteur est sur chaque site.", webFocusNoPerm: "C'est parti. Autorisez l'accès pour voir le minuteur sur les sites.", webFocusDone: "Session terminée 🎉 Faites une petite pause.",
 		boxMove: "Glisser pour déplacer (ou flèches du clavier)", boxWide: "Élargir le bloc", boxNarrow: "Rétrécir le bloc", layoutCols: "Colonnes", layoutReset0: "Disposition par défaut", layoutReset: "Disposition réinitialisée", layoutHint: "Glissez les blocs par ⠿ pour les déplacer ; ⤢ en élargit un.",
 		colorWalls: "Couleurs unies", bdayPersian: "Persan (hégire solaire)", bdayGregorian: "Grégorien", bdayDay: "Jour", bdayMonth: "Mois", bdayYear: "Année", bdayClear: "Effacer l'anniversaire",
@@ -160,6 +163,7 @@
 		h_newyear: "Jour de l'An", h_christmas: "Noël"
 	};
 	D.de = {
+		folderCount: "{n} Einträge", folderEmpty: "Leer. Mit + hinzufügen oder eine Verknüpfung auf den Ordner ziehen",
 		webFocusStart: "Web-Fokus (25 Min.)", webFocusStop: "Web-Fokus beenden", webFocusBlock: "Ablenkende Seiten sperren", webFocusNote: "Ein kleiner Timer erscheint auf jeder Seite; zieh ihn, wohin du willst.", webFocusOn: "Fokus gestartet; der Timer ist auf jeder Seite.", webFocusNoPerm: "Fokus gestartet. Erlaube den Zugriff, um den Timer auf Seiten zu sehen.", webFocusDone: "Fokus-Sitzung fertig 🎉 Mach eine kurze Pause.",
 		boxMove: "Ziehen zum Verschieben (oder Pfeiltasten)", boxWide: "Box breit machen", boxNarrow: "Box schmal machen", layoutCols: "Spalten", layoutReset0: "Standard-Anordnung", layoutReset: "Anordnung zurückgesetzt", layoutHint: "Boxen an ⠿ ziehen, um sie zu verschieben; ⤢ macht eine breit.",
 		colorWalls: "Einfarbig", bdayPersian: "Persisch (Sonnenhidschra)", bdayGregorian: "Gregorianisch", bdayDay: "Tag", bdayMonth: "Monat", bdayYear: "Jahr", bdayClear: "Geburtstag löschen",
