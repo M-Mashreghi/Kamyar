@@ -272,3 +272,105 @@ chrome.alarms.onAlarm.addListener((a) => {
 const ensureAlertAlarm = () => chrome.alarms.get("kamyar-alerts", (a) => !a && chrome.alarms.create("kamyar-alerts", { periodInMinutes: 5, delayInMinutes: 1 }));
 chrome.runtime.onInstalled.addListener(ensureAlertAlarm);
 chrome.runtime.onStartup.addListener(ensureAlertAlarm);
+
+// Water and eye-break reminders. Settings live in hamyar_data.settings.care; the last time each one fired is in kamyar_care_state.
+// A visible Kamyar tab shows its own card at the page edge; otherwise Chrome shows a notification (if allowed in the settings).
+const CARE_STR = {
+	fa: { water: "💧 وقت یک لیوان آب", waterMsg: "چند دقیقه‌ای است آب نخورده‌اید. یک لیوان آب بنوشید.", eye: "👀 به چشم‌هایت استراحت بده", eyeMsg: "۲۰ ثانیه به چیزی در فاصله‌ی دور (حدود ۶ متر) نگاه کنید.", drank: "نوشیدم ✓", later: "۱۰ دقیقه‌ی دیگر" },
+	en: { water: "💧 Time for a glass of water", waterMsg: "It's been a while. Have a glass of water.", eye: "👀 Rest your eyes", eyeMsg: "Look at something about 6 metres (20 feet) away for 20 seconds.", drank: "Done ✓", later: "In 10 minutes" },
+	fr: { water: "💧 Un verre d'eau ?", waterMsg: "Cela fait un moment. Buvez un verre d'eau.", eye: "👀 Reposez vos yeux", eyeMsg: "Regardez quelque chose à environ 6 mètres pendant 20 secondes.", drank: "C'est fait ✓", later: "Dans 10 minutes" },
+	de: { water: "💧 Zeit für ein Glas Wasser", waterMsg: "Schon eine Weile her. Trink ein Glas Wasser.", eye: "👀 Gönn deinen Augen eine Pause", eyeMsg: "Schau 20 Sekunden lang auf etwas etwa 6 Meter entfernt.", drank: "Erledigt ✓", later: "In 10 Minuten" }
+};
+const CARE_DEF = { water: { on: true, every: 60 }, eye: { on: true, every: 20 }, sys: true, side: "end", quiet: true };
+const careCfg = (data) => {
+	const c = (data && data.settings && data.settings.care) || {};
+	return { ...CARE_DEF, ...c, water: { ...CARE_DEF.water, ...(c.water || {}) }, eye: { ...CARE_DEF.eye, ...(c.eye || {}) } };
+};
+const dkey = (d = new Date()) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+async function logWater(n = 1) {
+	const { kamyar_water: w = {} } = await chrome.storage.local.get("kamyar_water");
+	const k = dkey();
+	await chrome.storage.local.set({ kamyar_water: { ...w, [k]: (w[k] || 0) + n } });
+}
+async function checkCare() {
+	const { hamyar_data: data, kamyar_care_state: st = {}, hamyar_lang: lang } = await chrome.storage.local.get(["hamyar_data", "kamyar_care_state", "hamyar_lang"]);
+	const cfg = careCfg(data);
+	const now = Date.now();
+	const next = { ...st };
+	// Away from the computer (idle 5+ minutes or locked): the clocks start again on return.
+	let idle = "active";
+	try { idle = await chrome.idle.queryState(300); } catch {}
+	const h = new Date().getHours();
+	const night = cfg.quiet && (h >= 23 || h < 7);
+	const focus = (await chrome.storage.local.get("kamyar_focus")).kamyar_focus;
+	for (const kind of ["water", "eye"]) {
+		const k = cfg[kind];
+		if (!k.on) { delete next[kind]; continue; }
+		if (idle !== "active" || night || !next[kind]) { next[kind] = now; continue; }
+		if (now - next[kind] < Math.max(5, Number(k.every) || 20) * 60000) continue;
+		next[kind] = now;
+		// Eye breaks wait while a focus session runs; water reminders still come.
+		if (kind === "eye" && focus && focus.on) continue;
+		let shown = false;
+		try { shown = !!(await chrome.runtime.sendMessage({ type: "kamyar-care", kind }))?.shown; } catch {}
+		if (!shown && cfg.sys) {
+			const S = CARE_STR[lang] || CARE_STR.fa;
+			chrome.notifications.create("kamyar-care-" + kind + "-" + now, { type: "basic", iconUrl: "icons/icon-128.png", title: S[kind], message: S[kind + "Msg"], priority: 1, buttons: kind === "water" ? [{ title: S.drank }, { title: S.later }] : [{ title: S.later }] });
+		}
+	}
+	await chrome.storage.local.set({ kamyar_care_state: next });
+}
+chrome.notifications.onButtonClicked.addListener(async (nid, btn) => {
+	const m = /^kamyar-care-(water|eye)-/.exec(nid);
+	if (!m) return;
+	chrome.notifications.clear(nid);
+	const later = m[1] === "eye" || btn === 1;
+	if (m[1] === "water" && btn === 0) await logWater();
+	if (later) {
+		const { hamyar_data: data, kamyar_care_state: st = {} } = await chrome.storage.local.get(["hamyar_data", "kamyar_care_state"]);
+		const every = careCfg(data)[m[1]].every;
+		await chrome.storage.local.set({ kamyar_care_state: { ...st, [m[1]]: Date.now() - Math.max(0, every - 10) * 60000 } });
+	}
+});
+
+// Update notice for copies installed from the zip (Chrome Web Store copies update by themselves).
+const REPO = "M-Mashreghi/kamyar";
+const newer = (a, b) => {
+	const x = String(a).replace(/^v/, "").split(".").map(Number), y = String(b).replace(/^v/, "").split(".").map(Number);
+	for (let i = 0; i < 3; i++) if ((x[i] || 0) !== (y[i] || 0)) return (x[i] || 0) > (y[i] || 0);
+	return false;
+};
+async function checkUpdate() {
+	if (chrome.runtime.getManifest().update_url) return;
+	try {
+		const r = await fetch(`https://api.github.com/repos/${REPO}/releases/latest`, { headers: { Accept: "application/vnd.github+json" } });
+		if (!r.ok) return;
+		const d = await r.json();
+		const ver = String(d.tag_name || "").replace(/^v/, "");
+		const zip = (d.assets || []).find((a) => /\.zip$/i.test(a.name));
+		await chrome.storage.local.set({ kamyar_update: { at: Date.now(), latest: ver, url: d.html_url, zip: zip ? zip.browser_download_url : "", newer: newer(ver, chrome.runtime.getManifest().version) } });
+	} catch {}
+}
+chrome.runtime.onMessage.addListener((m, _s, reply) => {
+	if (m && m.type === "kamyar-update-check") {
+		checkUpdate().then(() => reply(true));
+		return true;
+	}
+	if (m && m.type === "kamyar-water") {
+		logWater(m.n || 1).then(() => reply(true));
+		return true;
+	}
+});
+chrome.alarms.onAlarm.addListener((a) => {
+	if (a.name === "kamyar-care") checkCare();
+	if (a.name === "kamyar-update") checkUpdate();
+});
+const ensureKamyarAlarms = () => {
+	chrome.alarms.get("kamyar-care", (a) => !a && chrome.alarms.create("kamyar-care", { periodInMinutes: 1, delayInMinutes: 1 }));
+	chrome.alarms.get("kamyar-update", (a) => !a && chrome.alarms.create("kamyar-update", { periodInMinutes: 360, delayInMinutes: 2 }));
+};
+chrome.runtime.onInstalled.addListener((d) => {
+	ensureKamyarAlarms();
+	if (d.reason === "update") chrome.storage.local.set({ kamyar_whatsnew: chrome.runtime.getManifest().version, kamyar_update: null });
+});
+chrome.runtime.onStartup.addListener(ensureKamyarAlarms);

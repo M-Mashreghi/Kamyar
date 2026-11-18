@@ -19,7 +19,7 @@
 		const v = Store.get().settings[k];
 		return v === undefined ? def : v;
 	};
-	const WIDGETS = ["calendar", "weather", "rates", "prayer", "daily", "tools", "habits", "expenses", "sounds", "alerts", "snippets", "pomodoro", "focusStats"];
+	const WIDGETS = ["calendar", "weather", "rates", "prayer", "daily", "tools", "habits", "expenses", "sounds", "alerts", "snippets", "pomodoro", "focusStats", "care"];
 	const widgetOn = (w) => (setting("widgets", {}) || {})[w] !== false;
 
 	/* ---------- shared helpers for the widget scripts ---------- */
@@ -31,7 +31,7 @@
 	function toast(msg, action) {
 		const tEl = $("toast");
 		tEl.replaceChildren(el("span", {}, msg));
-		if (action) tEl.append(el("button", { class: "link-btn", type: "button", onclick: () => { action.run(); tEl.hidden = true; } }, t("undo")));
+		if (action) tEl.append(el("button", { class: "link-btn", type: "button", onclick: () => { action.run(); tEl.hidden = true; } }, action.label || t("undo")));
 		tEl.hidden = false;
 		clearTimeout(toastTimer);
 		toastTimer = setTimeout(() => (tEl.hidden = true), action ? 6000 : 3000);
@@ -250,21 +250,41 @@
 	let editingBm = null;
 	let bmKind = "bookmark";
 	const folders = () => Store.list("folder");
+	// Folders can sit inside folders: a folder's own "folder" field is its parent.
+	const alive = (id) => { const f = id && Store.get().items[id]; return !!(f && !f.deleted); };
+	const parentOf = (x) => (alive(x.folder) ? x.folder : "");
+	function descendants(id) {
+		const out = new Set([id]);
+		let grew = true;
+		while (grew) {
+			grew = false;
+			for (const f of folders()) if (!out.has(f.id) && out.has(f.folder)) { out.add(f.id); grew = true; }
+		}
+		return out;
+	}
+	// Folders as "Parent / Child" labels for pickers, leaving out a folder and everything under it.
+	function folderOptions(skip) {
+		const bad = skip ? descendants(skip) : new Set();
+		const path = (f) => { const p = []; let x = f, n = 0; while (x && n++ < 12) { p.unshift((x.emoji ? x.emoji + " " : "") + x.title); x = alive(x.folder) ? Store.get().items[x.folder] : null; } return p.join(" / "); };
+		return folders().filter((f) => !bad.has(f.id)).map((f) => ({ id: f.id, label: path(f), f })).sort((a, b) => a.label.localeCompare(b.label));
+	}
+	const childrenOf = (id) => [...Store.list("bookmark").filter((x) => x.folder === id), ...folders().filter((x) => x.folder === id)].sort((a, b) => (a.order ?? 0) - (b.order ?? 0) || a.createdAt - b.createdAt);
 	function renderBmKind() {
 		document.querySelectorAll("#bmKind .seg-btn").forEach((b) => b.classList.toggle("active", b.dataset.kind === bmKind));
 		document.querySelectorAll("#bmDialog .bm-only").forEach((n) => (n.hidden = bmKind === "folder"));
+		$("bmFolderLabel").textContent = t(bmKind === "folder" ? "parentFolder" : "kFolder");
 		$("bmUrl").required = bmKind === "bookmark";
 		$("bmDialogTitle").textContent = t(editingBm ? (bmKind === "folder" ? "editFolder" : "editShortcut") : bmKind === "folder" ? "newFolder" : "newShortcut");
 	}
 	function openBmDialog(bm, folderId = "", kind = "bookmark") {
 		editingBm = bm || null;
 		bmKind = bm ? bm.type : kind;
-		$("bmKind").hidden = !!bm || !!folderId;
+		$("bmKind").hidden = !!bm;
 		$("bmName").value = bm ? bm.title : "";
 		$("bmUrl").value = bm && bm.url ? bm.url : "";
 		$("bmEmoji").value = bm && bm.emoji ? bm.emoji : "";
-		$("bmFolder").replaceChildren(el("option", { value: "" }, t("noFolder")), ...folders().map((f) => el("option", { value: f.id }, (f.emoji ? f.emoji + " " : "") + f.title)));
-		$("bmFolder").value = bm ? bm.folder || "" : folderId;
+		$("bmFolder").replaceChildren(el("option", { value: "" }, t("noFolder")), ...folderOptions(bm && bm.type === "folder" ? bm.id : null).map((o) => el("option", { value: o.id }, o.label)));
+		$("bmFolder").value = bm ? parentOf(bm) : folderId;
 		$("bmDelete").hidden = !bm;
 		$("bmImport").hidden = !!bm;
 		$("bmError").hidden = true;
@@ -279,8 +299,9 @@
 		if (bmKind === "folder") {
 			const title = $("bmName").value.trim();
 			if (!title) return e.preventDefault();
-			if (editingBm) Store.update(editingBm.id, { title, emoji });
-			else Store.add("folder", { title, emoji: emoji || "📁", order: Store.list("bookmark").length + folders().length });
+			const parent = $("bmFolder").value || "";
+			if (editingBm) Store.update(editingBm.id, { title, emoji, folder: descendants(editingBm.id).has(parent) ? "" : parent });
+			else Store.add("folder", { title, emoji: emoji || "📁", folder: parent, order: Store.list("bookmark").length + folders().length });
 			if (editingBm && openFolderId === editingBm.id) renderFolder();
 			return;
 		}
@@ -310,11 +331,15 @@
 		delete snap.id;
 		$("bmDialog").close();
 		if (snap.type === "folder") {
-			// Shortcuts inside a deleted folder move back to the main grid.
-			const inside = Store.list("bookmark").filter((x) => x.folder === editingBm.id);
-			inside.forEach((x) => Store.update(x.id, { folder: "" }));
+			// What was inside a deleted folder (shortcuts and folders) moves up one level.
+			const up = parentOf(editingBm);
+			const inside = childrenOf(editingBm.id);
+			inside.forEach((x) => Store.update(x.id, { folder: up }));
 			Store.remove(editingBm.id);
-			if ($("folderDialog").open) $("folderDialog").close();
+			if (openFolderId === editingBm.id) {
+				if (up) { openFolderId = up; renderFolder(); }
+				else if ($("folderDialog").open) $("folderDialog").close();
+			}
 			toast(t("folderDeleted"), { run: () => { const f = Store.add("folder", snap); inside.forEach((x) => Store.update(x.id, { folder: f.id })); } });
 		} else {
 			Store.remove(editingBm.id);
@@ -326,9 +351,9 @@
 	let dragId = null;
 	function tile(item, siblings) {
 		const isFolder = item.type === "folder";
-		const inside = isFolder ? Store.list("bookmark").filter((x) => x.folder === item.id).sort((a, b) => (a.order ?? 0) - (b.order ?? 0) || a.createdAt - b.createdAt) : [];
+		const inside = isFolder ? childrenOf(item.id) : [];
 		const icon = isFolder
-			? el("span", { class: "bm-icon folder-icon" + (inside.length ? "" : " empty") }, ...(inside.length ? inside.slice(0, 6).map((b) => b.emoji ? el("span", { class: "mini-emoji" }, b.emoji) : Brands.img(b.url, b.title, 16)) : [item.emoji || "📁"]))
+			? el("span", { class: "bm-icon folder-icon" + (inside.length ? "" : " empty") }, ...(inside.length ? inside.slice(0, 6).map((b) => b.type === "folder" ? el("span", { class: "mini-emoji" }, b.emoji || "📁") : b.emoji ? el("span", { class: "mini-emoji" }, b.emoji) : Brands.img(b.url, b.title, 16)) : [item.emoji || "📁"]))
 			: el("span", { class: "bm-icon" }, item.emoji ? el("span", { class: "bm-emoji" }, item.emoji) : Brands.img(item.url, item.title, 28));
 		const main = isFolder
 			? el("button", { type: "button", class: "bm-open", onclick: () => openFolder(item.id) }, icon, el("span", { class: "bm-name", dir: "auto" }, item.title))
@@ -345,8 +370,9 @@
 					e.preventDefault();
 					if (!dragId || dragId === item.id) return;
 					const dragged = Store.get().items[dragId];
-					// Dropping a shortcut on a folder moves it into the folder.
+					// Dropping a shortcut or another folder on a folder moves it into the folder.
 					if (isFolder && dragged && dragged.type === "bookmark") return Store.update(dragId, { folder: item.id });
+					if (isFolder && dragged && dragged.type === "folder" && !descendants(dragId).has(item.id)) return Store.update(dragId, { folder: item.id });
 					const all = siblings();
 					const from = all.findIndex((x) => x.id === dragId);
 					if (from < 0) return;
@@ -361,15 +387,17 @@
 	}
 	function tileMenu(anchor, item) {
 		if (item.type === "folder") {
+			const fMove = [{ icon: "", label: t("noFolder"), active: !parentOf(item), run: () => Store.update(item.id, { folder: "" }) }, ...folderOptions(item.id).map((o) => ({ icon: "", label: o.label, active: item.folder === o.id, run: () => Store.update(item.id, { folder: o.id }) }))];
 			return menu(anchor, [
 				{ icon: "📂", label: t("open"), run: () => openFolder(item.id) },
 				{ icon: "↗", label: t("openAllTabs"), run: () => Store.list("bookmark").filter((x) => x.folder === item.id).forEach((b) => chrome.tabs.create({ url: b.url, active: false })) },
 				{ icon: "✎", label: t("edit"), run: () => openBmDialog(item) },
+				{ icon: "📁", label: t("moveTo"), sub: fMove },
 				"-",
 				{ icon: "🗑", label: t("delete"), danger: true, run: () => { openBmDialog(item); $("bmDelete").click(); } }
 			]);
 		}
-		const moveTo = [{ icon: "", label: t("noFolder"), active: !item.folder, run: () => Store.update(item.id, { folder: "" }) }, ...folders().map((f) => ({ icon: f.emoji || "📁", label: f.title, active: item.folder === f.id, run: () => Store.update(item.id, { folder: f.id }) }))];
+		const moveTo = [{ icon: "", label: t("noFolder"), active: !item.folder, run: () => Store.update(item.id, { folder: "" }) }, ...folderOptions(null).map((o) => ({ icon: "", label: o.label, active: item.folder === o.id, run: () => Store.update(item.id, { folder: o.id }) }))];
 		menu(anchor, [
 			{ icon: "↗", label: t("open"), run: () => (location.href = item.url) },
 			{ icon: "⧉", label: t("openNewTab"), run: () => chrome.tabs.create({ url: item.url, active: false }) },
@@ -380,7 +408,7 @@
 			{ icon: "🗑", label: t("delete"), danger: true, run: () => { const snap = { ...item }; delete snap.id; Store.remove(item.id); toast(t("shortcutDeleted"), { run: () => Store.add("bookmark", snap) }); } }
 		]);
 	}
-	const topItems = () => [...Store.list("bookmark").filter((x) => !x.folder || !Store.get().items[x.folder] || Store.get().items[x.folder].deleted), ...folders()].sort((a, b) => (a.order ?? 0) - (b.order ?? 0) || a.createdAt - b.createdAt);
+	const topItems = () => [...Store.list("bookmark"), ...folders()].filter((x) => !parentOf(x)).sort((a, b) => (a.order ?? 0) - (b.order ?? 0) || a.createdAt - b.createdAt);
 	function renderBookmarks() {
 		const items = topItems().map((x) => tile(x, topItems));
 		items.push(el("li", { class: "bm" }, el("button", { class: "bm-add", type: "button", onclick: () => openBmDialog() }, el("span", { class: "bm-icon" }, "+"), el("span", { class: "bm-name" }, t("add")))));
@@ -391,20 +419,29 @@
 	function openFolder(id) {
 		openFolderId = id;
 		renderFolder();
-		$("folderDialog").showModal();
+		if (!$("folderDialog").open) $("folderDialog").showModal();
 	}
 	function renderFolder() {
 		const f = Store.get().items[openFolderId];
 		if (!f || f.deleted) return $("folderDialog").open && $("folderDialog").close();
-		$("folderTitle").textContent = (f.emoji ? f.emoji + " " : "") + f.title;
-		const inside = () => Store.list("bookmark").filter((x) => x.folder === openFolderId);
+		// Breadcrumb: Main / Parent / This folder; each part opens that level.
+		const trail = [];
+		for (let x = f, n = 0; x && n < 12; n++, x = alive(x.folder) ? Store.get().items[x.folder] : null) trail.unshift(x);
+		$("folderTitle").replaceChildren(...trail.flatMap((x, i) => [
+			i ? el("span", { class: "crumb-sep" }, " / ") : "",
+			i < trail.length - 1 ? el("button", { type: "button", class: "crumb", onclick: () => openFolder(x.id) }, (x.emoji ? x.emoji + " " : "") + x.title) : el("span", {}, (x.emoji ? x.emoji + " " : "") + x.title)
+		]));
+		$("folderBack").hidden = !parentOf(f);
+		const id = openFolderId;
+		const inside = () => childrenOf(id);
 		const items = inside().map((x) => tile(x, inside));
-		items.push(el("li", { class: "bm" }, el("button", { class: "bm-add", type: "button", onclick: () => openBmDialog(null, openFolderId) }, el("span", { class: "bm-icon" }, "+"), el("span", { class: "bm-name" }, t("add")))));
+		items.push(el("li", { class: "bm" }, el("button", { class: "bm-add", type: "button", onclick: () => openBmDialog(null, id) }, el("span", { class: "bm-icon" }, "+"), el("span", { class: "bm-name" }, t("add")))));
 		$("folderList").replaceChildren(...items);
 	}
 	H.openBmDialog = openBmDialog;
 	H.openNote = (id) => openNote(id);
 	$("folderClose").addEventListener("click", () => $("folderDialog").close());
+	$("folderBack").addEventListener("click", () => { const f = Store.get().items[openFolderId]; if (f && parentOf(f)) openFolder(f.folder); });
 	$("folderDialog").addEventListener("close", () => (openFolderId = null));
 	$("folderEdit").addEventListener("click", () => openBmDialog(Store.get().items[openFolderId]));
 
@@ -573,6 +610,8 @@
 		$("wallRemove").hidden = !Themes.hasWall();
 		$("wallDimRow").hidden = !(Themes.hasWall() || Themes.hasVideo());
 		$("wallDim").value = Themes.dim();
+		$("boxAlphaRows").hidden = !(Themes.hasWall() || Themes.hasVideo());
+		drawBoxAlpha();
 		renderWalls();
 	}
 	$("accentInput").addEventListener("change", (e) => { Store.setSetting("accent", e.target.value); renderThemeGrid(); });
@@ -629,8 +668,18 @@
 	$("searchHistChk").addEventListener("change", (e) => { Store.setSetting("searchHistory", e.target.checked); if (!e.target.checked) saveHist([]); });
 	$("clearHist").addEventListener("click", () => { saveHist([]); toast(t("historyCleared")); });
 	$("wallDim").addEventListener("input", (e) => Themes.setDim(Number(e.target.value)));
+	function drawBoxAlpha() {
+		const [a, h] = Themes.boxAlpha();
+		$("boxAlpha").value = a;
+		$("boxAlphaH").value = h;
+		$("boxAlphaOut").textContent = num(a) + (I18n.lang === "fa" ? "٪" : "%");
+		$("boxAlphaHOut").textContent = num(h) + (I18n.lang === "fa" ? "٪" : "%");
+	}
+	$("boxAlpha").addEventListener("input", (e) => { Themes.setBoxAlpha(Number(e.target.value), null); drawBoxAlpha(); });
+	$("boxAlphaH").addEventListener("input", (e) => { Themes.setBoxAlpha(null, Number(e.target.value)); drawBoxAlpha(); });
+	$("boxAlphaReset").addEventListener("click", () => { Themes.setBoxAlpha(80, 92); drawBoxAlpha(); });
 	$("langSelect").replaceChildren(...I18n.langs.map((l) => el("option", { value: l }, I18n.names[l])));
-	const widgetLabel = { calendar: "wCalendar", weather: "wWeather", rates: "wRates", prayer: "wPrayer", pomodoro: "wPomodoro", tools: "wTools", daily: "wDaily", habits: "wHabits", expenses: "wExpenses", sounds: "wSounds", alerts: "wAlerts", snippets: "wSnippets", focusStats: "wFocusStats" };
+	const widgetLabel = { calendar: "wCalendar", weather: "wWeather", rates: "wRates", prayer: "wPrayer", pomodoro: "wPomodoro", tools: "wTools", daily: "wDaily", habits: "wHabits", expenses: "wExpenses", sounds: "wSounds", alerts: "wAlerts", snippets: "wSnippets", focusStats: "wFocusStats", care: "wCare" };
 	function renderWidgetToggles() {
 		$("widgetToggles").replaceChildren(
 			...WIDGETS.map((w) =>

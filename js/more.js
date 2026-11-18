@@ -307,6 +307,6 @@
 		const mark = () => (busy = true);
 		document.addEventListener("pointerdown", mark, { once: true, capture: true });
 		document.addEventListener("keydown", mark, { once: true, capture: true });
-		if (setting("briefAuto", true) !== false && d.getHours() >= 5 && lsGet("kamyar_brief_day") !== dstr(d) && !focus.on) setTimeout(() => !busy && !document.querySelector("dialog[open]") && openBrief(), 1200);
+		if (setting("briefAuto", true) !== false && d.getHours() >= 5 && lsGet("kamyar_brief_day") !== dstr(d) && !focus.on) setTimeout(() => !busy && !H.tourOpen?.() && !document.querySelector("dialog[open]") && openBrief(), 1200);
 	});
 })();

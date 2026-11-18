@@ -14,6 +14,12 @@ The first public release of Kamyar, a personal new-tab page for Chrome with no a
 راهنمای کامل و انتقال از دستیار در [README](https://github.com/M-Mashreghi/Kamyar#نصب) است. Full guide and Dastyar import: [README](https://github.com/M-Mashreghi/Kamyar#install).
 
 ### تازه‌های این نسخه · New in this version
+- 💧👀 یادآور آب و استراحت چشم با کارت کنار صفحه (بسته‌شدن با ✕) · Water and eye-break reminder cards at the page edge
+- 📁 پوشه داخل پوشه · Folders inside folders
+- 🪟 شفافیت باکس‌ها روی عکس پس‌زمینه (عادی و هنگام هاور) · Box opacity over the wallpaper (normal and on hover)
+- 🎥 دسته‌ی هوش مصنوعی ویدیو و Kimi · AI video category and Kimi
+- 👋 آموزش اولین اجرا · First-run tour
+- 🎁 خبر نسخه‌ی جدید و راهنمای به‌روزرسانی · New version notice with update steps
 - 📊 گزارش روزانه‌ی تمرکز (پومودورو) · Daily focus report
 - 🗓 خلاصه‌ی هفتگی · Weekly summary
 - 🎯 بودجه‌ی ماهانه با هشدار · Monthly budget with warnings

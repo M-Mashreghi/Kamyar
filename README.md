@@ -6,7 +6,7 @@
 
 <p align="center">
   <img alt="Chrome MV3" src="https://img.shields.io/badge/Chrome-Manifest%20V3-4285F4?logo=googlechrome&logoColor=white" />
-  <img alt="Version" src="https://img.shields.io/badge/version-2.10.0-6c4ff0" />
+  <img alt="Version" src="https://img.shields.io/badge/version-2.11.0-6c4ff0" />
   <img alt="Languages" src="https://img.shields.io/badge/languages-FA%20%7C%20EN%20%7C%20FR%20%7C%20DE-14b8a6" />
   <img alt="No ads" src="https://img.shields.io/badge/ads-none-3db985" />
   <img alt="No tracking" src="https://img.shields.io/badge/tracking-none-3db985" />
@@ -40,7 +40,7 @@
 
 ### یار هوشمند و حال خوب روزانه
 
-- **پرسیدن از هوش مصنوعی:** دکمه‌ی ✨ کنار جستجو، سؤال را مستقیم به Claude، ChatGPT، Gemini، Perplexity یا DeepSeek می‌فرستد. با **Shift+Enter** سؤال به آخرین هوش مصنوعی‌ای که انتخاب کرده‌اید می‌رود.
+- **پرسیدن از هوش مصنوعی:** دکمه‌ی ✨ کنار جستجو، سؤال را مستقیم به Claude، ChatGPT، Gemini، Perplexity، DeepSeek یا Kimi می‌فرستد. با **Shift+Enter** سؤال به آخرین هوش مصنوعی‌ای که انتخاب کرده‌اید می‌رود.
 - **جمله‌ی امیدبخش روز:** هر روز یک جمله‌ی انگیزشی و امیدبخش تازه؛ با ↻ جمله‌ی بعدی را ببینید.
 - **شعر روز و فال حافظ:** هر روز یک بیت از حافظ، و فال حافظ با غزل کامل و تعبیر آن.
 - **بعداً بخوانم:** لینک‌ها را از پنل کناری یا با **راست‌کلیک روی هر صفحه** ذخیره کنید.
@@ -60,6 +60,12 @@
 - **🎯 بودجه‌ی ماهانه:** برای هر دسته‌ی هزینه سقف بگذارید. در ۸۰٪ و ۱۰۰٪ سقف هشدار می‌گیرید.
 - **🧮 ماشین‌حساب و مبدل در جستجو:** مثلاً «۱۲۰ دلار به تومان»، «۵ فوت به سانتی‌متر»، «۳۰ c to f» یا «۱۲×(۳+۴)». جواب همان زیر جعبه‌ی جستجو می‌آید و با یک کلیک کپی می‌شود.
 - **دو نوار کناری:** ابزارهای اصلی سمت راست، و صداها، تمرکز، مرور روز و هوش مصنوعی‌ها سمت چپ.
+- **💧👀 یادآور آب و استراحت چشم:** هر چند وقت یک کارت کوچک کنار صفحه (چپ یا راست، به انتخاب شما) می‌آید که با ✕ بسته می‌شود: «یک لیوان آب بنوشید» یا «۲۰ ثانیه به دوردست نگاه کنید» با شمارش معکوس. لیوان‌های امروز شمرده می‌شوند. وقتی کامیار باز نیست، اعلان کروم می‌آید. شب‌ها و وقتی پشت کامپیوتر نیستید چیزی نمی‌آید.
+- **📁 پوشه داخل پوشه:** پوشه‌ها می‌توانند داخل هم باشند، با مسیر بالای پوشه برای برگشتن.
+- **🪟 شفافیت باکس‌ها:** وقتی عکس پس‌زمینه دارید، شفافیت باکس‌ها را تنظیم کنید؛ یک مقدار برای حالت عادی و یکی برای وقتی ماوس روی باکس است.
+- **🎥 هوش مصنوعی ویدیو:** دسته‌ی تازه در صفحه‌ی سرویس‌ها: Sora، Veo/Flow، Runway، Kling، Luma، Pika، Hailuo و …
+- **👋 آموزش اولین اجرا:** چند قدم کوتاه که بخش‌های اصلی را نشان می‌دهد. از تنظیمات › درباره دوباره دیده می‌شود.
+- **🎁 خبر نسخه‌ی جدید:** وقتی نسخه‌ی تازه‌ای منتشر شود، بالای صفحه خبر می‌دهد و مراحل به‌روزرسانی را نشان می‌دهد.
 
 <p align="center"><img src="docs/screenshots/home-daily-fa.png" alt="شعر روز و بعداً بخوانم" width="900" /></p>
 <p align="center"><img src="docs/screenshots/hafez-fal-fa.png" alt="فال حافظ" width="900" /></p>
@@ -76,6 +82,13 @@
 <p align="center"><img src="docs/screenshots/week-summary-fa.png" alt="خلاصه‌ی هفتگی" width="900" /></p>
 <p align="center"><img src="docs/screenshots/budget-fa.png" alt="بودجه‌ی ماهانه" width="900" /></p>
 <p align="center"><img src="docs/screenshots/calc-fa.png" alt="ماشین‌حساب در جستجو" width="900" /></p>
+<p align="center"><img src="docs/screenshots/care-reminder-fa.png" alt="یادآور آب و استراحت چشم" width="900" /></p>
+<p align="center"><img src="docs/screenshots/care-widget-fa.png" alt="تنظیم یادآورها" width="900" /></p>
+<p align="center"><img src="docs/screenshots/nested-folders-fa.png" alt="پوشه داخل پوشه" width="900" /></p>
+<p align="center"><img src="docs/screenshots/box-opacity-fa.png" alt="شفافیت باکس‌ها" width="900" /></p>
+<p align="center"><img src="docs/screenshots/ai-video-fa.png" alt="هوش مصنوعی ویدیو" width="900" /></p>
+<p align="center"><img src="docs/screenshots/tour-fa.png" alt="آموزش اولین اجرا" width="900" /></p>
+<p align="center"><img src="docs/screenshots/update-fa.png" alt="به‌روزرسانی" width="900" /></p>
 
 ### تقویم و مناسبت‌ها
 
@@ -152,7 +165,7 @@
 6. **تب جدید: یک تب جدید باز کنید. اگر کروم پرسید «این تغییر را نگه می‌دارید؟»، گزینه‌ی Keep it را بزنید.**
 7. **ذخیره در حساب گوگل: در کروم با حساب گوگلتان وارد شوید و همگام‌سازی را روشن کنید (روی عکس پروفایل کروم بزنید ← Turn on sync) تا اطلاعاتتان روی همه‌ی دستگاه‌ها باشد.**
 
-> 💡 **به‌روزرسانی: نسخه‌ی جدید را دانلود کنید، محتوای پوشه‌ی قبلی `Kamyar` را با آن جایگزین کنید و در `chrome://extensions` روی دکمه‌ی 🔄 (Reload) افزونه بزنید. اطلاعاتتان پاک نمی‌شود.**
+> 💡 **به‌روزرسانی: نسخه‌ی جدید را دانلود کنید، محتوای پوشه‌ی قبلی `Kamyar` را با آن جایگزین کنید و در `chrome://extensions` روی دکمه‌ی 🔄 (Reload) افزونه بزنید. اطلاعاتتان پاک نمی‌شود. از نسخه‌ی ۲.۱۱ به بعد، خود کامیار وقتی نسخه‌ی جدیدی بیاید بالای صفحه خبر می‌دهد.**
 
 **راهنمای کامل‌تر، از جمله وصل کردن گوگل درایو و تقویم گوگل، در [SETUP.md](SETUP.md) است.**
 
@@ -199,7 +212,7 @@ Kamyar is a **personal new-tab page for Google Chrome**. Every new tab shows you
 
 ### Features
 
-- **Smart companion:** a ✨ button next to search sends your question straight to Claude, ChatGPT, Gemini, Perplexity or DeepSeek. **Shift+Enter** sends it to the one you used last.
+- **Smart companion:** a ✨ button next to search sends your question straight to Claude, ChatGPT, Gemini, Perplexity, DeepSeek or Kimi. **Shift+Enter** sends it to the one you used last.
 - **Daily lift:** a hopeful or motivational quote every day, a couplet of Hafez as the poem of the day, and a Hafez *fal* with the full ghazal and its interpretation.
 - **Read later:** save links from the side panel or by **right-clicking any page**.
 - **Habit tracker:** water, exercise, reading or anything else, with a daily target, a 7-day view and a 🔥 streak.
@@ -218,6 +231,12 @@ Kamyar is a **personal new-tab page for Google Chrome**. Every new tab shows you
 - **Monthly budget:** a cap per expense category, with warnings at 80% and 100%.
 - **Calculator and converter in search:** "120 dollars to toman", "5 ft to cm", "30 c to f" or "12*(3+4)". The answer shows under the search box and copies in one click.
 - **Two side rails:** navigation on one side; sounds, focus, the daily brief and AI shortcuts on the other.
+- **Water and eye-break reminder:** every so often a small card at the edge of the page (left or right, your choice) that closes with ✕: "have a glass of water" or "look far away for 20 seconds" with a countdown. Glasses are counted per day. Without a Kamyar tab open, Chrome shows a notification instead. Nothing comes at night or while you're away.
+- **Folders inside folders**, with a breadcrumb to go back up.
+- **Box opacity:** with a background picture, choose how see-through the boxes are, one value normally and one while the pointer is on a box.
+- **AI video:** a new services category with Sora, Veo/Flow, Runway, Kling, Luma, Pika, Hailuo and more.
+- **First-run tour:** a few short steps through the main parts; replay it from Settings › About.
+- **New version notice:** when a new release is out, a bar at the top says so and shows how to update.
 - **Calendar:** Persian (Solar Hijri), Gregorian and Islamic calendars side by side, with Iranian and international occasions, each with its own emoji. Twelve occasion categories that you can turn on or off one by one. Events, birthdays and reminders, with repeats. Optional Google Calendar events.
 - **Weekly planner:** an hour-by-hour week view of events, timed tasks and birthdays. Click an empty slot to add an event at that time.
 - **Tasks and notes:** due dates, times, priorities, labels, reminders, repeats, boards, filters and sorting, plus quick notes with search.
@@ -243,6 +262,13 @@ Kamyar is a **personal new-tab page for Google Chrome**. Every new tab shows you
 <p align="center"><img src="docs/screenshots/week-summary-fa.png" alt="Weekly summary" width="900" /></p>
 <p align="center"><img src="docs/screenshots/budget-fa.png" alt="Monthly budget" width="900" /></p>
 <p align="center"><img src="docs/screenshots/calc-fa.png" alt="Calculator in search" width="900" /></p>
+<p align="center"><img src="docs/screenshots/care-reminder-fa.png" alt="Water and eye-break reminder" width="900" /></p>
+<p align="center"><img src="docs/screenshots/care-widget-fa.png" alt="Reminder settings" width="900" /></p>
+<p align="center"><img src="docs/screenshots/nested-folders-fa.png" alt="Folders inside folders" width="900" /></p>
+<p align="center"><img src="docs/screenshots/box-opacity-fa.png" alt="Box opacity" width="900" /></p>
+<p align="center"><img src="docs/screenshots/ai-video-fa.png" alt="AI video" width="900" /></p>
+<p align="center"><img src="docs/screenshots/tour-fa.png" alt="First-run tour" width="900" /></p>
+<p align="center"><img src="docs/screenshots/update-fa.png" alt="Updating" width="900" /></p>
 <p align="center"><img src="docs/screenshots/planner-light-en.png" alt="Weekly planner" width="900" /></p>
 
 ### Where your data lives

@@ -124,6 +124,12 @@
 		// A video background (kept in IndexedDB) wins over a picture.
 		const video = ls("hamyar_video") === "1";
 		root.classList.toggle("has-video", video);
+		// How solid the boxes are over a background: one value while idle, one while the pointer is on a box.
+		const [ba, bh] = boxAlpha();
+		root.style.setProperty("--box-a", ba + "%");
+		root.style.setProperty("--box-ah", bh + "%");
+		root.style.setProperty("--box-blur", Math.round(4 + (ba / 100) * 14) + "px");
+		root.style.setProperty("--box-blur-h", Math.round(4 + (bh / 100) * 14) + "px");
 		if (video) {
 			root.classList.add("has-wall");
 			root.style.removeProperty("--wall");
@@ -171,6 +177,15 @@
 		} else ls("hamyar_wall", null);
 		applyWallpaper();
 		return true;
+	}
+	function boxAlpha() {
+		const n = (k, d) => { const v = Number(ls(k)); return Number.isFinite(v) && ls(k) != null ? Math.max(0, Math.min(100, v)) : d; };
+		return [n("hamyar_box_a", 80), n("hamyar_box_ah", 92)];
+	}
+	function setBoxAlpha(idle, hover) {
+		if (idle != null) ls("hamyar_box_a", String(idle));
+		if (hover != null) ls("hamyar_box_ah", String(hover));
+		applyWallpaper();
 	}
 	function setDim(pct) {
 		ls("hamyar_wall_dim", String(pct));
@@ -246,7 +261,7 @@
 		} catch (e) {}
 	}
 
-	window.Themes = { list, byId, apply, applyWallpaper, readWallpaper, setWallpaper, setDim, hasWall: () => !!ls("hamyar_wall"), hasVideo: () => ls("hamyar_video") === "1", setVideo, getVideo, dim: () => Number(ls("hamyar_wall_dim") || 35),
+	window.Themes = { list, byId, apply, applyWallpaper, readWallpaper, setWallpaper, setDim, boxAlpha, setBoxAlpha, hasWall: () => !!ls("hamyar_wall"), hasVideo: () => ls("hamyar_video") === "1", setVideo, getVideo, dim: () => Number(ls("hamyar_wall_dim") || 35),
 		applyFont, FONTS, FONT_LIST, isDay, walls, addWall, removeWall, useWall, BUILTIN, rotate, ROTATE,
 		rotation: (v) => (v === undefined ? ls("hamyar_wall_rotate") || "off" : ls("hamyar_wall_rotate", v)), activeWall: () => ls("hamyar_wall_id") };
 })();

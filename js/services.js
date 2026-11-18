@@ -13,7 +13,13 @@
 	const CATS = [
 		["ai", "✨", "هوش مصنوعی|AI|IA|KI", [
 			["Claude", "https://claude.ai"], ["ChatGPT", "https://chatgpt.com"], ["Qwen", "https://chat.qwen.ai"], ["DeepSeek", "https://chat.deepseek.com"], ["NotebookLM", "https://notebooklm.google.com"],
-			["Gemini", "https://gemini.google.com"], ["Perplexity", "https://www.perplexity.ai"], ["Copilot", "https://copilot.microsoft.com"], ["Grok", "https://grok.com"], ["Mistral", "https://chat.mistral.ai"], ["Hugging Face", "https://huggingface.co"]
+			["Gemini", "https://gemini.google.com"], ["Perplexity", "https://www.perplexity.ai"], ["Copilot", "https://copilot.microsoft.com"], ["Grok", "https://grok.com"], ["Mistral", "https://chat.mistral.ai"], ["Kimi", "https://www.kimi.ai/"], ["Hugging Face", "https://huggingface.co"]
+		]],
+		["aivideo", "🎥", "هوش مصنوعی ویدیو|AI video|IA vidéo|KI-Video", [
+			["Sora", "https://sora.chatgpt.com"], ["Google Flow (Veo)", "https://labs.google/fx/tools/flow"], ["Runway", "https://app.runwayml.com"], ["Kling", "https://klingai.com"], ["Luma Dream Machine", "https://dream-machine.lumalabs.ai"],
+			["Pika", "https://pika.art"], ["Hailuo (MiniMax)", "https://hailuoai.video"], ["PixVerse", "https://app.pixverse.ai"], ["Vidu", "https://www.vidu.com"], ["Higgsfield", "https://higgsfield.ai"],
+			["Midjourney", "https://www.midjourney.com"], ["HeyGen", "https://www.heygen.com"], ["Synthesia", "https://www.synthesia.io"], ["InVideo AI", "https://invideo.io"], ["CapCut", "https://www.capcut.com"],
+			["Descript", "https://www.descript.com"], ["Krea", "https://www.krea.ai"], ["Hedra", "https://www.hedra.com"]
 		]],
 		["google", "🔵", "سرویس‌های گوگل|Google services|Services Google|Google-Dienste", [
 			["Google", "https://www.google.com"], ["Gmail", "https://mail.google.com"], ["Drive", "https://drive.google.com"], ["Docs", "https://docs.google.com/document/"], ["Sheets", "https://docs.google.com/spreadsheets/"],

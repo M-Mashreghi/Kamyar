@@ -291,6 +291,26 @@
 					<button id="pomoReset" class="btn btn-ghost" type="button" data-i18n="reset"></button>
 				</div>
 			</section>
+			<section class="panel widget care" data-widget="care">
+				<div class="panel-head">
+					<h2 data-i18n="wCare"></h2>
+					<span class="grow"></span>
+					<button id="careTest" class="chip" type="button" data-i18n="careTry"></button>
+				</div>
+				<div class="care-today">
+					<span class="care-glass">💧</span>
+					<div class="grow"><strong id="careWaterToday"></strong><div id="careWaterBar" class="care-cups"></div></div>
+					<button id="careDrink" class="btn small" type="button" data-i18n="careDrank"></button>
+				</div>
+				<div class="tog-card"><span class="tc-ic">💧</span><span class="grow"><strong data-i18n="careWater"></strong></span><select id="careWaterEvery" class="care-every"></select><input id="careWaterOn" class="switch" type="checkbox" data-i18n-title="careWater" /></div>
+				<div class="tog-card"><span class="tc-ic">👀</span><span class="grow"><strong data-i18n="careEye"></strong><small class="muted" data-i18n="careEyeHint"></small></span><select id="careEyeEvery" class="care-every"></select><input id="careEyeOn" class="switch" type="checkbox" data-i18n-title="careEye" /></div>
+				<div class="care-opts">
+					<label class="fld"><span data-i18n="careSide"></span><select id="careSide"><option value="end" data-i18n="careSideEnd"></option><option value="start" data-i18n="careSideStart"></option></select></label>
+					<label class="fld"><span data-i18n="careGoal"></span><input id="careGoal" type="number" min="1" max="20" /></label>
+				</div>
+				<label class="check"><input id="careSys" type="checkbox" /> <span data-i18n="careSys"></span></label>
+				<label class="check"><input id="careQuiet" type="checkbox" /> <span data-i18n="careQuiet"></span></label>
+			</section>
 			<section class="panel widget focus-stats" data-widget="focusStats">
 				<div class="panel-head">
 					<h2 data-i18n="wFocusStats"></h2>
@@ -301,6 +321,24 @@
 			</section>
 		</div>
 	</main>
+
+	<div id="careStack" class="care-stack" aria-live="polite"></div>
+	<div id="updateBar" class="update-bar" role="status" hidden></div>
+	<div id="tour" class="tour" hidden>
+		<div class="tour-hole"></div>
+		<div class="tour-tip" role="dialog" aria-modal="true" aria-labelledby="tourTitle">
+			<div class="tour-step muted small" id="tourStep"></div>
+			<h3 id="tourTitle"></h3>
+			<p id="tourText"></p>
+			<div class="tour-dots" id="tourDots"></div>
+			<div class="dialog-actions">
+				<button id="tourSkip" class="btn btn-ghost" type="button" data-i18n="tourSkip"></button>
+				<span class="grow"></span>
+				<button id="tourPrev" class="btn btn-ghost" type="button" data-i18n="tourPrev"></button>
+				<button id="tourNext" class="btn" type="button" data-i18n="tourNext"></button>
+			</div>
+		</div>
+	</div>
 
 	<dialog id="noteDialog" class="dialog">
 		<form method="dialog" class="dialog-body">
@@ -328,7 +366,7 @@
 			<label class="bm-only"><span data-i18n="address"></span><input id="bmUrl" dir="ltr" placeholder="https://" /></label>
 			<div class="grid2">
 				<label><span data-i18n="emojiOpt"></span><input id="bmEmoji" maxlength="8" class="emoji-in" placeholder="🙂" /></label>
-				<label class="bm-only"><span data-i18n="kFolder"></span><select id="bmFolder"></select></label>
+				<label><span id="bmFolderLabel" data-i18n="kFolder"></span><select id="bmFolder"></select></label>
 			</div>
 			<p id="bmError" class="error" hidden></p>
 			<div class="dialog-actions">
@@ -344,7 +382,8 @@
 	<dialog id="folderDialog" class="dialog">
 		<div class="dialog-body">
 			<div class="page-head">
-				<h3 id="folderTitle"></h3>
+				<button id="folderBack" class="icon-btn small" type="button" data-i18n-title="back" hidden>‹</button>
+				<h3 id="folderTitle" class="folder-crumbs"></h3>
 				<span class="grow"></span>
 				<button id="folderEdit" class="btn btn-ghost small" type="button" data-i18n="edit"></button>
 				<button id="folderClose" class="icon-btn small" type="button" data-i18n-title="close">✕</button>
@@ -505,6 +544,13 @@
 					<label class="drop-box"><input id="videoInput" type="file" accept="video/mp4,video/webm,video/*" hidden /><span class="drop-ic">⬆️</span><strong data-i18n="uploadVideo"></strong><small class="muted" data-i18n="videoHint"></small></label>
 					<div class="row wrap"><span id="videoInfo" class="muted small"></span><span class="grow"></span><button id="videoRemove" class="btn btn-ghost small" type="button" data-i18n="removeVideo"></button></div>
 					<label id="wallDimRow" class="range-row"><span data-i18n="wallDim"></span><input id="wallDim" type="range" min="0" max="80" step="5" /></label>
+					<div id="boxAlphaRows">
+						<h4 data-i18n="boxAlphaTitle"></h4>
+						<p class="muted small" data-i18n="boxAlphaHint"></p>
+						<label class="range-row"><span data-i18n="boxAlphaIdle"></span><input id="boxAlpha" type="range" min="0" max="100" step="5" /><output id="boxAlphaOut" class="small muted"></output></label>
+						<label class="range-row"><span data-i18n="boxAlphaHover"></span><input id="boxAlphaH" type="range" min="0" max="100" step="5" /><output id="boxAlphaHOut" class="small muted"></output></label>
+						<button id="boxAlphaReset" class="link-btn" type="button" data-i18n="resetDefault"></button>
+					</div>
 				</section>
 
 				<section class="set-sec" data-sec="theme" hidden>
@@ -608,6 +654,11 @@
 						<strong class="about-name"><span data-i18n="brandName"></span> <span id="aboutVer" dir="ltr"></span></strong>
 						<p class="brand-line"><svg class="sparkle" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 2.5c.5 4.6 2.9 7 7.5 7.5-4.6.5-7 2.9-7.5 7.5-.5-4.6-2.9-7-7.5-7.5 4.6-.5 7-2.9 7.5-7.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="19" cy="4.5" r="1.6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span data-i18n="brandFull"></span></p>
 						<p class="muted" data-i18n="aboutText"></p>
+						<div class="row wrap about-actions">
+							<button id="tourAgain" class="btn btn-ghost" type="button" data-i18n="tourAgain"></button>
+							<button id="updCheck" class="btn btn-ghost" type="button" data-i18n="updCheck"></button>
+						</div>
+						<p id="updInfo" class="muted small"></p>
 					</div>
 				</section>
 				<p id="settingsMsg" class="muted"></p>
@@ -801,5 +852,7 @@
 	<script src="js/tools2.js"></script>
 	<script src="js/insights.js"></script>
 	<script src="js/calc.js"></script>
+	<script src="js/care.js"></script>
+	<script src="js/tour.js"></script>
 </body>
 </html>

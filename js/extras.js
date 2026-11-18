@@ -14,6 +14,7 @@
 		["gemini", "Gemini", "https://gemini.google.com/app", null],
 		["perplexity", "Perplexity", "https://www.perplexity.ai", (q) => "https://www.perplexity.ai/search?q=" + encodeURIComponent(q)],
 		["deepseek", "DeepSeek", "https://chat.deepseek.com", null],
+		["kimi", "Kimi", "https://www.kimi.ai/", null],
 	];
 	async function askAi(id) {
 		const ai = AIS.find((a) => a[0] === id) || AIS[0];
