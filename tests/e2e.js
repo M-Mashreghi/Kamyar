@@ -128,6 +128,19 @@ function i18nParity() {
 	check("world clock shows cities", (await page.$$(".wc")).length >= 3);
 	const cols = await page.evaluate(() => new Set([...document.querySelectorAll("#viewTools [data-widget]:not([hidden])")].map((w) => Math.round(w.getBoundingClientRect().left))).size);
 	check("tools page uses several columns", cols >= 3, cols);
+	const toolsOrder = () => page.evaluate(() => [...document.querySelectorAll("#viewTools .widgets > [data-widget]")].map((b) => b.dataset.widget));
+	const firstBox = (await toolsOrder())[0];
+	await page.hover(`[data-widget="${firstBox}"]`);
+	await page.focus(`[data-widget="${firstBox}"] > .drag-h`);
+	await page.keyboard.press("ArrowDown");
+	await page.waitForTimeout(200);
+	check("a box moves and its place is saved", (await toolsOrder())[1] === firstBox && (await page.evaluate(() => H.setting("toolsOrder")[1])) === firstBox);
+	await page.click(`[data-widget="${firstBox}"] > .box-size`);
+	await page.waitForTimeout(200);
+	check("a box can be made wide", await page.evaluate((w) => document.querySelector(`[data-widget="${w}"]`).classList.contains("wide"), firstBox));
+	await page.click("#viewTools .tools-bar .chip:last-child");
+	await page.waitForTimeout(200);
+	check("default layout comes back", (await toolsOrder())[0] === firstBox && !(await page.evaluate(() => document.querySelector("#viewTools .wide"))));
 
 	console.log("Family sharing");
 	await page.evaluate(() => Store.add("event", { kind: "birthday", title: "Mum", date: "1970-03-05", repeat: "yearly", allDay: true }));

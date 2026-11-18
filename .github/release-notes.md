@@ -14,6 +14,7 @@ The first public release of Kamyar, a personal new-tab page for Chrome with no a
 راهنمای کامل و انتقال از دستیار در [README](https://github.com/M-Mashreghi/Kamyar#نصب) است. Full guide and Dastyar import: [README](https://github.com/M-Mashreghi/Kamyar#install).
 
 ### تازه‌های این نسخه · New in this version
+- 🧲 چیدمان دلخواه: باکس‌های ابزارها و دسته‌های سرویس‌ها را با ⠿ بکشید و جابه‌جا کنید؛ باکس پهن (⤢)، تعداد ستون‌ها (۲/۳/۴ برای ابزارها، ۱/۲ برای سرویس‌ها) و برگشت به چیدمان پیش‌فرض. چیدمان همگام می‌شود · Arrange your own layout: drag Tools boxes and Services categories, wide boxes, column count, reset; the layout syncs
 - 🎨 ۱۸ رنگ ساده و ملایم برای پس‌زمینه، و تنظیم شفافیت در همان راه‌اندازی اول · 18 plain colours and soft gradients as backgrounds; box opacity in the first-run setup
 - 🎂 تاریخ تولد به شمسی یا میلادی · Birthday in the Persian or Gregorian calendar
 - 👋 راه‌اندازی اول کار با چند سؤال کوتاه (زبان، اطلاعات قبلی، نام، شهر، ظاهر، باکس‌ها) · First-run setup with a few short questions

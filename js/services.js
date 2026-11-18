@@ -98,11 +98,11 @@
 	const saveCustom = (list) => Store.setSetting("svcCustom", list);
 	// Everything as [id, emoji, name, items, isCustom]; custom items are {title, url}.
 	function all() {
-		return [
+		return H.byOrder([
 			...CATS.map((c) => [c[0], c[1], tr(c[2]), c[3].map(([title, url]) => ({ title: tr(title), url })), false, "world"]),
 			...(window.SERVICES_IR || []).map((c) => [c[0], c[1], tr(c[2]), c[3].map(([title, url]) => ({ title: tr(title), url })), false, "iran"]),
 			...custom().map((c) => [c.id, c.emoji || "📁", c.title, c.items || [], true, "mine"])
-		];
+		], H.setting("svcOrder", []), (c) => c[0]);
 	}
 	const normUrl = (u) => {
 		u = u.trim();
@@ -140,8 +140,8 @@
 	function section(cat) {
 		const [id, emoji, name, items, mine] = cat;
 		const form = mine ? addSiteForm(cat) : null;
-		return el("section", { class: "card apps-sec" + (mine ? " mine" : ""), id: "apps-" + id },
-			el("h2", { class: "apps-h" }, el("span", {}, emoji), el("span", { dir: "auto" }, name),
+		return el("section", { class: "card apps-sec" + (mine ? " mine" : ""), id: "apps-" + id, "data-key": id },
+			el("h2", { class: "apps-h" }, query ? null : H.dragHandle(), el("span", {}, emoji), el("span", { dir: "auto" }, name),
 				el("span", { class: "grow" }),
 				mine ? el("button", { class: "chip svc-plus", type: "button", onclick: () => { form.hidden = !form.hidden; if (!form.hidden) form.querySelector("input").focus(); } }, "＋ ", t("svcAddSite")) : null,
 				el("button", { class: "icon-btn small svc-hide", type: "button", title: t("svcHide"), "aria-label": t("svcHide"), onclick: () => {
@@ -156,7 +156,8 @@
 	function drawManage() {
 		const hidden = off();
 		$("svcList").replaceChildren(...all().map((c) =>
-			el("label", { class: "manage-item" + (hidden[c[0]] ? "" : " on") },
+			el("label", { class: "manage-item" + (hidden[c[0]] ? "" : " on"), "data-key": c[0], for: "svcOn-" + c[0] },
+				el("span", { class: "drag-h", tabindex: "0", role: "button", title: t("boxMove"), "aria-label": t("boxMove"), onclick: (e) => e.preventDefault() }, "⠿"),
 				el("span", { class: "manage-ic" }, c[1]),
 				el("span", { class: "manage-name", dir: "auto" }, c[2]),
 				c[4] ? el("button", { class: "icon-btn small", type: "button", title: t("delete"), onclick: (e) => {
@@ -165,7 +166,7 @@
 					saveCustom(keep.filter((x) => x.id !== c[0]));
 					H.toast(t("svcDeleted", { name: c[2] }), { run: () => saveCustom(keep) });
 				} }, "🗑") : null,
-				el("input", { type: "checkbox", class: "switch", checked: !hidden[c[0]], onchange: (e) => setOff(c[0], !e.target.checked) }))));
+				el("input", { type: "checkbox", class: "switch", id: "svcOn-" + c[0], checked: !hidden[c[0]], onchange: (e) => setOff(c[0], !e.target.checked) }))));
 	}
 	function openManage() {
 		drawManage();
@@ -186,6 +187,15 @@
 		render();
 		setTimeout(() => { const s = $("apps-" + id); if (s) { s.scrollIntoView({ behavior: "smooth", block: "start" }); s.querySelector(".svc-plus")?.click(); } }, 200);
 	});
+	// New order of some categories (one group, or the whole list in the dialog), written into the full order.
+	function saveOrder(ids) {
+		const full = all().map((c) => c[0]);
+		const set = new Set(ids);
+		let i = 0;
+		const next = full.map((id) => (set.has(id) ? ids[i++] : id));
+		if (String(next) !== String(full)) Store.setSetting("svcOrder", next);
+	}
+	H.sortable($("svcList"), ".manage-item", saveOrder);
 	$("svcAllOn").addEventListener("click", () => { Store.setSetting("svcOff", {}); });
 	$("svcDialog").addEventListener("click", (e) => { if (e.target.closest("[data-close]") || e.target === $("svcDialog")) $("svcDialog").close(); });
 
@@ -220,7 +230,7 @@
 	// Built only when the Services page is open: it is the largest page and most new tabs never show it.
 	function render() {
 		if ($("svcDialog").open) drawManage();
-		const key = JSON.stringify([I18n.lang, off(), custom()]);
+		const key = JSON.stringify([I18n.lang, off(), custom(), H.setting("svcOrder", []), H.setting("svcCols", 1)]);
 		if (drawnKey === key || $("viewApps").hidden) return;
 		drawnKey = key;
 		const view = $("viewApps");
@@ -230,8 +240,11 @@
 			el("div", { class: "svc-tabs", role: "tablist" }, ...GROUPS.map(([g, emoji, label]) =>
 				el("button", { type: "button", class: "svc-tab", role: "tab", "data-g": g, onclick: () => { group = g; ls("kamyar_svc_group", g); query = ""; search.value = ""; drawBody(); view.scrollTop = 0; } }, emoji, " ", t(label)))),
 			search,
+			el("div", { class: "seg svc-cols", role: "group", title: t("layoutCols") }, ...[[1, "▤"], [2, "▥"]].map(([n, ic]) =>
+				el("button", { type: "button", class: "seg-btn" + ((H.setting("svcCols", 1) || 1) === n ? " active" : ""), title: t("layoutCols") + ": " + H.num(n), "aria-label": t("layoutCols") + ": " + H.num(n), onclick: () => Store.setSetting("svcCols", n) }, ic))),
 			el("button", { type: "button", class: "icon-btn svc-manage", title: t("svcManage"), "aria-label": t("svcManage"), onclick: openManage }, "⚙️"));
-		view.replaceChildren(el("div", { class: "apps-head" }, bar, el("nav", { id: "svcChips", class: "apps-chips" })), el("div", { id: "svcBody", class: "apps-body" }));
+		view.replaceChildren(el("div", { class: "apps-head" }, bar, el("nav", { id: "svcChips", class: "apps-chips" })), el("div", { id: "svcBody", class: "apps-body" + ((H.setting("svcCols", 1) || 1) === 2 ? " two" : "") }));
+		H.sortable($("svcBody"), ".apps-sec[data-key]", saveOrder);
 		drawBody();
 		view.scrollTop = top;
 	}
