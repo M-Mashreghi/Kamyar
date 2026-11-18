@@ -230,7 +230,7 @@
 	}
 	const removeWall = (id) => tx("readwrite", (st) => st.delete(id));
 	/* Ready-made wallpapers that ship with the extension. */
-	const BUILTIN = ["spirit-deer", "winter-deer", "snow-cabin", "dragon", "sakura", "bubble-cat", "forest-girl", "raccoon", "new-york", "keyboard", "low-poly", "bugatti", "bmw", "red-warrior", "deep-night", "neon-car", "retro-stripes", "misty-village", "purple-moon", "river-forest", "eclipse", "cyber-city", "sunset-peaks", "pink-mountains", "fuji-night", "green-islands", "autumn-pavilion", "violet-glow", "blue-galaxy", "hexagons", "doodles", "lake-sunset", "anime-city", "moon-lake", "storm-ship"]
+	const BUILTIN = ["winter-deer", "snow-cabin", "dragon", "sakura", "bubble-cat", "forest-girl", "raccoon", "new-york", "keyboard", "low-poly", "deep-night", "misty-village", "purple-moon", "river-forest", "eclipse", "sunset-peaks", "pink-mountains", "fuji-night", "green-islands", "autumn-pavilion", "violet-glow", "blue-galaxy", "hexagons", "lake-sunset", "moon-lake"]
 		.map((n) => ({ id: "b-" + n, data: "/wallpapers/" + n + ".jpg", thumb: "/wallpapers/thumbs/" + n + ".jpg", builtin: true }));
 	/* Plain colours and soft gradients, drawn as a tiny picture so they work like any wallpaper
 	 * (dimming, box opacity, hover). */
@@ -265,6 +265,11 @@
 		ls("hamyar_wall_id", id);
 		ls("hamyar_wall_at", String(Date.now()));
 		return setWallpaper(w.data);
+	}
+	// A ready-made wallpaper that no longer ships (removed in 2.16.3): switch to another one instead of a blank page.
+	{
+		const cur = ls("hamyar_wall_id") || "";
+		if (cur.startsWith("b-") && !BUILTIN.some((x) => x.id === cur)) setTimeout(() => useWall("b-misty-village").catch(() => {}), 0);
 	}
 	const ROTATE = { off: 0, tab: 1, h1: 3600e3, h4: 4 * 3600e3, h12: 12 * 3600e3, d1: 24 * 3600e3 };
 	/** Moves to the next wallpaper in the collection when the chosen interval has passed. */
