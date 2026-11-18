@@ -1489,3 +1489,8 @@ html.tour-boxes [data-widget="daily"] > .box-x { animation: boxPulse 1.2s ease-i
 .apps-top .svc-cols { flex: none; background: var(--surface); box-shadow: var(--shadow); border-radius: 999px; }
 .apps-top .svc-cols .seg-btn { border-radius: 999px; font-size: 15px; padding: 5px 11px; }
 #svcList .manage-item .drag-h { padding: 0 2px; }
+/* v2.16.2: the calendar footer follows the box opacity too (it had a solid background). */
+html.has-wall .cal-foot-btn { background: color-mix(in srgb, var(--surface-2) calc(var(--box-a, 60%) * 0.9), transparent); transition: background-color .2s; }
+html.has-wall .card:hover .cal-foot-btn, html.has-wall .panel:hover .cal-foot-btn { background: color-mix(in srgb, var(--surface-2) var(--box-ah, 85%), transparent); }
+html.has-wall .cal-foot-btn:hover { background: color-mix(in srgb, var(--accent) 22%, transparent); }
+.setup-walls:not(.colors) { max-height: 270px; overflow-y: auto; padding-inline-end: 4px; }

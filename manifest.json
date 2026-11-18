@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Kamyar | Your All-in-One Smart Assistant",
   "short_name": "Kamyar",
-  "version": "2.16.1",
+  "version": "2.16.2",
   "description": "Kamyar, your all-in-one smart assistant: calendar, tasks, notes and shortcuts in your new tab, saved in your own Google account. No ads, no tracking.",
   "icons": {
     "16": "icons/icon-16.png",

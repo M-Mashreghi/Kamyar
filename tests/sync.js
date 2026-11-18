@@ -38,7 +38,7 @@ async function device(name) {
   await A.page.evaluate(() => {
     Store.setSetting('lang', 'fa'); Store.setSetting('name', 'محمد'); Store.setSetting('city', { name: 'تهران', lat: 35.69, lon: 51.39, tz: 'Asia/Tehran' });
     Store.setSetting('widgets', { football: false }); Store.setSetting('care', { water: { on: false } }); Store.setSetting('salat', { on: true }); Store.setSetting('svcCustom', [{ id: 'my-1', title: 'کاری', items: [{ title: 'X', url: 'https://x.com' }] }]);
-    Store.setSetting('feat', { tr: false }); Store.setSetting('boxAlpha', [40, 70]); Store.setSetting('wallBuiltin', 'b-sakura'); Store.setSetting('worldClocks', ['Asia/Tokyo']);
+    Store.setSetting('feat', { tr: false }); Store.setSetting('boxAlpha', [40, 70]); Store.setSetting('wallBuiltin', 'b-fuji-night'); Store.setSetting('toolsOrder', ['journal', 'weather']); Store.setSetting('toolsWide', { worldclock: true }); Store.setSetting('svcOrder', ['ir-taxi', 'ir-search']); Store.setSetting('svcCols', 2); Store.setSetting('worldClocks', ['Asia/Tokyo']);
     Store.add('bookmark', { title: 'Digikala', url: 'https://www.digikala.com' }); Store.add('folder', { title: 'Work' });
     Store.add('todo', { text: 'T1' }); Store.add('note', { title: 'N1', text: 'hello' }); Store.add('event', { kind: 'birthday', title: 'Mum', date: '1970-03-05' });
     Store.add('goal', { title: 'Books', target: 10, done: 3 }); Store.add('journal', { date: '2026-11-18', lines: ['a', 'b', 'c'] }); Store.add('trip', { title: 'Trip', date: '2026-12-30' });
@@ -54,7 +54,7 @@ async function device(name) {
   await B.page.waitForTimeout(800);
   const r = await B.page.evaluate(() => ({
     lang: H.setting('lang'), name: H.setting('name'), city: (H.setting('city') || {}).name, widgets: H.setting('widgets'), care: H.setting('care'), salat: H.setting('salat'),
-    svc: (H.setting('svcCustom') || []).length, feat: H.setting('feat'), boxAlpha: H.setting('boxAlpha'), localAlpha: Themes.boxAlpha(), wall: Themes.activeWall(), clocks: H.setting('worldClocks'),
+    svc: (H.setting('svcCustom') || []).length, feat: H.setting('feat'), boxAlpha: H.setting('boxAlpha'), localAlpha: Themes.boxAlpha(), wall: Themes.activeWall(), clocks: H.setting('worldClocks'), tools: H.setting('toolsOrder'), wide: document.querySelector('[data-widget="worldclock"]').classList.contains('wide'), svcFirst: (H.setting('svcOrder') || [])[0], svcCols: H.setting('svcCols'),
     bms: Store.list('bookmark').map((b) => b.title), types: ['folder', 'todo', 'note', 'event', 'goal', 'journal', 'trip', 'habit'].map((t) => t + ':' + Store.list(t).length).join(' ')
   }));
   console.log('Google Drive sync');
@@ -62,10 +62,26 @@ async function device(name) {
   check('computer B downloads', okB === 'ok', okB);
   check('B keeps its own newer choice (language)', r.lang === 'en', r.lang);
   check('name, city and settings come across', r.name === 'محمد' && r.city === 'تهران' && r.salat && r.salat.on && r.feat && r.feat.tr === false && r.svc === 1 && String(r.clocks) === 'Asia/Tokyo', r);
-  check('box opacity and wallpaper come across', String(r.localAlpha) === '40,70' && r.wall === 'b-sakura', [r.localAlpha, r.wall]);
+  check('box opacity and wallpaper come across', String(r.localAlpha) === '40,70' && r.wall === 'b-fuji-night', [r.localAlpha, r.wall]);
+  check('box layout comes across', String(r.tools).startsWith('journal,weather') && r.wide && r.svcFirst === 'ir-taxi' && r.svcCols === 2, r);
   check('every kind of item comes across', r.types === 'folder:1 todo:1 note:1 event:1 goal:1 journal:1 trip:1 habit:1', r.types);
   check('starter shortcuts are not doubled', r.bms.filter((x) => x === 'Google').length === 1 && r.bms.includes('Digikala'), r.bms);
   check('no page errors', !A.errs.length && !B.errs.length, [A.errs, B.errs]);
+  // Round two: B changes and deletes something and saves; a third computer must get B's version.
+  const okB2 = await B.page.evaluate(async () => {
+    const t = Store.list('todo')[0]; Store.remove(t.id);
+    Store.add('note', { title: 'From B', text: 'b' }); Store.setSetting('name', 'Mohammad');
+    return 'ok';
+  });
+  await B.page.waitForTimeout(4500); // the page saves to Drive by itself a moment after a change
   await B.ctx.close();
+  const C = await device('C');
+  const okC = await C.page.evaluate(async () => { try { await H.driveConnect(); return 'ok'; } catch (e) { return 'ERR ' + e.message; } });
+  await C.page.waitForTimeout(500);
+  const c = await C.page.evaluate(() => ({ name: H.setting('name'), todos: Store.list('todo').length, notes: Store.list('note').map((n) => n.title).sort().join(','), habits: Store.list('habit').length }));
+  check('changes from B reach a third computer', okB2 === 'ok' && okC === 'ok' && c.name === 'Mohammad' && c.notes === 'From B,N1' && c.habits === 1, [okB2, okC, c]);
+  check('a deleted item stays deleted', c.todos === 0, c.todos);
+  check('no page errors on the third computer', !C.errs.length, C.errs);
+  await C.ctx.close();
   process.exit(failed ? 1 : 0);
 })();

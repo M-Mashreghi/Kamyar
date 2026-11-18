@@ -14,6 +14,8 @@ The first public release of Kamyar, a personal new-tab page for Chrome with no a
 راهنمای کامل و انتقال از دستیار در [README](https://github.com/M-Mashreghi/Kamyar#نصب) است. Full guide and Dastyar import: [README](https://github.com/M-Mashreghi/Kamyar#install).
 
 ### تازه‌های این نسخه · New in this version
+- 🖼️ ۲۲ تصویر زمینه‌ی تازه (روی هم ۳۵ تصویر آماده) · 22 new ready-made wallpapers (35 in all)
+- 🔧 نوار پایین تقویم هم حالا از شفافیت باکس‌ها پیروی می‌کند · The calendar footer now follows the box opacity too
 - 🏷️ نام افزونه در کروم انگلیسی شد و شعار تازه: «کامیار، دستیار هوشمند همه‌جانبه‌ی شما» · The extension name in Chrome is now English, with the new tagline "Your all-in-one smart assistant"
 - 🧲 چیدمان دلخواه: باکس‌های ابزارها و دسته‌های سرویس‌ها را با ⠿ بکشید و جابه‌جا کنید؛ باکس پهن (⤢)، تعداد ستون‌ها (۲/۳/۴ برای ابزارها، ۱/۲ برای سرویس‌ها) و برگشت به چیدمان پیش‌فرض. چیدمان همگام می‌شود · Arrange your own layout: drag Tools boxes and Services categories, wide boxes, column count, reset; the layout syncs
 - 🎨 ۱۸ رنگ ساده و ملایم برای پس‌زمینه، و تنظیم شفافیت در همان راه‌اندازی اول · 18 plain colours and soft gradients as backgrounds; box opacity in the first-run setup
