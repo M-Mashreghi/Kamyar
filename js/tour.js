@@ -11,6 +11,7 @@
 		{ sel: ".rail.rail-2", title: "tour5T", text: "tour5" },
 		{ sel: '[data-widget="calendar"]', title: "tour6T", text: "tour6" },
 		{ sel: '[data-go="tools"]', title: "tour7T", text: "tour7" },
+		{ sel: '[data-widget="daily"]', title: "tourBoxT", text: "tourBox", cls: "tour-boxes" },
 		{ sel: "#settingsBtn", title: "tour8T", text: "tour8" },
 		{ title: "tour9T", text: "tour9" }
 	];
@@ -54,6 +55,7 @@
 		$("tourDots").replaceChildren(...STEPS.map((_, k) => el("span", { class: k === i ? "on" : "" })));
 		$("tourPrev").hidden = i === 0;
 		$("tourNext").textContent = t(i === STEPS.length - 1 ? "tourDone" : "tourNext");
+		document.documentElement.classList.toggle("tour-boxes", s.cls === "tour-boxes");
 		place();
 		requestAnimationFrame(place);
 		$("tourNext").focus();
@@ -68,6 +70,7 @@
 	}
 	function end() {
 		$("tour").hidden = true;
+		document.documentElement.classList.remove("tour-boxes");
 		ls("kamyar_tour_done", "1");
 	}
 	H.startTour = start;

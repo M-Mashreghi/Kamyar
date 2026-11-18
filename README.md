@@ -6,7 +6,7 @@
 
 <p align="center">
   <img alt="Chrome MV3" src="https://img.shields.io/badge/Chrome-Manifest%20V3-4285F4?logo=googlechrome&logoColor=white" />
-  <img alt="Version" src="https://img.shields.io/badge/version-2.12.0-6c4ff0" />
+  <img alt="Version" src="https://img.shields.io/badge/version-2.13.0-6c4ff0" />
   <img alt="Languages" src="https://img.shields.io/badge/languages-FA%20%7C%20EN%20%7C%20FR%20%7C%20DE-14b8a6" />
   <img alt="No ads" src="https://img.shields.io/badge/ads-none-3db985" />
   <img alt="No tracking" src="https://img.shields.io/badge/tracking-none-3db985" />
@@ -62,7 +62,8 @@
 - **دو نوار کناری:** ابزارهای اصلی سمت راست، و صداها، تمرکز، مرور روز و هوش مصنوعی‌ها سمت چپ.
 - **💧👀 یادآور آب و استراحت چشم:** هر چند وقت یک کارت کوچک کنار صفحه (چپ یا راست، به انتخاب شما) می‌آید که با ✕ بسته می‌شود: «یک لیوان آب بنوشید» یا «۲۰ ثانیه به دوردست نگاه کنید» با شمارش معکوس. لیوان‌های امروز شمرده می‌شوند. وقتی کامیار باز نیست، اعلان کروم می‌آید. شب‌ها و وقتی پشت کامپیوتر نیستید چیزی نمی‌آید.
 - **📁 پوشه داخل پوشه:** پوشه‌ها می‌توانند داخل هم باشند، با مسیر بالای پوشه برای برگشتن.
-- **🪟 شفافیت باکس‌ها:** وقتی عکس پس‌زمینه دارید، شفافیت باکس‌ها را تنظیم کنید؛ یک مقدار برای حالت عادی و یکی برای وقتی ماوس روی باکس است.
+- **🪟 شفافیت باکس‌ها:** در تنظیمات › پس‌زمینه، وقتی عکس یا ویدئوی پس‌زمینه دارید، شفافیت باکس‌ها را تنظیم کنید؛ یک مقدار برای حالت عادی (پیش‌فرض ۷۰٪) و یکی برای وقتی ماوس روی باکس است (پیش‌فرض ۹۵٪، پررنگ‌تر).
+- **🧩 باکس‌ها و قابلیت‌ها:** هر باکس را با ✕ گوشه‌اش خاموش کنید و از دکمه‌ی 🧩 بالای صفحه‌ی ابزارها یا تنظیمات › عمومی دوباره روشن کنید. دکمه‌های نوار کناری، یادآورها، پوسته‌ی مناسبتی و میان‌برهای هوشمند هم همان‌جا روشن و خاموش می‌شوند.
 - **🎥 هوش مصنوعی ویدیو:** دسته‌ی تازه در صفحه‌ی سرویس‌ها: Sora، Veo/Flow، Runway، Kling، Luma، Pika، Hailuo و …
 - **👋 آموزش اولین اجرا:** چند قدم کوتاه که بخش‌های اصلی را نشان می‌دهد. از تنظیمات › درباره دوباره دیده می‌شود.
 - **🎁 خبر نسخه‌ی جدید:** وقتی نسخه‌ی تازه‌ای منتشر شود، بالای صفحه خبر می‌دهد و مراحل به‌روزرسانی را نشان می‌دهد.
@@ -96,6 +97,7 @@
 <p align="center"><img src="docs/screenshots/care-widget-fa.png" alt="تنظیم یادآورها" width="900" /></p>
 <p align="center"><img src="docs/screenshots/nested-folders-fa.png" alt="پوشه داخل پوشه" width="900" /></p>
 <p align="center"><img src="docs/screenshots/box-opacity-fa.png" alt="شفافیت باکس‌ها" width="900" /></p>
+<p align="center"><img src="docs/screenshots/manage-boxes-fa.png" alt="باکس‌ها و قابلیت‌ها" width="900" /></p>
 <p align="center"><img src="docs/screenshots/ai-video-fa.png" alt="هوش مصنوعی ویدیو" width="900" /></p>
 <p align="center"><img src="docs/screenshots/tour-fa.png" alt="آموزش اولین اجرا" width="900" /></p>
 <p align="center"><img src="docs/screenshots/update-fa.png" alt="به‌روزرسانی" width="900" /></p>
@@ -259,7 +261,8 @@ Kamyar is a **personal new-tab page for Google Chrome**. Every new tab shows you
 - **Two side rails:** navigation on one side; sounds, focus, the daily brief and AI shortcuts on the other.
 - **Water and eye-break reminder:** every so often a small card at the edge of the page (left or right, your choice) that closes with ✕: "have a glass of water" or "look far away for 20 seconds" with a countdown. Glasses are counted per day. Without a Kamyar tab open, Chrome shows a notification instead. Nothing comes at night or while you're away.
 - **Folders inside folders**, with a breadcrumb to go back up.
-- **Box opacity:** with a background picture, choose how see-through the boxes are, one value normally and one while the pointer is on a box.
+- **Box opacity:** in Settings › Background, with a background picture or video, choose how see-through the boxes are: one value normally (70% by default) and one while the pointer is on a box (95%, more solid).
+- **Boxes & features:** hide any box with the ✕ in its corner and bring it back from 🧩 at the top of the Tools page or in Settings › General. Side bar buttons, reminders, occasion looks and smart shortcuts are switched there too.
 - **AI video:** a new services category with Sora, Veo/Flow, Runway, Kling, Luma, Pika, Hailuo and more.
 - **First-run tour:** a few short steps through the main parts; replay it from Settings › About.
 - **New version notice:** when a new release is out, a bar at the top says so and shows how to update.
@@ -302,6 +305,7 @@ Kamyar is a **personal new-tab page for Google Chrome**. Every new tab shows you
 <p align="center"><img src="docs/screenshots/care-widget-fa.png" alt="Reminder settings" width="900" /></p>
 <p align="center"><img src="docs/screenshots/nested-folders-fa.png" alt="Folders inside folders" width="900" /></p>
 <p align="center"><img src="docs/screenshots/box-opacity-fa.png" alt="Box opacity" width="900" /></p>
+<p align="center"><img src="docs/screenshots/manage-boxes-fa.png" alt="Boxes and features" width="900" /></p>
 <p align="center"><img src="docs/screenshots/ai-video-fa.png" alt="AI video" width="900" /></p>
 <p align="center"><img src="docs/screenshots/tour-fa.png" alt="First-run tour" width="900" /></p>
 <p align="center"><img src="docs/screenshots/update-fa.png" alt="Updating" width="900" /></p>

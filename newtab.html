@@ -162,6 +162,7 @@
 	</main>
 
 	<main id="viewTools" class="view tools-view" hidden>
+		<div class="tools-bar"><button id="manageBtn" class="chip manage-btn" type="button">🧩 <span data-i18n="manageTitle"></span></button></div>
 		<div class="widgets">
 			<section class="panel widget" data-widget="weather">
 				<div class="panel-head">
@@ -402,6 +403,20 @@
 				<button id="jPrev" class="icon-btn small" type="button">‹</button><button id="jNext" class="icon-btn small" type="button">›</button>
 				<button class="icon-btn small" type="button" data-close data-i18n-title="close">✕</button></div>
 			<div id="journalDlgBody" class="journal-review"></div>
+		</div>
+	</dialog>
+
+	<dialog id="manageDialog" class="dialog">
+		<div class="dialog-body">
+			<div class="page-head"><h3>🧩 <span data-i18n="manageTitle"></span></h3><span class="grow"></span><button class="icon-btn small" type="button" data-close data-i18n-title="close">✕</button></div>
+			<p class="muted small" data-i18n="manageHint"></p>
+			<h4 data-i18n="manageBoxes"></h4>
+			<div id="manageWidgets" class="manage-grid"></div>
+			<h4 data-i18n="manageRail"></h4>
+			<div id="manageRail" class="manage-grid"></div>
+			<h4 data-i18n="manageFeatures"></h4>
+			<div id="manageFeats" class="manage-grid"></div>
+			<div class="dialog-actions"><button id="manageAllOn" class="btn btn-ghost" type="button" data-i18n="manageAllOn"></button><span class="grow"></span><button class="btn" type="button" data-close data-i18n="close"></button></div>
 		</div>
 	</dialog>
 
@@ -670,6 +685,7 @@
 					<div id="boxAlphaRows">
 						<h4 data-i18n="boxAlphaTitle"></h4>
 						<p class="muted small" data-i18n="boxAlphaHint"></p>
+						<p id="boxAlphaNoWall" class="small warn-note" data-i18n="boxAlphaNoWall"></p>
 						<label class="range-row"><span data-i18n="boxAlphaIdle"></span><input id="boxAlpha" type="range" min="0" max="100" step="5" /><output id="boxAlphaOut" class="small muted"></output></label>
 						<label class="range-row"><span data-i18n="boxAlphaHover"></span><input id="boxAlphaH" type="range" min="0" max="100" step="5" /><output id="boxAlphaHOut" class="small muted"></output></label>
 						<button id="boxAlphaReset" class="link-btn" type="button" data-i18n="resetDefault"></button>
@@ -707,6 +723,7 @@
 						</label>
 					</div>
 					<label class="tog-card"><span class="tc-ic">🧠</span><span class="grow"><strong data-i18n="smartBm"></strong><small class="muted" data-i18n="smartBmHint"></small></span><input id="smartBmChk" class="switch" type="checkbox" /></label>
+					<button id="manageBtnSet" class="btn btn-ghost manage-btn" type="button">🧩 <span data-i18n="manageTitle"></span></button>
 					<h4 data-i18n="widgets"></h4>
 					<div id="widgetToggles" class="toggles"></div>
 					<h4 data-i18n="tickerRates"></h4>
@@ -999,5 +1016,6 @@
 	<script src="js/tour.js"></script>
 	<script src="js/life.js"></script>
 	<script src="js/smart.js"></script>
+	<script src="js/manage.js"></script>
 </body>
 </html>

@@ -14,6 +14,9 @@ The first public release of Kamyar, a personal new-tab page for Chrome with no a
 راهنمای کامل و انتقال از دستیار در [README](https://github.com/M-Mashreghi/Kamyar#نصب) است. Full guide and Dastyar import: [README](https://github.com/M-Mashreghi/Kamyar#install).
 
 ### تازه‌های این نسخه · New in this version
+- 🧩 خاموش و روشن کردن هر باکس با ✕ و صفحه‌ی «باکس‌ها و قابلیت‌ها» · Hide any box with ✕, and a Boxes & features page
+- 🪟 شفافیت باکس‌ها همیشه در تنظیمات › پس‌زمینه، پررنگ‌تر با ماوس (قابل تنظیم) · Box opacity always in Settings, more solid on hover (adjustable)
+- 🎓 آموزش اول کار حالا روشن و خاموش کردن باکس‌ها را هم یاد می‌دهد · The first-run tour now shows how to hide and show boxes
 - ⏳ شمارش معکوس برای هر چیزی با تاریخ‌های آماده و عکس · Countdown to anything, with ready-made dates and a photo
 - 🎯 اهداف بلندمدت با پیش‌بینی · Long-term goals with a forecast
 - 🙏 دفتر شکرگزاری و مرور ماهانه · Gratitude journal with a monthly review

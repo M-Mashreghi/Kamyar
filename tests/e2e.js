@@ -127,6 +127,23 @@ function i18nParity() {
 	await page.keyboard.press("Escape");
 
 	await page.click('.rail-btn[data-go="home"]');
+	console.log("Boxes and features");
+	await page.hover('[data-widget="daily"]');
+	await page.click('[data-widget="daily"] > .box-x');
+	await page.waitForTimeout(200);
+	check("✕ hides a box", await page.evaluate(() => document.querySelector('[data-widget="daily"]').hidden));
+	await page.click("#toast .link-btn");
+	await page.waitForTimeout(200);
+	check("undo brings it back", await page.evaluate(() => !document.querySelector('[data-widget="daily"]').hidden));
+	await page.evaluate(() => H.openManage());
+	await page.click("#manageRail .manage-item:nth-child(4) input");
+	await page.waitForTimeout(200);
+	check("side bar button can be turned off", await page.evaluate(() => document.getElementById("trBtn").hidden));
+	await page.click("#manageAllOn");
+	await page.waitForTimeout(200);
+	check("turn everything on", await page.evaluate(() => !document.getElementById("trBtn").hidden));
+	await page.keyboard.press("Escape");
+
 	console.log("Translator");
 	await page.keyboard.press("Alt+t");
 	await page.fill("#trIn", "سلام");
