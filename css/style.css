@@ -1528,3 +1528,9 @@ html.has-wall .cal-foot-btn:hover { background: color-mix(in srgb, var(--accent)
 #folderList.tiles .bm a:hover, #folderList.tiles .bm-open:hover, #folderList.tiles .bm-add:hover { background: color-mix(in srgb, var(--text) 11%, transparent); }
 #folderList.tiles .bm-add { border: 1.5px dashed color-mix(in srgb, var(--text) 18%, transparent); background: transparent; }
 .folder-icon .fcell.more { direction: ltr; }
+
+/* ---------- v2.19: site flag ---------- */
+.flag-demo { display: flex; justify-content: center; gap: 14px; margin: 4px 0 6px; }
+.flag-demo-ic { width: 64px; height: 64px; border-radius: 16px; padding: 8px; background: color-mix(in srgb, var(--text) 7%, transparent); display: grid; place-items: center; }
+.flag-demo-ic img { width: 48px; height: 48px; }
+.flag-demo-ic:nth-child(2) { transform: translateY(-6px) scale(1.12); }

@@ -7,7 +7,7 @@
 	const { $, el, setting } = H;
 	const ls = (k, v) => { try { return v === undefined ? localStorage.getItem(k) : localStorage.setItem(k, v); } catch { return null; } };
 	const LANGS = [["fa", "فارسی"], ["en", "English"], ["fr", "Français"], ["de", "Deutsch"]];
-	const STEPS = ["welcome", "data", "you", "city", "look", "boxes", "done"];
+	const STEPS = ["welcome", "data", "you", "city", "look", "boxes", "flag", "done"];
 	let i = 0;
 
 	const head = (title, text) => [el("h2", { class: "setup-h" }, t(title)), text ? el("p", { class: "muted setup-p" }, t(text)) : null];
@@ -136,6 +136,20 @@
 					sw("🎉", "seasonal", setting("seasonal", true) !== false, (on) => Store.setSetting("seasonal", on)),
 					sw("🧠", "smartBm", !!setting("smartBm", false), (on) => Store.setSetting("smartBm", on))),
 				el("p", { class: "muted small" }, t("setupBoxesNote"))
+			];
+		},
+		flag() {
+			// Off unless the user says yes here (or later in Boxes and features).
+			const on = !!setting("siteFlag", false);
+			const pick = (v) => H.setSiteFlag(v).then(() => draw());
+			return [
+				el("div", { class: "flag-demo", "aria-hidden": "true" },
+					...["ir", "de", "us"].map((c) => el("span", { class: "flag-demo-ic" }, el("img", { src: "icons/flag-demo-" + c + ".png", alt: "" })))),
+				...head("siteFlagT", "siteFlagText"),
+				el("div", { class: "setup-langs" },
+					el("button", { type: "button", class: "setup-chip" + (on ? " on" : ""), onclick: () => pick(true) }, "✓ " + t("siteFlagYes")),
+					el("button", { type: "button", class: "setup-chip" + (on ? "" : " on"), onclick: () => pick(false) }, t("siteFlagNo"))),
+				el("p", { class: "muted small" }, t("siteFlagNote"), " ", el("a", { href: "https://db-ip.com", target: "_blank", rel: "noopener", dir: "ltr", style: "unicode-bidi:isolate;white-space:nowrap" }, "IP Geolocation by DB-IP"))
 			];
 		},
 		done() {

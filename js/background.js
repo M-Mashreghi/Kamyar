@@ -1,4 +1,4 @@
-importScripts("i18n-bg.js", "events-core.js");
+importScripts("i18n-bg.js", "events-core.js", "site-flag.js");
 
 // Clicking the toolbar icon opens a new tab (the Kamyar page).
 chrome.action.onClicked.addListener(() => chrome.tabs.create({}));

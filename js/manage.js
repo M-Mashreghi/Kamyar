@@ -25,8 +25,20 @@
 		{ label: "careWater", ic: "💧", get: () => careCfg().water?.on !== false, set: (on) => Store.setSetting("care", { ...careCfg(), water: { every: 60, ...(careCfg().water || {}), on } }) },
 		{ label: "careEye", ic: "👀", get: () => careCfg().eye?.on !== false, set: (on) => Store.setSetting("care", { ...careCfg(), eye: { every: 20, ...(careCfg().eye || {}), on } }) },
 		{ label: "seasonal", ic: "🎉", get: () => setting("seasonal", true) !== false, set: (on) => Store.setSetting("seasonal", on) },
-		{ label: "smartBm", ic: "🧠", get: () => !!setting("smartBm", false), set: (on) => Store.setSetting("smartBm", on) }
+		{ label: "smartBm", ic: "🧠", get: () => !!setting("smartBm", false), set: (on) => Store.setSetting("smartBm", on) },
+		{ label: "siteFlag", ic: "🏳️", get: () => !!setting("siteFlag", false), set: (on) => setSiteFlag(on).then((ok) => !ok && draw()) }
 	];
+	// Site flag on the toolbar icon (off by default). Turning it on asks Chrome for the permission
+	// to see which server each site comes from; the country is looked up inside the extension.
+	async function setSiteFlag(on) {
+		if (on) {
+			const ok = await chrome.permissions.request({ permissions: ["webRequest"], origins: ["<all_urls>"] }).catch(() => false);
+			if (!ok) { toast(t("siteFlagNoPerm")); return false; }
+		}
+		Store.setSetting("siteFlag", on);
+		return true;
+	}
+	H.setSiteFlag = setSiteFlag;
 
 	const ICON = { calendar: "📅", weather: "⛅", rates: "💱", prayer: "🕌", daily: "📝", tools: "🧰", habits: "✅", expenses: "💳", sounds: "🎧", alerts: "🔔", snippets: "📋", pomodoro: "🍅", focusStats: "📊", care: "💧", goals: "🎯", journal: "🙏", worldclock: "🌍", football: "⚽", trip: "⏳" };
 
@@ -77,7 +89,7 @@
 	$("manageAllOn").addEventListener("click", () => {
 		Store.setSetting("widgets", {});
 		Store.setSetting("feat", {});
-		FEATS.forEach((f) => f.label !== "smartBm" && f.set(true));
+		FEATS.forEach((f) => f.label !== "smartBm" && f.label !== "siteFlag" && f.set(true));
 		draw();
 	});
 	$("manageDialog").addEventListener("click", (e) => { if (e.target.closest("[data-close]") || e.target === $("manageDialog")) $("manageDialog").close(); });

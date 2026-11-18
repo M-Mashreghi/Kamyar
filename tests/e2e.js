@@ -71,7 +71,9 @@ function i18nParity() {
 	await page.click("#setupNext"); // city → look
 	await page.click("#setupNext"); // look → boxes
 	check("prayer reminder starts off in setup", await page.evaluate(() => [...document.querySelectorAll("#setupBody .manage-item")].some((x) => /prayer|نماز/i.test(x.textContent) && !x.querySelector("input").checked)));
-	await page.click("#setupNext"); // boxes → done
+	await page.click("#setupNext"); // boxes → site flag
+	check("site flag is offered in setup and starts off", await page.evaluate(() => document.getElementById("setupBody").dataset.step === "flag" && !H.setting("siteFlag", false)));
+	await page.click("#setupNext"); // site flag → done
 	check("setup saved the name", (await page.textContent("#setupBody")).includes("Sam"));
 	await page.click("#setupNext"); // done → tour
 	await page.waitForTimeout(500);
@@ -221,6 +223,12 @@ function i18nParity() {
 		await page.waitForTimeout(250);
 		check(`page switches to ${l}`, (await page.evaluate(() => document.documentElement.lang)) === l);
 	}
+
+	console.log("Site flag");
+	const geo = await sw.evaluate(async () => Promise.all(["8.8.8.8", "2.144.0.1", "2a01:4f8::1", "::ffff:8.8.4.4", "192.168.1.1"].map((ip) => KamyarFlag.countryOf(ip))));
+	check("server addresses map to countries inside the extension", geo.join(",") === "US,IR,DE,US,", geo);
+	const icon = await sw.evaluate(async () => { const d = await KamyarFlag.drawIcon("IR"); return [d[16].width, d[32].width]; });
+	check("flag icon is drawn at 16 and 32 px", icon.join() === "16,32", icon);
 
 	check("no page errors", errors.length === 0, errors);
 	await ctx.close();
