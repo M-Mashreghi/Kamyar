@@ -6,7 +6,7 @@
 
 <p align="center">
   <img alt="Chrome MV3" src="https://img.shields.io/badge/Chrome-Manifest%20V3-4285F4?logo=googlechrome&logoColor=white" />
-  <img alt="Version" src="https://img.shields.io/badge/version-2.16.3-6c4ff0" />
+  <img alt="Version" src="https://img.shields.io/badge/version-2.16.4-6c4ff0" />
   <img alt="Languages" src="https://img.shields.io/badge/languages-FA%20%7C%20EN%20%7C%20FR%20%7C%20DE-14b8a6" />
   <img alt="No ads" src="https://img.shields.io/badge/ads-none-3db985" />
   <img alt="No tracking" src="https://img.shields.io/badge/tracking-none-3db985" />
@@ -287,7 +287,7 @@ Kamyar is a **personal new-tab page for Google Chrome**. Every new tab shows you
 - **Tasks and notes:** due dates, times, priorities, labels, reminders, repeats, boards, filters and sorting, plus quick notes with search.
 - **Shortcuts and services:** shortcuts with real site logos, folders, drag and drop, and a right-click menu. A services page with AI tools (Claude, ChatGPT, Gemini, DeepSeek, Qwen, NotebookLM…), every Google service, US news (Reuters, AP, CNN, NYT…), gaming (Steam, Epic, PlayStation, IGN…), wallpaper sites (Wallhaven, Wallpaper Abyss, Wallpaper Cave…), and popular Iranian and international sites.
 - **Tools:** weather, prayer times, currency and gold rates, Pomodoro, timer, stopwatch, countdowns, date converter and age calculator. Voice and image search.
-- **Look and feel:** light, dark, auto and day/night modes, 26 more themes, 7 accent colors or your own, **13 bundled fonts**, **13 ready-made wallpapers**, and your own image or **video** backgrounds.
+- **Look and feel:** light, dark, auto and day/night modes, 26 more themes, 7 accent colors or your own, **13 bundled fonts**, **31 ready-made wallpapers**, and your own image or **video** backgrounds.
 - **Profile:** picture, name, username and birthday, saved to your Google account through Chrome Sync.
 - **Four languages:** Persian, English, French and German.
 - Backup and restore, and import from the Dastyar extension.
@@ -394,3 +394,5 @@ docs/screenshots/  Images used in this README
 ### Credits
 
 Fonts are under the SIL Open Font License (see `fonts/README.txt`). Brand logos come from CC0 and MIT icon sets and are listed in `icons/brands/NOTICE.txt`. Each logo belongs to its owner. The Divan of Hafez text and fal interpretations in `data/hafez.json` come from the MIT-licensed [hafez](https://pypi.org/project/hafez/) package by Kaveh Bakhtiyari.
+
+Some of the ready-made wallpapers are photos from [Pexels](https://www.pexels.com) under the Pexels License: alpine-lake (frop), blue-ranges (Pixabay), pink-mist (Ray Bilcliff), misty-dawn (Sivarao Sanapalli), violet-lake (kienvirak), purple-sunset (Joshua Woroniecki).

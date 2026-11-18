@@ -230,7 +230,7 @@
 	}
 	const removeWall = (id) => tx("readwrite", (st) => st.delete(id));
 	/* Ready-made wallpapers that ship with the extension. */
-	const BUILTIN = ["winter-deer", "snow-cabin", "dragon", "sakura", "bubble-cat", "forest-girl", "raccoon", "new-york", "keyboard", "low-poly", "deep-night", "misty-village", "purple-moon", "river-forest", "eclipse", "sunset-peaks", "pink-mountains", "fuji-night", "green-islands", "autumn-pavilion", "violet-glow", "blue-galaxy", "hexagons", "lake-sunset", "moon-lake"]
+	const BUILTIN = ["winter-deer", "snow-cabin", "dragon", "sakura", "bubble-cat", "forest-girl", "raccoon", "new-york", "keyboard", "low-poly", "deep-night", "misty-village", "purple-moon", "river-forest", "eclipse", "sunset-peaks", "pink-mountains", "fuji-night", "green-islands", "autumn-pavilion", "violet-glow", "blue-galaxy", "hexagons", "lake-sunset", "moon-lake", "alpine-lake", "blue-ranges", "pink-mist", "misty-dawn", "violet-lake", "purple-sunset"]
 		.map((n) => ({ id: "b-" + n, data: "/wallpapers/" + n + ".jpg", thumb: "/wallpapers/thumbs/" + n + ".jpg", builtin: true }));
 	/* Plain colours and soft gradients, drawn as a tiny picture so they work like any wallpaper
 	 * (dimming, box opacity, hover). */
