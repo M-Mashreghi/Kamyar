@@ -334,7 +334,7 @@ chrome.notifications.onButtonClicked.addListener(async (nid, btn) => {
 });
 
 // Update notice for copies installed from the zip (Chrome Web Store copies update by themselves).
-const REPO = "M-Mashreghi/kamyar";
+const REPO = "M-Mashreghi/Kamyar";
 const newer = (a, b) => {
 	const x = String(a).replace(/^v/, "").split(".").map(Number), y = String(b).replace(/^v/, "").split(".").map(Number);
 	for (let i = 0; i < 3; i++) if ((x[i] || 0) !== (y[i] || 0)) return (x[i] || 0) > (y[i] || 0);
