@@ -699,7 +699,7 @@
 	}
 	$("boxAlpha").addEventListener("input", (e) => { Themes.setBoxAlpha(Number(e.target.value), null); drawBoxAlpha(); });
 	$("boxAlphaH").addEventListener("input", (e) => { Themes.setBoxAlpha(null, Number(e.target.value)); drawBoxAlpha(); });
-	$("boxAlphaReset").addEventListener("click", () => { Themes.setBoxAlpha(70, 95); drawBoxAlpha(); });
+	$("boxAlphaReset").addEventListener("click", () => { Themes.setBoxAlpha(60, 85); drawBoxAlpha(); });
 	$("langSelect").replaceChildren(...I18n.langs.map((l) => el("option", { value: l }, I18n.names[l])));
 	const widgetLabel = { calendar: "wCalendar", weather: "wWeather", rates: "wRates", prayer: "wPrayer", pomodoro: "wPomodoro", tools: "wTools", daily: "wDaily", habits: "wHabits", expenses: "wExpenses", sounds: "wSounds", alerts: "wAlerts", snippets: "wSnippets", focusStats: "wFocusStats", care: "wCare", goals: "wGoals", journal: "wJournal", worldclock: "wWorldClock", football: "wFootball", trip: "wTrip" };
 	H.WIDGETS = WIDGETS;

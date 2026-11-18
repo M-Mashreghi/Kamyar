@@ -97,5 +97,5 @@
 
 	H.onRefresh(render);
 	setInterval(() => document.visibilityState === "visible" && render(), 30000);
-	window.Prayer = { compute, tzOffset };
+	window.Prayer = { compute, tzOffset, nowInCity, hm };
 })();

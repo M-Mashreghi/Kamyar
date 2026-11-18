@@ -349,13 +349,13 @@ main { max-width: 1120px; margin: 0 auto; padding: 8px 24px 48px; }
 html.has-wall body { background: linear-gradient(rgb(0 0 0 / var(--wall-dim, 0.35)), rgb(0 0 0 / var(--wall-dim, 0.35))), var(--wall) center / cover no-repeat fixed, var(--bg); }
 html.has-wall .time, html.has-wall .date, html.has-wall .greeting, html.has-wall .bm a, html.has-wall .bm-add { color: #fff; text-shadow: 0 1px 3px rgb(0 0 0 / 0.55); }
 html.has-wall .panel, html.has-wall .widget, html.has-wall .search, html.has-wall .chip, html.has-wall .icon-btn:not(.small), html.has-wall .bm-icon {
-	background: color-mix(in srgb, var(--surface) var(--box-a, 70%), transparent);
+	background: color-mix(in srgb, var(--surface) var(--box-a, 60%), transparent);
 	-webkit-backdrop-filter: blur(var(--box-blur, 16px)) saturate(1.2);
 	backdrop-filter: blur(var(--box-blur, 16px)) saturate(1.2);
 	transition: background-color 0.2s, backdrop-filter 0.2s;
 }
 html.has-wall .panel:hover, html.has-wall .widget:hover, html.has-wall .search:focus-within, html.has-wall .search:hover, html.has-wall .card:hover, html.has-wall .rail:hover {
-	background: color-mix(in srgb, var(--surface) var(--box-ah, 95%), transparent);
+	background: color-mix(in srgb, var(--surface) var(--box-ah, 85%), transparent);
 	-webkit-backdrop-filter: blur(var(--box-blur-h, 16px)) saturate(1.2);
 	backdrop-filter: blur(var(--box-blur-h, 16px)) saturate(1.2);
 }
@@ -618,7 +618,7 @@ main.tools-view { overflow: auto; padding: 22px; }
 
 /* wallpaper: glass cards */
 html.has-wall .card, html.has-wall .tiles .bm a, html.has-wall .tiles .bm-open, html.has-wall .tiles .bm-add, html.has-wall .rail { background: color-mix(in srgb, var(--surface) var(--box-a, 78%), transparent); backdrop-filter: blur(var(--box-blur, 14px)); transition: background-color 0.2s; }
-html.has-wall .card:hover, html.has-wall .tiles .bm a:hover, html.has-wall .tiles .bm-open:hover, html.has-wall .tiles .bm-add:hover, html.has-wall .rail:hover { background: color-mix(in srgb, var(--surface) var(--box-ah, 95%), transparent); backdrop-filter: blur(var(--box-blur-h, 14px)); }
+html.has-wall .card:hover, html.has-wall .tiles .bm a:hover, html.has-wall .tiles .bm-open:hover, html.has-wall .tiles .bm-add:hover, html.has-wall .rail:hover { background: color-mix(in srgb, var(--surface) var(--box-ah, 85%), transparent); backdrop-filter: blur(var(--box-blur-h, 14px)); }
 html.has-wall .tiles .bm a, html.has-wall .tiles .bm-open, html.has-wall .tiles .bm-add { color: var(--text); text-shadow: none; }
 html.has-wall .clock-card .time { color: var(--accent); text-shadow: none; }
 html.has-wall .search-card .search { background: var(--surface-2); }
@@ -1374,3 +1374,27 @@ html.tour-boxes [data-widget="daily"] > .box-x { animation: boxPulse 1.2s ease-i
 .w-calendar > .box-x, .trip-card > .box-x { top: 4px; inset-inline-start: 4px; }
 /* A box-x poking out above a box breaks the multi-column flow on the Tools page, so keep it inside there. */
 .widgets .box-x { top: 3px; inset-inline-start: 3px; width: 20px; height: 20px; }
+
+/* ---------- v2.14: services categories on/off, own categories ---------- */
+.apps-chips { flex-wrap: wrap; position: static; }
+.apps-chip.svc-manage { background: var(--accent); color: var(--accent-ink); }
+.apps-h .grow { flex: 1; }
+.apps-h .svc-hide { opacity: 0; transition: opacity .15s; }
+.apps-sec:hover .svc-hide, .apps-h .svc-hide:focus-visible { opacity: 1; }
+.svc-plus { box-shadow: none; font-size: 12.5px; padding: 4px 10px; }
+.svc-add-site, .svc-new { display: flex; gap: 8px; margin: 0 0 10px; flex-wrap: wrap; }
+.svc-add-site input, .svc-new input { flex: 1; min-width: 140px; }
+.svc-new #svcNewEmoji { flex: 0 0 56px; min-width: 0; text-align: center; }
+.app-del { position: absolute; top: 4px; inset-inline-start: 4px; width: 20px; height: 20px; border-radius: 50%; border: 0; background: var(--surface-2); color: var(--muted); font-size: 11px; cursor: pointer; opacity: 0; }
+.app:hover .app-del, .app-del:focus-visible { opacity: 1; }
+.app-del:hover { background: #e5484d; color: #fff; }
+#svcDialog { width: min(720px, calc(100vw - 32px)); }
+#svcList { max-height: 46vh; overflow: auto; }
+.care-card.salat { border-inline-start-color: #f59e0b; }
+.care-card.salat.urgent { border-inline-start-color: #e5484d; }
+.salat-left { margin: 4px 0 2px; }
+.salat-clock { font-variant-numeric: tabular-nums; font-size: 18px; }
+.care-card.salat.urgent .salat-clock { color: #e5484d; }
+.salat-opts { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; padding: 4px 6px 10px; }
+.dialog .salat-opts label.fld { flex-direction: row; align-items: center; gap: 8px; }
+.salat-opts p { flex-basis: 100%; margin: 0; }

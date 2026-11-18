@@ -32,11 +32,6 @@
 			["Analytics", "https://analytics.google.com"], ["Search Console", "https://search.google.com/search-console"], ["Ads", "https://ads.google.com"], ["Cloud Console", "https://console.cloud.google.com"], ["Firebase", "https://console.firebase.google.com"],
 			["Google One", "https://one.google.com"], ["Passwords|Password Manager", "https://passwords.google.com"], ["حساب گوگل|Google Account", "https://myaccount.google.com"]
 		]],
-		["iran", "🇮🇷", "خدمات ایرانی|Iranian services|Services iraniens|Iranische Dienste", [
-			["دولت من|My Gov", "https://my.gov.ir"], ["خدمات قضایی (ثنا)|Judiciary e-services", "https://adliran.ir"], ["پلیس+|Police+", "https://epolice.ir"], ["سامانه مالیاتی|Tax portal", "https://my.tax.gov.ir"],
-			["سجام|Sejam", "https://sejam.ir"], ["تأمین اجتماعی|Social Security", "https://es.tamin.ir"], ["پست|Iran Post", "https://post.ir"], ["شاپرک|Shaparak", "https://shaparak.ir"],
-			["بانک مرکزی|Central Bank", "https://www.cbi.ir"], ["همراه اول من|My MCI", "https://my.mci.ir"], ["ایرانسل من|My Irancell", "https://my.irancell.ir"], ["تقویم time.ir|time.ir calendar", "https://www.time.ir"]
-		]],
 		["shop", "🛒", "خرید|Shopping|Achats|Einkaufen", [
 			["دیجی‌کالا|Digikala", "https://www.digikala.com"], ["دیوار|Divar", "https://divar.ir"], ["ترب|Torob", "https://torob.com"], ["باسلام|Basalam", "https://basalam.com"], ["شیپور|Sheypoor", "https://www.sheypoor.com"],
 			["باما|Bama", "https://bama.ir"], ["اسنپ‌فود|SnappFood", "https://snappfood.ir"], ["Amazon", "https://www.amazon.com"], ["eBay", "https://www.ebay.com"], ["AliExpress", "https://www.aliexpress.com"]
@@ -96,32 +91,120 @@
 	H.siteImg = (url, name, size) => Brands.img(url, name, size);
 	H.siteIcon = icon;
 
-	let drawnLang = null;
+	/* ---------- categories: built-in, Iranian, and the user's own; each can be turned off ---------- */
+	const custom = () => H.setting("svcCustom", []) || [];
+	const off = () => H.setting("svcOff", {}) || {};
+	const setOff = (id, hidden) => Store.setSetting("svcOff", { ...off(), [id]: hidden });
+	const saveCustom = (list) => Store.setSetting("svcCustom", list);
+	// Everything as [id, emoji, name, items, isCustom]; custom items are {title, url}.
+	function all() {
+		return [
+			...CATS.map((c) => [c[0], c[1], tr(c[2]), c[3].map(([title, url]) => ({ title: tr(title), url })), false]),
+			...(window.SERVICES_IR || []).map((c) => [c[0], c[1], tr(c[2]), c[3].map(([title, url]) => ({ title: tr(title), url })), false]),
+			...custom().map((c) => [c.id, c.emoji || "📁", c.title, c.items || [], true])
+		];
+	}
+	const normUrl = (u) => {
+		u = u.trim();
+		if (!u) return "";
+		if (!/^https?:\/\//i.test(u)) u = "https://" + u;
+		try { return new URL(u).href; } catch { return ""; }
+	};
+	const sameUrl = (a, b) => a.replace(/\/$/, "") === b.replace(/\/$/, "");
+
+	function tile(item, cat) {
+		const { title: name, url } = item;
+		return el("li", { class: "app" },
+			el("a", { href: url, title: url },
+				H.siteImg(url, name, 32),
+				el("span", { class: "app-name", dir: "auto" }, name)),
+			el("button", { class: "app-add", type: "button", title: t("addToShortcuts"), "aria-label": t("addToShortcuts") + ": " + name, onclick: () => {
+				if (Store.list("bookmark").some((b) => sameUrl(b.url, url))) return H.toast(t("alreadyShortcut"));
+				Store.add("bookmark", { title: name, url });
+				H.toast(t("addedShortcut", { name }));
+			} }, "+"),
+			cat[4] ? el("button", { class: "app-del", type: "button", title: t("delete"), "aria-label": t("delete") + ": " + name, onclick: () => {
+				saveCustom(custom().map((c) => (c.id === cat[0] ? { ...c, items: c.items.filter((x) => !sameUrl(x.url, url)) } : c)));
+			} }, "✕") : null);
+	}
+	function addSiteForm(cat) {
+		const name = el("input", { type: "text", placeholder: t("svcSiteName"), required: true, maxlength: 60 });
+		const url = el("input", { type: "text", placeholder: "example.com", required: true, dir: "ltr" });
+		return el("form", { class: "svc-add-site", hidden: true, onsubmit: (e) => {
+			e.preventDefault();
+			const u = normUrl(url.value);
+			if (!u) return H.toast(t("svcBadUrl"));
+			saveCustom(custom().map((c) => (c.id === cat[0] ? { ...c, items: [...(c.items || []), { title: name.value.trim() || new URL(u).hostname, url: u }] } : c)));
+		} }, name, url, el("button", { class: "btn", type: "submit" }, t("add")));
+	}
+	function section(cat) {
+		const [id, emoji, name, items, mine] = cat;
+		const form = mine ? addSiteForm(cat) : null;
+		return el("section", { class: "card apps-sec" + (mine ? " mine" : ""), id: "apps-" + id },
+			el("h2", { class: "apps-h" }, el("span", {}, emoji), el("span", { dir: "auto" }, name),
+				el("span", { class: "grow" }),
+				mine ? el("button", { class: "chip svc-plus", type: "button", onclick: () => { form.hidden = !form.hidden; if (!form.hidden) form.querySelector("input").focus(); } }, "＋ ", t("svcAddSite")) : null,
+				el("button", { class: "icon-btn small svc-hide", type: "button", title: t("svcHide"), "aria-label": t("svcHide"), onclick: () => {
+					setOff(id, true);
+					H.toast(t("svcHidden", { name }), { run: () => setOff(id, false) });
+				} }, "✕")),
+			form,
+			items.length ? el("ul", { class: "apps-grid" }, ...items.map((it) => tile(it, cat))) : el("p", { class: "muted small" }, t("svcEmpty")));
+	}
+
+	/* ---------- manage dialog ---------- */
+	function drawManage() {
+		const hidden = off();
+		$("svcList").replaceChildren(...all().map((c) =>
+			el("label", { class: "manage-item" + (hidden[c[0]] ? "" : " on") },
+				el("span", { class: "manage-ic" }, c[1]),
+				el("span", { class: "manage-name", dir: "auto" }, c[2]),
+				c[4] ? el("button", { class: "icon-btn small", type: "button", title: t("delete"), onclick: (e) => {
+					e.preventDefault();
+					const keep = custom();
+					saveCustom(keep.filter((x) => x.id !== c[0]));
+					H.toast(t("svcDeleted", { name: c[2] }), { run: () => saveCustom(keep) });
+				} }, "🗑") : null,
+				el("input", { type: "checkbox", class: "switch", checked: !hidden[c[0]], onchange: (e) => setOff(c[0], !e.target.checked) }))));
+	}
+	function openManage() {
+		drawManage();
+		$("svcDialog").showModal();
+	}
+	$("svcNewForm").addEventListener("submit", (e) => {
+		e.preventDefault();
+		const title = $("svcNewName").value.trim();
+		if (!title) return;
+		const id = "my-" + Date.now().toString(36);
+		saveCustom([...custom(), { id, title, emoji: $("svcNewEmoji").value.trim() || "📁", items: [] }]);
+		$("svcNewName").value = "";
+		$("svcNewEmoji").value = "";
+		$("svcDialog").close();
+		setTimeout(() => { const s = $("apps-" + id); if (s) { s.scrollIntoView({ behavior: "smooth", block: "start" }); s.querySelector(".svc-plus")?.click(); } }, 200);
+	});
+	$("svcAllOn").addEventListener("click", () => { Store.setSetting("svcOff", {}); });
+	$("svcDialog").addEventListener("click", (e) => { if (e.target.closest("[data-close]") || e.target === $("svcDialog")) $("svcDialog").close(); });
+
+	let drawnKey = null;
 	// Built only when the Services page is open: it is the largest page and most new tabs never show it.
 	function render() {
-		if (drawnLang === I18n.lang || $("viewApps").hidden) return;
-		drawnLang = I18n.lang;
+		if ($("svcDialog").open) drawManage();
+		const key = JSON.stringify([I18n.lang, off(), custom()]);
+		if (drawnKey === key || $("viewApps").hidden) return;
+		drawnKey = key;
 		const view = $("viewApps");
-		const sections = CATS.map(([id, emoji, names, items]) =>
-			el("section", { class: "card apps-sec", id: "apps-" + id },
-				el("h2", { class: "apps-h" }, el("span", {}, emoji), tr(names)),
-				el("ul", { class: "apps-grid" }, ...items.map(([title, url]) => {
-					const name = tr(title);
-					return el("li", { class: "app" },
-						el("a", { href: url, title: url },
-							H.siteImg(url, name, 32),
-							el("span", { class: "app-name", dir: "auto" }, name)),
-						el("button", { class: "app-add", type: "button", title: t("addToShortcuts"), "aria-label": t("addToShortcuts") + ": " + name, onclick: () => {
-							if (Store.list("bookmark").some((b) => b.url.replace(/\/$/, "") === url.replace(/\/$/, ""))) return H.toast(t("alreadyShortcut"));
-							Store.add("bookmark", { title: name, url });
-							H.toast(t("addedShortcut", { name }));
-						} }, "+"));
-				})))
-		);
-		const chips = el("nav", { class: "apps-chips" }, ...CATS.map(([id, emoji, names]) =>
-			el("button", { type: "button", class: "apps-chip", onclick: () => $("apps-" + id).scrollIntoView({ behavior: "smooth", block: "start" }) }, tr(names), " ", emoji)));
-		view.replaceChildren(chips, el("div", { class: "apps-body" }, ...sections));
+		const top = view.scrollTop;
+		const hidden = off();
+		const cats = all().filter((c) => !hidden[c[0]]);
+		const chips = el("nav", { class: "apps-chips" },
+			el("button", { type: "button", class: "apps-chip svc-manage", onclick: openManage }, "⚙️ ", t("svcManage")),
+			...cats.map(([id, emoji, name]) =>
+				el("button", { type: "button", class: "apps-chip", onclick: () => $("apps-" + id).scrollIntoView({ behavior: "smooth", block: "start" }) }, name, " ", emoji)));
+		view.replaceChildren(chips, el("div", { class: "apps-body" }, ...cats.map(section)));
+		view.scrollTop = top;
 	}
+	H.openServicesManage = () => { H.showView?.("apps"); openManage(); };
+
 	H.onRefresh(render);
-	window.Services = { render, CATS };
+	window.Services = { render, CATS, all };
 })();

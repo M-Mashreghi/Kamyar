@@ -406,6 +406,18 @@
 		</div>
 	</dialog>
 
+	<dialog id="svcDialog" class="dialog">
+		<div class="dialog-body">
+			<div class="page-head"><h3>⚙️ <span data-i18n="svcManage"></span></h3><span class="grow"></span><button class="icon-btn small" type="button" data-close data-i18n-title="close">✕</button></div>
+			<p class="muted small" data-i18n="svcManageHint"></p>
+			<h4 data-i18n="svcNew"></h4>
+			<form id="svcNewForm" class="svc-new"><input id="svcNewEmoji" type="text" maxlength="4" placeholder="📁" aria-label="Emoji" /><input id="svcNewName" type="text" maxlength="40" required data-i18n-ph="svcNewName" /><button class="btn" type="submit" data-i18n="add"></button></form>
+			<h4 data-i18n="svcCats"></h4>
+			<div id="svcList" class="manage-grid"></div>
+			<div class="dialog-actions"><button id="svcAllOn" class="btn btn-ghost" type="button" data-i18n="manageAllOn"></button><span class="grow"></span><button class="btn" type="button" data-close data-i18n="close"></button></div>
+		</div>
+	</dialog>
+
 	<dialog id="manageDialog" class="dialog">
 		<div class="dialog-body">
 			<div class="page-head"><h3>🧩 <span data-i18n="manageTitle"></span></h3><span class="grow"></span><button class="icon-btn small" type="button" data-close data-i18n-title="close">✕</button></div>
@@ -758,6 +770,21 @@
 							</select>
 						</label>
 					</div>
+					<label class="tog-card"><span class="tc-ic">🕌</span><span class="grow"><strong data-i18n="salatRemind"></strong><small class="muted" data-i18n="salatRemindHint"></small></span><input id="salatChk" class="switch" type="checkbox" /></label>
+					<div id="salatOpts" class="salat-opts" hidden>
+						<label class="check"><input id="salatFajr" type="checkbox" /> <span data-i18n="salatFajr"></span></label>
+						<label class="check"><input id="salatAsr" type="checkbox" /> <span data-i18n="salatAsr"></span></label>
+						<label class="check"><input id="salatIsha" type="checkbox" /> <span data-i18n="salatIsha"></span></label>
+						<label class="fld"><span data-i18n="salatWhen"></span>
+							<select id="salatBefore">
+								<option value="0" data-i18n="salatAll"></option>
+								<option value="60" data-i18n="salat60"></option>
+								<option value="30" data-i18n="salat30"></option>
+								<option value="15" data-i18n="salat15"></option>
+							</select>
+						</label>
+						<p class="muted small" data-i18n="salatNote"></p>
+					</div>
 					<h4 data-i18n="calEvents"></h4>
 					<div class="set-card setting-row">
 						<div><strong data-i18n="shTitle"></strong><p class="muted small" data-i18n="shIntro"></p></div>
@@ -1000,6 +1027,7 @@
 	<script src="js/rates.js"></script>
 	<script src="js/pomodoro.js"></script>
 	<script src="js/tools.js"></script>
+	<script src="js/services-ir.js"></script>
 	<script src="js/services.js"></script>
 	<script src="js/plan.js"></script>
 	<script src="js/layout.js"></script>
@@ -1017,5 +1045,6 @@
 	<script src="js/life.js"></script>
 	<script src="js/smart.js"></script>
 	<script src="js/manage.js"></script>
+	<script src="js/salat.js"></script>
 </body>
 </html>

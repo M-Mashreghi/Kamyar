@@ -180,7 +180,7 @@
 	}
 	function boxAlpha() {
 		const n = (k, d) => { const v = Number(ls(k)); return Number.isFinite(v) && ls(k) != null ? Math.max(0, Math.min(100, v)) : d; };
-		return [n("hamyar_box_a", 70), n("hamyar_box_ah", 95)];
+		return [n("hamyar_box_a", 60), n("hamyar_box_ah", 85)];
 	}
 	function setBoxAlpha(idle, hover) {
 		if (idle != null) ls("hamyar_box_a", String(idle));

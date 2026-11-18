@@ -146,6 +146,29 @@ function i18nParity() {
 	check("turn everything on", await page.evaluate(() => !document.getElementById("trBtn").hidden));
 	await page.keyboard.press("Escape");
 
+	console.log("Services");
+	await page.click('.rail-btn[data-go="apps"]');
+	await page.waitForTimeout(400);
+	check("Iranian categories are listed", (await page.$("#apps-ir-bank")) !== null);
+	await page.hover("#apps-ir-sport");
+	await page.click("#apps-ir-sport .svc-hide");
+	await page.waitForTimeout(200);
+	check("a category can be hidden", (await page.$("#apps-ir-sport")) === null);
+	await page.click(".svc-manage");
+	await page.fill("#svcNewName", "Work");
+	await page.click("#svcNewForm button");
+	await page.waitForTimeout(500);
+	await page.fill(".apps-sec.mine .svc-add-site input >> nth=0", "Example");
+	await page.fill(".apps-sec.mine .svc-add-site input >> nth=1", "example.com");
+	await page.click(".apps-sec.mine .svc-add-site button");
+	await page.waitForTimeout(300);
+	check("own category with a site", (await page.textContent(".apps-sec.mine")).includes("Example"));
+	await page.evaluate(() => Store.setSetting("svcOff", {}));
+	await page.click('.rail-btn[data-go="home"]');
+
+	console.log("Prayer reminder");
+	check("prayer reminder is off by default", await page.evaluate(() => !document.getElementById("salatChk").checked && !H.setting("salat", {})?.on));
+
 	console.log("Translator");
 	await page.keyboard.press("Alt+t");
 	await page.fill("#trIn", "سلام");
