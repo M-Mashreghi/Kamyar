@@ -57,7 +57,12 @@ function i18nParity() {
 	console.log("First run");
 	await page.goto(url);
 	// Wait for the setup instead of a fixed time: the CI machines are slower than a desktop.
-	await page.waitForFunction(() => !document.getElementById("setup").hidden, null, { timeout: 15000 }).catch(() => {});
+	// (The page can reload once on a first run, which cancels a single wait, so keep trying until a deadline.)
+	for (const end = Date.now() + 15000; Date.now() < end; ) {
+		const ok = await page.evaluate(() => !document.getElementById("setup").hidden).catch(() => false);
+		if (ok) break;
+		await page.waitForTimeout(250);
+	}
 	check("setup opens on first run (before the tour)", await page.evaluate(() => !document.getElementById("setup").hidden && document.getElementById("tour").hidden), await page.evaluate(() => ({ setup: document.getElementById("setup").hidden, tour: document.getElementById("tour").hidden, ls: Object.keys(localStorage), wall: localStorage.getItem("hamyar_wall_id") })));
 	await page.click("#setupNext"); // welcome → data
 	await page.click("#setupNext"); // data → you
