@@ -114,6 +114,8 @@ function i18nParity() {
 	await page.waitForTimeout(200);
 	check("journal entry saved", await page.evaluate(() => Store.list("journal").length === 1));
 	check("world clock shows cities", (await page.$$(".wc")).length >= 3);
+	const cols = await page.evaluate(() => new Set([...document.querySelectorAll("#viewTools [data-widget]:not([hidden])")].map((w) => Math.round(w.getBoundingClientRect().left))).size);
+	check("tools page uses several columns", cols >= 3, cols);
 
 	console.log("Family sharing");
 	await page.evaluate(() => Store.add("event", { kind: "birthday", title: "Mum", date: "1970-03-05", repeat: "yearly", allDay: true }));

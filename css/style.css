@@ -1359,7 +1359,7 @@ html.season-suri .season-chip { background: color-mix(in srgb, #f97316 25%, tran
 .box-x:hover { color: #fff; background: #e5484d; border-color: #e5484d; }
 html.tour-boxes [data-widget="daily"] > .box-x { animation: boxPulse 1.2s ease-in-out infinite; }
 @keyframes boxPulse { 50% { box-shadow: 0 0 0 6px color-mix(in srgb, #e5484d 30%, transparent); } }
-.tools-bar { display: flex; justify-content: flex-end; margin: 0 0 10px; }
+.tools-bar { display: flex; justify-content: flex-end; max-width: 1200px; margin: 0 auto 10px; }
 .manage-btn { gap: 6px; }
 #manageBtnSet { margin: 4px 0 6px; }
 #manageDialog { width: min(640px, calc(100vw - 32px)); }
@@ -1372,3 +1372,5 @@ html.tour-boxes [data-widget="daily"] > .box-x { animation: boxPulse 1.2s ease-i
 .dialog label.manage-item { display: flex; flex-direction: row; align-items: center; margin: 0; }
 .box-x { top: -9px; inset-inline-start: -9px; }
 .w-calendar > .box-x, .trip-card > .box-x { top: 4px; inset-inline-start: 4px; }
+/* A box-x poking out above a box breaks the multi-column flow on the Tools page, so keep it inside there. */
+.widgets .box-x { top: 3px; inset-inline-start: 3px; width: 20px; height: 20px; }
