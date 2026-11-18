@@ -1227,3 +1227,11 @@ html[dir="rtl"] .care-stack.start .care-card { transform: translateX(40px); }
 .tour-dots span { width: 7px; height: 7px; border-radius: 50%; background: color-mix(in srgb, var(--text) 22%, transparent); }
 .tour-dots span.on { background: var(--accent); width: 18px; border-radius: 4px; }
 .tour-tip .dialog-actions { margin: 0; }
+
+/* ---------- v2.11: developer and support ---------- */
+.about-card { width: min(460px, 100%); margin-top: 12px; padding: 14px 16px; border: 1px solid var(--border); border-radius: 14px; background: var(--surface-2); text-align: center; }
+.about-card h4 { margin: 0 0 6px; }
+.about-card p { margin: 0 0 8px; line-height: 1.8; }
+.about-links { justify-content: center; gap: 8px; }
+.about-card a.btn { text-decoration: none; }
+.about-card .bmc { background: #ffdd00; color: #222; border-color: #ffdd00; }

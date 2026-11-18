@@ -333,15 +333,18 @@ chrome.notifications.onButtonClicked.addListener(async (nid, btn) => {
 	}
 });
 
-// Update notice for copies installed from the zip (Chrome Web Store copies update by themselves).
+// Update notice for copies installed from the zip, checked once a week (Chrome Web Store copies update by themselves).
 const REPO = "M-Mashreghi/Kamyar";
 const newer = (a, b) => {
 	const x = String(a).replace(/^v/, "").split(".").map(Number), y = String(b).replace(/^v/, "").split(".").map(Number);
 	for (let i = 0; i < 3; i++) if ((x[i] || 0) !== (y[i] || 0)) return (x[i] || 0) > (y[i] || 0);
 	return false;
 };
-async function checkUpdate() {
+async function checkUpdate(force) {
 	if (chrome.runtime.getManifest().update_url) return;
+	// Once a week is enough; the "check now" button in Settings › About skips the wait.
+	const last = (await chrome.storage.local.get("kamyar_update")).kamyar_update;
+	if (!force && last && last.at && Date.now() - last.at < 7 * 864e5) return;
 	try {
 		const r = await fetch(`https://api.github.com/repos/${REPO}/releases/latest`, { headers: { Accept: "application/vnd.github+json" } });
 		if (!r.ok) return;
@@ -353,7 +356,7 @@ async function checkUpdate() {
 }
 chrome.runtime.onMessage.addListener((m, _s, reply) => {
 	if (m && m.type === "kamyar-update-check") {
-		checkUpdate().then(() => reply(true));
+		checkUpdate(true).then(() => reply(true));
 		return true;
 	}
 	if (m && m.type === "kamyar-water") {

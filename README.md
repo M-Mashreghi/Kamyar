@@ -89,6 +89,7 @@
 <p align="center"><img src="docs/screenshots/ai-video-fa.png" alt="هوش مصنوعی ویدیو" width="900" /></p>
 <p align="center"><img src="docs/screenshots/tour-fa.png" alt="آموزش اولین اجرا" width="900" /></p>
 <p align="center"><img src="docs/screenshots/update-fa.png" alt="به‌روزرسانی" width="900" /></p>
+<p align="center"><img src="docs/screenshots/about-fa.png" alt="سازنده و حمایت" width="900" /></p>
 
 ### تقویم و مناسبت‌ها
 
@@ -153,6 +154,13 @@
 
 هیچ سروری وجود ندارد و هیچ اطلاعاتی برای ما فرستاده نمی‌شود.
 
+## 👤 سازنده و حمایت
+
+- **پیشنهاد، گزارش مشکل یا ایده:** در [Issues گیت‌هاب](https://github.com/M-Mashreghi/Kamyar/issues) بنویسید.
+- **ایمیل:** [amiramirmashgh@gmail.com](mailto:amiramirmashgh@gmail.com)
+- **حمایت مالی:** کامیار رایگان است. اگر خواستید کمکی کنید، خیلی خوشحال می‌شوم که به نیازمندان صدقه بدهید یا به یک خیریه کمک کنید. 💚
+  اگر هم دوست داشتید از خود من حمایت کنید: [☕ Buy Me a Coffee](https://buymeacoffee.com/mmashreghi)
+
 ## 📥 نصب
 
 > ⚠️ **کامیار هنوز در فروشگاه کروم (Chrome Web Store) نیست، برای همین دستی نصب می‌شود. فقط چند دقیقه طول می‌کشد.**
@@ -165,7 +173,7 @@
 6. **تب جدید: یک تب جدید باز کنید. اگر کروم پرسید «این تغییر را نگه می‌دارید؟»، گزینه‌ی Keep it را بزنید.**
 7. **ذخیره در حساب گوگل: در کروم با حساب گوگلتان وارد شوید و همگام‌سازی را روشن کنید (روی عکس پروفایل کروم بزنید ← Turn on sync) تا اطلاعاتتان روی همه‌ی دستگاه‌ها باشد.**
 
-> 💡 **به‌روزرسانی: نسخه‌ی جدید را دانلود کنید، محتوای پوشه‌ی قبلی `Kamyar` را با آن جایگزین کنید و در `chrome://extensions` روی دکمه‌ی 🔄 (Reload) افزونه بزنید. اطلاعاتتان پاک نمی‌شود. از نسخه‌ی ۲.۱۱ به بعد، خود کامیار وقتی نسخه‌ی جدیدی بیاید بالای صفحه خبر می‌دهد.**
+> 💡 **به‌روزرسانی: نسخه‌ی جدید را دانلود کنید، محتوای پوشه‌ی قبلی `Kamyar` را با آن جایگزین کنید و در `chrome://extensions` روی دکمه‌ی 🔄 (Reload) افزونه بزنید. اطلاعاتتان پاک نمی‌شود. از نسخه‌ی ۲.۱۱ به بعد، کامیار هفته‌ای یک بار نسخه‌ی جدید را چک می‌کند و اگر آمده باشد بالای صفحه خبر می‌دهد.**
 
 **راهنمای کامل‌تر، از جمله وصل کردن گوگل درایو و تقویم گوگل، در [SETUP.md](SETUP.md) است.**
 
@@ -269,6 +277,7 @@ Kamyar is a **personal new-tab page for Google Chrome**. Every new tab shows you
 <p align="center"><img src="docs/screenshots/ai-video-fa.png" alt="AI video" width="900" /></p>
 <p align="center"><img src="docs/screenshots/tour-fa.png" alt="First-run tour" width="900" /></p>
 <p align="center"><img src="docs/screenshots/update-fa.png" alt="Updating" width="900" /></p>
+<p align="center"><img src="docs/screenshots/about-fa.png" alt="Developer and support" width="900" /></p>
 <p align="center"><img src="docs/screenshots/planner-light-en.png" alt="Weekly planner" width="900" /></p>
 
 ### Where your data lives
@@ -280,6 +289,13 @@ Kamyar is a **personal new-tab page for Google Chrome**. Every new tab shows you
 | Google Drive (optional) | A hidden app folder in your own Drive, for more space |
 
 There is no server, and nothing is sent to us.
+
+## 👤 Developer & support
+
+- **Suggestions, bugs or ideas:** open an issue on [GitHub](https://github.com/M-Mashreghi/Kamyar/issues).
+- **Email:** [amiramirmashgh@gmail.com](mailto:amiramirmashgh@gmail.com)
+- **Donations:** Kamyar is free. If you'd like to help, I'd be very happy if you gave to those in need or to a charity. 💚
+  And if you'd like to support me directly: [☕ Buy Me a Coffee](https://buymeacoffee.com/mmashreghi)
 
 ## 📥 Install
 
