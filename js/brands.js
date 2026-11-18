@@ -28,6 +28,16 @@
 		s.textContent = (name || "?").trim().charAt(0).toUpperCase();
 		return s;
 	}
+	// Logos downloaded into icons/sites by the "Fetch site logos" workflow (js/site-icons.js).
+	function siteIcon(url) {
+		const map = window.SITE_ICONS || {};
+		try {
+			const host = new URL(url).hostname.replace(/^www\./, "");
+			return map[host] ? `icons/sites/${host}.${map[host]}` : null;
+		} catch {
+			return null;
+		}
+	}
 	/** An <img> with the best logo for the site. */
 	function img(url, name, size) {
 		const i = document.createElement("img");
@@ -40,8 +50,14 @@
 			i.src = "icons/brands/" + b[0];
 			i.className = "brand" + (b[1] ? " dark-logo" : "");
 		} else {
-			i.src = s2(url);
+			const local = siteIcon(url);
+			i.src = local || s2(url);
 			i.className = "fav";
+			// A bundled logo that fails falls back to the online icon, then to a letter.
+			if (local) {
+				i.addEventListener("error", () => { i.src = s2(url); i.addEventListener("error", () => i.replaceWith(letter(name, size)), { once: true }); }, { once: true });
+				return i;
+			}
 		}
 		i.addEventListener("error", () => i.replaceWith(letter(name, size)), { once: true });
 		return i;
