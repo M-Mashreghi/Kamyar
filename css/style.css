@@ -1235,3 +1235,119 @@ html[dir="rtl"] .care-stack.start .care-card { transform: translateX(40px); }
 .about-links { justify-content: center; gap: 8px; }
 .about-card a.btn { text-decoration: none; }
 .about-card .bmc { background: #ffdd00; color: #222; border-color: #ffdd00; }
+
+/* ---------- v2.12: air quality ---------- */
+.aq-row { display: flex; align-items: center; gap: 10px; margin: 8px 0; padding: 8px 10px; border-radius: 12px; background: color-mix(in srgb, var(--aq) 12%, transparent); }
+.aq-row.bad { outline: 1px solid color-mix(in srgb, var(--aq) 60%, transparent); }
+.aq-badge { min-width: 40px; height: 32px; padding: 0 6px; border-radius: 9px; display: grid; place-items: center; font-weight: 800; color: #fff; background: var(--aq); }
+.aq-text { display: flex; flex-direction: column; gap: 1px; font-size: 13px; }
+.wx-m-aq { font-size: 11.5px; padding: 1px 7px; border-radius: 99px; color: #fff; background: var(--aq); }
+
+/* ---------- v2.12: goals ---------- */
+.goal-list { display: flex; flex-direction: column; gap: 10px; }
+.goal { padding: 10px 12px; border: 1px solid var(--border); border-radius: 12px; }
+.goal-top { display: flex; align-items: center; gap: 8px; }
+.goal-ic { font-size: 20px; }
+.goal-num { font-size: 13px; font-weight: 700; }
+.goal-bar { position: relative; height: 10px; margin: 8px 0 6px; border-radius: 6px; background: color-mix(in srgb, var(--text) 10%, transparent); }
+.goal-bar i { display: block; height: 100%; border-radius: 6px; background: var(--accent); transition: width .3s; }
+.goal.done .goal-bar i { background: #22c55e; }
+.goal.behind .goal-bar i, .goal.late .goal-bar i { background: #f59e0b; }
+.goal-time { position: absolute; top: -3px; width: 2px; height: 16px; background: var(--text); opacity: .55; border-radius: 2px; }
+.goal-foot { display: flex; align-items: center; gap: 6px; }
+.goal-fc { line-height: 1.6; }
+.goal.behind .goal-fc, .goal.late .goal-fc { color: #d97706; }
+.goal.done .goal-fc, .goal.ok .goal-fc { color: #16a34a; }
+.goal-step { width: 64px; padding: 4px 6px; }
+.goal-form { display: grid; grid-template-columns: 52px 1fr 90px; gap: 6px; margin-top: 10px; }
+.goal-form .goal-date { grid-column: 1 / 3; display: flex; align-items: center; gap: 8px; font-size: 13px; }
+.goal-form .goal-date input { flex: 1; }
+.goal-form #goalUnit { grid-column: 3; }
+.goal-form #goalTitle { grid-column: 2 / 4; }
+.goal-form #goalTarget { grid-column: 1 / 3; }
+.goal-emoji { text-align: center; }
+
+/* ---------- v2.12: journal ---------- */
+.journal-form { display: flex; flex-direction: column; gap: 6px; }
+.journal-form .j-line { width: 100%; }
+.journal-review { display: flex; flex-direction: column; gap: 10px; max-height: 60vh; overflow: auto; }
+.jr-day { padding: 10px 12px; border-radius: 12px; background: var(--surface-2); }
+.jr-day ul { margin: 6px 0 0; padding-inline-start: 18px; line-height: 1.8; }
+
+/* ---------- v2.12: world clock ---------- */
+.wc-list { list-style: none; margin: 0 0 10px; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.wc { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 12px; background: var(--surface-2); }
+.wc .grow { display: flex; flex-direction: column; min-width: 0; }
+.wc-ic { font-size: 18px; }
+.wc-time { font-size: 22px; font-weight: 800; font-variant-numeric: tabular-nums; }
+.wc.night .wc-time { opacity: .8; }
+
+/* ---------- v2.12: football ---------- */
+.fb-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 10px; }
+.fb-card { padding: 10px 12px; border: 1px solid var(--border); border-radius: 12px; }
+.fb-head { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+.fb-head img { object-fit: contain; }
+.fb-label { display: block; margin-top: 6px; color: var(--muted); font-size: 11.5px; }
+.fb-matches { list-style: none; margin: 2px 0 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+.fb-match { display: grid; grid-template-columns: 1fr auto 1fr; gap: 2px 8px; align-items: center; font-size: 13px; padding: 4px 6px; border-radius: 8px; }
+.fb-match .fb-team:first-child { text-align: end; }
+.fb-match .fb-when { grid-column: 1 / -1; text-align: center; font-size: 11px; }
+.fb-score { min-width: 48px; text-align: center; padding: 1px 6px; border-radius: 6px; background: var(--surface-2); }
+.fb-match.r-w .fb-score { background: color-mix(in srgb, #22c55e 25%, transparent); }
+.fb-match.r-l .fb-score { background: color-mix(in srgb, #ef4444 22%, transparent); }
+.fb-match.r-d .fb-score { background: color-mix(in srgb, #eab308 22%, transparent); }
+.fb-suggest { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+
+/* ---------- v2.12: countdown card (home) ---------- */
+.trip-card { position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 92px; }
+.trip-card.has-img { background: linear-gradient(to top, rgb(0 0 0 / .65), rgb(0 0 0 / .15)), var(--trip-img) center / cover no-repeat !important; color: #fff; min-height: 150px; align-items: flex-end; }
+.trip-card.has-img .muted, .trip-card.has-img .trip-date { color: rgb(255 255 255 / .85); }
+.trip-card.has-img .icon-btn { color: #fff; background: rgb(0 0 0 / .3); }
+.trip-card.empty { min-height: 0; padding: 6px; background: transparent !important; box-shadow: none; backdrop-filter: none !important; }
+.trip-add { width: 100%; padding: 10px; border-radius: 14px; border: 1.5px dashed color-mix(in srgb, var(--text) 25%, transparent); background: transparent; color: var(--muted); cursor: pointer; font: inherit; font-size: 13.5px; }
+html.has-wall .trip-add { color: #fff; border-color: rgb(255 255 255 / .45); }
+.trip-add:hover { color: var(--text); border-color: var(--accent); }
+.trip-main { display: flex; align-items: center; gap: 14px; min-width: 0; }
+.trip-emoji { font-size: 40px; line-height: 1; }
+.trip-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.trip-days { font-size: 15px; }
+.trip-days b { font-size: 34px; font-weight: 900; line-height: 1; }
+.trip-title { font-weight: 700; font-size: 15px; }
+.trip-date { font-size: 12px; }
+.trip-tools { display: flex; align-items: center; gap: 6px; align-self: flex-start; }
+.trip-dots { display: flex; gap: 5px; margin-inline-end: 4px; }
+.trip-dots button { width: 8px; height: 8px; padding: 0; border: 0; border-radius: 50%; background: currentColor; opacity: .35; cursor: pointer; }
+.trip-dots button.on { opacity: 1; }
+.trip-presets { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+#tripDateHint { display: block; margin-top: 4px; }
+
+/* ---------- v2.12: seasonal looks ---------- */
+.season-chip { display: flex; width: fit-content; align-items: center; gap: 6px; margin: -4px auto 8px; padding: 4px 12px; border-radius: 99px; font-size: 13px; font-weight: 600; background: color-mix(in srgb, var(--accent) 16%, transparent); }
+.season-layer { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+.season-layer span { position: absolute; top: -40px; left: var(--x); font-size: calc(18px * var(--s)); opacity: .55; animation: season-fall var(--d) linear var(--delay) infinite; }
+@keyframes season-fall { to { transform: translateY(110vh) rotate(200deg); } }
+html.focus-on .season-layer, html:has(#viewHome[hidden]) .season-layer { display: none; }
+html.season-nowruz .season-chip { background: color-mix(in srgb, #22c55e 22%, transparent); }
+html.season-yalda .season-chip { background: color-mix(in srgb, #dc2626 22%, transparent); }
+html.season-xmas .season-chip, html.season-newyear .season-chip { background: color-mix(in srgb, #38bdf8 22%, transparent); }
+html.season-muharram .season-chip { background: color-mix(in srgb, #000 55%, transparent); color: #fff; }
+html.season-suri .season-chip { background: color-mix(in srgb, #f97316 25%, transparent); }
+@media (prefers-reduced-motion: reduce) { .season-layer { display: none; } }
+
+/* ---------- v2.12: translator & family sharing ---------- */
+.tr-langs { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.tr-langs select { flex: 1; }
+#trIn { width: 100%; resize: vertical; }
+.tr-out { min-height: 64px; margin-top: 8px; padding: 10px 12px; border-radius: 12px; background: var(--surface-2); font-size: 15px; line-height: 1.8; white-space: pre-wrap; display: flex; flex-direction: column; gap: 4px; }
+#trDialog .dialog-actions a.btn { text-decoration: none; }
+.sh-pick { max-height: 240px; overflow: auto; display: flex; flex-direction: column; gap: 2px; border: 1px solid var(--border); border-radius: 12px; padding: 6px 10px; margin-bottom: 8px; }
+.sh-row { display: flex; align-items: center; gap: 8px; padding: 4px 0; font-size: 13.5px; }
+#shCode { width: 100%; }
+#shMsg.ok { color: #16a34a; }
+.goal-form input, .goal-step, .journal-form input, .care input[type=number], .care select, .care-every { border: 1px solid var(--border); background: var(--surface-2); border-radius: 10px; padding: 7px 9px; outline: 0; min-width: 0; color: inherit; font: inherit; font-size: 13px; }
+.goal-form input:focus, .goal-step:focus, .journal-form input:focus, .care input:focus, .care select:focus { border-color: var(--accent); }
+.goal-form { grid-template-columns: 56px 1fr 1fr; }
+.goal-form #goalTitle { grid-column: 2 / 4; }
+.goal-form #goalTarget { grid-column: 1 / 3; }
+.goal-form .goal-date { grid-column: 1 / 3; }
+.goal-form .btn { grid-column: 3; }

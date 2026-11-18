@@ -14,6 +14,18 @@ The first public release of Kamyar, a personal new-tab page for Chrome with no a
 راهنمای کامل و انتقال از دستیار در [README](https://github.com/M-Mashreghi/Kamyar#نصب) است. Full guide and Dastyar import: [README](https://github.com/M-Mashreghi/Kamyar#install).
 
 ### تازه‌های این نسخه · New in this version
+- ⏳ شمارش معکوس برای هر چیزی با تاریخ‌های آماده و عکس · Countdown to anything, with ready-made dates and a photo
+- 🎯 اهداف بلندمدت با پیش‌بینی · Long-term goals with a forecast
+- 🙏 دفتر شکرگزاری و مرور ماهانه · Gratitude journal with a monthly review
+- 🌍 ساعت جهانی · World clock
+- 🌫️ کیفیت هوا کنار آب‌وهوا · Air quality next to the weather
+- 🧠 میان‌برهای هوشمند · Smart shortcuts by time of day
+- 🎉 پوسته‌ی مناسبتی (نوروز، یلدا، محرم، کریسمس) · Occasion looks
+- 🌐 مترجم سریع (Alt+T) · Quick translator
+- ⚽ فوتبال: نتیجه و بازی بعدی · Football results and fixtures
+- 👨‍👩‍👧 تقویم خانوادگی با کد یا فایل · Family calendar sharing
+- 👤 سازنده و حمایت، بررسی هفتگی نسخه‌ی جدید · Developer & support, weekly update check
+- ✅ تست خودکار و بارگذاری سریع‌تر · Automated tests and faster loading
 - 💧👀 یادآور آب و استراحت چشم با کارت کنار صفحه (بسته‌شدن با ✕) · Water and eye-break reminder cards at the page edge
 - 📁 پوشه داخل پوشه · Folders inside folders
 - 🪟 شفافیت باکس‌ها روی عکس پس‌زمینه (عادی و هنگام هاور) · Box opacity over the wallpaper (normal and on hover)

@@ -1,0 +1,11 @@
+{
+  "name": "kamyar",
+  "private": true,
+  "description": "Kamyar new-tab extension: development scripts only (the extension itself needs no build).",
+  "scripts": {
+    "test": "node tests/e2e.js"
+  },
+  "devDependencies": {
+    "playwright": "1.49.1"
+  }
+}

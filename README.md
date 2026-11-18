@@ -6,7 +6,7 @@
 
 <p align="center">
   <img alt="Chrome MV3" src="https://img.shields.io/badge/Chrome-Manifest%20V3-4285F4?logo=googlechrome&logoColor=white" />
-  <img alt="Version" src="https://img.shields.io/badge/version-2.11.0-6c4ff0" />
+  <img alt="Version" src="https://img.shields.io/badge/version-2.12.0-6c4ff0" />
   <img alt="Languages" src="https://img.shields.io/badge/languages-FA%20%7C%20EN%20%7C%20FR%20%7C%20DE-14b8a6" />
   <img alt="No ads" src="https://img.shields.io/badge/ads-none-3db985" />
   <img alt="No tracking" src="https://img.shields.io/badge/tracking-none-3db985" />
@@ -66,6 +66,16 @@
 - **🎥 هوش مصنوعی ویدیو:** دسته‌ی تازه در صفحه‌ی سرویس‌ها: Sora، Veo/Flow، Runway، Kling، Luma، Pika، Hailuo و …
 - **👋 آموزش اولین اجرا:** چند قدم کوتاه که بخش‌های اصلی را نشان می‌دهد. از تنظیمات › درباره دوباره دیده می‌شود.
 - **🎁 خبر نسخه‌ی جدید:** وقتی نسخه‌ی تازه‌ای منتشر شود، بالای صفحه خبر می‌دهد و مراحل به‌روزرسانی را نشان می‌دهد.
+- **⏳ شمارش معکوس برای هر چیزی:** سفر، پایان ترم، پایان سال، پایان تابستان، نوروز، یلدا و … با دکمه‌های آماده که تاریخ را خودشان حساب می‌کنند، و عکس دلخواه در صفحه‌ی اصلی.
+- **🎯 اهداف بلندمدت:** مثلاً «۱۲ کتاب امسال» یا «۵۰۰ کیلومتر دویدن»، با نوار پیشرفت و پیش‌بینی اینکه با همین سرعت به هدف می‌رسید یا نه، و اینکه روزی یا هفته‌ای چقدر لازم است.
+- **🙏 دفتر شکرگزاری:** هر شب سه خط، با یادآوری کوچک و مرور ماهانه.
+- **🌍 ساعت جهانی:** چند شهر کنار هم، با اختلاف ساعت و روز و شب.
+- **🌫️ کیفیت هوا:** شاخص AQI و PM2.5 کنار آب‌وهوا، با هشدار در روزهای آلوده.
+- **🧠 میان‌برهای هوشمند:** اگر روشن کنید، میان‌برهایی که در این ساعت از روز بیشتر باز می‌کنید جلوتر می‌آیند.
+- **🎉 پوسته‌ی مناسبتی:** در نوروز، یلدا، چهارشنبه‌سوری، محرم و کریسمس ظاهر صفحه خودش کمی عوض می‌شود.
+- **🌐 مترجم سریع:** با Alt+T (یا L) باز می‌شود؛ فارسی ↔ انگلیسی، آلمانی و زبان‌های دیگر.
+- **⚽ فوتبال:** نتیجه‌ی آخرین بازی‌ها و بازی بعدی تیم‌های محبوبتان (پرسپولیس، استقلال، تیم ملی، رئال مادرید و …).
+- **👨‍👩‍👧 تقویم خانوادگی:** تولدها و رویدادها را با یک کد یا فایل برای خانواده بفرستید تا در کامیار خودشان اضافه کنند.
 
 <p align="center"><img src="docs/screenshots/home-daily-fa.png" alt="شعر روز و بعداً بخوانم" width="900" /></p>
 <p align="center"><img src="docs/screenshots/hafez-fal-fa.png" alt="فال حافظ" width="900" /></p>
@@ -90,6 +100,14 @@
 <p align="center"><img src="docs/screenshots/tour-fa.png" alt="آموزش اولین اجرا" width="900" /></p>
 <p align="center"><img src="docs/screenshots/update-fa.png" alt="به‌روزرسانی" width="900" /></p>
 <p align="center"><img src="docs/screenshots/about-fa.png" alt="سازنده و حمایت" width="900" /></p>
+<p align="center"><img src="docs/screenshots/countdown-aqi-fa.png" alt="شمارش معکوس و کیفیت هوا" width="900" /></p>
+<p align="center"><img src="docs/screenshots/countdown-presets-fa.png" alt="شمارش معکوس با تاریخ‌های آماده" width="900" /></p>
+<p align="center"><img src="docs/screenshots/goals-fa.png" alt="اهداف بلندمدت" width="900" /></p>
+<p align="center"><img src="docs/screenshots/journal-fa.png" alt="دفتر شکرگزاری" width="900" /></p>
+<p align="center"><img src="docs/screenshots/football-fa.png" alt="فوتبال" width="900" /></p>
+<p align="center"><img src="docs/screenshots/translator-fa.png" alt="مترجم سریع" width="900" /></p>
+<p align="center"><img src="docs/screenshots/family-share-fa.png" alt="تقویم خانوادگی" width="900" /></p>
+<p align="center"><img src="docs/screenshots/season-yalda-fa.png" alt="پوسته‌ی یلدا" width="900" /></p>
 
 ### تقویم و مناسبت‌ها
 
@@ -245,6 +263,16 @@ Kamyar is a **personal new-tab page for Google Chrome**. Every new tab shows you
 - **AI video:** a new services category with Sora, Veo/Flow, Runway, Kling, Luma, Pika, Hailuo and more.
 - **First-run tour:** a few short steps through the main parts; replay it from Settings › About.
 - **New version notice:** when a new release is out, a bar at the top says so and shows how to update.
+- **Countdown to anything:** a trip, the end of term, the end of the year or summer, Nowruz, Yalda… Ready-made buttons work out the date, and you can add a photo on the home page.
+- **Long-term goals:** e.g. "12 books this year" or "500 km running", with a progress bar, a forecast of whether you'll make it at this pace, and how much you need per day or week.
+- **Gratitude journal:** three lines each evening, with a gentle nudge and a monthly review.
+- **World clock:** several cities side by side, with the time difference and day or night.
+- **Air quality:** AQI and PM2.5 next to the weather, with a warning on polluted days.
+- **Smart shortcuts:** when on, the shortcuts you open most at this time of day move to the front.
+- **Occasion looks:** the page changes a little by itself for Nowruz, Yalda, Chaharshanbe Suri, Muharram and Christmas.
+- **Quick translator:** Alt+T (or L); Persian ↔ English, German and more.
+- **Football:** latest results and next matches of your teams (Persepolis, Esteghlal, Iran, Real Madrid…).
+- **Family calendar:** send birthdays and events to family as a code or a file; they add them in their own Kamyar.
 - **Calendar:** Persian (Solar Hijri), Gregorian and Islamic calendars side by side, with Iranian and international occasions, each with its own emoji. Twelve occasion categories that you can turn on or off one by one. Events, birthdays and reminders, with repeats. Optional Google Calendar events.
 - **Weekly planner:** an hour-by-hour week view of events, timed tasks and birthdays. Click an empty slot to add an event at that time.
 - **Tasks and notes:** due dates, times, priorities, labels, reminders, repeats, boards, filters and sorting, plus quick notes with search.
@@ -278,6 +306,14 @@ Kamyar is a **personal new-tab page for Google Chrome**. Every new tab shows you
 <p align="center"><img src="docs/screenshots/tour-fa.png" alt="First-run tour" width="900" /></p>
 <p align="center"><img src="docs/screenshots/update-fa.png" alt="Updating" width="900" /></p>
 <p align="center"><img src="docs/screenshots/about-fa.png" alt="Developer and support" width="900" /></p>
+<p align="center"><img src="docs/screenshots/countdown-aqi-fa.png" alt="Countdown and air quality" width="900" /></p>
+<p align="center"><img src="docs/screenshots/countdown-presets-fa.png" alt="Countdown presets" width="900" /></p>
+<p align="center"><img src="docs/screenshots/goals-fa.png" alt="Long-term goals" width="900" /></p>
+<p align="center"><img src="docs/screenshots/journal-fa.png" alt="Gratitude journal" width="900" /></p>
+<p align="center"><img src="docs/screenshots/football-fa.png" alt="Football" width="900" /></p>
+<p align="center"><img src="docs/screenshots/translator-fa.png" alt="Quick translator" width="900" /></p>
+<p align="center"><img src="docs/screenshots/family-share-fa.png" alt="Family calendar" width="900" /></p>
+<p align="center"><img src="docs/screenshots/season-yalda-fa.png" alt="Yalda look" width="900" /></p>
 <p align="center"><img src="docs/screenshots/planner-light-en.png" alt="Weekly planner" width="900" /></p>
 
 ### Where your data lives

@@ -50,6 +50,11 @@
 			"&daily=weather_code,temperature_2m_max,temperature_2m_min,sunrise,sunset&timezone=auto&forecast_days=5";
 		try {
 			const d = await fetchJson(url);
+			// Air quality (US AQI and PM2.5) from Open-Meteo's air-quality service; the weather still shows if it fails.
+			try {
+				const a = await fetchJson(`https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${city.lat}&longitude=${city.lon}&current=us_aqi,pm2_5,pm10&timezone=auto`);
+				if (a.current && a.current.us_aqi != null) d.aq = { aqi: a.current.us_aqi, pm25: a.current.pm2_5, pm10: a.current.pm10 };
+			} catch {}
 			await chrome.storage.local.set({ [CACHE_KEY]: { key, at: Date.now(), data: d } });
 			return d;
 		} catch (e) {
@@ -58,11 +63,25 @@
 		}
 	}
 
+	// US AQI bands: 0-50 good, 51-100 moderate, 101-150 unhealthy for sensitive groups, 151-200 unhealthy, 201-300 very unhealthy, 301+ hazardous.
+	function aqiLevel(v) {
+		const L = [[50, "aqGood", "#22c55e"], [100, "aqModerate", "#eab308"], [150, "aqSensitive", "#f97316"], [200, "aqUnhealthy", "#ef4444"], [300, "aqVeryUnhealthy", "#a855f7"], [1e9, "aqHazardous", "#7f1d1d"]];
+		const i = L.findIndex(([max]) => v <= max);
+		return { key: L[i][1], color: L[i][2], bad: i >= 2, i };
+	}
+	H.aqiLevel = aqiLevel;
+	function aqiWarn(city, aq) {
+		const lv = aqiLevel(aq.aqi);
+		if (!lv.bad) return;
+		const k = "kamyar_aqi_warned", day = new Date().toDateString() + city.name;
+		try { if (localStorage.getItem(k) === day) return; localStorage.setItem(k, day); } catch {}
+		H.toast(t("aqWarn", { city: city.name, n: num(Math.round(aq.aqi)), level: t(lv.key) }));
+	}
 	function draw(city) {
 		const d = data;
 		const c = d.current;
 		const [icon, label] = describe(c.weather_code, c.is_day);
-		H.wx = { icon, label: t(label), temp: n0(c.temperature_2m), city: city.name, hi: n0(d.daily.temperature_2m_max[0]), lo: n0(d.daily.temperature_2m_min[0]) };
+		H.wx = { icon, label: t(label), temp: n0(c.temperature_2m), city: city.name, hi: n0(d.daily.temperature_2m_max[0]), lo: n0(d.daily.temperature_2m_min[0]), aq: d.aq || null };
 		window.dispatchEvent(new Event("hamyar-wx"));
 		const dayFmt = new Intl.DateTimeFormat(I18n.locale, { weekday: "short", timeZone: "UTC" });
 		const days = el(
@@ -76,6 +95,12 @@
 		$("wxBody").replaceChildren(
 			el("div", { class: "wx-now" }, el("span", { class: "wx-icon" }, icon), el("div", {}, el("div", { class: "wx-temp" }, `${n0(c.temperature_2m)}°`), el("div", { class: "muted small" }, `${city.name} · ${t(label)}`))),
 			el("div", { class: "wx-meta muted small" }, [t("feels", { t: n0(c.apparent_temperature) + "°" }), t("humidity", { h: n0(c.relative_humidity_2m) }), t("wind", { w: n0(c.wind_speed_10m) }), `${t("sunrise")} ${localTime(d.daily.sunrise[0])}`, `${t("sunset")} ${localTime(d.daily.sunset[0])}`].join(" · ")),
+			...(d.aq ? [(() => {
+				const lv = aqiLevel(d.aq.aqi);
+				return el("div", { class: "aq-row" + (lv.bad ? " bad" : ""), style: `--aq:${lv.color}` },
+					el("span", { class: "aq-badge" }, num(Math.round(d.aq.aqi))),
+					el("div", { class: "aq-text" }, el("strong", {}, t("aqTitle") + ": " + t(lv.key)), el("small", { class: "muted" }, "PM2.5 " + num(Math.round(d.aq.pm25 ?? 0)) + " µg/m³" + (lv.bad ? " · " + t("aqAdvice") : ""))));
+			})()] : []),
 			days,
 			...(d.stale ? [el("p", { class: "muted small" }, t("offlineCached"))] : [])
 		);
@@ -102,6 +127,7 @@
 			}
 		}
 		draw(city);
+		if (data.aq) aqiWarn(city, data.aq);
 	}
 
 	$("wxEdit").addEventListener("click", () => {

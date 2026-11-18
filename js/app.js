@@ -19,7 +19,7 @@
 		const v = Store.get().settings[k];
 		return v === undefined ? def : v;
 	};
-	const WIDGETS = ["calendar", "weather", "rates", "prayer", "daily", "tools", "habits", "expenses", "sounds", "alerts", "snippets", "pomodoro", "focusStats", "care"];
+	const WIDGETS = ["calendar", "weather", "rates", "prayer", "daily", "tools", "habits", "expenses", "sounds", "alerts", "snippets", "pomodoro", "focusStats", "care", "goals", "journal", "worldclock", "football", "trip"];
 	const widgetOn = (w) => (setting("widgets", {}) || {})[w] !== false;
 
 	/* ---------- shared helpers for the widget scripts ---------- */
@@ -357,7 +357,7 @@
 			: el("span", { class: "bm-icon" }, item.emoji ? el("span", { class: "bm-emoji" }, item.emoji) : Brands.img(item.url, item.title, 28));
 		const main = isFolder
 			? el("button", { type: "button", class: "bm-open", onclick: () => openFolder(item.id) }, icon, el("span", { class: "bm-name", dir: "auto" }, item.title))
-			: el("a", { href: item.url, title: item.url }, icon, el("span", { class: "bm-name", dir: "auto" }, item.title));
+			: el("a", { href: item.url, title: item.url, onclick: () => bmClick(item), onauxclick: (e) => e.button === 1 && bmClick(item) }, icon, el("span", { class: "bm-name", dir: "auto" }, item.title));
 		return el(
 			"li",
 			{
@@ -408,9 +408,31 @@
 			{ icon: "🗑", label: t("delete"), danger: true, run: () => { const snap = { ...item }; delete snap.id; Store.remove(item.id); toast(t("shortcutDeleted"), { run: () => Store.add("bookmark", snap) }); } }
 		]);
 	}
+	/* Smart shortcuts: count clicks per part of the day (kept on this device) and, when turned on,
+	 * show the shortcuts used most at this time of day first. Folders count their shortcuts' clicks. */
+	const BM_CLICKS = "kamyar_bm_clicks";
+	const bucket = (h = new Date().getHours()) => (h >= 5 && h < 12 ? "m" : h >= 12 && h < 17 ? "a" : h >= 17 && h < 23 ? "e" : "n");
+	const readClicks = () => { try { return JSON.parse(localStorage.getItem(BM_CLICKS) || "{}"); } catch { return {}; } };
+	function bmClick(item) {
+		const c = readClicks();
+		const b = bucket();
+		const r = (c[item.id] ||= {});
+		r[b] = (r[b] || 0) + 1;
+		r.last = Date.now();
+		if (item.folder) { const f = (c[item.folder] ||= {}); f[b] = (f[b] || 0) + 1; }
+		try { localStorage.setItem(BM_CLICKS, JSON.stringify(c)); } catch {}
+	}
+	function smartSort(list) {
+		const c = readClicks(), b = bucket();
+		// This part of the day counts most; the rest of the day a little, so new habits still show.
+		const score = (x) => { const r = c[x.id] || {}; return (r[b] || 0) * 3 + ["m", "a", "e", "n"].reduce((s, k) => s + (r[k] || 0), 0) * 0.5; };
+		return list.map((x, i) => [x, score(x), i]).sort((p, q) => q[1] - p[1] || p[2] - q[2]).map((p) => p[0]);
+	}
+	H.bmBucket = bucket;
 	const topItems = () => [...Store.list("bookmark"), ...folders()].filter((x) => !parentOf(x)).sort((a, b) => (a.order ?? 0) - (b.order ?? 0) || a.createdAt - b.createdAt);
 	function renderBookmarks() {
-		const items = topItems().map((x) => tile(x, topItems));
+		const list = setting("smartBm", false) ? smartSort(topItems()) : topItems();
+		const items = list.map((x) => tile(x, topItems));
 		items.push(el("li", { class: "bm" }, el("button", { class: "bm-add", type: "button", onclick: () => openBmDialog() }, el("span", { class: "bm-icon" }, "+"), el("span", { class: "bm-name" }, t("add")))));
 		$("bookmarkList").replaceChildren(...items);
 		if (openFolderId) renderFolder();
@@ -679,7 +701,7 @@
 	$("boxAlphaH").addEventListener("input", (e) => { Themes.setBoxAlpha(null, Number(e.target.value)); drawBoxAlpha(); });
 	$("boxAlphaReset").addEventListener("click", () => { Themes.setBoxAlpha(80, 92); drawBoxAlpha(); });
 	$("langSelect").replaceChildren(...I18n.langs.map((l) => el("option", { value: l }, I18n.names[l])));
-	const widgetLabel = { calendar: "wCalendar", weather: "wWeather", rates: "wRates", prayer: "wPrayer", pomodoro: "wPomodoro", tools: "wTools", daily: "wDaily", habits: "wHabits", expenses: "wExpenses", sounds: "wSounds", alerts: "wAlerts", snippets: "wSnippets", focusStats: "wFocusStats", care: "wCare" };
+	const widgetLabel = { calendar: "wCalendar", weather: "wWeather", rates: "wRates", prayer: "wPrayer", pomodoro: "wPomodoro", tools: "wTools", daily: "wDaily", habits: "wHabits", expenses: "wExpenses", sounds: "wSounds", alerts: "wAlerts", snippets: "wSnippets", focusStats: "wFocusStats", care: "wCare", goals: "wGoals", journal: "wJournal", worldclock: "wWorldClock", football: "wFootball", trip: "wTrip" };
 	function renderWidgetToggles() {
 		$("widgetToggles").replaceChildren(
 			...WIDGETS.map((w) =>
@@ -790,6 +812,7 @@
 		["b", "kbShortcut", () => openBmDialog()],
 		["v", "kbVoice", () => !$("voiceBtn").hidden && $("voiceBtn").click()],
 		["i", "kbImage", () => $("imageBtn").click()],
+		["l", "kbTranslate", () => H.openTranslator && H.openTranslator()],
 		[",", "kbSettings", () => $("settingsBtn").click()],
 		["?", "kbHelp", () => showKeys()],
 	];

@@ -97,8 +97,9 @@
 	H.siteIcon = icon;
 
 	let drawnLang = null;
+	// Built only when the Services page is open: it is the largest page and most new tabs never show it.
 	function render() {
-		if (drawnLang === I18n.lang) return;
+		if (drawnLang === I18n.lang || $("viewApps").hidden) return;
 		drawnLang = I18n.lang;
 		const view = $("viewApps");
 		const sections = CATS.map(([id, emoji, names, items]) =>

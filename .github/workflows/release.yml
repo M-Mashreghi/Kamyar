@@ -20,7 +20,7 @@ jobs:
 
       - name: Build zip
         run: |
-          git archive --prefix=Kamyar/ -o "Kamyar-v${{ steps.v.outputs.version }}.zip" HEAD -- . ':!docs' ':!.github'
+          git archive --prefix=Kamyar/ -o "Kamyar-v${{ steps.v.outputs.version }}.zip" HEAD -- . ':!docs' ':!.github' ':!tests' ':!package.json'
           sed "s/{VERSION}/${{ steps.v.outputs.version }}/g" .github/release-notes.md > notes.md
 
       - name: Publish release

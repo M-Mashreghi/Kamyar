@@ -34,6 +34,7 @@
 		if (v === "plan" && panel.parentNode !== $("planSide")) $("planSide").append(panel);
 		else if (v !== "plan" && panel.parentNode !== home) home.append(panel);
 		if (v === "plan") Plan.show();
+		if (v === "apps" && window.Services) Services.render();
 		if (v === "apps") Services.render();
 		document.querySelectorAll(".rail-btn[data-go]").forEach((b) => b.classList.toggle("active", b.dataset.go === v));
 		document.documentElement.dataset.view = v;
@@ -123,7 +124,8 @@
 			el("span", { class: "wx-m-icon" }, w.icon),
 			el("span", { class: "wx-m-temp" }, w.temp + "°"),
 			el("span", { class: "wx-m-label" }, w.label),
-			el("span", { class: "wx-m-city muted", dir: "auto" }, `${w.city} · ${w.hi}° / ${w.lo}°`)
+			el("span", { class: "wx-m-city muted", dir: "auto" }, `${w.city} · ${w.hi}° / ${w.lo}°`),
+			...(w.aq && H.aqiLevel ? [(() => { const lv = H.aqiLevel(w.aq.aqi); return el("span", { class: "wx-m-aq" + (lv.bad ? " bad" : ""), style: `--aq:${lv.color}`, title: t("aqTitle") + ": " + t(lv.key) }, "AQI " + num(Math.round(w.aq.aqi))); })()] : [])
 		);
 	}
 	$("wxMini").addEventListener("click", () => {
@@ -180,7 +182,8 @@
 	function drawCalFoot() {
 		$("calFoot").replaceChildren(
 			el("a", { class: "cal-foot-btn", href: "https://calendar.google.com/" }, el("span", {}, "📅"), t("gcalOpen")),
-			el("button", { class: "cal-foot-btn", type: "button", onclick: () => $("calTitle").click() }, el("span", {}, "◉"), t("today"))
+			el("button", { class: "cal-foot-btn", type: "button", onclick: () => $("calTitle").click() }, el("span", {}, "◉"), t("today")),
+			el("button", { class: "cal-foot-btn", type: "button", onclick: () => H.openShare && H.openShare() }, el("span", {}, "👨‍👩‍👧"), t("shShort"))
 		);
 	}
 
