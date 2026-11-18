@@ -650,7 +650,7 @@
 		}
 		const active = Themes.hasWall() ? Themes.activeWall() : null;
 		$("builtinWalls").replaceChildren(...Themes.BUILTIN.map((w) => el("div", { class: "wall-th" + (w.id === active ? " on" : "") },
-			el("button", { type: "button", class: "wall-pick", "aria-pressed": String(w.id === active), title: t("useWallpaper"), onclick: async () => { await Themes.useWall(w.id); renderThemeGrid(); } }, el("img", { src: w.thumb, alt: "", loading: "lazy" })))));
+			el("button", { type: "button", class: "wall-pick", "aria-pressed": String(w.id === active), title: t("useWallpaper"), onclick: async () => { await Themes.useWall(w.id); Store.setSetting("wallBuiltin", w.id); renderThemeGrid(); } }, el("img", { src: w.thumb, alt: "", loading: "lazy" })))));
 		$("wallGrid").replaceChildren(
 			...list.map((w) => el("div", { class: "wall-th" + (w.id === active ? " on" : "") },
 				el("button", { type: "button", class: "wall-pick", "aria-pressed": String(w.id === active), title: t("useWallpaper"), onclick: async () => { await Themes.useWall(w.id); renderThemeGrid(); } }, el("img", { src: w.data, alt: "" })),
@@ -700,6 +700,18 @@
 	$("boxAlpha").addEventListener("input", (e) => { Themes.setBoxAlpha(Number(e.target.value), null); drawBoxAlpha(); });
 	$("boxAlphaH").addEventListener("input", (e) => { Themes.setBoxAlpha(null, Number(e.target.value)); drawBoxAlpha(); });
 	$("boxAlphaReset").addEventListener("click", () => { Themes.setBoxAlpha(60, 85); drawBoxAlpha(); });
+	// The box opacity and a ready-made wallpaper choice also travel with the data (Drive / Chrome Sync).
+	const saveAlpha = () => Store.setSetting("boxAlpha", Themes.boxAlpha());
+	$("boxAlpha").addEventListener("change", saveAlpha);
+	$("boxAlphaH").addEventListener("change", saveAlpha);
+	$("boxAlphaReset").addEventListener("click", saveAlpha);
+	H.onRefresh(() => {
+		const ba = setting("boxAlpha", null);
+		if (Array.isArray(ba) && String(ba) !== String(Themes.boxAlpha())) Themes.setBoxAlpha(ba[0], ba[1]);
+		const wb = setting("wallBuiltin", "");
+		const localAt = Number(localStorage.getItem("hamyar_wall_at") || 0);
+		if (wb && wb !== Themes.activeWall() && Store.settingTime("wallBuiltin") > localAt) Themes.useWall(wb).catch(() => {});
+	});
 	$("langSelect").replaceChildren(...I18n.langs.map((l) => el("option", { value: l }, I18n.names[l])));
 	const widgetLabel = { calendar: "wCalendar", weather: "wWeather", rates: "wRates", prayer: "wPrayer", pomodoro: "wPomodoro", tools: "wTools", daily: "wDaily", habits: "wHabits", expenses: "wExpenses", sounds: "wSounds", alerts: "wAlerts", snippets: "wSnippets", focusStats: "wFocusStats", care: "wCare", goals: "wGoals", journal: "wJournal", worldclock: "wWorldClock", football: "wFootball", trip: "wTrip" };
 	H.WIDGETS = WIDGETS;
@@ -917,6 +929,8 @@
 		const msg = String((e && e.message) || e);
 		return /client|oauth2|OAuth2/i.test(msg) ? t("oauthMissing") : t("connectFailed", { msg: msg.slice(0, 120) });
 	};
+	H.oauthReady = oauthReady;
+	H.driveConnect = () => runSync(true);
 	$("driveBtn").addEventListener("click", async () => {
 		const btn = $("driveBtn");
 		btn.disabled = true;
@@ -992,7 +1006,7 @@
 	window.hamyarReady = (async function init() {
 		await Store.load();
 		if (!Store.list("bookmark").length && !setting("seeded", false)) {
-			[["Google", "https://www.google.com"], ["Gmail", "https://mail.google.com"], ["YouTube", "https://www.youtube.com"], ["Drive", "https://drive.google.com"]].forEach(([title, url]) => Store.add("bookmark", { title, url }));
+			[["Google", "https://www.google.com"], ["Gmail", "https://mail.google.com"], ["YouTube", "https://www.youtube.com"], ["Drive", "https://drive.google.com"]].forEach(([title, url]) => Store.add("bookmark", { title, url, seed: true }));
 			Store.setSetting("seeded", true);
 		}
 		// 2.3: the new one-screen look starts in the dark navy theme; a later choice in Settings is kept.

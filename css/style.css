@@ -1415,3 +1415,39 @@ html.tour-boxes [data-widget="daily"] > .box-x { animation: boxPulse 1.2s ease-i
 .apps-none { text-align: center; padding: 30px; }
 @media (max-width: 760px) { .apps-top { flex-wrap: wrap; } .svc-search { flex-basis: 100%; order: 3; } }
 .apps-head { background: color-mix(in srgb, var(--bg) 72%, transparent); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); padding-inline: 10px; margin-inline: auto; border-radius: 0 0 18px 18px; max-width: 1000px; }
+
+/* ---------- v2.15: first-run setup ---------- */
+.setup { position: fixed; inset: 0; z-index: 95; display: grid; place-items: center; background: rgb(8 12 20 / 0.66); backdrop-filter: blur(6px); padding: 16px; }
+.setup-card { width: min(640px, 100%); max-height: calc(100vh - 32px); display: flex; flex-direction: column; background: var(--surface); color: var(--text); border: 1px solid var(--border); border-radius: 22px; box-shadow: 0 24px 60px rgb(0 0 0 / .4); padding: 18px 22px; }
+.setup-top, .setup-foot { display: flex; align-items: center; gap: 8px; }
+.setup-foot { padding-top: 14px; border-top: 1px solid var(--border); }
+.setup-body { flex: 1; overflow: auto; padding: 8px 2px 14px; display: flex; flex-direction: column; gap: 12px; }
+.setup-body[data-step="welcome"], .setup-body[data-step="done"] { align-items: center; text-align: center; }
+.setup-logo { width: 72px; height: 72px; margin-top: 6px; }
+.setup-h { margin: 4px 0 0; font-size: 22px; }
+.setup-p { margin: 0; line-height: 1.8; }
+.setup-langs { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.setup-body:not([data-step="welcome"]) .setup-langs { justify-content: flex-start; }
+.setup-chip { border: 1px solid var(--border); background: var(--surface-2); color: var(--text); border-radius: 999px; padding: 8px 16px; font: inherit; font-size: 14px; cursor: pointer; }
+.setup-chip.on { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.setup-opt { display: flex; gap: 12px; align-items: center; padding: 12px; border: 1px solid var(--border); border-radius: 14px; }
+.setup-opt p { margin: 2px 0 0; line-height: 1.7; }
+.setup-ic { font-size: 24px; flex: none; }
+.setup-opt .btn { flex: none; }
+.setup-msg { color: var(--accent); margin: 0; min-height: 1em; }
+.setup-body .fld { display: flex; flex-direction: column; gap: 6px; font-size: 14px; }
+.setup-body input[type=text], .setup-body input[type=date] { height: 42px; border-radius: 10px; border: 1px solid var(--border); background: var(--surface-2); color: var(--text); padding: 0 12px; font: inherit; }
+.setup-row { display: flex; gap: 8px; }
+.setup-row input { flex: 1; }
+.setup-cities { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.setup-walls { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 8px; }
+.setup-wall { aspect-ratio: 16 / 10; border-radius: 10px; overflow: hidden; border: 2px solid transparent; padding: 0; cursor: pointer; background: var(--surface-2); color: var(--muted); font: inherit; font-size: 13px; }
+.setup-wall img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.setup-wall.on { border-color: var(--accent); box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 40%, transparent); }
+.setup-grid { grid-template-columns: repeat(auto-fill, minmax(185px, 1fr)); }
+.setup-body h4 { margin: 6px 0 0; }
+.setup-party { font-size: 56px; margin-top: 10px; }
+.setup .manage-item input.switch { appearance: none; -webkit-appearance: none; flex: none; width: 42px; height: 24px; padding: 0; border-radius: 99px; border: 0; background: var(--border); position: relative; cursor: pointer; transition: background .2s; }
+.setup .manage-item input.switch::after { content: ""; position: absolute; top: 3px; inset-inline-start: 3px; width: 18px; height: 18px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgb(0 0 0 / .3); transition: inset-inline-start .2s; }
+.setup .manage-item input.switch:checked { background: var(--accent); }
+.setup .manage-item input.switch:checked::after { inset-inline-start: 21px; }

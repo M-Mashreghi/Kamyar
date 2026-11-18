@@ -57,7 +57,19 @@ function i18nParity() {
 	console.log("First run");
 	await page.goto(url);
 	await page.waitForTimeout(1500);
-	check("tour opens on first run", await page.evaluate(() => !document.getElementById("tour").hidden));
+	check("setup opens on first run (before the tour)", await page.evaluate(() => !document.getElementById("setup").hidden && document.getElementById("tour").hidden));
+	await page.click("#setupNext"); // welcome → data
+	await page.click("#setupNext"); // data → you
+	await page.fill('#setupBody input[type="text"]', "Sam");
+	await page.click("#setupNext"); // you → city
+	await page.click("#setupNext"); // city → look
+	await page.click("#setupNext"); // look → boxes
+	check("prayer reminder starts off in setup", await page.evaluate(() => [...document.querySelectorAll("#setupBody .manage-item")].some((x) => /prayer|نماز/i.test(x.textContent) && !x.querySelector("input").checked)));
+	await page.click("#setupNext"); // boxes → done
+	check("setup saved the name", (await page.textContent("#setupBody")).includes("Sam"));
+	await page.click("#setupNext"); // done → tour
+	await page.waitForTimeout(500);
+	check("tour opens after setup", await page.evaluate(() => !document.getElementById("tour").hidden && localStorage.getItem("kamyar_setup_done") === "1"));
 	await page.click("#tourSkip");
 	check("tour closes and is remembered", await page.evaluate(() => localStorage.getItem("kamyar_tour_done") === "1"));
 	await page.evaluate(async () => { await window.hamyarReady; Store.setSetting("lang", "en"); });

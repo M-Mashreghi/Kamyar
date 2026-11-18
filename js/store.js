@@ -38,8 +38,38 @@
 			if (win.deleted && now - win.updatedAt > TOMBSTONE_TTL) continue;
 			out.items[id] = win;
 		}
-		out.settings = (b.settings.updatedAt || 0) > (a.settings.updatedAt || 0) ? b.settings : a.settings;
+		out.settings = mergeSettings(a.settings, b.settings);
+		dropSeedCopies(out);
 		return out;
+	}
+
+	/* Settings merge key by key, so a change made on one device never wipes out a different change made on
+	 * another (for example the first settings of a new install against the copy in Drive). Each key's time is
+	 * kept in settings._t; older copies without it count every key at their settings.updatedAt. */
+	const keyTime = (st, k) => (st._t && typeof st._t[k] === "number" ? st._t[k] : k in st ? st.updatedAt || 0 : -1);
+	function mergeSettings(a, b) {
+		const out = { _t: {} };
+		const keys = new Set([...Object.keys(a), ...Object.keys(b)]);
+		keys.delete("_t");
+		keys.delete("updatedAt");
+		for (const k of keys) {
+			const ta = keyTime(a, k), tb = keyTime(b, k);
+			const src = tb > ta ? b : a;
+			if (k in src) out[k] = src[k];
+			out._t[k] = Math.max(ta, tb, 0);
+		}
+		out.updatedAt = Math.max(a.updatedAt || 0, b.updatedAt || 0);
+		return out;
+	}
+	// The starter shortcuts of a new install (seed: true) go away when the same site comes from another copy.
+	function dropSeedCopies(d) {
+		const live = Object.values(d.items).filter((it) => it.type === "bookmark" && !it.deleted);
+		for (const it of live) {
+			if (!it.seed) continue;
+			const same = (o) => o !== it && !d.items[o.id].deleted && (o.url || "").replace(/\/$/, "") === (it.url || "").replace(/\/$/, "");
+			// Keep a real shortcut over a starter one; of two starter ones, keep the one with the smaller id.
+			if (live.some((o) => same(o) && (!o.seed || o.id < it.id))) d.items[it.id] = { id: it.id, type: "bookmark", deleted: true, updatedAt: it.updatedAt };
+		}
 	}
 
 	async function load() {
@@ -96,9 +126,15 @@
 			emit("local");
 		},
 		setSetting(k, v) {
-			data.settings = { ...data.settings, [k]: v, updatedAt: Date.now() };
+			const now = Date.now();
+			const st = data.settings;
+			// First change after an upgrade: give every existing key the time it had so far.
+			const times = st._t ? { ...st._t } : Object.fromEntries(Object.keys(st).filter((x) => x !== "updatedAt").map((x) => [x, st.updatedAt || 0]));
+			data.settings = { ...st, [k]: v, _t: { ...times, [k]: now }, updatedAt: now };
 			emit("local");
 		},
+		/** When a setting was last changed (0 if never). */
+		settingTime: (k) => Math.max(0, keyTime(data.settings, k)),
 		subscribe(fn) {
 			listeners.add(fn);
 			return () => listeners.delete(fn);

@@ -89,6 +89,6 @@
 	addEventListener("resize", () => !$("tour").hidden && place());
 	H.onRefresh(() => !$("tour").hidden && draw());
 	(window.hamyarReady || Promise.resolve()).then(() => {
-		if (!ls("kamyar_tour_done")) setTimeout(start, 600);
+		if (!ls("kamyar_tour_done") && !(H.setupPending && H.setupPending())) setTimeout(start, 600);
 	});
 })();
