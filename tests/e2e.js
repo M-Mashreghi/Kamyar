@@ -56,7 +56,8 @@ function i18nParity() {
 
 	console.log("First run");
 	await page.goto(url);
-	await page.waitForTimeout(1500);
+	// Wait for the setup instead of a fixed time: the CI machines are slower than a desktop.
+	await page.waitForFunction(() => !document.getElementById("setup").hidden, null, { timeout: 15000 }).catch(() => {});
 	check("setup opens on first run (before the tour)", await page.evaluate(() => !document.getElementById("setup").hidden && document.getElementById("tour").hidden));
 	await page.click("#setupNext"); // welcome → data
 	await page.click("#setupNext"); // data → you
