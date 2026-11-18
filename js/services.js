@@ -99,9 +99,9 @@
 	// Everything as [id, emoji, name, items, isCustom]; custom items are {title, url}.
 	function all() {
 		return [
-			...CATS.map((c) => [c[0], c[1], tr(c[2]), c[3].map(([title, url]) => ({ title: tr(title), url })), false]),
-			...(window.SERVICES_IR || []).map((c) => [c[0], c[1], tr(c[2]), c[3].map(([title, url]) => ({ title: tr(title), url })), false]),
-			...custom().map((c) => [c.id, c.emoji || "📁", c.title, c.items || [], true])
+			...CATS.map((c) => [c[0], c[1], tr(c[2]), c[3].map(([title, url]) => ({ title: tr(title), url })), false, "world"]),
+			...(window.SERVICES_IR || []).map((c) => [c[0], c[1], tr(c[2]), c[3].map(([title, url]) => ({ title: tr(title), url })), false, "iran"]),
+			...custom().map((c) => [c.id, c.emoji || "📁", c.title, c.items || [], true, "mine"])
 		];
 	}
 	const normUrl = (u) => {
@@ -180,10 +180,41 @@
 		$("svcNewName").value = "";
 		$("svcNewEmoji").value = "";
 		$("svcDialog").close();
+		group = "mine";
+		ls("kamyar_svc_group", "mine");
+		drawnKey = null;
+		render();
 		setTimeout(() => { const s = $("apps-" + id); if (s) { s.scrollIntoView({ behavior: "smooth", block: "start" }); s.querySelector(".svc-plus")?.click(); } }, 200);
 	});
 	$("svcAllOn").addEventListener("click", () => { Store.setSetting("svcOff", {}); });
 	$("svcDialog").addEventListener("click", (e) => { if (e.target.closest("[data-close]") || e.target === $("svcDialog")) $("svcDialog").close(); });
+
+	/* ---------- top bar: group tabs (world / Iranian / mine), search, one row of category chips ---------- */
+	const ls = (k, v) => { try { return v === undefined ? localStorage.getItem(k) : localStorage.setItem(k, v); } catch { return null; } };
+	const GROUPS = [["world", "🌍", "svcWorld"], ["iran", "🇮🇷", "svcIran"], ["mine", "⭐", "svcMine"]];
+	let group = ls("kamyar_svc_group") || (I18n.lang === "fa" ? "iran" : "world");
+	let query = "";
+	const fold = (x) => x.toLowerCase().replace(/[يى]/g, "ی").replace(/ك/g, "ک").replace(/\u200c/g, " ");
+
+	function body() {
+		const hidden = off();
+		let cats = all().filter((c) => !hidden[c[0]]);
+		if (query) {
+			const q = fold(query);
+			cats = cats.map((c) => [...c.slice(0, 3), c[3].filter((it) => fold(it.title + " " + it.url).includes(q)), ...c.slice(4)]).filter((c) => c[3].length);
+			$("svcChips").replaceChildren();
+			return cats.length ? cats.map(section) : [el("p", { class: "muted apps-none" }, t("svcNoMatch"))];
+		}
+		cats = cats.filter((c) => c[5] === group);
+		$("svcChips").replaceChildren(...cats.map(([id, emoji, name]) =>
+			el("button", { type: "button", class: "apps-chip", onclick: () => $("apps-" + id).scrollIntoView({ behavior: "smooth", block: "start" }) }, emoji, " ", name)));
+		if (group === "mine" && !cats.length) return [el("div", { class: "card apps-sec apps-empty" }, el("p", {}, t("svcMineEmpty")), el("button", { class: "btn", type: "button", onclick: openManage }, "＋ ", t("svcNew")))];
+		return cats.map(section);
+	}
+	function drawBody() {
+		$("svcBody").replaceChildren(...body());
+		document.querySelectorAll(".svc-tab").forEach((b) => b.classList.toggle("on", !query && b.dataset.g === group));
+	}
 
 	let drawnKey = null;
 	// Built only when the Services page is open: it is the largest page and most new tabs never show it.
@@ -194,15 +225,17 @@
 		drawnKey = key;
 		const view = $("viewApps");
 		const top = view.scrollTop;
-		const hidden = off();
-		const cats = all().filter((c) => !hidden[c[0]]);
-		const chips = el("nav", { class: "apps-chips" },
-			el("button", { type: "button", class: "apps-chip svc-manage", onclick: openManage }, "⚙️ ", t("svcManage")),
-			...cats.map(([id, emoji, name]) =>
-				el("button", { type: "button", class: "apps-chip", onclick: () => $("apps-" + id).scrollIntoView({ behavior: "smooth", block: "start" }) }, name, " ", emoji)));
-		view.replaceChildren(chips, el("div", { class: "apps-body" }, ...cats.map(section)));
+		const search = el("input", { type: "search", class: "svc-search", placeholder: t("svcSearch"), value: query, oninput: (e) => { query = e.target.value.trim(); drawBody(); } });
+		const bar = el("div", { class: "apps-top" },
+			el("div", { class: "svc-tabs", role: "tablist" }, ...GROUPS.map(([g, emoji, label]) =>
+				el("button", { type: "button", class: "svc-tab", role: "tab", "data-g": g, onclick: () => { group = g; ls("kamyar_svc_group", g); query = ""; search.value = ""; drawBody(); view.scrollTop = 0; } }, emoji, " ", t(label)))),
+			search,
+			el("button", { type: "button", class: "icon-btn svc-manage", title: t("svcManage"), "aria-label": t("svcManage"), onclick: openManage }, "⚙️"));
+		view.replaceChildren(el("div", { class: "apps-head" }, bar, el("nav", { id: "svcChips", class: "apps-chips" })), el("div", { id: "svcBody", class: "apps-body" }));
+		drawBody();
 		view.scrollTop = top;
 	}
+	H.svcGroup = (g) => { group = g; drawBody(); };
 	H.openServicesManage = () => { H.showView?.("apps"); openManage(); };
 
 	H.onRefresh(render);

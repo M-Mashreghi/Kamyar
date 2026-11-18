@@ -1398,3 +1398,20 @@ html.tour-boxes [data-widget="daily"] > .box-x { animation: boxPulse 1.2s ease-i
 .salat-opts { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; padding: 4px 6px 10px; }
 .dialog .salat-opts label.fld { flex-direction: row; align-items: center; gap: 8px; }
 .salat-opts p { flex-basis: 100%; margin: 0; }
+
+/* Services top: tabs + search + manage, then one scrolling row of chips; stays at the top while scrolling. */
+.apps-head { position: sticky; top: 0; z-index: 3; max-width: 980px; margin: 0 auto; padding: 14px 0 8px; display: flex; flex-direction: column; gap: 8px; }
+.apps-top { display: flex; gap: 10px; align-items: center; }
+.svc-tabs { display: flex; gap: 4px; padding: 4px; border-radius: 999px; background: var(--surface); box-shadow: var(--shadow); flex: none; }
+.svc-tab { border: 0; background: none; color: var(--text); padding: 7px 14px; border-radius: 999px; font-size: 13.5px; cursor: pointer; white-space: nowrap; }
+.svc-tab:hover { background: var(--surface-2); }
+.svc-tab.on { background: var(--accent); color: var(--accent-ink); }
+.svc-search { flex: 1; min-width: 0; height: 40px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); color: var(--text); padding: 0 16px; box-shadow: var(--shadow); font: inherit; }
+.apps-top .svc-manage { flex: none; width: 40px; height: 40px; border-radius: 50%; background: var(--surface); box-shadow: var(--shadow); }
+.apps-head .apps-chips { flex-wrap: nowrap; overflow-x: auto; padding: 2px 0 4px; margin: 0; max-width: none; position: static; }
+.apps-head .apps-chip { box-shadow: none; padding: 5px 12px; font-size: 12.5px; background: color-mix(in srgb, var(--surface) 85%, transparent); }
+.apps-head .apps-chips:empty { display: none; }
+.apps-empty { text-align: center; padding: 30px; }
+.apps-none { text-align: center; padding: 30px; }
+@media (max-width: 760px) { .apps-top { flex-wrap: wrap; } .svc-search { flex-basis: 100%; order: 3; } }
+.apps-head { background: color-mix(in srgb, var(--bg) 72%, transparent); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); padding-inline: 10px; margin-inline: auto; border-radius: 0 0 18px 18px; max-width: 1000px; }

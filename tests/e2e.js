@@ -149,7 +149,15 @@ function i18nParity() {
 	console.log("Services");
 	await page.click('.rail-btn[data-go="apps"]');
 	await page.waitForTimeout(400);
-	check("Iranian categories are listed", (await page.$("#apps-ir-bank")) !== null);
+	await page.click('.svc-tab[data-g="iran"]');
+	await page.waitForTimeout(200);
+	check("Iranian tab lists Iranian categories only", (await page.$("#apps-ir-bank")) !== null && (await page.$("#apps-google")) === null);
+	await page.fill(".svc-search", "digikala");
+	await page.waitForTimeout(200);
+	check("search finds a site across tabs", (await page.textContent("#svcBody")).includes("Digikala"));
+	await page.fill(".svc-search", "");
+	await page.click('.svc-tab[data-g="iran"]');
+	await page.waitForTimeout(200);
 	await page.hover("#apps-ir-sport");
 	await page.click("#apps-ir-sport .svc-hide");
 	await page.waitForTimeout(200);

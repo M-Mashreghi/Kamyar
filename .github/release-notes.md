@@ -15,6 +15,7 @@ The first public release of Kamyar, a personal new-tab page for Chrome with no a
 
 ### تازه‌های این نسخه · New in this version
 - 🇮🇷 نزدیک ۲۷۰ سایت ایرانی در ۲۴ دسته در صفحه‌ی سرویس‌ها · About 270 Iranian sites in 24 Services categories
+- 🗂️ سرویس‌ها با سه زبانه‌ی جهانی، ایرانی و دسته‌های من، و جستجوی سایت · Services tabs (Global, Iranian, My categories) and site search
 - 🗂️ خاموش کردن دسته‌ها و ساختن دسته‌ی دلخواه · Turn categories off, or make your own
 - 🕌 یادآور نماز با شمارش معکوس تا پایان وقت (پیش‌فرض خاموش) · Prayer reminder with a countdown (off by default)
 - 🪟 شفافیت پیش‌فرض باکس‌ها کمتر شد (۶۰٪ و ۸۵٪) · Lower default box opacity (60% / 85%)

@@ -6,7 +6,7 @@
 
 <p align="center">
   <img alt="Chrome MV3" src="https://img.shields.io/badge/Chrome-Manifest%20V3-4285F4?logo=googlechrome&logoColor=white" />
-  <img alt="Version" src="https://img.shields.io/badge/version-2.14.0-6c4ff0" />
+  <img alt="Version" src="https://img.shields.io/badge/version-2.14.1-6c4ff0" />
   <img alt="Languages" src="https://img.shields.io/badge/languages-FA%20%7C%20EN%20%7C%20FR%20%7C%20DE-14b8a6" />
   <img alt="No ads" src="https://img.shields.io/badge/ads-none-3db985" />
   <img alt="No tracking" src="https://img.shields.io/badge/tracking-none-3db985" />
@@ -63,7 +63,7 @@
 - **💧👀 یادآور آب و استراحت چشم:** هر چند وقت یک کارت کوچک کنار صفحه (چپ یا راست، به انتخاب شما) می‌آید که با ✕ بسته می‌شود: «یک لیوان آب بنوشید» یا «۲۰ ثانیه به دوردست نگاه کنید» با شمارش معکوس. لیوان‌های امروز شمرده می‌شوند. وقتی کامیار باز نیست، اعلان کروم می‌آید. شب‌ها و وقتی پشت کامپیوتر نیستید چیزی نمی‌آید.
 - **📁 پوشه داخل پوشه:** پوشه‌ها می‌توانند داخل هم باشند، با مسیر بالای پوشه برای برگشتن.
 - **🪟 شفافیت باکس‌ها:** در تنظیمات › پس‌زمینه، وقتی عکس یا ویدئوی پس‌زمینه دارید، شفافیت باکس‌ها را تنظیم کنید؛ یک مقدار برای حالت عادی (پیش‌فرض ۶۰٪) و یکی برای وقتی ماوس روی باکس است (پیش‌فرض ۸۵٪، پررنگ‌تر).
-- **🇮🇷 سایت‌های ایرانی در سرویس‌ها:** نزدیک ۲۷۰ سایت در ۲۴ دسته (دولتی، بانک، بیمه، تاکسی و مسیریاب، خبر، فیلم، پیام‌رسان، فروشگاه، سلامت، هوش مصنوعی ایرانی و …). هر دسته را می‌شود خاموش کرد یا دسته‌ی دلخواه ساخت و سایت به آن اضافه کرد.
+- **🇮🇷 سایت‌های ایرانی در سرویس‌ها:** نزدیک ۲۷۰ سایت در ۲۴ دسته (دولتی، بانک، بیمه، تاکسی و مسیریاب، خبر، فیلم، پیام‌رسان، فروشگاه، سلامت، هوش مصنوعی ایرانی و …). صفحه سه زبانه دارد (جهانی، ایرانی، دسته‌های من) و جستجوی سایت. هر دسته را می‌شود خاموش کرد یا دسته‌ی دلخواه ساخت و سایت به آن اضافه کرد.
 - **🕌 یادآور نماز:** (پیش‌فرض خاموش؛ تنظیمات › تقویم و زمان) وقتی وقت نماز صبح، ظهر و عصر یا مغرب و عشا باز است، کارتی کنار صفحه با شمارش معکوس تا پایان وقت.
 - **🧩 باکس‌ها و قابلیت‌ها:** هر باکس را با ✕ گوشه‌اش خاموش کنید و از دکمه‌ی 🧩 بالای صفحه‌ی ابزارها یا تنظیمات › عمومی دوباره روشن کنید. دکمه‌های نوار کناری، یادآورها، پوسته‌ی مناسبتی و میان‌برهای هوشمند هم همان‌جا روشن و خاموش می‌شوند.
 - **🎥 هوش مصنوعی ویدیو:** دسته‌ی تازه در صفحه‌ی سرویس‌ها: Sora، Veo/Flow، Runway، Kling، Luma، Pika، Hailuo و …
@@ -264,7 +264,7 @@ Kamyar is a **personal new-tab page for Google Chrome**. Every new tab shows you
 - **Water and eye-break reminder:** every so often a small card at the edge of the page (left or right, your choice) that closes with ✕: "have a glass of water" or "look far away for 20 seconds" with a countdown. Glasses are counted per day. Without a Kamyar tab open, Chrome shows a notification instead. Nothing comes at night or while you're away.
 - **Folders inside folders**, with a breadcrumb to go back up.
 - **Box opacity:** in Settings › Background, with a background picture or video, choose how see-through the boxes are: one value normally (60% by default) and one while the pointer is on a box (85%, more solid).
-- **Iranian sites in Services:** About 270 sites in 24 categories (government, banks, insurance, taxis and maps, news, streaming, messengers, shops, health, Iranian AI…). Turn any category off, or make your own and add sites to it.
+- **Iranian sites in Services:** About 270 sites in 24 categories (government, banks, insurance, taxis and maps, news, streaming, messengers, shops, health, Iranian AI…). Three tabs (Global, Iranian, My categories) and a site search keep it tidy. Turn any category off, or make your own and add sites to it.
 - **Prayer reminder:** (off by default; Settings › Calendar) while the morning, noon & afternoon, or evening & night prayer time is open, a card counts down the time left.
 - **Boxes & features:** hide any box with the ✕ in its corner and bring it back from 🧩 at the top of the Tools page or in Settings › General. Side bar buttons, reminders, occasion looks and smart shortcuts are switched there too.
 - **AI video:** a new services category with Sora, Veo/Flow, Runway, Kling, Luma, Pika, Hailuo and more.
