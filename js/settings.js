@@ -43,7 +43,7 @@
 		const who = setting("name", "") || email || "H";
 		return el("span", { class: "avatar-letter", style: `width:${size}px;height:${size}px;font-size:${Math.round(size * 0.45)}px` }, who.trim().charAt(0).toUpperCase());
 	}
-	/* Ready-made avatars (girls and boys), drawn for Kamyar. The setting keeps just the file path. */
+	/* Ready-made avatars (girls and boys), drawn for Rubi. The setting keeps just the file path. */
 	const AV_KINDS = ["woman", "man", "girl", "boy"];
 	const AVATARS = Object.fromEntries(AV_KINDS.map((k) => [k, [1, 2, 3, 4, 5, 6, 7, 8].map((n) => "avatars/" + k + "-" + n + ".svg")]));
 	const AV_LABEL = { woman: "avWomen", man: "avMen", girl: "avGirls", boy: "avBoys" };
@@ -189,7 +189,7 @@
 		$("fontSelect").value = font;
 		$("fontGrid").replaceChildren(...Themes.FONT_LIST.map(([id, fam, name]) =>
 			el("button", { type: "button", class: "font-card" + (font === id ? " on" : ""), "aria-pressed": String(font === id), "data-font": id, onclick: () => { $("fontSelect").value = id; $("fontSelect").dispatchEvent(new Event("change")); } },
-				el("span", { class: "fc-sample", style: `font-family:${fam}`, dir: LATIN.has(id) ? "ltr" : null }, LATIN.has(id) ? "Kamyar · Aa Bb 123" : t("fontSample")), el("small", {}, name))));
+				el("span", { class: "fc-sample", style: `font-family:${fam}`, dir: LATIN.has(id) ? "ltr" : null }, LATIN.has(id) ? "Rubi · Aa Bb 123" : t("fontSample")), el("small", {}, name))));
 	}
 
 	/* ---------- video background ---------- */

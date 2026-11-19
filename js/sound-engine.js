@@ -1,4 +1,4 @@
-/* Kamyar focus sounds: every sound is synthesized live with the Web Audio API (no recordings, no downloads).
+/* Rubi focus sounds: every sound is synthesized live with the Web Audio API (no recordings, no downloads).
  * SoundEngine.create(ctx) returns { set(mix, master), tick(), stop() }.
  * mix is { soundId: volume 0..1 }. Event-based sounds (rain drops, cup clinks, crickets…) are scheduled by tick(). */
 (function (g) {

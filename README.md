@@ -1,24 +1,24 @@
-<p align="center"><img src="icons/logo.png" alt="Kamyar" width="240" /></p>
+<p align="center"><img src="icons/logo.png" alt="Rubi" width="240" /></p>
 
-<h1 align="center">Kamyar · کامیار</h1>
+<h1 align="center">Rubi · روبی</h1>
 
-<p align="center"><b>کامیار | دستیار هوشمند همه‌جانبه‌ی شما</b><br/><i>Kamyar | Your all-in-one smart assistant</i></p>
+<p align="center"><b>روبی | دستیار هوشمند همه‌جانبه‌ی شما</b><br/><i>Rubi | Your all-in-one smart assistant</i></p>
 
 <p align="center">
   <img alt="Chrome MV3" src="https://img.shields.io/badge/Chrome-Manifest%20V3-4285F4?logo=googlechrome&logoColor=white" />
-  <img alt="Version" src="https://img.shields.io/badge/version-2.21.0-6c4ff0" />
+  <img alt="Version" src="https://img.shields.io/badge/version-3.0.0-6c4ff0" />
   <img alt="Languages" src="https://img.shields.io/badge/languages-FA%20%7C%20EN%20%7C%20FR%20%7C%20DE-14b8a6" />
   <img alt="No ads" src="https://img.shields.io/badge/ads-none-3db985" />
   <img alt="No tracking" src="https://img.shields.io/badge/tracking-none-3db985" />
 </p>
 
-<h2 align="center"><a href="https://github.com/M-Mashreghi/Kamyar/releases/latest">⬇️ دانلود آخرین نسخه · Download the latest release</a></h2>
+<h2 align="center"><a href="https://github.com/M-Mashreghi/Rubi/releases/latest">⬇️ دانلود آخرین نسخه · Download the latest release</a></h2>
 
 <p align="center"><b><a href="#-نصب">📥 راهنمای نصب</a> · <a href="#-انتقال-اطلاعات-از-افزونه‌ی-دستیار">🔄 انتقال از دستیار</a> · <a href="#-install">📥 Install guide</a> · <a href="#-move-your-data-from-dastyar">🔄 Move from Dastyar</a></b></p>
 
 <p align="center"><a href="#فارسی">فارسی</a> · <a href="#english">English</a></p>
 
-<p align="center"><img src="docs/screenshots/home-dark-fa.png" alt="Kamyar home screen" width="900" /></p>
+<p align="center"><img src="docs/screenshots/home-dark-fa.png" alt="Rubi home screen" width="900" /></p>
 
 ---
 
@@ -26,7 +26,7 @@
 
 ## فارسی
 
-کامیار یک **تب جدید شخصی** برای گوگل کروم است. هر بار که تب جدید باز می‌کنید، تقویم، کارهای امروز، یادداشت‌ها، میان‌برها، آب‌وهوا و نرخ ارز جلوی چشمتان است. کامیار **هیچ تبلیغ و هیچ ردیابی ندارد** و اطلاعاتتان فقط در مرورگر و **حساب گوگل خودتان** ذخیره می‌شود.
+روبی یک **تب جدید شخصی** برای گوگل کروم است. هر بار که تب جدید باز می‌کنید، تقویم، کارهای امروز، یادداشت‌ها، میان‌برها، آب‌وهوا و نرخ ارز جلوی چشمتان است. روبی **هیچ تبلیغ و هیچ ردیابی ندارد** و اطلاعاتتان فقط در مرورگر و **حساب گوگل خودتان** ذخیره می‌شود.
 
 ### صفحه‌ی اصلی
 
@@ -34,9 +34,9 @@
 
 <p align="center"><img src="docs/screenshots/home-wallpaper-fa.png" alt="صفحه‌ی اصلی با عکس پس‌زمینه" width="900" /></p>
 
-کامیار در استفاده‌ی واقعی، با عکس پس‌زمینه‌ی دلخواه و نرخ‌های زنده:
+روبی در استفاده‌ی واقعی، با عکس پس‌زمینه‌ی دلخواه و نرخ‌های زنده:
 
-<p align="center"><img src="docs/screenshots/real-use-en.png" alt="کامیار در استفاده‌ی واقعی" width="900" /></p>
+<p align="center"><img src="docs/screenshots/real-use-en.png" alt="روبی در استفاده‌ی واقعی" width="900" /></p>
 
 ### یار هوشمند و حال خوب روزانه
 
@@ -51,7 +51,7 @@
 - **📈 سهام و شاخص‌ها:** قیمت انویدیا، اپل، S&P 500، نزدک و هر نماد دلخواه بورس آمریکا کنار نرخ ارز (فقط برای نمایش).
 - **💸 ردیاب هزینه:** خرج‌ها به تومان، دلار، یورو و … با دسته‌بندی، جمع ماهانه (بر اساس تقویم اصلی شما) و نمودار سهم هر دسته.
 - **🎧 صداهای تمرکز:** ۱۴ صدای آرامش‌بخش (باران، رعدوبرق، باد، موج دریا، رودخانه، آتش هیزم، کافه، شب تابستان، پرندگان، قطار، نویز سفید، صورتی و قهوه‌ای، و بیت آلفا) که می‌شود ترکیبشان کرد. ۸ ترکیب آماده مثل «کافه‌ی بارانی» و «شب بارانی کنار آتش» هم دارد، با تایمر خاموشی. صداها در پس‌زمینه پخش می‌شوند و با رفتن به سایت‌های دیگر قطع نمی‌شوند. همه‌ی صداها همان لحظه در خود مرورگر ساخته می‌شوند، پس فایل صوتی دانلود نمی‌شود و اینترنت هم لازم نیست.
-- **🔔 هشدار قیمت:** مثلاً «بیت‌کوین زیر ۹۰٬۰۰۰ دلار» یا «انویدیا بالای ۲۰۰ دلار». کروم اعلان می‌دهد، حتی اگر صفحه‌ی کامیار باز نباشد.
+- **🔔 هشدار قیمت:** مثلاً «بیت‌کوین زیر ۹۰٬۰۰۰ دلار» یا «انویدیا بالای ۲۰۰ دلار». کروم اعلان می‌دهد، حتی اگر صفحه‌ی روبی باز نباشد.
 - **📋 قطعه‌متن‌ها:** آدرس، جواب‌های آماده و متن‌های پرتکرار با یک کلیک کپی می‌شوند. در هر سایتی هم با راست‌کلیک در جعبه‌ی متن، همان‌جا نوشته می‌شوند.
 - **🖨 تقویم برای چاپ:** ماه شمسی با مناسبت‌ها، رویدادها و کارهای خودتان. چاپ کنید یا PDF بگیرید.
 - **🎵 این آهنگ چیه؟:** چند ثانیه گوش می‌دهد و اسم آهنگ و خواننده را با لینک اسپاتیفای، یوتیوب و اپل موزیک نشان می‌دهد. برای این کار کلید رایگان [AudD](https://dashboard.audd.io/) لازم است.
@@ -60,7 +60,7 @@
 - **🎯 بودجه‌ی ماهانه:** برای هر دسته‌ی هزینه سقف بگذارید. در ۸۰٪ و ۱۰۰٪ سقف هشدار می‌گیرید.
 - **🧮 ماشین‌حساب و مبدل در جستجو:** مثلاً «۱۲۰ دلار به تومان»، «۵ فوت به سانتی‌متر»، «۳۰ c to f» یا «۱۲×(۳+۴)». جواب همان زیر جعبه‌ی جستجو می‌آید و با یک کلیک کپی می‌شود.
 - **دو نوار کناری:** ابزارهای اصلی سمت راست، و صداها، تمرکز، مرور روز و هوش مصنوعی‌ها سمت چپ.
-- **💧👀 یادآور آب و استراحت چشم:** هر چند وقت یک کارت کوچک کنار صفحه (چپ یا راست، به انتخاب شما) می‌آید که با ✕ بسته می‌شود: «یک لیوان آب بنوشید» یا «۲۰ ثانیه به دوردست نگاه کنید» با شمارش معکوس. لیوان‌های امروز شمرده می‌شوند. وقتی کامیار باز نیست، اعلان کروم می‌آید. شب‌ها و وقتی پشت کامپیوتر نیستید چیزی نمی‌آید.
+- **💧👀 یادآور آب و استراحت چشم:** هر چند وقت یک کارت کوچک کنار صفحه (چپ یا راست، به انتخاب شما) می‌آید که با ✕ بسته می‌شود: «یک لیوان آب بنوشید» یا «۲۰ ثانیه به دوردست نگاه کنید» با شمارش معکوس. لیوان‌های امروز شمرده می‌شوند. وقتی روبی باز نیست، اعلان کروم می‌آید. شب‌ها و وقتی پشت کامپیوتر نیستید چیزی نمی‌آید.
 - **📁 پوشه داخل پوشه:** پوشه‌ها می‌توانند داخل هم باشند، با مسیر بالای پوشه برای برگشتن.
 - **🪟 شفافیت باکس‌ها:** در تنظیمات › پس‌زمینه، وقتی عکس یا ویدئوی پس‌زمینه دارید، شفافیت باکس‌ها را تنظیم کنید؛ یک مقدار برای حالت عادی (پیش‌فرض ۶۰٪) و یکی برای وقتی ماوس روی باکس است (پیش‌فرض ۸۵٪، پررنگ‌تر).
 - **👋 راه‌اندازی اول کار:** بار اول چند سؤال کوتاه می‌پرسد: زبان، آوردن اطلاعات قبلی (حساب گوگل و درایو، دستیار، فایل پشتیبان)، نام و تولد، شهر، پوسته و تصویر زمینه و باکس‌ها. بعد گشت کوتاه شروع می‌شود.
@@ -79,7 +79,7 @@
 - **🎉 پوسته‌ی مناسبتی:** در نوروز، یلدا، چهارشنبه‌سوری، محرم و کریسمس ظاهر صفحه خودش کمی عوض می‌شود.
 - **🌐 مترجم سریع:** با Alt+T (یا L) باز می‌شود؛ فارسی ↔ انگلیسی، آلمانی و زبان‌های دیگر.
 - **⚽ فوتبال:** نتیجه‌ی آخرین بازی‌ها و بازی بعدی تیم‌های محبوبتان (پرسپولیس، استقلال، تیم ملی، رئال مادرید و …).
-- **👨‍👩‍👧 تقویم خانوادگی:** تولدها و رویدادها را با یک کد یا فایل برای خانواده بفرستید تا در کامیار خودشان اضافه کنند.
+- **👨‍👩‍👧 تقویم خانوادگی:** تولدها و رویدادها را با یک کد یا فایل برای خانواده بفرستید تا در روبی خودشان اضافه کنند.
 
 <p align="center"><img src="docs/screenshots/home-daily-fa.png" alt="شعر روز و بعداً بخوانم" width="900" /></p>
 <p align="center"><img src="docs/screenshots/hafez-fal-fa.png" alt="فال حافظ" width="900" /></p>
@@ -140,9 +140,9 @@
 - میان‌برها با **لوگوی واقعی هر سایت**، پوشه، کشیدن و جابه‌جا کردن، و منوی راست‌کلیک.
 - صفحه‌ی سرویس‌ها با دسته‌بندی: **هوش مصنوعی** (Claude، ChatGPT، Gemini، DeepSeek، Qwen، NotebookLM و …)، **همه‌ی سرویس‌های گوگل**، سایت‌های ایرانی، خرید، سفر، فیلم، موسیقی، شبکه‌های اجتماعی، خبر، **خبرگزاری‌های آمریکا** (رویترز، AP، CNN، نیویورک تایمز و …)، **گیمینگ** (Steam، Epic، PlayStation، IGN و …)، **والپیپر** (Wallhaven، Wallpaper Abyss، Wallpaper Cave و …) و ابزار.
 - دسترسی سریع به Claude، ChatGPT، Gemini، Qwen، DeepSeek و NotebookLM از نوار کناری.
-- **صدای خوشامد** (پیش‌فرض خاموش): ۷ صدای ملایم هنگام باز شدن کامیار، یا صدای دلخواه خودتان.
-- **آواتار:** ۳۲ آواتار طراحی‌شده برای کامیار (زن، مرد، دختر و پسر) برای انتخاب در راه‌اندازی اول یا تنظیمات › پروفایل؛ یا عکس خودتان.
-- **پرچم کشور سایت** (پیش‌فرض خاموش): آیکون کامیار در نوار افزونه‌ها به پرچم کشوری تبدیل می‌شود که سرور سایتِ باز در آن است، با لوگوی کوچک کامیار در گوشه. کشور داخل خود افزونه پیدا می‌شود.
+- **صدای خوشامد** (پیش‌فرض خاموش): ۷ صدای ملایم هنگام باز شدن روبی، یا صدای دلخواه خودتان.
+- **آواتار:** ۳۲ آواتار طراحی‌شده برای روبی (زن، مرد، دختر و پسر) برای انتخاب در راه‌اندازی اول یا تنظیمات › پروفایل؛ یا عکس خودتان.
+- **پرچم کشور سایت** (پیش‌فرض خاموش): آیکون روبی در نوار افزونه‌ها به پرچم کشوری تبدیل می‌شود که سرور سایتِ باز در آن است، با لوگوی کوچک روبی در گوشه. کشور داخل خود افزونه پیدا می‌شود.
 
 <p align="center"><img src="docs/screenshots/services-fa.png" alt="صفحه‌ی سرویس‌ها" width="900" /></p>
 
@@ -182,35 +182,35 @@
 
 ## 👤 سازنده و حمایت
 
-- **پیشنهاد، گزارش مشکل یا ایده:** در [Issues گیت‌هاب](https://github.com/M-Mashreghi/Kamyar/issues) بنویسید.
+- **پیشنهاد، گزارش مشکل یا ایده:** در [Issues گیت‌هاب](https://github.com/M-Mashreghi/Rubi/issues) بنویسید.
 - **ایمیل:** [amiramirmashgh@gmail.com](mailto:amiramirmashgh@gmail.com)
-- **حمایت مالی:** کامیار رایگان است. اگر خواستید کمکی کنید، خیلی خوشحال می‌شوم که به نیازمندان صدقه بدهید یا به یک خیریه کمک کنید. 💚
+- **حمایت مالی:** روبی رایگان است. اگر خواستید کمکی کنید، خیلی خوشحال می‌شوم که به نیازمندان صدقه بدهید یا به یک خیریه کمک کنید. 💚
   اگر هم دوست داشتید از خود من حمایت کنید: [☕ Buy Me a Coffee](https://buymeacoffee.com/mmashreghi)
 
 ## 📥 نصب
 
-> ⚠️ **کامیار هنوز در فروشگاه کروم (Chrome Web Store) نیست، برای همین دستی نصب می‌شود. فقط چند دقیقه طول می‌کشد.**
+> ⚠️ **روبی هنوز در فروشگاه کروم (Chrome Web Store) نیست، برای همین دستی نصب می‌شود. فقط چند دقیقه طول می‌کشد.**
 
-1. **دانلود: به صفحه‌ی [Releases](https://github.com/M-Mashreghi/Kamyar/releases/latest) بروید و فایل `Kamyar-v….zip` را دانلود کنید.**
-2. **باز کردن فایل: روی فایل zip راست‌کلیک کنید و Extract All را بزنید (در مک: دوبار کلیک). پوشه‌ی `Kamyar` را جایی بگذارید که پاکش نکنید (مثلاً Documents)، چون کروم افزونه را از همین پوشه اجرا می‌کند.**
+1. **دانلود: به صفحه‌ی [Releases](https://github.com/M-Mashreghi/Rubi/releases/latest) بروید و فایل `Rubi-v….zip` را دانلود کنید.**
+2. **باز کردن فایل: روی فایل zip راست‌کلیک کنید و Extract All را بزنید (در مک: دوبار کلیک). پوشه‌ی `Rubi` را جایی بگذارید که پاکش نکنید (مثلاً Documents)، چون کروم افزونه را از همین پوشه اجرا می‌کند.**
 3. **صفحه‌ی افزونه‌ها: در نوار آدرس کروم بنویسید `chrome://extensions` و Enter بزنید.**
 4. **حالت توسعه‌دهنده: کلید Developer mode را در گوشه‌ی بالا سمت راست روشن کنید.**
-5. **نصب: دکمه‌ی Load unpacked را بزنید و پوشه‌ی `Kamyar` را انتخاب کنید (همان پوشه‌ای که فایل `manifest.json` داخلش است).**
+5. **نصب: دکمه‌ی Load unpacked را بزنید و پوشه‌ی `Rubi` را انتخاب کنید (همان پوشه‌ای که فایل `manifest.json` داخلش است).**
 6. **تب جدید: یک تب جدید باز کنید. اگر کروم پرسید «این تغییر را نگه می‌دارید؟»، گزینه‌ی Keep it را بزنید.**
 7. **ذخیره در حساب گوگل: در کروم با حساب گوگلتان وارد شوید و همگام‌سازی را روشن کنید (روی عکس پروفایل کروم بزنید ← Turn on sync) تا اطلاعاتتان روی همه‌ی دستگاه‌ها باشد.**
 
-> 💡 **به‌روزرسانی: نسخه‌ی جدید را دانلود کنید، محتوای پوشه‌ی قبلی `Kamyar` را با آن جایگزین کنید و در `chrome://extensions` روی دکمه‌ی 🔄 (Reload) افزونه بزنید. اطلاعاتتان پاک نمی‌شود. از نسخه‌ی ۲.۱۱ به بعد، کامیار هفته‌ای یک بار نسخه‌ی جدید را چک می‌کند و اگر آمده باشد بالای صفحه خبر می‌دهد.**
+> 💡 **به‌روزرسانی: نسخه‌ی جدید را دانلود کنید، محتوای پوشه‌ی قبلی `Rubi` را با آن جایگزین کنید و در `chrome://extensions` روی دکمه‌ی 🔄 (Reload) افزونه بزنید. اطلاعاتتان پاک نمی‌شود. از نسخه‌ی ۲.۱۱ به بعد، روبی هفته‌ای یک بار نسخه‌ی جدید را چک می‌کند و اگر آمده باشد بالای صفحه خبر می‌دهد.**
 
 **راهنمای کامل‌تر، از جمله وصل کردن گوگل درایو و تقویم گوگل، در [SETUP.md](SETUP.md) است.**
 
 ## 🔄 انتقال اطلاعات از افزونه‌ی دستیار
 
-> ℹ️ **اگر قبلاً افزونه‌ی دستیار را داشتید، می‌توانید کارها، بوردها، برچسب‌ها، یادداشت‌ها، میان‌برها و تولدهایتان را به کامیار بیاورید. کروم اجازه نمی‌دهد یک افزونه اطلاعات افزونه‌ی دیگر را مستقیم بخواند، برای همین این کار یک‌بار و با یک کد کوتاه انجام می‌شود (حدود ۲ دقیقه).**
+> ℹ️ **اگر قبلاً افزونه‌ی دستیار را داشتید، می‌توانید کارها، بوردها، برچسب‌ها، یادداشت‌ها، میان‌برها و تولدهایتان را به روبی بیاورید. کروم اجازه نمی‌دهد یک افزونه اطلاعات افزونه‌ی دیگر را مستقیم بخواند، برای همین این کار یک‌بار و با یک کد کوتاه انجام می‌شود (حدود ۲ دقیقه).**
 
-1. **گرفتن کد: در کامیار تنظیمات (⚙️) ← پشتیبان و انتقال ← انتقال اطلاعات… را بزنید، بعد کپی کد را بزنید. این پنجره را نبندید.**
-2. **باز کردن دستیار: در `chrome://extensions` کامیار را موقتاً خاموش کنید (دستیار باید روشن باشد) و یک تب جدید باز کنید تا صفحه‌ی دستیار بیاید. چند ثانیه صبر کنید تا کارها و یادداشت‌هایتان کامل نشان داده شود.**
+1. **گرفتن کد: در روبی تنظیمات (⚙️) ← پشتیبان و انتقال ← انتقال اطلاعات… را بزنید، بعد کپی کد را بزنید. این پنجره را نبندید.**
+2. **باز کردن دستیار: در `chrome://extensions` روبی را موقتاً خاموش کنید (دستیار باید روشن باشد) و یک تب جدید باز کنید تا صفحه‌ی دستیار بیاید. چند ثانیه صبر کنید تا کارها و یادداشت‌هایتان کامل نشان داده شود.**
 3. **اجرای کد: روی صفحه‌ی دستیار راست‌کلیک کنید ← Inspect ← زبانه‌ی Console. کد را جای‌گذاری کنید (Ctrl+V) و Enter بزنید. اگر کروم اجازه‌ی جای‌گذاری نداد، اول عبارت `allow pasting` را تایپ کنید و Enter بزنید. فایل `dastyar-export.json` دانلود می‌شود.**
-4. **وارد کردن در کامیار: کامیار را دوباره روشن کنید، به همان پنجره‌ی «انتقال از دستیار» برگردید و فایل دانلودشده را انتخاب کنید.**
+4. **وارد کردن در روبی: روبی را دوباره روشن کنید، به همان پنجره‌ی «انتقال از دستیار» برگردید و فایل دانلودشده را انتخاب کنید.**
 5. **تمام: پیامی نشان می‌دهد چند کار، یادداشت و میان‌بر منتقل شد. بعد از آن اگر خواستید، دستیار را حذف کنید.**
 
 **چند نکته:**
@@ -240,18 +240,18 @@
 
 ## English
 
-Kamyar is a **personal new-tab page for Google Chrome**. Every new tab shows your calendar, today's tasks, notes, shortcuts, weather and exchange rates on one screen. It has **no ads and no tracking**, and your data stays in your browser and your **own Google account**.
+Rubi is a **personal new-tab page for Google Chrome**. Every new tab shows your calendar, today's tasks, notes, shortcuts, weather and exchange rates on one screen. It has **no ads and no tracking**, and your data stays in your browser and your **own Google account**.
 
-<p align="center"><img src="docs/screenshots/home-light-en.png" alt="Kamyar in English with the light theme" width="900" /></p>
+<p align="center"><img src="docs/screenshots/home-light-en.png" alt="Rubi in English with the light theme" width="900" /></p>
 
 ### Features
 
 - **Smart companion:** a ✨ button next to search sends your question straight to Claude, ChatGPT, Gemini, Perplexity, DeepSeek or Kimi. **Shift+Enter** sends it to the one you used last.
 - **Daily lift:** a hopeful or motivational quote every day, a couplet of Hafez as the poem of the day, and a Hafez *fal* with the full ghazal and its interpretation.
-- **Welcome sound** (off by default): 7 gentle chimes made in the browser when Kamyar opens, or upload your own sound.
-- **Avatars:** 32 avatars drawn for Kamyar (women, men, girls and boys) to pick in the first-run setup or in Settings › Profile, or use your own photo.
+- **Welcome sound** (off by default): 7 gentle chimes made in the browser when Rubi opens, or upload your own sound.
+- **Avatars:** 32 avatars drawn for Rubi (women, men, girls and boys) to pick in the first-run setup or in Settings › Profile, or use your own photo.
 - **Read later:** save links from the side panel or by **right-clicking any page**.
-- **Site flag** (off by default): the Kamyar icon in the extensions bar turns into the flag of the country where the open site's server is, with a small Kamyar badge. The lookup happens inside the extension.
+- **Site flag** (off by default): the Rubi icon in the extensions bar turns into the flag of the country where the open site's server is, with a small Rubi badge. The lookup happens inside the extension.
 - **Habit tracker:** water, exercise, reading or anything else, with a daily target, a 7-day view and a 🔥 streak.
 - **Pick your rates:** choose which currencies, gold and crypto show on the rates bar.
 - **Morning brief:** each morning, one card with today's and overdue tasks, events and birthdays, weather, today's occasion, habits and the daily quote.
@@ -259,7 +259,7 @@ Kamyar is a **personal new-tab page for Google Chrome**. Every new tab shows you
 - **Stocks and indexes:** NVIDIA, Apple, S&P 500, Nasdaq or any US symbol next to the currency rates (display only).
 - **Expense tracker:** log spending in toman, dollars, euros and more, with categories, monthly totals (in your main calendar) and a breakdown per category.
 - **Focus sounds:** 14 sounds you can mix (rain, thunderstorm, wind, waves, stream, fireplace, café, summer night, birds, train, white, pink and brown noise, alpha beats), 8 presets and a sleep timer. They keep playing in the background while you browse. Every sound is synthesized live in the browser, so nothing is downloaded and no internet is needed.
-- **Price alerts:** for example "Bitcoin below $90,000" or "NVIDIA above $200". Chrome notifies you, even with no Kamyar tab open.
+- **Price alerts:** for example "Bitcoin below $90,000" or "NVIDIA above $200". Chrome notifies you, even with no Rubi tab open.
 - **Snippets:** addresses, canned replies and other text you type often, copied in one click. You can also insert them into any text box from the right-click menu.
 - **Printable calendar:** the month with occasions, your events and tasks, ready to print or save as PDF.
 - **What's this song?:** listens for a few seconds and shows the title and artist with Spotify, YouTube and Apple Music links. Needs a free [AudD](https://dashboard.audd.io/) key.
@@ -268,7 +268,7 @@ Kamyar is a **personal new-tab page for Google Chrome**. Every new tab shows you
 - **Monthly budget:** a cap per expense category, with warnings at 80% and 100%.
 - **Calculator and converter in search:** "120 dollars to toman", "5 ft to cm", "30 c to f" or "12*(3+4)". The answer shows under the search box and copies in one click.
 - **Two side rails:** navigation on one side; sounds, focus, the daily brief and AI shortcuts on the other.
-- **Water and eye-break reminder:** every so often a small card at the edge of the page (left or right, your choice) that closes with ✕: "have a glass of water" or "look far away for 20 seconds" with a countdown. Glasses are counted per day. Without a Kamyar tab open, Chrome shows a notification instead. Nothing comes at night or while you're away.
+- **Water and eye-break reminder:** every so often a small card at the edge of the page (left or right, your choice) that closes with ✕: "have a glass of water" or "look far away for 20 seconds" with a countdown. Glasses are counted per day. Without a Rubi tab open, Chrome shows a notification instead. Nothing comes at night or while you're away.
 - **Folders inside folders**, with a breadcrumb to go back up.
 - **Box opacity:** in Settings › Background, with a background picture or video, choose how see-through the boxes are: one value normally (60% by default) and one while the pointer is on a box (85%, more solid).
 - **First-run setup:** a few short questions the first time: language, bringing data in (Google account and Drive, Dastyar, a backup file), name and birthday, city, theme and wallpaper, and boxes. Then the short tour starts.
@@ -287,7 +287,7 @@ Kamyar is a **personal new-tab page for Google Chrome**. Every new tab shows you
 - **Occasion looks:** the page changes a little by itself for Nowruz, Yalda, Chaharshanbe Suri, Muharram and Christmas.
 - **Quick translator:** Alt+T (or L); Persian ↔ English, German and more.
 - **Football:** latest results and next matches of your teams (Persepolis, Esteghlal, Iran, Real Madrid…).
-- **Family calendar:** send birthdays and events to family as a code or a file; they add them in their own Kamyar.
+- **Family calendar:** send birthdays and events to family as a code or a file; they add them in their own Rubi.
 - **Calendar:** Persian (Solar Hijri), Gregorian and Islamic calendars side by side, with Iranian and international occasions, each with its own emoji. Twelve occasion categories that you can turn on or off one by one. Events, birthdays and reminders, with repeats. Optional Google Calendar events.
 - **Weekly planner:** an hour-by-hour week view of events, timed tasks and birthdays. Click an empty slot to add an event at that time.
 - **Tasks and notes:** due dates, times, priorities, labels, reminders, repeats, boards, filters and sorting, plus quick notes with search.
@@ -348,37 +348,37 @@ There is no server, and nothing is sent to us.
 
 ## 👤 Developer & support
 
-- **Suggestions, bugs or ideas:** open an issue on [GitHub](https://github.com/M-Mashreghi/Kamyar/issues).
+- **Suggestions, bugs or ideas:** open an issue on [GitHub](https://github.com/M-Mashreghi/Rubi/issues).
 - **Email:** [amiramirmashgh@gmail.com](mailto:amiramirmashgh@gmail.com)
-- **Donations:** Kamyar is free. If you'd like to help, I'd be very happy if you gave to those in need or to a charity. 💚
+- **Donations:** Rubi is free. If you'd like to help, I'd be very happy if you gave to those in need or to a charity. 💚
   And if you'd like to support me directly: [☕ Buy Me a Coffee](https://buymeacoffee.com/mmashreghi)
 
 ## 📥 Install
 
 > [!IMPORTANT]
-> **Kamyar is not on the Chrome Web Store yet, so you install it by hand. It takes a few minutes.**
+> **Rubi is not on the Chrome Web Store yet, so you install it by hand. It takes a few minutes.**
 
-1. **Download: go to [Releases](https://github.com/M-Mashreghi/Kamyar/releases/latest) and download `Kamyar-v….zip`.**
-2. **Unzip: right-click the zip and choose Extract All (on a Mac, double-click it). Keep the `Kamyar` folder somewhere you won't delete, such as Documents, because Chrome runs the extension from it.**
+1. **Download: go to [Releases](https://github.com/M-Mashreghi/Rubi/releases/latest) and download `Rubi-v….zip`.**
+2. **Unzip: right-click the zip and choose Extract All (on a Mac, double-click it). Keep the `Rubi` folder somewhere you won't delete, such as Documents, because Chrome runs the extension from it.**
 3. **Open extensions: type `chrome://extensions` in the address bar and press Enter.**
 4. **Developer mode: turn on the Developer mode switch in the top-right corner.**
-5. **Install: click Load unpacked and choose the `Kamyar` folder (the one that contains `manifest.json`).**
+5. **Install: click Load unpacked and choose the `Rubi` folder (the one that contains `manifest.json`).**
 6. **New tab: open a new tab. If Chrome asks whether to keep the change, click Keep it.**
 7. **Save to your Google account: sign in to Chrome and turn on sync (click your Chrome profile picture → Turn on sync) so your data follows you to every device.**
 
 > [!TIP]
-> **Updating: download the new release, replace the contents of your `Kamyar` folder, and click 🔄 (Reload) on Kamyar in `chrome://extensions`. Your data stays.**
+> **Updating: download the new release, replace the contents of your `Rubi` folder, and click 🔄 (Reload) on Rubi in `chrome://extensions`. Your data stays.**
 
 ## 🔄 Move your data from Dastyar
 
 > [!NOTE]
-> **If you used the Dastyar extension, you can bring your tasks, boards, labels, notes, shortcuts and birthdays into Kamyar. Chrome doesn't let one extension read another's data, so you run a short snippet once (about two minutes).**
+> **If you used the Dastyar extension, you can bring your tasks, boards, labels, notes, shortcuts and birthdays into Rubi. Chrome doesn't let one extension read another's data, so you run a short snippet once (about two minutes).**
 
-1. **Copy the snippet: in Kamyar open Settings (⚙️) → Backup & import → Move my data…, then click Copy code. Keep this window open.**
-2. **Open Dastyar: in `chrome://extensions`, turn Kamyar off for a moment (keep Dastyar on) and open a new tab so Dastyar's page shows. Wait a few seconds until your tasks and notes have loaded.**
+1. **Copy the snippet: in Rubi open Settings (⚙️) → Backup & import → Move my data…, then click Copy code. Keep this window open.**
+2. **Open Dastyar: in `chrome://extensions`, turn Rubi off for a moment (keep Dastyar on) and open a new tab so Dastyar's page shows. Wait a few seconds until your tasks and notes have loaded.**
 3. **Run the snippet: right-click Dastyar's page → Inspect → Console tab. Paste the snippet and press Enter. If Chrome blocks pasting, type `allow pasting`, press Enter, and paste again. A file named `dastyar-export.json` downloads.**
-4. **Import into Kamyar: turn Kamyar back on, return to the "Move from Dastyar" window, and choose the downloaded file.**
-5. **Done: Kamyar tells you how many tasks, notes and shortcuts it moved. You can remove Dastyar afterwards if you like.**
+4. **Import into Rubi: turn Rubi back on, return to the "Move from Dastyar" window, and choose the downloaded file.**
+5. **Done: Rubi tells you how many tasks, notes and shortcuts it moved. You can remove Dastyar afterwards if you like.**
 
 **Persian dates are converted automatically, and running the import again doesn't create duplicates. The file never includes Dastyar's passwords, tokens or sign-in data.**
 

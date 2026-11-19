@@ -1,7 +1,7 @@
 {
-  "name": "kamyar",
+  "name": "rubi",
   "private": true,
-  "description": "Kamyar new-tab extension: development scripts only (the extension itself needs no build).",
+  "description": "Rubi new-tab extension: development scripts only (the extension itself needs no build).",
   "scripts": {
     "test": "node tests/e2e.js && node tests/sync.js"
   },

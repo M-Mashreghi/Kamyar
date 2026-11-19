@@ -1,4 +1,4 @@
-/* Kamyar end-to-end checks: loads the extension in Chromium and walks through the main features.
+/* Rubi end-to-end checks: loads the extension in Chromium and walks through the main features.
  * Run: npm install && npx playwright install chromium && npm test
  * Network calls are answered with fixed sample data, so the run needs no internet and no keys. */
 const { chromium } = require("playwright");

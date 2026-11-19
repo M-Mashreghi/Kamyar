@@ -1,4 +1,4 @@
-/* Kamyar: answers in the search bar. Type a sum ("12*(3+4)") or a conversion
+/* Rubi: answers in the search bar. Type a sum ("12*(3+4)") or a conversion
  * ("120 دلار به تومان", "5 ft to cm", "30 c in f", "2 GB به مگابایت") and the answer shows under the box. */
 (function () {
 	"use strict";

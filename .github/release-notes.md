@@ -1,30 +1,31 @@
-**کامیار | دستیار هوشمند همه‌جانبه‌ی شما** · *Kamyar | Your all-in-one smart assistant*
+**روبی | دستیار هوشمند همه‌جانبه‌ی شما** · *Rubi | Your all-in-one smart assistant*
 
-اولین نسخه‌ی عمومی کامیار: تب جدید شخصی برای کروم، بدون تبلیغ و بدون ردیابی.
-The first public release of Kamyar, a personal new-tab page for Chrome with no ads and no tracking.
+اولین نسخه‌ی عمومی روبی: تب جدید شخصی برای کروم، بدون تبلیغ و بدون ردیابی.
+The first public release of Rubi, a personal new-tab page for Chrome with no ads and no tracking.
 
 ### نصب · Install
-1. فایل `Kamyar-v{VERSION}.zip` را از پایین همین صفحه دانلود و از حالت فشرده خارج کنید.
-   Download `Kamyar-v{VERSION}.zip` below and unzip it.
+1. فایل `Rubi-v{VERSION}.zip` را از پایین همین صفحه دانلود و از حالت فشرده خارج کنید.
+   Download `Rubi-v{VERSION}.zip` below and unzip it.
 2. `chrome://extensions` ← **Developer mode** را روشن کنید.
    Open `chrome://extensions` and turn on **Developer mode**.
-3. **Load unpacked** ← پوشه‌ی `Kamyar` را انتخاب کنید.
-   Click **Load unpacked** and choose the `Kamyar` folder.
+3. **Load unpacked** ← پوشه‌ی `Rubi` را انتخاب کنید.
+   Click **Load unpacked** and choose the `Rubi` folder.
 
-راهنمای کامل و انتقال از دستیار در [README](https://github.com/M-Mashreghi/Kamyar#نصب) است. Full guide and Dastyar import: [README](https://github.com/M-Mashreghi/Kamyar#install).
+راهنمای کامل و انتقال از دستیار در [README](https://github.com/M-Mashreghi/Rubi#نصب) است. Full guide and Dastyar import: [README](https://github.com/M-Mashreghi/Rubi#install).
 
 ### تازه‌های این نسخه · New in this version
-- 🔔 صدای خوشامد (پیش‌فرض خاموش): ۷ صدای ملایم هنگام باز شدن کامیار، یا صدای دلخواه خودتان با آپلود فایل؛ بلندی صدا و دفعات پخش قابل تنظیم · Welcome sound (off by default): 7 gentle chimes when Kamyar opens, or upload your own; volume and how often
+- 💎 **کامیار حالا «روبی» است!** نسخه‌ی ۳ با نام و لوگوی تازه. همه‌ی اطلاعات و تنظیمات شما سر جایش می‌ماند · **Kamyar is now Rubi!** Version 3 with a new name and logo; all your data and settings stay as they are
+- 🔔 صدای خوشامد (پیش‌فرض خاموش): ۷ صدای ملایم هنگام باز شدن روبی، یا صدای دلخواه خودتان با آپلود فایل؛ بلندی صدا و دفعات پخش قابل تنظیم · Welcome sound (off by default): 7 gentle chimes when Rubi opens, or upload your own; volume and how often
 - 🧑‍🎨 ۱۶ آواتار تازه‌ی بزرگسال: ۸ زن و ۸ مرد (روی هم ۳۲ آواتار) · 16 new grown-up avatars, 8 women and 8 men (32 in all)
 - 🧑‍🎨 ۱۶ آواتار تازه برای دخترها و پسرها؛ در راه‌اندازی اول و در تنظیمات › پروفایل انتخاب می‌شوند · 16 new avatars for girls and boys, to pick in the first-run setup or in Settings › Profile
-- 🏳️ پرچم کشور سایت (پیش‌فرض خاموش، در راه‌اندازی اول پرسیده می‌شود): آیکون کامیار در نوار افزونه‌ها به پرچم کشوری تبدیل می‌شود که سرور سایتِ باز در آن است، با لوگوی کوچک کامیار. کشور داخل خود افزونه پیدا می‌شود · Site flag (off by default, offered in the first-run setup): the Kamyar icon turns into the flag of the country where the site's server is, with a small Kamyar badge; looked up inside the extension
+- 🏳️ پرچم کشور سایت (پیش‌فرض خاموش، در راه‌اندازی اول پرسیده می‌شود): آیکون روبی در نوار افزونه‌ها به پرچم کشوری تبدیل می‌شود که سرور سایتِ باز در آن است، با لوگوی کوچک روبی. کشور داخل خود افزونه پیدا می‌شود · Site flag (off by default, offered in the first-run setup): the Rubi icon turns into the flag of the country where the site's server is, with a small Rubi badge; looked up inside the extension
 - 📁 پوشه‌ها زیباتر شدند: پیش‌نمایش مرتب ۲×۲ از محتوای پوشه (با «+N» برای بیشتر)، و پنجره‌ی شیشه‌ای پوشه که از خود کاشی باز می‌شود و تعداد موارد را نشان می‌دهد · Prettier folders: a tidy 2×2 preview of the contents, and a glass folder window that grows out of its tile and shows the item count
-- 📸 عکس از صفحه: روی هر سایت راست‌کلیک › «عکس از صفحه (کامیار)» › بخش دیده‌شده، کل صفحه تا پایین، انتخاب ناحیه یا با ۳ ثانیه تأخیر؛ بعد صفحه‌ی ذخیره با PNG، JPG، PDF، کپی و چاپ باز می‌شود. میان‌برها: Alt+Shift+3 / 1 / 4 · Screenshots from the right-click menu (visible part, entire page, area, delayed) with a save page for PNG, JPG, PDF, copy and print
+- 📸 عکس از صفحه: روی هر سایت راست‌کلیک › «عکس از صفحه (روبی)» › بخش دیده‌شده، کل صفحه تا پایین، انتخاب ناحیه یا با ۳ ثانیه تأخیر؛ بعد صفحه‌ی ذخیره با PNG، JPG، PDF، کپی و چاپ باز می‌شود. میان‌برها: Alt+Shift+3 / 1 / 4 · Screenshots from the right-click menu (visible part, entire page, area, delayed) with a save page for PNG, JPG, PDF, copy and print
 - 🌐 فوکوس وب‌گردی: یک جلسه‌ی ۲۵ دقیقه‌ای برای کار در اینترنت، با تایمر کوچکی روی همه‌ی سایت‌ها که می‌شود آن را کشید و هر جا گذاشت؛ سایت‌های حواس‌پرت‌کن تا پایان جلسه بسته می‌شوند · Web focus: a 25-minute session with a small draggable timer on every site; distracting sites stay blocked until it ends
 - 🖼️ همه‌ی تصویرهای آماده در راه‌اندازی اول دیده می‌شوند · All ready-made wallpapers show in the first-run setup
 - 🖼️ تصویرهای زمینه‌ی تازه (روی هم ۳۱ تصویر آماده، از جمله ۶ عکس از Pexels)؛ تصویرهای دارای نشان تجاری یا شخصیت‌های محفوظ برداشته شدند · New ready-made wallpapers (31 in all, 6 from Pexels); images with brands or protected characters were removed
 - 🔧 نوار پایین تقویم هم حالا از شفافیت باکس‌ها پیروی می‌کند · The calendar footer now follows the box opacity too
-- 🏷️ نام افزونه در کروم انگلیسی شد و شعار تازه: «کامیار، دستیار هوشمند همه‌جانبه‌ی شما» · The extension name in Chrome is now English, with the new tagline "Your all-in-one smart assistant"
+- 🏷️ نام افزونه در کروم انگلیسی شد و شعار تازه: «روبی، دستیار هوشمند همه‌جانبه‌ی شما» · The extension name in Chrome is now English, with the new tagline "Your all-in-one smart assistant"
 - 🧲 چیدمان دلخواه: باکس‌های ابزارها و دسته‌های سرویس‌ها را با ⠿ بکشید و جابه‌جا کنید؛ باکس پهن (⤢)، تعداد ستون‌ها (۲/۳/۴ برای ابزارها، ۱/۲ برای سرویس‌ها) و برگشت به چیدمان پیش‌فرض. چیدمان همگام می‌شود · Arrange your own layout: drag Tools boxes and Services categories, wide boxes, column count, reset; the layout syncs
 - 🎨 ۱۸ رنگ ساده و ملایم برای پس‌زمینه، و تنظیم شفافیت در همان راه‌اندازی اول · 18 plain colours and soft gradients as backgrounds; box opacity in the first-run setup
 - 🎂 تاریخ تولد به شمسی یا میلادی · Birthday in the Persian or Gregorian calendar

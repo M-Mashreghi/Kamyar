@@ -1,4 +1,4 @@
-/* Kamyar v2.12: long-term goals, gratitude journal, world clock and the trip / big-event countdown. */
+/* Rubi v2.12: long-term goals, gratitude journal, world clock and the trip / big-event countdown. */
 (function () {
 	"use strict";
 	const { $, el, num, setting, toast } = H;

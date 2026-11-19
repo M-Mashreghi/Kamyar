@@ -1,4 +1,4 @@
-/* Kamyar: price alerts, text snippets, printable month calendar and "what's this song?". */
+/* Rubi: price alerts, text snippets, printable month calendar and "what's this song?". */
 (function () {
 	"use strict";
 	const { $, el, num, setting, toast } = H;

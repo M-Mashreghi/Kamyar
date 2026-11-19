@@ -1,4 +1,4 @@
-/* Kamyar screenshot page: gets the capture from the background, stitches it into one picture,
+/* Rubi screenshot page: gets the capture from the background, stitches it into one picture,
  * and saves it as PNG, JPG or PDF (or copies / prints it). Nothing leaves the computer. */
 (async () => {
 	"use strict";

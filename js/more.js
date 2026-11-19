@@ -1,4 +1,4 @@
-/* Kamyar: morning brief, focus mode (with blocked sites) and a simple expense tracker. */
+/* Rubi: morning brief, focus mode (with blocked sites) and a simple expense tracker. */
 (function () {
 	"use strict";
 	const { $, el, num, setting, toast } = H;

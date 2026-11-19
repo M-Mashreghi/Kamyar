@@ -96,7 +96,7 @@
 				}
 				status = { ...status, state: status.state === "full" ? "full" : "ok" };
 			} catch (e) {
-				console.warn("[Kamyar] Chrome sync read failed", e);
+				console.warn("[Rubi] Chrome sync read failed", e);
 				status = { ...status, state: "error" };
 			}
 			emit();
@@ -104,7 +104,7 @@
 		schedulePush(ms = 3000) {
 			clearTimeout(timer);
 			timer = setTimeout(() => write(Store.get()).catch((e) => {
-				console.warn("[Kamyar] Chrome sync write failed", e);
+				console.warn("[Rubi] Chrome sync write failed", e);
 				status = { ...status, state: /QUOTA/i.test(String(e)) ? "full" : "error" };
 				emit();
 			}), ms);

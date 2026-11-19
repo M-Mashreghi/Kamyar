@@ -1,5 +1,5 @@
 /* Focus sounds mixer. The mix lives in chrome.storage.local (kamyar_sounds); the service worker plays it
- * in an offscreen document, so it keeps going in other tabs and every Kamyar tab shows the same state. */
+ * in an offscreen document, so it keeps going in other tabs and every Rubi tab shows the same state. */
 (function () {
 	"use strict";
 	const { $, el, num, toast } = H;

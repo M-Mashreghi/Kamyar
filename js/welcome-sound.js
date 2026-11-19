@@ -1,4 +1,4 @@
-/* Welcome sound (off by default): a gentle chime when a Kamyar tab opens. Built-in chimes are made
+/* Welcome sound (off by default): a gentle chime when a Rubi tab opens. Built-in chimes are made
  * with Web Audio (js/chimes.js); people can also upload their own short sound, which stays on this
  * device (chrome.storage.local, kamyar_welcome_custom). If Chrome blocks sound on a fresh tab, the
  * background plays it through the offscreen document instead.

@@ -1,5 +1,5 @@
-/* Kamyar site flag (off by default): the toolbar icon shows the flag of the country where the
- * open site's server is, with a small Kamyar badge in the corner. The country comes from the
+/* Rubi site flag (off by default): the toolbar icon shows the flag of the country where the
+ * open site's server is, with a small Rubi badge in the corner. The country comes from the
  * server's IP address, looked up in a database bundled with the extension (IP to Country Lite
  * by DB-IP, CC BY 4.0), so no address ever leaves the computer. Flags: flag-icons (MIT).
  * Needs the optional "webRequest" permission and access to all sites; both are asked for when
@@ -74,7 +74,7 @@
 			g.drawImage(art.flags, (i % 16) * 64, Math.floor(i / 16) * 64, 64, 64, 0, 0, S, S);
 			g.restore();
 			g.lineWidth = Math.max(1, S / 24); g.strokeStyle = "rgba(0,0,0,.28)"; rr(g, g.lineWidth / 2, g.lineWidth / 2, S - g.lineWidth, S - g.lineWidth, S * 0.22); g.stroke();
-			// Kamyar's badge: a small round logo in the lower corner, with a white ring.
+			// Rubi's badge: a small round logo in the lower corner, with a white ring.
 			const b = S * 0.5, x = S - b, y = S - b;
 			g.beginPath(); g.arc(x + b / 2, y + b / 2, b / 2, 0, Math.PI * 2); g.fillStyle = "#fff"; g.fill();
 			g.save(); g.beginPath(); g.arc(x + b / 2, y + b / 2, b / 2 - Math.max(1, S / 32), 0, Math.PI * 2); g.clip();
@@ -91,10 +91,10 @@
 		return (d && d.settings && d.settings.lang) || l || "fa";
 	}
 	const T = {
-		fa: (n) => `کامیار · سرور این سایت در ${n} است`, en: (n) => `Kamyar · this site's server is in ${n}`,
-		fr: (n) => `Kamyar · le serveur de ce site est en/au ${n}`, de: (n) => `Kamyar · Server dieser Seite: ${n}`
+		fa: (n) => `روبی · سرور این سایت در ${n} است`, en: (n) => `Rubi · this site's server is in ${n}`,
+		fr: (n) => `Rubi · le serveur de ce site est en/au ${n}`, de: (n) => `Rubi · Server dieser Seite: ${n}`
 	};
-	const DEF_TITLE = chrome.runtime.getManifest().action?.default_title || "Kamyar";
+	const DEF_TITLE = chrome.runtime.getManifest().action?.default_title || "Rubi";
 	async function show(tabId, cc) {
 		if (!on || tabId < 0) return;
 		try {
@@ -121,7 +121,7 @@
 		if (cc) hosts.set(host, cc);
 		show(d.tabId, cc);
 	}
-	// A tab that moves to another site (or to a cached page) gets the flag it is known by, or Kamyar's own icon.
+	// A tab that moves to another site (or to a cached page) gets the flag it is known by, or Rubi's own icon.
 	async function onTab(tabId, info) {
 		await ready;
 		if (!on || !info.url) return;

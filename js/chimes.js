@@ -1,5 +1,5 @@
-/* Kamyar welcome chimes: short, gentle sounds made on the fly with Web Audio (no audio files),
- * used when a Kamyar tab opens. Shared by the new-tab page and the offscreen document. */
+/* Rubi welcome chimes: short, gentle sounds made on the fly with Web Audio (no audio files),
+ * used when a Rubi tab opens. Shared by the new-tab page and the offscreen document. */
 (function (root) {
 	"use strict";
 	// One soft "pluck" or bell partial: a sine (or triangle) with a quick attack and a long fade.

@@ -1,4 +1,4 @@
-/* Kamyar: daily focus report (finished 25-minute Pomodoro sessions) and the weekly summary. */
+/* Rubi: daily focus report (finished 25-minute Pomodoro sessions) and the weekly summary. */
 (function () {
 	"use strict";
 	const { $, el, num, setting, toast } = H;

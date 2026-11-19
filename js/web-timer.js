@@ -1,4 +1,4 @@
-/* Kamyar web focus: a small floating timer on every site while a focus session runs.
+/* Rubi web focus: a small floating timer on every site while a focus session runs.
  * It follows the Pomodoro state (hamyar_pomo) and shows only while kamyar_webtimer.on is true.
  * Drag it anywhere; its place is remembered for all sites. Runs in a closed shadow root so pages can't restyle it. */
 (() => {

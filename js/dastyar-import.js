@@ -1,7 +1,7 @@
 /* Moving from Dastyar.
- * Kamyar cannot read another extension's storage, so the person runs a short snippet once in Dastyar's own tab
+ * Rubi cannot read another extension's storage, so the person runs a short snippet once in Dastyar's own tab
  * (DevTools console). It saves Dastyar's local data, without sign-in tokens, to dastyar-export.json.
- * This file reads that export (or any similar JSON) and turns it into Kamyar tasks, boards, labels, notes and bookmarks.
+ * This file reads that export (or any similar JSON) and turns it into Rubi tasks, boards, labels, notes and bookmarks.
  * Dastyar's formats changed between versions, so the reader looks at the shape of each object rather than exact keys. */
 (function () {
 	"use strict";
@@ -269,7 +269,7 @@
 		return found;
 	}
 
-	/** Builds the Kamyar items and merges them into the store in one write. Returns counts per kind. */
+	/** Builds the Rubi items and merges them into the store in one write. Returns counts per kind. */
 	function importInto(json) {
 		const f = collect(json);
 		const data = structuredClone(Store.get());
@@ -386,7 +386,7 @@
 		return n;
 	}
 
-	/** True when the parsed file looks like a Dastyar export rather than a Kamyar backup. */
+	/** True when the parsed file looks like a Dastyar export rather than a Rubi backup. */
 	const isDastyar = (json) => !!json && typeof json === "object" && (json.source === "dastyar" || !("items" in json));
 
 	window.DastyarImport = { SNIPPET, collect, importInto, isDastyar, readDate, j2g };

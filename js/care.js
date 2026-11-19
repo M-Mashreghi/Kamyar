@@ -128,7 +128,7 @@
 		if (u && u.newer && u.latest && u.latest !== dismissed) {
 			bar.replaceChildren(
 				el("span", {}, "🎁 "), el("span", { class: "grow" }, t("updAvail", { v: u.latest })),
-				el("a", { class: "btn small", href: u.url || "https://github.com/M-Mashreghi/Kamyar/releases/latest", target: "_blank", rel: "noopener" }, t("updGet")),
+				el("a", { class: "btn small", href: u.url || "https://github.com/M-Mashreghi/Rubi/releases/latest", target: "_blank", rel: "noopener" }, t("updGet")),
 				el("button", { type: "button", class: "btn btn-ghost small", onclick: () => H.updateHelp(u) }, t("updHow")),
 				el("button", { type: "button", class: "care-x", title: t("close"), "aria-label": t("close"), onclick: () => { try { localStorage.setItem("kamyar_upd_dismissed", u.latest); } catch {} dismissed = u.latest; bar.hidden = true; } }, "✕"));
 			bar.hidden = false;
@@ -175,7 +175,7 @@
 			// After an update, say so once.
 			if (s.kamyar_whatsnew) {
 				chrome.storage.local.remove("kamyar_whatsnew");
-				toast(t("updDone", { v: s.kamyar_whatsnew }), { label: t("updWhatsNew"), run: () => window.open("https://github.com/M-Mashreghi/Kamyar/releases/tag/v" + s.kamyar_whatsnew, "_blank", "noopener") });
+				toast(t("updDone", { v: s.kamyar_whatsnew }), { label: t("updWhatsNew"), run: () => window.open("https://github.com/M-Mashreghi/Rubi/releases/tag/v" + s.kamyar_whatsnew, "_blank", "noopener") });
 			}
 		} else drawUpdate(null);
 		draw();

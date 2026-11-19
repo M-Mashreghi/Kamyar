@@ -1,4 +1,4 @@
-/* Kamyar extras: ask an AI from the search box, the daily card (hopeful quote, poem of the day, Hafez fal),
+/* Rubi extras: ask an AI from the search box, the daily card (hopeful quote, poem of the day, Hafez fal),
  * "read later" links, the habit tracker and the choice of rates on the home ticker. */
 (function () {
 	"use strict";
@@ -152,7 +152,7 @@
 		if (addLater(v)) $("laterInput").value = "";
 		else toast(t("invalidUrl"));
 	});
-	// Links saved from the right-click menu wait in local storage until a Kamyar tab picks them up.
+	// Links saved from the right-click menu wait in local storage until a Rubi tab picks them up.
 	async function drainInbox() {
 		if (!globalThis.chrome?.storage?.local) return;
 		const { kamyar_inbox: box } = await chrome.storage.local.get("kamyar_inbox");

@@ -933,7 +933,7 @@
 			sync.last = Date.now();
 			sync.email = await Drive.getEmail();
 		} catch (e) {
-			console.warn("[Kamyar] sync failed", e);
+			console.warn("[Rubi] sync failed", e);
 			sync.state = !navigator.onLine ? "offline" : e && e.status === 401 ? "auth" : "error";
 			if (interactive) throw e;
 		} finally {

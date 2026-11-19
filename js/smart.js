@@ -1,4 +1,4 @@
-/* Kamyar v2.12: seasonal looks, quick translator, football scores, family calendar sharing and their settings. */
+/* Rubi v2.12: seasonal looks, quick translator, football scores, family calendar sharing and their settings. */
 (function () {
 	"use strict";
 	const { $, el, num, setting, toast } = H;
@@ -206,10 +206,10 @@
 		const gz = new Uint8Array(await new Response(new Blob([bytes]).stream().pipeThrough(new CompressionStream("gzip"))).arrayBuffer());
 		let bin = "";
 		gz.forEach((b) => (bin += String.fromCharCode(b)));
-		return "KAMYAR1:" + btoa(bin);
+		return "RUBI1:" + btoa(bin);
 	}
 	async function unpackCode(code) {
-		const b64 = code.trim().replace(/^KAMYAR1:/, "").replace(/\s+/g, "");
+		const b64 = code.trim().replace(/^RUBI1:/, "").replace(/\s+/g, "");
 		const bin = atob(b64);
 		const bytes = Uint8Array.from(bin, (c) => c.charCodeAt(0));
 		return JSON.parse(await new Response(new Blob([bytes]).stream().pipeThrough(new DecompressionStream("gzip"))).text());

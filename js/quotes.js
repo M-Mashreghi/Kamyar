@@ -1,4 +1,4 @@
-/* Hopeful and motivational sentences for the daily card. Persian sayings are proverbs or written for Kamyar;
+/* Hopeful and motivational sentences for the daily card. Persian sayings are proverbs or written for Rubi;
  * quoted lines name their author. One is picked per day, and the ↻ button shows the next one. */
 window.Quotes = {
 	fa: [

@@ -18,7 +18,7 @@
 		eng.set(s.mix, s.master);
 		eng.tick();
 	}
-	// Welcome chime for a new Kamyar tab when Chrome didn't let the tab itself make sound.
+	// Welcome chime for a new Rubi tab when Chrome didn't let the tab itself make sound.
 	function welcome(m) {
 		if (m.data) {
 			const a = new Audio(m.data);

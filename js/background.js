@@ -1,6 +1,6 @@
 importScripts("i18n-bg.js", "events-core.js", "site-flag.js");
 
-// Clicking the toolbar icon opens a new tab (the Kamyar page).
+// Clicking the toolbar icon opens a new tab (the Rubi page).
 chrome.action.onClicked.addListener(() => chrome.tabs.create({}));
 
 // Pomodoro: finish the session when its alarm fires, even if no new tab is open.
@@ -81,9 +81,9 @@ chrome.notifications.onClicked.addListener((nid) => {
 	if (nid.startsWith("hamyar-")) chrome.tabs.create({});
 });
 
-// Right-click menu: "Save to Read later". The link waits in local storage until a Kamyar tab picks it up.
-const LATER_TITLE = { fa: "ذخیره در «بعداً بخوانم» کامیار", en: "Save to Kamyar Read later", fr: "Enregistrer dans Kamyar · À lire plus tard", de: "In Kamyar · Später lesen speichern" };
-const SNIP_TITLE = { fa: "قطعه‌متن‌های کامیار", en: "Kamyar snippets", fr: "Extraits Kamyar", de: "Kamyar-Textbausteine" };
+// Right-click menu: "Save to Read later". The link waits in local storage until a Rubi tab picks it up.
+const LATER_TITLE = { fa: "ذخیره در «بعداً بخوانم» روبی", en: "Save to Rubi Read later", fr: "Enregistrer dans Rubi · À lire plus tard", de: "In Rubi · Später lesen speichern" };
+const SNIP_TITLE = { fa: "قطعه‌متن‌های روبی", en: "Rubi snippets", fr: "Extraits Rubi", de: "Rubi-Textbausteine" };
 const snippetsOf = (data) => Object.values((data && data.items) || {}).filter((x) => x && x.type === "snippet" && !x.deleted).sort((a, b) => (a.createdAt || 0) - (b.createdAt || 0)).slice(0, 30);
 let menuSig = "";
 async function setupMenu(force) {
@@ -191,7 +191,7 @@ async function applySounds() {
 let welcomeClose = 0;
 async function playWelcome(m) {
 	if (!(await hasOffscreen())) {
-		offscreenBusy ||= chrome.offscreen.createDocument({ url: "offscreen.html", reasons: ["AUDIO_PLAYBACK"], justification: "Play the welcome chime the person chose when a Kamyar tab opens." }).catch(() => {});
+		offscreenBusy ||= chrome.offscreen.createDocument({ url: "offscreen.html", reasons: ["AUDIO_PLAYBACK"], justification: "Play the welcome chime the person chose when a Rubi tab opens." }).catch(() => {});
 		await offscreenBusy;
 		offscreenBusy = null;
 	}
@@ -298,7 +298,7 @@ chrome.runtime.onInstalled.addListener(ensureAlertAlarm);
 chrome.runtime.onStartup.addListener(ensureAlertAlarm);
 
 // Water and eye-break reminders. Settings live in hamyar_data.settings.care; the last time each one fired is in kamyar_care_state.
-// A visible Kamyar tab shows its own card at the page edge; otherwise Chrome shows a notification (if allowed in the settings).
+// A visible Rubi tab shows its own card at the page edge; otherwise Chrome shows a notification (if allowed in the settings).
 const CARE_STR = {
 	fa: { water: "💧 وقت یک لیوان آب", waterMsg: "چند دقیقه‌ای است آب نخورده‌اید. یک لیوان آب بنوشید.", eye: "👀 به چشم‌هایت استراحت بده", eyeMsg: "۲۰ ثانیه به چیزی در فاصله‌ی دور (حدود ۶ متر) نگاه کنید.", drank: "نوشیدم ✓", later: "۱۰ دقیقه‌ی دیگر" },
 	en: { water: "💧 Time for a glass of water", waterMsg: "It's been a while. Have a glass of water.", eye: "👀 Rest your eyes", eyeMsg: "Look at something about 6 metres (20 feet) away for 20 seconds.", drank: "Done ✓", later: "In 10 minutes" },
@@ -358,7 +358,7 @@ chrome.notifications.onButtonClicked.addListener(async (nid, btn) => {
 });
 
 // Update notice for copies installed from the zip, checked once a week (Chrome Web Store copies update by themselves).
-const REPO = "M-Mashreghi/Kamyar";
+const REPO = "M-Mashreghi/Rubi";
 const newer = (a, b) => {
 	const x = String(a).replace(/^v/, "").split(".").map(Number), y = String(b).replace(/^v/, "").split(".").map(Number);
 	for (let i = 0; i < 3; i++) if ((x[i] || 0) !== (y[i] || 0)) return (x[i] || 0) > (y[i] || 0);
@@ -404,7 +404,7 @@ chrome.runtime.onStartup.addListener(ensureKamyarAlarms);
 
 /* ---------- Web focus: the floating timer on every site (js/web-timer.js) ----------
  * kamyar_webtimer.on shows it; it follows the Pomodoro state. The page asks for the optional
- * "<all_urls>" permission first; without it the timer only shows inside Kamyar. */
+ * "<all_urls>" permission first; without it the timer only shows inside Rubi. */
 const WEBT = "kamyar_webtimer", WEBT_ID = "kamyar-webtimer";
 async function applyWebTimer() {
 	const w = (await chrome.storage.local.get(WEBT))[WEBT];
@@ -464,13 +464,13 @@ chrome.runtime.onMessage.addListener((m, _s, reply) => {
 	return true;
 });
 
-/* ---------- Screenshots (right-click › Kamyar screenshot, or the keyboard shortcuts) ----------
+/* ---------- Screenshots (right-click › Rubi screenshot, or the keyboard shortcuts) ----------
  * The capture is kept in memory here and handed to capture.html, which stitches, previews and saves it. */
 const SHOT_TITLES = {
-	fa: { parent: "📸 عکس از صفحه (کامیار)", visible: "بخش دیده‌شده‌ی صفحه", full: "کل صفحه (تا پایین)", area: "انتخاب یک ناحیه…", delay: "بخش دیده‌شده، بعد از ۳ ثانیه" },
-	en: { parent: "📸 Kamyar screenshot", visible: "Visible part", full: "Entire page", area: "Select an area…", delay: "Visible part in 3 seconds" },
-	fr: { parent: "📸 Capture Kamyar", visible: "Partie visible", full: "Page entière", area: "Choisir une zone…", delay: "Partie visible dans 3 s" },
-	de: { parent: "📸 Kamyar-Screenshot", visible: "Sichtbarer Bereich", full: "Ganze Seite", area: "Bereich auswählen…", delay: "Sichtbarer Bereich in 3 s" }
+	fa: { parent: "📸 عکس از صفحه (روبی)", visible: "بخش دیده‌شده‌ی صفحه", full: "کل صفحه (تا پایین)", area: "انتخاب یک ناحیه…", delay: "بخش دیده‌شده، بعد از ۳ ثانیه" },
+	en: { parent: "📸 Rubi screenshot", visible: "Visible part", full: "Entire page", area: "Select an area…", delay: "Visible part in 3 seconds" },
+	fr: { parent: "📸 Capture Rubi", visible: "Partie visible", full: "Page entière", area: "Choisir une zone…", delay: "Partie visible dans 3 s" },
+	de: { parent: "📸 Rubi-Screenshot", visible: "Sichtbarer Bereich", full: "Ganze Seite", area: "Bereich auswählen…", delay: "Sichtbarer Bereich in 3 s" }
 };
 const shots = new Map(); // id -> capture, until the capture page takes it
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
