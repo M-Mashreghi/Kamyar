@@ -55,6 +55,7 @@
 		you() {
 			return [
 				...head("setupYouT", "setupYouText"),
+				el("div", { class: "fld" }, el("span", {}, t("avChoose")), H.avatarPicker(true)),
 				el("label", { class: "fld" }, el("span", {}, t("setupName")), el("input", { type: "text", maxlength: 40, value: setting("name", ""), placeholder: t("setupNamePh"), oninput: (e) => Store.setSetting("name", e.target.value.trim()) })),
 				el("div", { class: "fld" }, el("span", {}, t("setupBirthday")), H.bdayPicker()),
 				el("p", { class: "muted small" }, t("setupYouNote"))

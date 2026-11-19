@@ -14,6 +14,7 @@ The first public release of Kamyar, a personal new-tab page for Chrome with no a
 راهنمای کامل و انتقال از دستیار در [README](https://github.com/M-Mashreghi/Kamyar#نصب) است. Full guide and Dastyar import: [README](https://github.com/M-Mashreghi/Kamyar#install).
 
 ### تازه‌های این نسخه · New in this version
+- 🧑‍🎨 ۱۶ آواتار تازه برای دخترها و پسرها؛ در راه‌اندازی اول و در تنظیمات › پروفایل انتخاب می‌شوند · 16 new avatars for girls and boys, to pick in the first-run setup or in Settings › Profile
 - 🏳️ پرچم کشور سایت (پیش‌فرض خاموش، در راه‌اندازی اول پرسیده می‌شود): آیکون کامیار در نوار افزونه‌ها به پرچم کشوری تبدیل می‌شود که سرور سایتِ باز در آن است، با لوگوی کوچک کامیار. کشور داخل خود افزونه پیدا می‌شود · Site flag (off by default, offered in the first-run setup): the Kamyar icon turns into the flag of the country where the site's server is, with a small Kamyar badge; looked up inside the extension
 - 📁 پوشه‌ها زیباتر شدند: پیش‌نمایش مرتب ۲×۲ از محتوای پوشه (با «+N» برای بیشتر)، و پنجره‌ی شیشه‌ای پوشه که از خود کاشی باز می‌شود و تعداد موارد را نشان می‌دهد · Prettier folders: a tidy 2×2 preview of the contents, and a glass folder window that grows out of its tile and shows the item count
 - 📸 عکس از صفحه: روی هر سایت راست‌کلیک › «عکس از صفحه (کامیار)» › بخش دیده‌شده، کل صفحه تا پایین، انتخاب ناحیه یا با ۳ ثانیه تأخیر؛ بعد صفحه‌ی ذخیره با PNG، JPG، PDF، کپی و چاپ باز می‌شود. میان‌برها: Alt+Shift+3 / 1 / 4 · Screenshots from the right-click menu (visible part, entire page, area, delayed) with a save page for PNG, JPG, PDF, copy and print

@@ -6,7 +6,7 @@
 
 <p align="center">
   <img alt="Chrome MV3" src="https://img.shields.io/badge/Chrome-Manifest%20V3-4285F4?logo=googlechrome&logoColor=white" />
-  <img alt="Version" src="https://img.shields.io/badge/version-2.19.0-6c4ff0" />
+  <img alt="Version" src="https://img.shields.io/badge/version-2.20.0-6c4ff0" />
   <img alt="Languages" src="https://img.shields.io/badge/languages-FA%20%7C%20EN%20%7C%20FR%20%7C%20DE-14b8a6" />
   <img alt="No ads" src="https://img.shields.io/badge/ads-none-3db985" />
   <img alt="No tracking" src="https://img.shields.io/badge/tracking-none-3db985" />
@@ -140,6 +140,7 @@
 - میان‌برها با **لوگوی واقعی هر سایت**، پوشه، کشیدن و جابه‌جا کردن، و منوی راست‌کلیک.
 - صفحه‌ی سرویس‌ها با دسته‌بندی: **هوش مصنوعی** (Claude، ChatGPT، Gemini، DeepSeek، Qwen، NotebookLM و …)، **همه‌ی سرویس‌های گوگل**، سایت‌های ایرانی، خرید، سفر، فیلم، موسیقی، شبکه‌های اجتماعی، خبر، **خبرگزاری‌های آمریکا** (رویترز، AP، CNN، نیویورک تایمز و …)، **گیمینگ** (Steam، Epic، PlayStation، IGN و …)، **والپیپر** (Wallhaven، Wallpaper Abyss، Wallpaper Cave و …) و ابزار.
 - دسترسی سریع به Claude، ChatGPT، Gemini، Qwen، DeepSeek و NotebookLM از نوار کناری.
+- **آواتار:** ۱۶ آواتار طراحی‌شده برای کامیار (دختر و پسر) برای انتخاب در راه‌اندازی اول یا تنظیمات › پروفایل؛ یا عکس خودتان.
 - **پرچم کشور سایت** (پیش‌فرض خاموش): آیکون کامیار در نوار افزونه‌ها به پرچم کشوری تبدیل می‌شود که سرور سایتِ باز در آن است، با لوگوی کوچک کامیار در گوشه. کشور داخل خود افزونه پیدا می‌شود.
 
 <p align="center"><img src="docs/screenshots/services-fa.png" alt="صفحه‌ی سرویس‌ها" width="900" /></p>
@@ -246,6 +247,7 @@ Kamyar is a **personal new-tab page for Google Chrome**. Every new tab shows you
 
 - **Smart companion:** a ✨ button next to search sends your question straight to Claude, ChatGPT, Gemini, Perplexity, DeepSeek or Kimi. **Shift+Enter** sends it to the one you used last.
 - **Daily lift:** a hopeful or motivational quote every day, a couplet of Hafez as the poem of the day, and a Hafez *fal* with the full ghazal and its interpretation.
+- **Avatars:** 16 avatars drawn for Kamyar (girls and boys) to pick in the first-run setup or in Settings › Profile, or use your own photo.
 - **Read later:** save links from the side panel or by **right-clicking any page**.
 - **Site flag** (off by default): the Kamyar icon in the extensions bar turns into the flag of the country where the open site's server is, with a small Kamyar badge. The lookup happens inside the extension.
 - **Habit tracker:** water, exercise, reading or anything else, with a daily target, a 7-day view and a 🔥 streak.

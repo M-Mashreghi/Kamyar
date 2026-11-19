@@ -66,6 +66,8 @@ function i18nParity() {
 	check("setup opens on first run (before the tour)", await page.evaluate(() => !document.getElementById("setup").hidden && document.getElementById("tour").hidden), await page.evaluate(() => ({ setup: document.getElementById("setup").hidden, tour: document.getElementById("tour").hidden, ls: Object.keys(localStorage), wall: localStorage.getItem("hamyar_wall_id") })));
 	await page.click("#setupNext"); // welcome → data
 	await page.click("#setupNext"); // data → you
+	await page.click("#setupBody .av-btn >> nth=9");
+	check("an avatar can be picked in setup", (await page.evaluate(() => H.setting("avatar", ""))) === "avatars/boy-2.svg");
 	await page.fill('#setupBody input[type="text"]', "Sam");
 	await page.click("#setupNext"); // you → city
 	await page.click("#setupNext"); // city → look

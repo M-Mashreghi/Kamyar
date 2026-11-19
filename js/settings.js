@@ -43,8 +43,30 @@
 		const who = setting("name", "") || email || "H";
 		return el("span", { class: "avatar-letter", style: `width:${size}px;height:${size}px;font-size:${Math.round(size * 0.45)}px` }, who.trim().charAt(0).toUpperCase());
 	}
+	/* Ready-made avatars (girls and boys), drawn for Kamyar. The setting keeps just the file path. */
+	const AVATARS = { girl: [1, 2, 3, 4, 5, 6, 7, 8].map((n) => "avatars/girl-" + n + ".svg"), boy: [1, 2, 3, 4, 5, 6, 7, 8].map((n) => "avatars/boy-" + n + ".svg") };
+	function avatarPicker(withUpload) {
+		const box = el("div", { class: "av-pick" });
+		const draw = () => {
+			const cur = setting("avatar", "");
+			const row = (k) => el("div", { class: "av-group" }, el("span", { class: "av-label muted small" }, t(k === "girl" ? "avGirls" : "avBoys")),
+				el("div", { class: "av-row" }, ...AVATARS[k].map((src) => el("button", { type: "button", class: "av-btn" + (cur === src ? " on" : ""), "aria-pressed": String(cur === src), title: t("avPick"), onclick: () => { Store.setSetting("avatar", src); draw(); } }, el("img", { src, alt: "", width: "56", height: "56" })))));
+			box.replaceChildren(row("girl"), row("boy"),
+				withUpload ? el("div", { class: "av-more" },
+					el("button", { type: "button", class: "setup-chip", onclick: () => $("avatarInput").click() }, "📷 " + t("avOwn")),
+					cur ? el("button", { type: "button", class: "link-btn", onclick: () => { Store.setSetting("avatar", ""); draw(); } }, t("removeAvatar")) : "") : "");
+		};
+		draw();
+		box.redraw = draw;
+		H.onRefresh(() => box.isConnected && draw());
+		return box;
+	}
+	H.avatarPicker = avatarPicker;
+	const profPick = avatarPicker(false);
+	$("avatarPick").replaceChildren(profPick);
 	function renderProfile() {
 		$("profAvatar").replaceChildren(avatarEl(88));
+		profPick.redraw();
 		$("profName").textContent = setting("name", "") || t("noName");
 		$("profEmail").textContent = setting("username", "") ? "@" + setting("username", "") : email;
 		$("avatarRemove").hidden = !setting("avatar", "");

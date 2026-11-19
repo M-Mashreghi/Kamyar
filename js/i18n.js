@@ -4,6 +4,7 @@
 	"use strict";
 	const D = {};
 	D.fa = {
+		avChoose: "آواتار خودتان را انتخاب کنید", avGirls: "دختر", avBoys: "پسر", avPick: "انتخاب این آواتار", avOwn: "عکس خودم",
 		siteFlag: "پرچم کشور سایت روی آیکون کامیار", siteFlagT: "پرچم کشور هر سایت 🏳️", siteFlagText: "با روشن کردن این گزینه، آیکون کامیار در نوار افزونه‌ها به پرچم کشوری تبدیل می‌شود که سرور سایتِ باز در آن است، با لوگوی کوچک کامیار در گوشه. مثلاً روی سایتی که در ایران است پرچم ایران را می‌بینید. اسم کشور هم با نگه داشتن ماوس روی آیکون نشان داده می‌شود.", siteFlagYes: "بله، روشن شود", siteFlagNo: "نه، فعلاً نه", siteFlagNote: "کروم برای این کار اجازه‌ی دیدن آدرس سرور سایت‌ها را می‌خواهد. کشور داخل خود افزونه پیدا می‌شود و آدرس هیچ سایتی جایی فرستاده نمی‌شود. بعداً از «باکس‌ها و قابلیت‌ها» هم می‌توانید روشن یا خاموشش کنید. داده‌ی کشورها:", siteFlagNoPerm: "بدون اجازه‌ی کروم، پرچم سایت‌ها نشان داده نمی‌شود",
 		folderCount: "{n} مورد", folderEmpty: "خالی است؛ با + یا کشیدن میان‌بر رویش چیزی اضافه کنید",
 		webFocusStart: "فوکوس وب‌گردی (۲۵ دقیقه)", webFocusStop: "پایان فوکوس وب‌گردی", webFocusBlock: "سایت‌های حواس‌پرت‌کن بسته شوند", webFocusNote: "تایمر کوچکی روی همه‌ی سایت‌ها نشان داده می‌شود؛ می‌توانید آن را بکشید و هر جا بگذارید.", webFocusOn: "فوکوس شروع شد؛ تایمر روی همه‌ی سایت‌ها هست.", webFocusNoPerm: "فوکوس شروع شد. برای دیدن تایمر روی سایت‌ها، اجازه‌ی دسترسی را بدهید.", webFocusDone: "جلسه‌ی تمرکز تمام شد 🎉 کمی استراحت کنید.",
@@ -58,6 +59,7 @@
 		h_newyear: "سال نو میلادی", h_christmas: "کریسمس"
 	};
 	D.en = {
+		avChoose: "Pick your avatar", avGirls: "Girls", avBoys: "Boys", avPick: "Use this avatar", avOwn: "My own photo",
 		siteFlag: "Site's country flag on the Kamyar icon", siteFlagT: "A flag for every site 🏳️", siteFlagText: "When this is on, the Kamyar icon in the extensions bar turns into the flag of the country where the open site's server is, with a small Kamyar logo in the corner. On a site hosted in Iran, for example, you see Iran's flag. Hover over the icon to see the country's name.", siteFlagYes: "Yes, turn it on", siteFlagNo: "Not now", siteFlagNote: "Chrome will ask to let Kamyar see the server address of sites. The country is found inside the extension, and no site address is sent anywhere. You can change this later in Boxes and features. Country data:", siteFlagNoPerm: "Without Chrome's permission, site flags can't be shown",
 		folderCount: "{n} items", folderEmpty: "Empty. Add with +, or drag a shortcut onto the folder",
 		webFocusStart: "Web focus (25 min)", webFocusStop: "End web focus", webFocusBlock: "Block distracting sites", webFocusNote: "A small timer shows on every site; drag it anywhere.", webFocusOn: "Focus started; the timer is on every site.", webFocusNoPerm: "Focus started. Allow access to see the timer on sites.", webFocusDone: "Focus session done 🎉 Take a short break.",
@@ -112,6 +114,7 @@
 		h_newyear: "New Year's Day", h_christmas: "Christmas"
 	};
 	D.fr = {
+		avChoose: "Choisissez votre avatar", avGirls: "Filles", avBoys: "Garçons", avPick: "Utiliser cet avatar", avOwn: "Ma propre photo",
 		siteFlag: "Drapeau du pays du site sur l'icône Kamyar", siteFlagT: "Un drapeau pour chaque site 🏳️", siteFlagText: "Une fois activé, l'icône Kamyar dans la barre des extensions devient le drapeau du pays où se trouve le serveur du site ouvert, avec un petit logo Kamyar dans le coin. Survolez l'icône pour voir le nom du pays.", siteFlagYes: "Oui, activer", siteFlagNo: "Pas maintenant", siteFlagNote: "Chrome demandera l'autorisation de voir l'adresse du serveur des sites. Le pays est trouvé dans l'extension et aucune adresse n'est envoyée nulle part. Modifiable plus tard dans Blocs et fonctions. Données des pays :", siteFlagNoPerm: "Sans l'autorisation de Chrome, les drapeaux ne peuvent pas s'afficher",
 		folderCount: "{n} éléments", folderEmpty: "Vide. Ajoutez avec +, ou glissez un raccourci sur le dossier",
 		webFocusStart: "Concentration web (25 min)", webFocusStop: "Terminer la concentration", webFocusBlock: "Bloquer les sites distrayants", webFocusNote: "Un petit minuteur s'affiche sur chaque site ; déplacez-le où vous voulez.", webFocusOn: "C'est parti ; le minuteur est sur chaque site.", webFocusNoPerm: "C'est parti. Autorisez l'accès pour voir le minuteur sur les sites.", webFocusDone: "Session terminée 🎉 Faites une petite pause.",
@@ -166,6 +169,7 @@
 		h_newyear: "Jour de l'An", h_christmas: "Noël"
 	};
 	D.de = {
+		avChoose: "Wähle deinen Avatar", avGirls: "Mädchen", avBoys: "Jungen", avPick: "Diesen Avatar verwenden", avOwn: "Eigenes Foto",
 		siteFlag: "Landesflagge der Seite auf dem Kamyar-Symbol", siteFlagT: "Eine Flagge für jede Seite 🏳️", siteFlagText: "Wenn das an ist, wird das Kamyar-Symbol in der Erweiterungsleiste zur Flagge des Landes, in dem der Server der geöffneten Seite steht, mit einem kleinen Kamyar-Logo in der Ecke. Fahre mit der Maus darüber, um den Ländernamen zu sehen.", siteFlagYes: "Ja, einschalten", siteFlagNo: "Jetzt nicht", siteFlagNote: "Chrome fragt, ob Kamyar die Serveradresse von Seiten sehen darf. Das Land wird in der Erweiterung ermittelt, keine Adresse wird irgendwohin gesendet. Später änderbar unter Boxen und Funktionen. Länderdaten:", siteFlagNoPerm: "Ohne Chromes Erlaubnis können keine Flaggen angezeigt werden",
 		folderCount: "{n} Einträge", folderEmpty: "Leer. Mit + hinzufügen oder eine Verknüpfung auf den Ordner ziehen",
 		webFocusStart: "Web-Fokus (25 Min.)", webFocusStop: "Web-Fokus beenden", webFocusBlock: "Ablenkende Seiten sperren", webFocusNote: "Ein kleiner Timer erscheint auf jeder Seite; zieh ihn, wohin du willst.", webFocusOn: "Fokus gestartet; der Timer ist auf jeder Seite.", webFocusNoPerm: "Fokus gestartet. Erlaube den Zugriff, um den Timer auf Seiten zu sehen.", webFocusDone: "Fokus-Sitzung fertig 🎉 Mach eine kurze Pause.",
