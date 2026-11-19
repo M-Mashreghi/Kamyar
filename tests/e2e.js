@@ -67,7 +67,7 @@ function i18nParity() {
 	await page.click("#setupNext"); // welcome → data
 	await page.click("#setupNext"); // data → you
 	await page.click("#setupBody .av-btn >> nth=9");
-	check("an avatar can be picked in setup", (await page.evaluate(() => H.setting("avatar", ""))) === "avatars/boy-2.svg");
+	check("an avatar can be picked in setup", (await page.evaluate(() => H.setting("avatar", ""))) === "avatars/man-2.svg");
 	await page.fill('#setupBody input[type="text"]', "Sam");
 	await page.click("#setupNext"); // you → city
 	await page.click("#setupNext"); // city → look
@@ -225,6 +225,11 @@ function i18nParity() {
 		await page.waitForTimeout(250);
 		check(`page switches to ${l}`, (await page.evaluate(() => document.documentElement.lang)) === l);
 	}
+
+	console.log("Welcome sound");
+	check("welcome sound is off by default", !(await page.evaluate(() => (H.setting("welcomeSound", {}) || {}).on)));
+	const chimes = await page.evaluate(async () => { const out = []; for (const id of Chimes.ids) { const c = new OfflineAudioContext(1, 44100 * 3, 44100); Chimes.play(c, id, 0.6); const d = (await c.startRendering()).getChannelData(0); let pk = 0; for (const x of d) pk = Math.max(pk, Math.abs(x)); out.push(pk); } return out; });
+	check("every built-in chime makes a sound without clipping", chimes.length >= 6 && chimes.every((p) => p > 0.05 && p < 1), chimes);
 
 	console.log("Site flag");
 	const geo = await sw.evaluate(async () => Promise.all(["8.8.8.8", "2.144.0.1", "2a01:4f8::1", "::ffff:8.8.4.4", "192.168.1.1"].map((ip) => KamyarFlag.countryOf(ip))));

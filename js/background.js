@@ -187,6 +187,21 @@ async function applySounds() {
 		}
 	}
 }
+// Welcome chime through the offscreen document; it closes again unless the focus sounds use it.
+let welcomeClose = 0;
+async function playWelcome(m) {
+	if (!(await hasOffscreen())) {
+		offscreenBusy ||= chrome.offscreen.createDocument({ url: "offscreen.html", reasons: ["AUDIO_PLAYBACK"], justification: "Play the welcome chime the person chose when a Kamyar tab opens." }).catch(() => {});
+		await offscreenBusy;
+		offscreenBusy = null;
+	}
+	chrome.runtime.sendMessage({ target: "kamyar-offscreen", type: "welcome", id: m.id, vol: m.vol, data: m.data }).catch(() => {});
+	clearTimeout(welcomeClose);
+	welcomeClose = setTimeout(async () => {
+		const s = await soundsState();
+		if (!(s && s.playing) && (await hasOffscreen())) chrome.offscreen.closeDocument().catch(() => {});
+	}, 15000);
+}
 chrome.storage.onChanged.addListener((c, area) => {
 	if (area !== "local") return;
 	if (c[SOUNDS]) applySounds();
@@ -206,6 +221,10 @@ chrome.runtime.onMessage.addListener((m, _sender, reply) => {
 	if (m && m.type === "kamyar-sounds-get") {
 		soundsState().then(reply);
 		return true;
+	}
+	if (m && m.type === "kamyar-welcome-play") {
+		playWelcome(m);
+		return;
 	}
 	if (m && m.type === "kamyar-alerts-check") {
 		checkAlerts().then(() => reply(true), () => reply(false));

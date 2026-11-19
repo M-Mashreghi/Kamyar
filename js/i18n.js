@@ -4,6 +4,8 @@
 	"use strict";
 	const D = {};
 	D.fa = {
+		welcomeSound: "صدای خوشامد", welcomeSoundHint: "وقتی کامیار باز می‌شود یک صدای ملایم پخش شود", chCrystal: "کریستال", chMorning: "صبح بخیر", chHarp: "چنگ", chBowl: "کاسه‌ی ذن", chKalimba: "کالیمبا", chDrop: "قطره‌ی شبنم", chBreeze: "نسیم", chPreview: "پخش نمونه", chUpload: "آپلود صدای دلخواه", chReplace: "عوض کردن صدای دلخواه", chRemove: "حذف صدای دلخواه", chUploadHint: "هر فایل صوتی (MP3، WAV، OGG و …) تا ۲ مگابایت؛ بهتر است کوتاه باشد. صدای دلخواه فقط روی همین دستگاه می‌ماند.", chTooBig: "فایل صوتی باید کمتر از ۲ مگابایت باشد", chVolume: "بلندی صدا", chWhen: "چه وقت پخش شود؟", chWhen_tab: "با هر تب جدید", chWhen_hour: "حداکثر ساعتی یک بار", chWhen_day: "فقط اولین تب هر روز",
+		avWomen: "زن", avMen: "مرد",
 		avChoose: "آواتار خودتان را انتخاب کنید", avGirls: "دختر", avBoys: "پسر", avPick: "انتخاب این آواتار", avOwn: "عکس خودم",
 		siteFlag: "پرچم کشور سایت روی آیکون کامیار", siteFlagT: "پرچم کشور هر سایت 🏳️", siteFlagText: "با روشن کردن این گزینه، آیکون کامیار در نوار افزونه‌ها به پرچم کشوری تبدیل می‌شود که سرور سایتِ باز در آن است، با لوگوی کوچک کامیار در گوشه. مثلاً روی سایتی که در ایران است پرچم ایران را می‌بینید. اسم کشور هم با نگه داشتن ماوس روی آیکون نشان داده می‌شود.", siteFlagYes: "بله، روشن شود", siteFlagNo: "نه، فعلاً نه", siteFlagNote: "کروم برای این کار اجازه‌ی دیدن آدرس سرور سایت‌ها را می‌خواهد. کشور داخل خود افزونه پیدا می‌شود و آدرس هیچ سایتی جایی فرستاده نمی‌شود. بعداً از «باکس‌ها و قابلیت‌ها» هم می‌توانید روشن یا خاموشش کنید. داده‌ی کشورها:", siteFlagNoPerm: "بدون اجازه‌ی کروم، پرچم سایت‌ها نشان داده نمی‌شود",
 		folderCount: "{n} مورد", folderEmpty: "خالی است؛ با + یا کشیدن میان‌بر رویش چیزی اضافه کنید",
@@ -59,6 +61,8 @@
 		h_newyear: "سال نو میلادی", h_christmas: "کریسمس"
 	};
 	D.en = {
+		welcomeSound: "Welcome sound", welcomeSoundHint: "Play a gentle sound when Kamyar opens", chCrystal: "Crystal", chMorning: "Good morning", chHarp: "Harp", chBowl: "Zen bowl", chKalimba: "Kalimba", chDrop: "Dewdrop", chBreeze: "Breeze", chPreview: "Play a preview", chUpload: "Upload your own sound", chReplace: "Replace your sound", chRemove: "Remove your sound", chUploadHint: "Any audio file (MP3, WAV, OGG…) up to 2 MB; short is best. Your own sound stays on this device.", chTooBig: "The audio file must be under 2 MB", chVolume: "Volume", chWhen: "When should it play?", chWhen_tab: "Every new tab", chWhen_hour: "At most once an hour", chWhen_day: "Only the first tab each day",
+		avWomen: "Women", avMen: "Men",
 		avChoose: "Pick your avatar", avGirls: "Girls", avBoys: "Boys", avPick: "Use this avatar", avOwn: "My own photo",
 		siteFlag: "Site's country flag on the Kamyar icon", siteFlagT: "A flag for every site 🏳️", siteFlagText: "When this is on, the Kamyar icon in the extensions bar turns into the flag of the country where the open site's server is, with a small Kamyar logo in the corner. On a site hosted in Iran, for example, you see Iran's flag. Hover over the icon to see the country's name.", siteFlagYes: "Yes, turn it on", siteFlagNo: "Not now", siteFlagNote: "Chrome will ask to let Kamyar see the server address of sites. The country is found inside the extension, and no site address is sent anywhere. You can change this later in Boxes and features. Country data:", siteFlagNoPerm: "Without Chrome's permission, site flags can't be shown",
 		folderCount: "{n} items", folderEmpty: "Empty. Add with +, or drag a shortcut onto the folder",
@@ -114,6 +118,8 @@
 		h_newyear: "New Year's Day", h_christmas: "Christmas"
 	};
 	D.fr = {
+		welcomeSound: "Son d'accueil", welcomeSoundHint: "Jouer un son doux à l'ouverture de Kamyar", chCrystal: "Cristal", chMorning: "Bonjour", chHarp: "Harpe", chBowl: "Bol zen", chKalimba: "Kalimba", chDrop: "Goutte de rosée", chBreeze: "Brise", chPreview: "Écouter", chUpload: "Importer votre son", chReplace: "Remplacer votre son", chRemove: "Supprimer votre son", chUploadHint: "N'importe quel fichier audio (MP3, WAV, OGG…) jusqu'à 2 Mo ; court de préférence. Votre son reste sur cet appareil.", chTooBig: "Le fichier audio doit faire moins de 2 Mo", chVolume: "Volume", chWhen: "Quand le jouer ?", chWhen_tab: "À chaque nouvel onglet", chWhen_hour: "Au plus une fois par heure", chWhen_day: "Seulement au premier onglet du jour",
+		avWomen: "Femmes", avMen: "Hommes",
 		avChoose: "Choisissez votre avatar", avGirls: "Filles", avBoys: "Garçons", avPick: "Utiliser cet avatar", avOwn: "Ma propre photo",
 		siteFlag: "Drapeau du pays du site sur l'icône Kamyar", siteFlagT: "Un drapeau pour chaque site 🏳️", siteFlagText: "Une fois activé, l'icône Kamyar dans la barre des extensions devient le drapeau du pays où se trouve le serveur du site ouvert, avec un petit logo Kamyar dans le coin. Survolez l'icône pour voir le nom du pays.", siteFlagYes: "Oui, activer", siteFlagNo: "Pas maintenant", siteFlagNote: "Chrome demandera l'autorisation de voir l'adresse du serveur des sites. Le pays est trouvé dans l'extension et aucune adresse n'est envoyée nulle part. Modifiable plus tard dans Blocs et fonctions. Données des pays :", siteFlagNoPerm: "Sans l'autorisation de Chrome, les drapeaux ne peuvent pas s'afficher",
 		folderCount: "{n} éléments", folderEmpty: "Vide. Ajoutez avec +, ou glissez un raccourci sur le dossier",
@@ -169,6 +175,8 @@
 		h_newyear: "Jour de l'An", h_christmas: "Noël"
 	};
 	D.de = {
+		welcomeSound: "Begrüßungston", welcomeSoundHint: "Einen sanften Ton spielen, wenn Kamyar öffnet", chCrystal: "Kristall", chMorning: "Guten Morgen", chHarp: "Harfe", chBowl: "Zen-Schale", chKalimba: "Kalimba", chDrop: "Tautropfen", chBreeze: "Brise", chPreview: "Probe anhören", chUpload: "Eigenen Ton hochladen", chReplace: "Eigenen Ton ersetzen", chRemove: "Eigenen Ton entfernen", chUploadHint: "Jede Audiodatei (MP3, WAV, OGG…) bis 2 MB; am besten kurz. Dein eigener Ton bleibt auf diesem Gerät.", chTooBig: "Die Audiodatei muss kleiner als 2 MB sein", chVolume: "Lautstärke", chWhen: "Wann soll er spielen?", chWhen_tab: "Bei jedem neuen Tab", chWhen_hour: "Höchstens einmal pro Stunde", chWhen_day: "Nur beim ersten Tab des Tages",
+		avWomen: "Frauen", avMen: "Männer",
 		avChoose: "Wähle deinen Avatar", avGirls: "Mädchen", avBoys: "Jungen", avPick: "Diesen Avatar verwenden", avOwn: "Eigenes Foto",
 		siteFlag: "Landesflagge der Seite auf dem Kamyar-Symbol", siteFlagT: "Eine Flagge für jede Seite 🏳️", siteFlagText: "Wenn das an ist, wird das Kamyar-Symbol in der Erweiterungsleiste zur Flagge des Landes, in dem der Server der geöffneten Seite steht, mit einem kleinen Kamyar-Logo in der Ecke. Fahre mit der Maus darüber, um den Ländernamen zu sehen.", siteFlagYes: "Ja, einschalten", siteFlagNo: "Jetzt nicht", siteFlagNote: "Chrome fragt, ob Kamyar die Serveradresse von Seiten sehen darf. Das Land wird in der Erweiterung ermittelt, keine Adresse wird irgendwohin gesendet. Später änderbar unter Boxen und Funktionen. Länderdaten:", siteFlagNoPerm: "Ohne Chromes Erlaubnis können keine Flaggen angezeigt werden",
 		folderCount: "{n} Einträge", folderEmpty: "Leer. Mit + hinzufügen oder eine Verknüpfung auf den Ordner ziehen",

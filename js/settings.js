@@ -44,14 +44,16 @@
 		return el("span", { class: "avatar-letter", style: `width:${size}px;height:${size}px;font-size:${Math.round(size * 0.45)}px` }, who.trim().charAt(0).toUpperCase());
 	}
 	/* Ready-made avatars (girls and boys), drawn for Kamyar. The setting keeps just the file path. */
-	const AVATARS = { girl: [1, 2, 3, 4, 5, 6, 7, 8].map((n) => "avatars/girl-" + n + ".svg"), boy: [1, 2, 3, 4, 5, 6, 7, 8].map((n) => "avatars/boy-" + n + ".svg") };
+	const AV_KINDS = ["woman", "man", "girl", "boy"];
+	const AVATARS = Object.fromEntries(AV_KINDS.map((k) => [k, [1, 2, 3, 4, 5, 6, 7, 8].map((n) => "avatars/" + k + "-" + n + ".svg")]));
+	const AV_LABEL = { woman: "avWomen", man: "avMen", girl: "avGirls", boy: "avBoys" };
 	function avatarPicker(withUpload) {
 		const box = el("div", { class: "av-pick" });
 		const draw = () => {
 			const cur = setting("avatar", "");
-			const row = (k) => el("div", { class: "av-group" }, el("span", { class: "av-label muted small" }, t(k === "girl" ? "avGirls" : "avBoys")),
+			const row = (k) => el("div", { class: "av-group" }, el("span", { class: "av-label muted small" }, t(AV_LABEL[k])),
 				el("div", { class: "av-row" }, ...AVATARS[k].map((src) => el("button", { type: "button", class: "av-btn" + (cur === src ? " on" : ""), "aria-pressed": String(cur === src), title: t("avPick"), onclick: () => { Store.setSetting("avatar", src); draw(); } }, el("img", { src, alt: "", width: "56", height: "56" })))));
-			box.replaceChildren(row("girl"), row("boy"),
+			box.replaceChildren(...AV_KINDS.map(row),
 				withUpload ? el("div", { class: "av-more" },
 					el("button", { type: "button", class: "setup-chip", onclick: () => $("avatarInput").click() }, "📷 " + t("avOwn")),
 					cur ? el("button", { type: "button", class: "link-btn", onclick: () => { Store.setSetting("avatar", ""); draw(); } }, t("removeAvatar")) : "") : "");

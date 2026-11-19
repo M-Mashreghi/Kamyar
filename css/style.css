@@ -1546,3 +1546,18 @@ html.has-wall .cal-foot-btn:hover { background: color-mix(in srgb, var(--accent)
 .av-btn:focus-visible { outline-color: var(--accent); }
 .av-more { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
 @media (max-width: 560px) { .av-row { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+/* ---------- v2.21: welcome sound ---------- */
+.ws-box { display: flex; flex-direction: column; gap: 10px; }
+.ws-body { display: flex; flex-direction: column; gap: 10px; padding: 12px 14px; border: 1px solid var(--border); border-radius: 12px; background: var(--surface-2); }
+.ws-body[hidden] { display: none; }
+.ws-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; }
+.ws-opt { display: flex; align-items: center; gap: 4px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); padding: 2px 4px; }
+.ws-opt.on { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent) inset; }
+.ws-pick { flex: 1; min-width: 0; display: flex; align-items: center; gap: 8px; border: 0; background: none; color: var(--text); font: inherit; font-size: 13.5px; padding: 7px 6px; cursor: pointer; text-align: start; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ws-dot { flex: none; width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--muted); }
+.ws-opt.on .ws-dot { border-color: var(--accent); background: radial-gradient(circle, var(--accent) 45%, transparent 50%); }
+.ws-play { flex: none; font-size: 11px; }
+.ws-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.dialog .ws-vol { flex-direction: row; align-items: center; }
+.dialog .ws-vol input { flex: 1; padding: 0; border: 0; background: transparent; accent-color: var(--accent); }

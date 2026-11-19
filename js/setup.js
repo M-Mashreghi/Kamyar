@@ -135,7 +135,8 @@
 					sw("👀", "careEye", care().eye?.on !== false, (on) => Store.setSetting("care", { ...care(), eye: { every: 20, ...(care().eye || {}), on } })),
 					sw("🕌", "salatRemind", !!salat().on, (on) => Store.setSetting("salat", { ...salat(), on })),
 					sw("🎉", "seasonal", setting("seasonal", true) !== false, (on) => Store.setSetting("seasonal", on)),
-					sw("🧠", "smartBm", !!setting("smartBm", false), (on) => Store.setSetting("smartBm", on))),
+					sw("🧠", "smartBm", !!setting("smartBm", false), (on) => Store.setSetting("smartBm", on)),
+					sw("🔔", "welcomeSound", !!(setting("welcomeSound", {}) || {}).on, (on) => { Store.setSetting("welcomeSound", { id: "crystal", vol: 0.6, when: "tab", ...(setting("welcomeSound", {}) || {}), on }); if (on) H.playWelcome(undefined, true); })),
 				el("p", { class: "muted small" }, t("setupBoxesNote"))
 			];
 		},

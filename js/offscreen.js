@@ -18,8 +18,21 @@
 		eng.set(s.mix, s.master);
 		eng.tick();
 	}
+	// Welcome chime for a new Kamyar tab when Chrome didn't let the tab itself make sound.
+	function welcome(m) {
+		if (m.data) {
+			const a = new Audio(m.data);
+			a.volume = m.vol;
+			a.play().catch(() => {});
+			return;
+		}
+		const c = new AudioContext();
+		Chimes.play(c, m.id, m.vol);
+		setTimeout(() => c.close(), 6000);
+	}
 	chrome.runtime.onMessage.addListener((m) => {
 		if (m && m.target === "kamyar-offscreen" && m.type === "sounds") apply(m.state);
+		if (m && m.target === "kamyar-offscreen" && m.type === "welcome") welcome(m);
 	});
 	chrome.runtime.sendMessage({ type: "kamyar-sounds-get" }).then(apply).catch(() => {});
 	window.addEventListener("unload", () => clearInterval(timer));
